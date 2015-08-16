@@ -1,37 +1,39 @@
 package com.gary.garytool;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    Button bt;
-
-
+public class ListViewActivity extends ActionBarActivity {
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        bt= (Button) findViewById(R.id.button);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,ListViewActivity.class);
-                startActivity(intent);
-            }
-        });
+        setContentView(R.layout.activity_list_view);
+        listView= (ListView) findViewById(R.id.listView);
+        listView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,getData()));
+
+    }
+
+    private List<String> getData() {
+        List<String> data=new ArrayList<String>();
+        data.add("one");
+        data.add("two");
+        data.add("three");
+        return data;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_list_view, menu);
         return true;
     }
 
