@@ -4,4 +4,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_list_view">ListViewActivity</string>
+    <string name="title_activity_list_view_demo1">ListViewDemo1Activity</string>
+    <string name="title_activity_list_view_demo2">ListViewDemo2Activity</string>
+    <string name="title_activity_list_view_demo3">ListViewDemo3Activity</string>
+    <string name="title_activity_bottom_menu_with_view_pager">BottomMenuWithViewPagerActivity
+    </string>
+    <string name="title_activity_bottom_menu_with_fragment">BottomMenuWithFragment</string>
+    <string name="title_activity_bottom_menu_with_viewpager">BottomMenuWithViewpager</string>
 </resources>

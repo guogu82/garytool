@@ -20,6 +20,25 @@
             android:name=".ListViewActivity"
             android:label="@string/title_activity_list_view" >
         </activity>
+        <activity
+            android:name=".ListViewDemo1Activity"
+            android:label="@string/title_activity_list_view_demo1" >
+        </activity>
+        <activity
+            android:name=".ListViewDemo2Activity"
+            android:label="@string/title_activity_list_view_demo2" >
+        </activity>
+        <activity
+            android:name=".ListViewDemo3Activity"
+            android:label="@string/title_activity_list_view_demo3" >
+        </activity>
+        <activity
+            android:name=".BottomMenuWithFragment"
+            android:label="@string/title_activity_bottom_menu_with_fragment" >
+        </activity>
+        <activity
+            android:name=".BottomMenuWithViewpager">
+        </activity>
     </application>
 
 </manifest>
