@@ -10,8 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.gary.garytool.com.gary.garytool.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 public class ListViewActivity extends ActionBarActivity {
     private ListView listView;
     private  static final int BOTTOM_MENU_WITH_VIEWPAGER=3;
+    private  static final int BOTTOM_MENU_WITH_FRAGMENT=4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +39,12 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("two");
         data.add("three");
         data.add("BottomMenuWithViewpager");
+        data.add("底部菜单WithFragment");
         return data;
     }
 
         public final class ViewHolder {
-            public TextView item;
+            public Button item;
         }
 
     public class MyAdapter extends BaseAdapter {
@@ -72,16 +77,13 @@ public class ListViewActivity extends ActionBarActivity {
             if (convertView == null) {
                 holder=new ViewHolder();
                 convertView = mInflater.inflate(R.layout.listview_item, null);
-                holder.item = (TextView)convertView.findViewById(R.id.list_item);
+                holder.item = (Button)convertView.findViewById(R.id.list_item);
                 convertView.setTag(holder);
             }else {
                 holder = (ViewHolder)convertView.getTag();
             }
 
             holder.item.setText(getData().get(position));
-
-
-
             holder.item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -102,6 +104,12 @@ public class ListViewActivity extends ActionBarActivity {
                         case BOTTOM_MENU_WITH_VIEWPAGER:
                             intent =new Intent(ListViewActivity.this,BottomMenuWithViewpager.class);
                             startActivity(intent);
+                            break;
+                        case BOTTOM_MENU_WITH_FRAGMENT:
+                            intent=new Intent(ListViewActivity.this,BottomMenuWithFragment.class);
+                            startActivity(intent);
+                            break;
+                        default:
                             break;
                     }
 
