@@ -1,7 +1,6 @@
 package com.gary.garytool;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gary.garytool.com.gary.garytool.adapter.ContentAdapter;
+import com.gary.garytool.adapter.ContentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.gary.garytool.com.gary.garytool.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
