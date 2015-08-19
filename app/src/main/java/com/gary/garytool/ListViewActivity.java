@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int BOTTOM_MENU_WITH_VIEWPAGER = 3;
     private static final int BOTTOM_MENU_WITH_FRAGMENT = 4;
     private static final int WECHT = 5;
-    private static final int WECHT2 = 6;
+    private static final int WIFI = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,14 @@ public class ListViewActivity extends ActionBarActivity {
     }
 
     private List<String> getData() {
-        List<String> data = new ArrayList<String>();
+        List<String> data = new ArrayList<>();
         data.add("one");
         data.add("two");
-        data.add("three");
+        data.add("背景渐变");
         data.add("BottomMenuWithViewpager");
         data.add("底部菜单WithFragment");
         data.add("wechat");
-data.add("wechat2");
+        data.add("wifi");
         return data;
     }
 
@@ -77,9 +80,12 @@ data.add("wechat2");
         //每个convert view都会调用此方法，获得当前所需要的view样式
         @Override
         public int getItemViewType(int position) {
-            // TODO Auto-generated method stub
 
-            if (position == WECHT||position==WECHT2)
+            if(position==WIFI)
+            {
+                return 2;
+            }
+            else if (position == WECHT )
                 return 1;
             else {
                 return 0;
@@ -88,26 +94,52 @@ data.add("wechat2");
 
         @Override
         public int getViewTypeCount() {
-            // TODO Auto-generated method stub
-            return 2;
+            return 3;
         }
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
 
-            if (position == WECHT||position==WECHT2) {
+            if(position==WIFI)
+            {
+                convertView = mInflater.inflate(R.layout.activity_list_view_item_wifi, null);
+                ImageView iv= (ImageView) convertView.findViewById(R.id.iv_selector);
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
+                        startActivity(intent);
+                    }
+                });
+                LinearLayout ll= (LinearLayout) convertView.findViewById(R.id.ll_content);
+                ll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo2Activity.class);
+                        startActivity(intent);
+                    }
+                });
+                ImageView iv_arrow= (ImageView) convertView.findViewById(R.id.iv_arrow);
+                iv_arrow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
+                        startActivity(intent);
+                    }
+                });
+            } else  if (position == WECHT) {
                 convertView = mInflater.inflate(R.layout.activity_list_view_item_webchat, null);
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent  intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
+                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
                         startActivity(intent);
                     }
                 });
                 convertView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        Toast.makeText(ListViewActivity.this,"ok long click",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListViewActivity.this, "ok long click", Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });

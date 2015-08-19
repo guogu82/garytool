@@ -150,22 +150,23 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
         // ImageView和TetxView置为绿色，页面随之跳转
         switch (v.getId()) {
             case R.id.ll_home:
-                iv_home.setImageResource(R.drawable.press);
+                iv_home.setImageResource(R.drawable.tab1_press);
                 tv_home.setTextColor(0xff1B940A);
                 initFragment(0);
                 break;
             case R.id.ll_address:
-                iv_address.setImageResource(R.drawable.press);
+                iv_address.setImageResource(R.drawable.tab2_press);
                 tv_address.setTextColor(0xff1B940A);
                 initFragment(1);
                 break;
             case R.id.ll_friend:
-                iv_friend.setImageResource(R.drawable.press);
+                iv_friend.setImageResource(R.drawable.tab3_press);
                 tv_friend.setTextColor(0xff1B940A);
                 initFragment(2);
                 break;
             case R.id.ll_setting:
-                iv_setting.setImageResource(R.drawable.press);
+                iv_setting.setImageResource(R.drawable.tab4_press
+                );
                 tv_setting.setTextColor(0xff1B940A);
                 initFragment(3);
                 break;
