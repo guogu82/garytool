@@ -64,6 +64,8 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                     transaction.add(R.id.fl_content, homeFragment);
+                    //为了防止fragment被回收,应该用tab存起来
+                    //transaction.add(R.id.fl_content, homeFragment,"HomeFragment");
                 } else {
                     transaction.show(homeFragment);
                 }

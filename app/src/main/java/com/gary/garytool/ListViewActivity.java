@@ -23,6 +23,7 @@ import java.util.List;
 
 public class ListViewActivity extends ActionBarActivity {
     private ListView listView;
+    private static final int BOTTOOM_MENU_WITH_POPUPWINDOW=2;
     private static final int BOTTOM_MENU_WITH_VIEWPAGER = 3;
     private static final int BOTTOM_MENU_WITH_FRAGMENT = 4;
     private static final int WECHT = 5;
@@ -40,8 +41,8 @@ public class ListViewActivity extends ActionBarActivity {
     private List<String> getData() {
         List<String> data = new ArrayList<>();
         data.add("one");
-        data.add("two");
         data.add("背景渐变");
+        data.add("底部菜单仿QQ空间");
         data.add("BottomMenuWithViewpager");
         data.add("底部菜单WithFragment");
         data.add("wechat");
@@ -165,11 +166,11 @@ public class ListViewActivity extends ActionBarActivity {
                                 startActivity(intent);
                                 break;
                             case 1:
-                                intent = new Intent(ListViewActivity.this, ListViewDemo2Activity.class);
+                                intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
                                 startActivity(intent);
                                 break;
-                            case 2:
-                                intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
+                            case BOTTOOM_MENU_WITH_POPUPWINDOW:
+                                intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
                                 startActivity(intent);
                                 break;
                             case BOTTOM_MENU_WITH_VIEWPAGER:
