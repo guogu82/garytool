@@ -5,14 +5,14 @@
     tools:context="com.gary.garytool.BottomMenuWithPopupWindowLikeQQ">
 
     <FrameLayout
-        android:id="@+id/frame_content"
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/frameMenu"
+        android:layout_above="@+id/fl_ment"
         android:layout_alignParentTop="true"></FrameLayout>
 
     <FrameLayout
-        android:id="@+id/frameMenu"
+        android:id="@+id/fl_ment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
@@ -24,17 +24,17 @@
             android:orientation="horizontal">
             <!-- 动态-->
             <FrameLayout
-                android:id="@+id/layout_at"
+                android:id="@+id/fl_at"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/image_at"
+                    android:id="@+id/iv_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/skin_tabbar_icon_auth_select" />
+                    android:src="@drawable/selector_skin_tabbar_icon_auth" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,17 +46,17 @@
             </FrameLayout>
             <!-- 与我相关-->
             <FrameLayout
-                android:id="@+id/layout_auth"
+                android:id="@+id/fl_auth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/image_auth"
+                    android:id="@+id/iv_auth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/skin_tabbar_icon_at_select" />
+                    android:src="@drawable/selector_skin_tabbar_icon_at" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,17 +74,17 @@
 
             <!-- 我的空间-->
             <FrameLayout
-                android:id="@+id/layout_space"
+                android:id="@+id/fl_space"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/image_space"
+                    android:id="@+id/iv_space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/skin_tabbar_icon_space_select" />
+                    android:src="@drawable/selector_skin_tabbar_icon_space" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,17 +96,17 @@
             </FrameLayout>
             <!-- 玩吧-->
             <FrameLayout
-                android:id="@+id/layout_more"
+                android:id="@+id/fl_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/image_more"
+                    android:id="@+id/iv_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
-                    android:src="@drawable/skin_tabbar_icon_more_select" />
+                    android:src="@drawable/selector_skin_tabbar_icon_more" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -128,19 +128,19 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/toggle_btn"
+        android:id="@+id/iv_toggle"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_alignTop="@+id/frameMenu"
+        android:layout_alignTop="@+id/fl_ment"
         android:src="@drawable/skin_tabbar_btn"/>
 
     <!-- 中间按钮背景-->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/plus_btn"
+        android:id="@+id/iv_plus"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_alignTop="@+id/frameMenu"
-        android:src="@drawable/skin_tabbar_icon_select"/>
+        android:layout_alignTop="@+id/fl_ment"
+        android:src="@drawable/selector_skin_tabbar_icon"/>
 </RelativeLayout>

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SettingFragment extends Fragment {
+public class Demo4Fragment extends Fragment {
 
 
     @Override

@@ -1,14 +1,13 @@
 package com.gary.garytool;
 
-import android.app.*;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.*;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -20,25 +19,25 @@ import android.widget.PopupWindow;
 public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements View.OnClickListener {
 
     //定义Fragment 页面
-    private HomeFragment fragmentAt;
-    private AddressFragment fragmentAuth;
-    private FriendFragment fragmentSpace;
-    private SettingFragment fragmentMore;
+    private Demo1Fragment demo1Fragment;
+    private Demo2Fragment demo2Fragment;
+    private Demo3Fragment demo3Fragment;
+    private Demo4Fragment demo4Fragment;
 
     //定义布局对象
-    private FrameLayout atFl, authFl, spaceFl, moreFl;
+    private FrameLayout fl_at, fl_auth, fl_space, fl_more;
 
     //定义图片组件对象
-    private ImageView atIv, authIv, spaceIv, moreIv;
+    private ImageView iv_at, iv_auth, iv_space, iv_more;
 
     //定义按钮图片组件
-    private ImageView toogleImageView, plusImageView;
+    private ImageView iv_toogle, iv_plus;
 
     //定义PopupWindow
     private PopupWindow popWindow;
 
     //获取手机屏幕分辨率的类
-    private DisplayMetrics dm;
+    private DisplayMetrics displayMetrics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +55,13 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
 
     private void initData() {
         //给布局对象设置监听
-        atFl.setOnClickListener(this);
-        authFl.setOnClickListener(this);
-        spaceFl.setOnClickListener(this);
-        moreFl.setOnClickListener(this);
+        fl_at.setOnClickListener(this);
+        fl_auth.setOnClickListener(this);
+        fl_space.setOnClickListener(this);
+        fl_more.setOnClickListener(this);
 
         //给按钮图片设置监听
-        toogleImageView.setOnClickListener(this);
+        iv_toogle.setOnClickListener(this);
     }
 
     @Override
@@ -70,19 +69,19 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
 
         switch (v.getId())
         {
-            case R.id.layout_at:
+            case R.id.fl_at:
                 clickAtBtn();
                 break;
-            case R.id.layout_auth:
+            case R.id.fl_auth:
                 clickAuthBtn();
                 break;
-            case R.id.layout_space:
+            case R.id.fl_space:
                 clickSpaceBtn();
                 break;
-            case R.id.layout_more:
+            case R.id.fl_more:
                 clickMoreBtn();
                 break;
-            case R.id.toggle_btn:
+            case R.id.iv_toggle:
                 clickToggleBtn();
                 break;
             default:
@@ -100,25 +99,25 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickAtBtn() {
         //实例化Fragmenty页面
-        fragmentAt=new HomeFragment();
+        demo1Fragment =new Demo1Fragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         //替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content,fragmentAt);
+        fragmentTransaction.replace(R.id.fl_content, demo1Fragment);
         //事务管理提交
         fragmentTransaction.commit();
         //改变选中状态
-        atFl.setSelected(true);
-        atIv.setSelected(true);
+        fl_at.setSelected(true);
+        iv_at.setSelected(true);
 
-        authFl.setSelected(false);
-        authIv.setSelected(false);
+        fl_auth.setSelected(false);
+        iv_auth.setSelected(false);
 
-        spaceFl.setSelected(false);
-        spaceIv.setSelected(false);
+        fl_space.setSelected(false);
+        iv_space.setSelected(false);
 
-        moreFl.setSelected(false);
-        moreIv.setSelected(false);
+        fl_more.setSelected(false);
+        iv_more.setSelected(false);
 
     }
 
@@ -127,25 +126,25 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickAuthBtn() {
         //实例化Fragment页面
-        fragmentAuth =new AddressFragment();
+        demo2Fragment =new Demo2Fragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
                 //替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content, fragmentAuth);
+        fragmentTransaction.replace(R.id.fl_content, demo2Fragment);
         //事务管理提交
         fragmentTransaction.commit();
 
-        atFl.setSelected(false);
-        atIv.setSelected(false);
+        fl_at.setSelected(false);
+        iv_at.setSelected(false);
 
-        authFl.setSelected(true);
-        authIv.setSelected(true);
+        fl_auth.setSelected(true);
+        iv_auth.setSelected(true);
 
-        spaceFl.setSelected(false);
-        spaceIv.setSelected(false);
+        fl_space.setSelected(false);
+        iv_space.setSelected(false);
 
-        moreFl.setSelected(false);
-        moreIv.setSelected(false);
+        fl_more.setSelected(false);
+        iv_more.setSelected(false);
     }
 
     /**
@@ -153,25 +152,25 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickSpaceBtn() {
         //实例化Fragment页面
-        fragmentSpace=new FriendFragment();
+        demo3Fragment =new Demo3Fragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         //替换当前的页面
-        fragmentTransaction.replace(R.id.frame_content,fragmentSpace);
+        fragmentTransaction.replace(R.id.fl_content, demo3Fragment);
         //事务管理提交
         fragmentTransaction.commit();
 
-        atFl.setSelected(false);
-        atIv.setSelected(false);
+        fl_at.setSelected(false);
+        iv_at.setSelected(false);
 
-        authFl.setSelected(false);
-        authIv.setSelected(false);
+        fl_auth.setSelected(false);
+        iv_auth.setSelected(false);
 
-        spaceFl.setSelected(true);
-        spaceIv.setSelected(true);
+        fl_space.setSelected(true);
+        iv_space.setSelected(true);
 
-        moreFl.setSelected(false);
-        moreIv.setSelected(false);
+        fl_more.setSelected(false);
+        iv_more.setSelected(false);
 
     }
 
@@ -180,31 +179,31 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickMoreBtn() {
         //实例化Fragment页面
-        fragmentMore =new SettingFragment();
+        demo4Fragment =new Demo4Fragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_content, fragmentMore);
+        fragmentTransaction.replace(R.id.fl_content, demo4Fragment);
         fragmentTransaction.commit();
 
-        atFl.setSelected(false);
-        atIv.setSelected(false);
+        fl_at.setSelected(false);
+        iv_at.setSelected(false);
 
-        authFl.setSelected(false);
-        authIv.setSelected(false);
+        fl_auth.setSelected(false);
+        iv_auth.setSelected(false);
 
-        spaceFl.setSelected(false);
-        spaceIv.setSelected(false);
+        fl_space.setSelected(false);
+        iv_space.setSelected(false);
 
-        moreFl.setSelected(true);
-        moreIv.setSelected(true);
+        fl_more.setSelected(true);
+        iv_more.setSelected(true);
     }
 
     /**
      * 点击了中间按钮
      */
     private void clickToggleBtn() {
-        showPopupWindow(toogleImageView);
+        showPopupWindow(iv_toogle);
         //改变按钮显示的图片为按下时的状态
-        plusImageView.setSelected(true);
+        iv_plus.setSelected(true);
 
     }
 
@@ -217,10 +216,19 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
         {
             LayoutInflater layoutInflater= (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view=layoutInflater.inflate(R.layout.popwindow_layout,null);
-            dm=new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(dm);
+            displayMetrics =new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             //创建一个PopuWindow对象
-            popWindow=new PopupWindow(view,dm.widthPixels, LinearLayout.LayoutParams.WRAP_CONTENT);
+            popWindow=new PopupWindow(view, displayMetrics.widthPixels, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            LinearLayout linearLayout= (LinearLayout) view.findViewById(R.id.ll_popup_journal);
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(BottomMenuWithPopupWindowLikeQQ.this,ListViewDemo1Activity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
         //使其聚焦，要想监听菜单里控件的事件就必须调用此方法
@@ -241,37 +249,37 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
                 changeButtonImage();
             }
         });
-        //监听触屏事件
-        popWindow.setTouchInterceptor(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //改变显示的按钮图片为正常状态
-                changeButtonImage();
-                popWindow.dismiss();
-                return false;
 
-            }
-        });
+        // 监听触屏事件
+//        popWindow.setTouchInterceptor(new View.OnTouchListener() {
+//            public boolean onTouch(View view, MotionEvent event) {
+//                // 改变显示的按钮图片为正常状态
+//                changeButtonImage();
+//                popWindow.dismiss();
+//                return false;
+//            }
+//        });
+
     }
     private void changeButtonImage() {
-        plusImageView.setSelected(false);
+        iv_plus.setSelected(false);
     }
     private void initView() {
         //实例化布局对象
-        atFl = (FrameLayout) findViewById(R.id.layout_at);
-        authFl = (FrameLayout) findViewById(R.id.layout_auth);
-        spaceFl = (FrameLayout) findViewById(R.id.layout_space);
-        moreFl = (FrameLayout) findViewById(R.id.layout_more);
+        fl_at = (FrameLayout) findViewById(R.id.fl_at);
+        fl_auth = (FrameLayout) findViewById(R.id.fl_auth);
+        fl_space = (FrameLayout) findViewById(R.id.fl_space);
+        fl_more = (FrameLayout) findViewById(R.id.fl_more);
 
         //实例化图片组件对象
-        atIv= (ImageView) findViewById(R.id.image_at);
-        authIv= (ImageView) findViewById(R.id.image_space);
-        spaceIv= (ImageView) findViewById(R.id.image_space);
-        moreIv= (ImageView) findViewById(R.id.image_more);
+        iv_at = (ImageView) findViewById(R.id.iv_at);
+        iv_auth = (ImageView) findViewById(R.id.iv_auth);
+        iv_space = (ImageView) findViewById(R.id.iv_space);
+        iv_more = (ImageView) findViewById(R.id.iv_more);
 
         //实例化按钮图片组件
-        toogleImageView= (ImageView) findViewById(R.id.toggle_btn);
-        plusImageView= (ImageView) findViewById(R.id.plus_btn);
+        iv_toogle = (ImageView) findViewById(R.id.iv_toggle);
+        iv_plus = (ImageView) findViewById(R.id.iv_plus);
     }
 
 

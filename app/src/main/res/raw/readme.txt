@@ -10,13 +10,13 @@ Selector selector_skin_tabbar_icon_about
 BottomMenuWithFragmentActivity
 
 类成员命名规范
-多次出现的成员变量，通过前缀区分
+多次出现的成员变量，通过前缀区分,只是view对象有前缀
 ImageView iv_about_time
 类里面基本是唯一的变量，用小写开头的全名来表示
 DisplayMetrics displayMetrics
 
 类临时变量命名规范
-ImageView aboutTime
+ImageView aboutTimeInDay
 
 类方法
 必须是动词+名词
