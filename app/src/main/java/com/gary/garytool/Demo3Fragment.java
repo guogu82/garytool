@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class FriendFragment extends Fragment {
+public class Demo3Fragment extends Fragment {
 
 
     @Override
