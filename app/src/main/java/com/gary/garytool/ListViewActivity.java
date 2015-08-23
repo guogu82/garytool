@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -56,31 +55,24 @@ public class ListViewActivity extends ActionBarActivity {
     public class MyAdapter extends BaseAdapter {
 
         private LayoutInflater mInflater;
-
-
         public MyAdapter(Context context) {
             this.mInflater = LayoutInflater.from(context);
         }
-
         @Override
         public int getCount() {
             return getData().size();
         }
-
         @Override
         public Object getItem(int arg0) {
             return null;
         }
-
         @Override
         public long getItemId(int arg0) {
             return 0;
         }
-
         //每个convert view都会调用此方法，获得当前所需要的view样式
         @Override
         public int getItemViewType(int position) {
-
             if(position==WIFI)
             {
                 return 2;
