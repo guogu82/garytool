@@ -31,3 +31,7 @@ alt+enter 修复当前问题，view类型强转
 
 1:Fragment  transaction.replace() VS transaction.add() hide() show()
 Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
+那么最合适的处理方式是这样的：
+在add的时候，加上一个tab参数transaction.add(R.id.content, IndexFragment,”Tab1″);
+然后当IndexFragment引用被回收置空的话，先通过IndexFragment＝FragmentManager.findFragmentByTag(“Tab1″);
+找到对应的引用，然后继续上面的hide,show;
