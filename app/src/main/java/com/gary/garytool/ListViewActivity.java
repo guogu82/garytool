@@ -22,7 +22,9 @@ import java.util.List;
 
 public class ListViewActivity extends ActionBarActivity {
     private ListView listView;
-    private static final int BOTTOOM_MENU_WITH_POPUPWINDOW=2;
+
+    private static final int BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6=0;
+    private static final int BOTTOM_MENU_WITH_POPUPWINDOW=2;
     private static final int BOTTOM_MENU_WITH_VIEWPAGER = 3;
     private static final int BOTTOM_MENU_WITH_FRAGMENT = 4;
     private static final int WECHT = 5;
@@ -39,7 +41,7 @@ public class ListViewActivity extends ActionBarActivity {
 
     private List<String> getData() {
         List<String> data = new ArrayList<>();
-        data.add("one");
+        data.add("微信6.0主界面");
         data.add("背景渐变");
         data.add("底部菜单仿QQ空间");
         data.add("BottomMenuWithViewpager");
@@ -100,7 +102,7 @@ public class ListViewActivity extends ActionBarActivity {
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
+                        Intent intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                         startActivity(intent);
                     }
                 });
@@ -125,7 +127,7 @@ public class ListViewActivity extends ActionBarActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
+                        Intent intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                         startActivity(intent);
                     }
                 });
@@ -153,15 +155,15 @@ public class ListViewActivity extends ActionBarActivity {
                     public void onClick(View v) {
                         Intent intent;
                         switch (position) {
-                            case 0:
-                                intent = new Intent(ListViewActivity.this, ListViewDemo1Activity.class);
+                            case BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6:
+                                intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                                 startActivity(intent);
                                 break;
                             case 1:
                                 intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
                                 startActivity(intent);
                                 break;
-                            case BOTTOOM_MENU_WITH_POPUPWINDOW:
+                            case BOTTOM_MENU_WITH_POPUPWINDOW:
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
                                 startActivity(intent);
                                 break;

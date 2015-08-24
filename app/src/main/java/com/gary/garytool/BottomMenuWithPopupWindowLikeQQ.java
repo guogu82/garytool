@@ -225,7 +225,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(BottomMenuWithPopupWindowLikeQQ.this,ListViewDemo1Activity.class);
+                    Intent intent=new Intent(BottomMenuWithPopupWindowLikeQQ.this,BottomMenuWithActionbarLikeWeChat6Activity.class);
                     startActivity(intent);
                 }
             });

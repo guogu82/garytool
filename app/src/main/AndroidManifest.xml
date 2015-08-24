@@ -20,7 +20,7 @@
             android:name=".ListViewActivity"
             android:label="@string/title_activity_list_view" />
         <activity
-            android:name=".ListViewDemo1Activity"
+            android:name=".BottomMenuWithActionbarLikeWeChat6Activity"
             android:label="@string/title_activity_list_view_demo1" />
         <activity
             android:name=".ListViewDemo2Activity"

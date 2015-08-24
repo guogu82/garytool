@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ListViewDemo1Activity extends ActionBarActivity {
+public class BottomMenuWithActionbarLikeWeChat6Activity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_view_demo1);
+        setContentView(R.layout.activity_bottom_menu_with_actionbar_likewechat);
     }
 
     @Override
