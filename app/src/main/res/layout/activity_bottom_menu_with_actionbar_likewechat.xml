@@ -6,11 +6,11 @@
     tools:context="com.gary.garytool.BottomMenuWithActionbarLikeWeChat6Activity"
     android:orientation="vertical"
     >
-  <ViewPager
+  <android.support.v4.view.ViewPager
       android:id="@+id/id_viewpager"
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:layout_weight="1"></ViewPager>
+      android:layout_weight="1"></android.support.v4.view.ViewPager>
     <LinearLayout
         android:orientation="horizontal"
         android:background="@drawable/tabbg"
@@ -22,9 +22,36 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            gg:icon="@drawable/ic_menu_start_conversation"
-            gg:text="微信"
-            gg:text_size="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
+            gg:iconattr="@drawable/ic_menu_start_conversation"
+            gg:textattr="微信"
+            gg:text_sizeattr="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
+        <com.gary.garytool.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            gg:iconattr="@drawable/ic_menu_friendslist"
+            gg:textattr="通讯录"
+            gg:text_sizeattr="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
+        <com.gary.garytool.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            gg:iconattr="@drawable/ic_menu_emoticons"
+            gg:textattr="发现"
+            gg:text_sizeattr="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
+        <com.gary.garytool.view.ChangeColorIconWithTextView
+            android:id="@+id/id_indicator_four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            gg:iconattr="@drawable/ic_menu_allfriends"
+            gg:textattr="我"
+            gg:text_sizeattr="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
     </LinearLayout>
 
 </LinearLayout>

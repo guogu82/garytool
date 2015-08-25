@@ -78,42 +78,25 @@ public class ChangeColorIconWithTextView extends View {
         super(context, attrs);
         //获取设置的图标
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ChangeColorIconView);
-        int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
-            int attr = a.getIndex(i);
-            switch (attr) {
-                case R.styleable.ChangeColorIconView_icon:
-                    BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
-                    mIconBitmap = drawable.getBitmap();
-                    break;
-                case R.styleable.ChangeColorIconView_color:
-                    mColor = a.getColor(attr, 0x45C01A);
-                    break;
-                case R.styleable.ChangeColorIconView_text:
-                    mText = a.getString(attr);
-                    break;
-                case R.styleable.ChangeColorIconView_text_size:
-                    mTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-                    break;
-                default:
-                    break;
-            }
-            a.recycle();
 
-            //设置文字的属性
-            mTextPaint = new Paint();
-            mTextPaint.setTextSize(mTextSize);
-            mTextPaint.setColor(0xff555555);
-            //得到文字的绘制范围
-            mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
-        }
-    }
+        BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(R.styleable.ChangeColorIconView_iconattr);
+        mIconBitmap = drawable.getBitmap();
+        mColor = a.getColor(R.styleable.ChangeColorIconView_colorattr, 0x45C01A);
 
+        mText = a.getString(R.styleable.ChangeColorIconView_textattr);
+        mTextSize  = a.getDimensionPixelSize(R.styleable.ChangeColorIconView_text_sizeattr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
 
-    public ChangeColorIconWithTextView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+        a.recycle();
+
+        //设置文字的属性
+        mTextPaint = new Paint();
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(0xff555555);
+        //得到文字的绘制范围
+        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
 
     }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -160,6 +143,7 @@ public class ChangeColorIconWithTextView extends View {
         mTextPaint.setAlpha(255 - alpha);
         canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2 - mTextBound.width() / 2, mIconRect.bottom + mTextBound.height(), mTextPaint);
     }
+
     /*
        关于绘制文本区域的计算，首先是起点x：
        mIconRect.left + mIconRect.width() / 2- mTextBound.width() / 2 有点长哈，文本mIconRect.left + mIconRect.width() / 2这个位置，
@@ -172,19 +156,15 @@ public class ChangeColorIconWithTextView extends View {
         canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2 + mTextBound.width() / 2, mIconRect.bottom + mTextBound.height(), mTextPaint);
     }
 
-    public void setIconAlpha(float alpha)
-    {
-        this.mAlpha=alpha;
+    public void setIconAlpha(float alpha) {
+        this.mAlpha = alpha;
         invalidateView();
     }
 
     private void invalidateView() {
-        if(Looper.getMainLooper()==Looper.myLooper())
-        {
+        if (Looper.getMainLooper() == Looper.myLooper()) {
             invalidate();
-        }
-        else
-        {
+        } else {
             postInvalidate();
         }
     }

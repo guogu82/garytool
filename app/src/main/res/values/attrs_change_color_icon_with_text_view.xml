@@ -1,12 +1,8 @@
 <resources>
-    <attr name="icon" format="reference"></attr>
-    <attr name="color" format="color"></attr>
-    <attr name="text" format="string"></attr>
-    <attr name="text_size" format="dimension"></attr>
     <declare-styleable name="ChangeColorIconView">
-        <attr name="icon" />
-        <attr name="color" />
-        <attr name="text" />
-        <attr name="text_size" />
+        <attr name="iconattr" format="reference"/>
+        <attr name="colorattr" format="color"/>
+        <attr name="textattr" format="string"/>
+        <attr name="text_sizeattr" format="dimension" />
     </declare-styleable>
 </resources>
