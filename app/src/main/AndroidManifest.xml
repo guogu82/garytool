@@ -22,7 +22,7 @@
         <activity
             android:name=".BottomMenuWithActionbarLikeWeChat6Activity"
             android:label="微信"
-            android:icon="@null"
+            android:icon="@drawable/arrow_left_n"
             android:theme="@style/AppBaseTheme"/>
         <activity
             android:name=".ListViewDemo2Activity"

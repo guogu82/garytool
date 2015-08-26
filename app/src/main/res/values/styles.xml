@@ -1,6 +1,15 @@
 <resources>
+    <!-- 微信6.0actionbar主题. -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/weixinActionOverflowButtonstyle</item>
+    </style>
 
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+    <style name="weixinActionOverflowButtonstyle">
+        <item name="android:src">@drawable/actionbar_add_icon</item>
+    </style>
+
+
+
 
     <!-- Base application theme. -->
     <!-- appcompat vs holo 为何冲突报错 -->

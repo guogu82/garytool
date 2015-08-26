@@ -27,16 +27,20 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
     private FragmentPagerAdapter mAdapter;
     private String[] mTitiles=new String[]{"First Fragment","Second Fragment","Third Fragment","Fourth Fragment"};
     private List<ChangeColorIconWithTextView> mTabIndicator=new ArrayList<>();
+    private Menu mMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_bottom_menu_with_actionbar_likewechat);
 
-        setOverflowshowingAlways();
         //action的一个经典教程
         //http://blog.csdn.net/guolin_blog/article/details/18234477
-       getActionBar().setDisplayHomeAsUpEnabled(false);
+        //设置显示加号按钮，配合styles.xml的 android:actionOverflowButtonStyle <item name="android:src">@drawable/actionbar_add_icon</item>使用
+        setOverflowshowingAlways();
+
+        //设置隐藏左边的图标
+       getActionBar().setDisplayShowHomeEnabled(false);
 
         initView();
         initDatas();
@@ -103,6 +107,34 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    /**
+     * 设置menu 显示左边图标
+     * @param featureId
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if(featureId== Window.FEATURE_ACTION_BAR&&menu!=null)
+        {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder"))
+            {
+                try
+                {
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (Exception e)
+                {
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
+
+
     private void setOverflowshowingAlways() {
         try
         {
@@ -119,40 +151,8 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
 
     }
 
-    @Override
-    public boolean onMenuOpened(int featureId, Menu menu) {
-        if(featureId== Window.FEATURE_ACTION_BAR&&menu!=null)
-        {
-            if(menu.getClass().getSimpleName().equals("MenuBuilder"))
-            {
-                try
-                {
-                    Method m=menu.getClass().getDeclaredMethod("setOptionalIconsVIsible",Boolean.TYPE);
-                    m.setAccessible(true);
-                    m.invoke(menu,true);
-                }catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-            }
-        }
-        return super.onMenuOpened(featureId,menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     //下面是评论对这个功能实现的描述
 //监听vp滑动过程，通过属性动画更改图标透明度，不是可以嘛
