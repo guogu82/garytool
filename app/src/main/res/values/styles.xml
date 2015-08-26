@@ -1,6 +1,9 @@
 <resources>
 
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+
     <!-- Base application theme. -->
+    <!-- appcompat vs holo 为何冲突报错 -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>

@@ -21,7 +21,9 @@
             android:label="@string/title_activity_list_view" />
         <activity
             android:name=".BottomMenuWithActionbarLikeWeChat6Activity"
-            android:label="@string/title_activity_list_view_demo1" />
+            android:label="微信"
+            android:icon="@null"
+            android:theme="@style/AppBaseTheme"/>
         <activity
             android:name=".ListViewDemo2Activity"
             android:label="@string/title_activity_list_view_demo2" />

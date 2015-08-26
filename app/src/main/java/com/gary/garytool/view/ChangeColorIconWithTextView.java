@@ -15,14 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.gary.garytool.R;
-//下面是评论对这个功能实现的描述
-//监听vp滑动过程，通过属性动画更改图标透明度，不是可以嘛
-//解压过微信看他里边应该是2张图做的，就是个imageview就行，，背景设置为灰色的图，然后src就有色的图片，滑动的时候根据偏移量盖面imageview的透明度就可以实现
-//内存方面注意到画图片渐变的地方感觉费内存了，每次都创建新图，而且刷新一下就创建好多张图
-//回复mayuqing：内存倒是不费，毕竟执行完方法也就回收了，就是频繁创建回收了，你可以稍微优化下代码。
-//我测试了 用两张图片，分别是未取得焦点和去的焦点之后的颜色不同但是大小相同的两张图片，设置透明度变化，比如设置第一个图的透明度为100第二张图的透明度是255-100，绘制在相同位置自然叠加就行，而且微信用的是继承的ImageVIew和一个textView实现的
-//嗯，不动态去生成各种颜色图标，两张图最简单了~~
-//博主您好 我想到了一个更简单的办法 在微信里面 这个其实是由两张图片实现的 一张是纯绿色的 一张是白色的，于是我就想到 用FrameLayout 白色的在下面 绿色的在上面 然后滑动的时候 根据监听器的positionOffset设置view 的alpha ，变可以达到同样的效果 且代码还很简洁
+
 
 
 public class ChangeColorIconWithTextView extends View {
@@ -79,10 +72,10 @@ public class ChangeColorIconWithTextView extends View {
         //获取设置的图标
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ChangeColorIconView);
 
+        //原代码里面的轮询出现了指向不明的情况
         BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(R.styleable.ChangeColorIconView_iconattr);
         mIconBitmap = drawable.getBitmap();
         mColor = a.getColor(R.styleable.ChangeColorIconView_colorattr, 0x45C01A);
-
         mText = a.getString(R.styleable.ChangeColorIconView_textattr);
         mTextSize  = a.getDimensionPixelSize(R.styleable.ChangeColorIconView_text_sizeattr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
 
@@ -153,7 +146,7 @@ public class ChangeColorIconWithTextView extends View {
     private void drawTragetText(Canvas canvas, int alpha) {
         mTextPaint.setColor(mColor);
         mTextPaint.setAlpha(alpha);
-        canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2 + mTextBound.width() / 2, mIconRect.bottom + mTextBound.height(), mTextPaint);
+        canvas.drawText(mText, mIconRect.left + mIconRect.width() / 2 - mTextBound.width() / 2, mIconRect.bottom + mTextBound.height(), mTextPaint);
     }
 
     public void setIconAlpha(float alpha) {

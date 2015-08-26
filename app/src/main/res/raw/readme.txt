@@ -28,6 +28,7 @@ shift+enter 任意地方换行并新开一行
 ctrl+w 选中当前单词
 alt+enter 修复当前问题，view类型强转
 先敲“/”在敲两个**，然后回车  为方法添加注释
+ctrl+q 查看方法的文档
 
 1:Fragment  transaction.replace() VS transaction.add() hide() show()
 Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
