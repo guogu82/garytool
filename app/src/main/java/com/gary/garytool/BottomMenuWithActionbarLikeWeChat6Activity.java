@@ -1,6 +1,7 @@
 package com.gary.garytool;
 
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.Window;
+import android.widget.SearchView;
 
 import com.gary.garytool.view.ChangeColorIconWithTextView;
 
@@ -27,7 +29,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
     private FragmentPagerAdapter mAdapter;
     private String[] mTitiles=new String[]{"First Fragment","Second Fragment","Third Fragment","Fourth Fragment"};
     private List<ChangeColorIconWithTextView> mTabIndicator=new ArrayList<>();
-    private Menu mMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +38,16 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
 
         //action的一个经典教程
         //http://blog.csdn.net/guolin_blog/article/details/18234477
+
         //设置显示加号按钮，配合styles.xml的 android:actionOverflowButtonStyle <item name="android:src">@drawable/actionbar_add_icon</item>使用
         setOverflowshowingAlways();
 
         //设置隐藏左边的图标
        getActionBar().setDisplayShowHomeEnabled(false);
+
+        //显示当前activity的actionbar 的左边箭头 配合 onOptionsItemSelected 方法使用
+        //ActionBar导航和Back键在设计上的区别。这块是有区别的一个是主从，一个是前后。http://blog.csdn.net/guolin_blog/article/details/18234477
+       getActionBar().setDisplayHomeAsUpEnabled(true);
 
         initView();
         initDatas();
@@ -104,12 +111,19 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_web_chat_action_bar, menu);
+        //设置actionbar的搜索按钮事件
+        MenuItem searchItem=menu.findItem(R.id.action_search);
+        SearchView searchView= (SearchView) searchItem.getActionView();
+
         return super.onCreateOptionsMenu(menu);
     }
 
 
     /**
      * 设置menu 显示左边图标
+     * overflow中的Action按钮应不应该显示图标，是由MenuBuilder这个类的setOptionalIconsVisible方法来决定的，
+     * 如果我们在overflow被展开的时候给这个方法传入true，那么里面的每一个Action按钮对应的图标就都会显示出来了。
+     * 调用的方法当然仍然是用反射了
      * @param featureId
      * @param menu
      * @return
@@ -134,7 +148,58 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
         return super.onMenuOpened(featureId, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            //home 配合actionbar的左边箭头返回
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_group_chat:
+                intent=new Intent(this,ListViewDemo2Activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_add_friend:
+                intent=new Intent(this,ListViewDemo3Activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_scan:
+                intent=new Intent(this,ListViewDemo2Activity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_feedback:
+                intent=new Intent(this,ListViewDemo3Activity.class);
+                startActivity(intent);
+                return true;
+            default:
+            return super.onOptionsItemSelected(item);
+        }
 
+        //下面功能配合actionbar的左侧箭头回退父activity的
+        /*
+        case android.R.id.home:
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+            TaskStackBuilder.create(this)
+                    .addNextIntentWithParentStack(upIntent)
+                    .startActivities();
+        } else {
+            upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            NavUtils.navigateUpTo(this, upIntent);
+        }
+        return true;
+        */
+    }
+
+    /**
+     * overflow按钮的显示情况和手机的硬件情况是有关系的，
+     * 如果手机没有物理Menu键的话，overflow按钮就可以显示，
+     * 如果有物理Menu键的话，overflow按钮就不会显示出来.
+     * 下面代码是设置无论如何都显示overflow按钮
+     * 在ViewConfiguration这个类中有一个叫做sHasPermanentMenuKey的静态变量，系统就是根据这个变量的值来判断手机有没有物理Menu键的。
+     * 当然这是一个内部变量，我们无法直接访问它，但是可以通过反射的方式修改它的值，让它永远为false就可以
+     */
     private void setOverflowshowingAlways() {
         try
         {

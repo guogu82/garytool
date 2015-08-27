@@ -30,6 +30,16 @@ alt+enter 修复当前问题，view类型强转
 先敲“/”在敲两个**，然后回车  为方法添加注释
 ctrl+q 查看方法的文档
 
+adb 启动失败
+netstat -aon|findstr "5037"      （netstat -aon|findstr "5037" | more--分屏）
+ TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       18212
+tasklist|findstr "18212"
+ kadb.exe          18212 Console                    1      1,260 K
+ 1.关闭kadb.exe
+ 2.adb kill-server
+ 3.adb start-server
+ 4.重启Eclipse
+
 1:Fragment  transaction.replace() VS transaction.add() hide() show()
 Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
 那么最合适的处理方式是这样的：
