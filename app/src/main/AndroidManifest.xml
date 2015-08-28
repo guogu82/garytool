@@ -25,7 +25,7 @@
             android:icon="@drawable/arrow_left_n"
             android:theme="@style/AppBaseTheme"/>
         <activity
-            android:name=".ListViewDemo2Activity"
+            android:name=".ListViewItemUIActivity"
             android:label="@string/title_activity_list_view_demo2" />
         <activity
             android:name=".ListViewDemo3Activity"

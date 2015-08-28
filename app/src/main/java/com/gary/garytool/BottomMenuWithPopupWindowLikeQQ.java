@@ -19,10 +19,10 @@ import android.widget.PopupWindow;
 public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements View.OnClickListener {
 
     //定义Fragment 页面
-    private Demo1Fragment demo1Fragment;
-    private Demo2Fragment demo2Fragment;
-    private Demo3Fragment demo3Fragment;
-    private Demo4Fragment demo4Fragment;
+    private DemoTextViewFragment demo1Fragment;
+    private DemoButtonFragment demo2Fragment;
+    private DemoEidtTextFragment demo3Fragment;
+    private DemoOtherViewFragment demo4Fragment;
 
     //定义布局对象
     private FrameLayout fl_at, fl_auth, fl_space, fl_more;
@@ -99,7 +99,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickAtBtn() {
         //实例化Fragmenty页面
-        demo1Fragment =new Demo1Fragment();
+        demo1Fragment =new DemoTextViewFragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         //替换当前的页面
@@ -126,7 +126,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickAuthBtn() {
         //实例化Fragment页面
-        demo2Fragment =new Demo2Fragment();
+        demo2Fragment =new DemoButtonFragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
                 //替换当前的页面
@@ -152,7 +152,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickSpaceBtn() {
         //实例化Fragment页面
-        demo3Fragment =new Demo3Fragment();
+        demo3Fragment =new DemoEidtTextFragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         //替换当前的页面
@@ -179,7 +179,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickMoreBtn() {
         //实例化Fragment页面
-        demo4Fragment =new Demo4Fragment();
+        demo4Fragment =new DemoOtherViewFragment();
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fl_content, demo4Fragment);
         fragmentTransaction.commit();

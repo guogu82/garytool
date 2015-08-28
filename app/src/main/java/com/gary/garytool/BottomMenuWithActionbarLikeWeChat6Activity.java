@@ -84,7 +84,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
     private void initDatas() {
         for(String title:mTitiles)
         {
-            Demo1Fragment tabFragment=new Demo1Fragment();
+            DemoTextViewFragment tabFragment=new DemoTextViewFragment();
             Bundle args=new Bundle();
             args.putString("title",title);
             mTabs.add(tabFragment);
@@ -157,7 +157,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
                 finish();
                 return true;
             case R.id.action_group_chat:
-                intent=new Intent(this,ListViewDemo2Activity.class);
+                intent=new Intent(this,ListViewItemUIActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.action_add_friend:
@@ -165,7 +165,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
                 startActivity(intent);
                 return true;
             case R.id.action_scan:
-                intent=new Intent(this,ListViewDemo2Activity.class);
+                intent=new Intent(this,ListViewItemUIActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.action_feedback:

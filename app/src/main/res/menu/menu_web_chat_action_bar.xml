@@ -18,7 +18,7 @@
         android:title="添加朋友"/>
     <item
         android:id="@+id/action_scan"
-        android:icon="@drawable/men_scan_icon"
+        android:icon="@drawable/menu_scan_icon"
         android:title="扫一扫"/>
     <item
         android:id="@+id/action_feedback"

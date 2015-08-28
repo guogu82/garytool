@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Demo2Fragment extends Fragment {
+public class DemoButtonFragment extends Fragment {
 
 
     @Override

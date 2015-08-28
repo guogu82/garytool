@@ -62,17 +62,17 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
         switch (index) {
             case 0:
                 if (homeFragment == null) {
-                    homeFragment = new Demo1Fragment();
+                    homeFragment = new DemoTextViewFragment();
                     transaction.add(R.id.fl_content, homeFragment);
                     //为了防止fragment被回收,应该用tab存起来
-                    //transaction.add(R.id.fl_content, homeFragment,"Demo1Fragment");
+                    //transaction.add(R.id.fl_content, homeFragment,"DemoTextViewFragment");
                 } else {
                     transaction.show(homeFragment);
                 }
                 break;
             case 1:
                 if (addressFragment == null) {
-                    addressFragment = new Demo2Fragment();
+                    addressFragment = new DemoButtonFragment();
                     transaction.add(R.id.fl_content, addressFragment);
                 } else {
                     transaction.show(addressFragment);
@@ -80,7 +80,7 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
                 break;
             case 2:
                 if (friendFragment == null) {
-                    friendFragment = new Demo3Fragment();
+                    friendFragment = new DemoEidtTextFragment();
                     transaction.add(R.id.fl_content, friendFragment);
                 } else {
                     transaction.show(friendFragment);
@@ -88,7 +88,7 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
                 break;
             case 3:
                 if (settingFragment == null) {
-                    settingFragment = new Demo4Fragment();
+                    settingFragment = new DemoOtherViewFragment();
                     transaction.add(R.id.fl_content, settingFragment);
                 } else {
                     transaction.show(settingFragment);

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class Demo3Fragment extends Fragment {
+public class DemoEidtTextFragment extends Fragment {
 
 
     @Override
