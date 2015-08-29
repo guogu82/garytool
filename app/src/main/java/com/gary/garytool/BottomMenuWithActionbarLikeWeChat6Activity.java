@@ -161,7 +161,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
                 startActivity(intent);
                 return true;
             case R.id.action_add_friend:
-                intent=new Intent(this,ListViewDemo3Activity.class);
+                intent=new Intent(this,ListViewCustomStateActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.action_scan:
@@ -169,7 +169,7 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
                 startActivity(intent);
                 return true;
             case R.id.action_feedback:
-                intent=new Intent(this,ListViewDemo3Activity.class);
+                intent=new Intent(this,ListViewCustomStateActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -220,7 +220,6 @@ public class BottomMenuWithActionbarLikeWeChat6Activity extends FragmentActivity
 
 
     //下面是评论对这个功能实现的描述
-//监听vp滑动过程，通过属性动画更改图标透明度，不是可以嘛
 //解压过微信看他里边应该是2张图做的，就是个imageview就行，，背景设置为灰色的图，然后src就有色的图片，滑动的时候根据偏移量盖面imageview的透明度就可以实现
 //内存方面注意到画图片渐变的地方感觉费内存了，每次都创建新图，而且刷新一下就创建好多张图
 //回复mayuqing：内存倒是不费，毕竟执行完方法也就回收了，就是频繁创建回收了，你可以稍微优化下代码。

@@ -77,7 +77,7 @@ public class ChangeColorIconWithTextView extends View {
         //原代码里面的轮询出现了指向不明的情况
         BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(R.styleable.ChangeColorIconView_iconattr);
         mIconBitmap = drawable.getBitmap();
-        mColor = a.getColor(R.styleable.ChangeColorIconView_colorattr, 0x45C01A);
+        mColor = a.getColor(R.styleable.ChangeColorIconView_colorattr, 0x45c01a);
         mText = a.getString(R.styleable.ChangeColorIconView_textattr);
         mTextSize  = a.getDimensionPixelSize(R.styleable.ChangeColorIconView_text_sizeattr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
 
@@ -109,11 +109,13 @@ public class ChangeColorIconWithTextView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         int alpha = (int) Math.ceil(255 * mAlpha);
+        //制作icon底图
         canvas.drawBitmap(mIconBitmap, null, mIconRect, null);
+        //制作有颜色的覆盖图标，并通过alpha把三个设为透明，一个设为选中，本处可以通过制作有颜色的icon代替代码的生产
         setupTargetBitmap(alpha);
+        canvas.drawBitmap(mBitmap, 0, 0, null);
         drawSourceText(canvas, alpha);
         drawTragetText(canvas, alpha);
-        canvas.drawBitmap(mBitmap, 0, 0, null);
 
     }
 

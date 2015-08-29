@@ -5,49 +5,43 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ListViewActivity extends ActionBarActivity {
-    private ListView listView;
+    private ListView mListView;
 
     private static final int BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6=0;
-    private static final int BOTTOM_MENU_WITH_POPUPWINDOW=2;
-    private static final int BOTTOM_MENU_WITH_VIEWPAGER = 3;
-    private static final int BOTTOM_MENU_WITH_FRAGMENT = 4;
-    private static final int WECHT = 5;
-    private static final int WIFI = 6;
+    private static final int BOTTOM_MENU_WITH_POPUPWINDOW=1;
+    private static final int BOTTOM_MENU_WITH_VIEWPAGER = 2;
+    private static final int BOTTOM_MENU_WITH_FRAGMENT = 3;
+    private static final int LIST_VIEW_ITEM_UI = 4;
+    private static final int LIST_VIEW_MESSAGE_READED = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        listView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.listView);
         MyAdapter adapter = new MyAdapter(this);
-        listView.setAdapter(adapter);
+        mListView.setAdapter(adapter);
     }
 
     private List<String> getData() {
         List<String> data = new ArrayList<>();
         data.add("微信6.0主界面");
-        data.add("背景渐变");
         data.add("底部菜单仿QQ空间");
-        data.add("BottomMenuWithViewpager");
+        data.add("底部菜单WithViewpager");
         data.add("底部菜单WithFragment");
-        data.add("wechat");
-        data.add("wifi");
+        data.add("ListViewItem界面展示");
+        data.add("ListView邮件已读");
         return data;
     }
 
@@ -55,7 +49,7 @@ public class ListViewActivity extends ActionBarActivity {
         public Button item;
     }
 
-    public class MyAdapter extends BaseAdapter {
+    private class MyAdapter extends BaseAdapter {
 
         private LayoutInflater mInflater;
         public MyAdapter(Context context) {
@@ -73,73 +67,12 @@ public class ListViewActivity extends ActionBarActivity {
         public long getItemId(int arg0) {
             return 0;
         }
-        //每个convert view都会调用此方法，获得当前所需要的view样式
-        @Override
-        public int getItemViewType(int position) {
-            if(position==WIFI)
-            {
-                return 2;
-            }
-            else if (position == WECHT )
-                return 1;
-            else {
-                return 0;
-            }
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return 3;
-        }
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
 
-            if(position==WIFI)
-            {
-                convertView = mInflater.inflate(R.layout.activity_list_view_item_wifi, null);
-                ImageView iv= (ImageView) convertView.findViewById(R.id.iv_selector);
-                iv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
-                        startActivity(intent);
-                    }
-                });
-                LinearLayout ll= (LinearLayout) convertView.findViewById(R.id.ll_content);
-                ll.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, ListViewItemUIActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                ImageView iv_arrow= (ImageView) convertView.findViewById(R.id.iv_arrow);
-                iv_arrow.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
-                        startActivity(intent);
-                    }
-                });
-            } else  if (position == WECHT) {
-                convertView = mInflater.inflate(R.layout.activity_list_view_item_webchat, null);
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
-                        startActivity(intent);
-                    }
-                });
-                convertView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        Toast.makeText(ListViewActivity.this, "ok long click", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                });
-            } else {
-                ViewHolder holder = null;
+
+                ViewHolder holder;
                 if (convertView == null) {
                     holder = new ViewHolder();
                     convertView = mInflater.inflate(R.layout.listview_item, null);
@@ -159,10 +92,7 @@ public class ListViewActivity extends ActionBarActivity {
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                                 startActivity(intent);
                                 break;
-                            case 1:
-                                intent = new Intent(ListViewActivity.this, ListViewDemo3Activity.class);
-                                startActivity(intent);
-                                break;
+
                             case BOTTOM_MENU_WITH_POPUPWINDOW:
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
                                 startActivity(intent);
@@ -175,6 +105,13 @@ public class ListViewActivity extends ActionBarActivity {
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithFragment.class);
                                 startActivity(intent);
                                 break;
+                            case LIST_VIEW_ITEM_UI:
+                                intent = new Intent(ListViewActivity.this, ListViewItemUIActivity.class);
+                                startActivity(intent);
+                                break;
+                            case LIST_VIEW_MESSAGE_READED:
+                                intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
+                                startActivity(intent);
                             default:
                                 break;
                         }
@@ -182,7 +119,6 @@ public class ListViewActivity extends ActionBarActivity {
 
                     }
                 });
-            }
             return convertView;
         }
 

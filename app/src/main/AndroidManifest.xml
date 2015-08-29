@@ -12,13 +12,12 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ListViewActivity"
-            android:label="@string/title_activity_list_view" />
+            android:label="功能列表" />
         <activity
             android:name=".BottomMenuWithActionbarLikeWeChat6Activity"
             android:label="微信"
@@ -26,15 +25,15 @@
             android:theme="@style/AppBaseTheme"/>
         <activity
             android:name=".ListViewItemUIActivity"
-            android:label="@string/title_activity_list_view_demo2" />
+            android:label="ListViewItem展示" />
         <activity
-            android:name=".ListViewDemo3Activity"
-            android:label="@string/title_activity_list_view_demo3" />
+            android:name=".ListViewCustomStateActivity"
+            android:label="背景渐变" />
         <activity android:name=".BottomMenuWithFragment" />
         <activity android:name=".BottomMenuWithViewpager" />
         <activity
             android:name=".BottomMenuWithPopupWindowLikeQQ"
-            android:label="@string/title_activity_bottom_menu_with_popup_window_like_qq" >
+            android:label="高仿QQ底部菜单" >
         </activity>
     </application>
 

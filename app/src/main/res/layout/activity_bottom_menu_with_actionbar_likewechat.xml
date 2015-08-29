@@ -52,6 +52,7 @@
             gg:iconattr="@drawable/ic_menu_allfriends"
             gg:textattr="我"
             gg:text_sizeattr="12sp"></com.gary.garytool.view.ChangeColorIconWithTextView>
+
     </LinearLayout>
 
 </LinearLayout>
