@@ -8,8 +8,10 @@
         <item name="android:src">@drawable/actionbar_add_icon</item>
     </style>
 
-
-
+    <!-- 首页预加载主题. -->
+    <style name="MainWindowTheme" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:background">@drawable/layerlist_logo</item>
+    </style>
 
     <!-- Base application theme. -->
     <!-- appcompat vs holo 为何冲突报错 -->

@@ -30,6 +30,13 @@ alt+enter 修复当前问题，view类型强转
 先敲“/”在敲两个**，然后回车  为方法添加注释
 ctrl+q 查看方法的文档
 
+ctrl+TAB  编辑器文档切换
+ctrl+shift+enter  自动补充错误
+ctrl+alt+o  自动清理import
+alt+enter 错误修正提示列表
+ctrl+alt+T  包裹if或者try
+ctrl+J   生成for循环
+
 adb 启动失败
 netstat -aon|findstr "5037"      （netstat -aon|findstr "5037" | more--分屏）
  TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       18212

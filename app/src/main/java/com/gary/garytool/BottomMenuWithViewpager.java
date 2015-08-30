@@ -1,10 +1,12 @@
 package com.gary.garytool;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -94,6 +96,19 @@ public class BottomMenuWithViewpager extends Activity implements View.OnClickLis
         View page_02=View.inflate(BottomMenuWithViewpager.this,R.layout.layout_page_02,null);
         View page_03=View.inflate(BottomMenuWithViewpager.this,R.layout.layout_page_03,null);
         View page_04=View.inflate(BottomMenuWithViewpager.this,R.layout.layout_page_04,null);
+
+        //配合完全退出APP
+        Button button = (Button) page_02.findViewById(R.id.bt_finish_app);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(BottomMenuWithViewpager.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //注意本行的FLAG设置
+                startActivity(intent);
+                finish();//关掉自己
+            }
+        });
 
         views=new ArrayList<View>();
         views.add(page_01);
