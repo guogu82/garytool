@@ -24,6 +24,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int BOTTOM_MENU_WITH_FRAGMENT = 3;
     private static final int LIST_VIEW_ITEM_UI = 4;
     private static final int LIST_VIEW_MESSAGE_READED = 5;
+    private static final int LIST_VIEW_LOAD_MORE = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("底部菜单WithFragment");
         data.add("ListViewItem界面展示");
         data.add("ListView邮件已读");
+        data.add("ListView加载更多");
         return data;
     }
 
@@ -92,7 +94,6 @@ public class ListViewActivity extends ActionBarActivity {
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                                 startActivity(intent);
                                 break;
-
                             case BOTTOM_MENU_WITH_POPUPWINDOW:
                                 intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
                                 startActivity(intent);
@@ -111,6 +112,10 @@ public class ListViewActivity extends ActionBarActivity {
                                 break;
                             case LIST_VIEW_MESSAGE_READED:
                                 intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
+                                startActivity(intent);
+                                break;
+                            case LIST_VIEW_LOAD_MORE:
+                                intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
                                 startActivity(intent);
                             default:
                                 break;

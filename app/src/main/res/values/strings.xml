@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GaryTool</string>
+    <string name="title_activity_list_view_load_more">ListViewLoadMoreActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

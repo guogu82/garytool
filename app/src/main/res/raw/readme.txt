@@ -31,6 +31,8 @@ alt+enter 修复当前问题，view类型强转
 ctrl+q 查看方法的文档
 
 ctrl+TAB  编辑器文档切换
+alt+左右箭头 编辑器文档左右切换
+ctrl+insert 生产get set 构造函数 重构方法
 ctrl+shift+enter  自动补充错误
 ctrl+alt+o  自动清理import
 alt+enter 错误修正提示列表
