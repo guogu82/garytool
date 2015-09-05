@@ -55,3 +55,12 @@ Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/
 在add的时候，加上一个tab参数transaction.add(R.id.content, IndexFragment,”Tab1″);
 然后当IndexFragment引用被回收置空的话，先通过IndexFragment＝FragmentManager.findFragmentByTag(“Tab1″);
 找到对应的引用，然后继续上面的hide,show;
+
+2:TextView,Button,EditText 如果要做到按下去有变化，请使用selector
+点击父布局 使子控件（TextView等）响应点击效果 （子控件中加上这个属性 duplicateParentState）。
+例如：组件RelativeLayout上有两个TextView，这两个TextView具有不同的颜色值，现在要的效果是，当RelativeLayout被点击时，整个item有高亮背景。
+同时这两个TextView要变色。就是父控件响应点击事件，子View不响应点击事件，但是颜色要随着点击而发生变化。这样就用到了属性duplicateParentState。
+android:duplicateParentState，如果设置此属性，将直接从父容器中获取绘图状态（光标，按下等）。
+注意仅仅是获取绘图状态，而没有获取事件，也就是你点一下LinearLayout时Button有被点击的效果，但是不执行点击事件。
+在TextView中设置字体颜色一般使用，android:textColor="@color/red"，但是我们在使用selector动态修改字体颜色的时候要使用android:color="@color/red"。
+代码来设置textColor 的，需要用 textView.setTextColor(getResources().getColorStateList(R.color.text_selector_color));来设置。

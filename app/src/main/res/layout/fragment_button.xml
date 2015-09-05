@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/bt_finish_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="完全退出应用程序"/>
+
+   <LinearLayout
+       android:id="@+id/ll_custom_button_1"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       android:orientation="horizontal"></LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_custom_button_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"></LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_custom_button_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"></LinearLayout>
+</LinearLayout>
