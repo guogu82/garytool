@@ -23,7 +23,7 @@ public class MessageListItem extends RelativeLayout{
         if(this.mMessageReaded!=readed)
         {
             mMessageReaded=readed;
-            //TODO:需要透切理解refreshDrawableState()方法的用法
+            //TODO:note 需要透切理解refreshDrawableState()方法的用法
             refreshDrawableState();
         }
     }

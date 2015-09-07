@@ -120,7 +120,7 @@ public class ChangeColorIconWithTextView extends View {
     }
 
     private void setupTargetBitmap(int alpha) {
-        //TODO 尝试改一下画图的顺序，采用SrcIn模式 20150824 gary
+        //TODO:try 尝试改一下画图的顺序，采用SrcIn模式 20150824 gary
         mBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
         mPaint = new Paint();

@@ -80,7 +80,7 @@ public class BottomMenuWithFragment extends FragmentActivity implements View.OnC
                 break;
             case 2:
                 if (friendFragment == null) {
-                    friendFragment = new DemoEidtTextFragment();
+                    friendFragment = new DemoEditTextFragment();
                     transaction.add(R.id.fl_content, friendFragment);
                 } else {
                     transaction.show(friendFragment);

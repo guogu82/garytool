@@ -21,7 +21,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
     //定义Fragment 页面
     private DemoTextViewFragment demo1Fragment;
     private DemoButtonFragment demo2Fragment;
-    private DemoEidtTextFragment demo3Fragment;
+    private DemoEditTextFragment demo3Fragment;
     private DemoOtherViewFragment demo4Fragment;
 
     //定义布局对象
@@ -152,7 +152,7 @@ public class BottomMenuWithPopupWindowLikeQQ extends FragmentActivity implements
      */
     private void clickSpaceBtn() {
         //实例化Fragment页面
-        demo3Fragment =new DemoEidtTextFragment();
+        demo3Fragment =new DemoEditTextFragment();
         //得到Fragment事务管理器
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         //替换当前的页面

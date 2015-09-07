@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.gary.garytool.adapter.ListAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int LIST_VIEW_ITEM_UI = 4;
     private static final int LIST_VIEW_MESSAGE_READED = 5;
     private static final int LIST_VIEW_LOAD_MORE = 6;
+    private static final int LIST_VIEW_ADAPTER_BASE = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("ListViewItem界面展示");
         data.add("ListView邮件已读");
         data.add("ListView加载更多");
+        data.add("万能的adapter适配器");
         return data;
     }
 
@@ -117,6 +121,11 @@ public class ListViewActivity extends ActionBarActivity {
                             case LIST_VIEW_LOAD_MORE:
                                 intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
                                 startActivity(intent);
+                                break;
+                            case LIST_VIEW_ADAPTER_BASE:
+                                intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
+                                startActivity(intent);
+                                break;
                             default:
                                 break;
                         }
