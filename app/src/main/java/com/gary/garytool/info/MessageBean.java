@@ -11,6 +11,10 @@ public class MessageBean {
 
     public MessageBean(String title, String content, int comment, int read) {
 
+        this.title=title;
+        this.content=content;
+        this.comment=comment;
+        this.read=read;
     }
 
     public String getTitle() {

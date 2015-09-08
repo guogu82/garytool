@@ -63,8 +63,8 @@ public abstract class AdapterM<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //TODO:CHECK this function
-        //ViewHolderM holder=ViewHolderM.get(context,convertView,parent,layoutId,position);
-        ViewHolderM holder=new ViewHolderM(context,convertView,parent,layoutId,position);
+        ViewHolderM holder=ViewHolderM.get(context,convertView,parent,layoutId,position);
+        //ViewHolderM holder=new ViewHolderM(context,convertView,parent,layoutId,position);
         convert(holder,getItem(position));
         return holder.getConvertView();
     }
