@@ -9,12 +9,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.gary.garytool.util.LogUtil;
+
 /**
  * 重写Button,自定义Button样式
  * Created by Gary on 2015/9/2.
  * http://www.cnblogs.com/landptf/p/4562203.html
  */
 public class ButtonM extends Button {
+
+    static final String TAG="ButtonM";
 
     private GradientDrawable gradientDrawable;//控件的样式
     private String backColors="";//背景色  String
@@ -46,6 +50,8 @@ public class ButtonM extends Button {
     public ButtonM(Context context) {
         this(context, null);
     }
+
+
 
     private void init() {
             //将Button的默认背景色改为透明，本人不喜欢原来的颜色

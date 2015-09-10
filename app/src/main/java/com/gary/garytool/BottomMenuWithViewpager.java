@@ -95,7 +95,7 @@ public class BottomMenuWithViewpager extends Activity implements View.OnClickLis
         View page_01=View.inflate(BottomMenuWithViewpager.this,R.layout.fragment_textview,null);
         View page_02=View.inflate(BottomMenuWithViewpager.this,R.layout.fragment_button,null);
         View page_03=View.inflate(BottomMenuWithViewpager.this,R.layout.layout_page_03,null);
-        View page_04=View.inflate(BottomMenuWithViewpager.this,R.layout.layout_page_04,null);
+        View page_04=View.inflate(BottomMenuWithViewpager.this,R.layout.fragment_other,null);
 
         //配合完全退出APP
         Button button = (Button) page_02.findViewById(R.id.bt_finish_app);

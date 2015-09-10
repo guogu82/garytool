@@ -27,7 +27,8 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int LIST_VIEW_ITEM_UI = 4;
     private static final int LIST_VIEW_MESSAGE_READED = 5;
     private static final int LIST_VIEW_LOAD_MORE = 6;
-    private static final int LIST_VIEW_ADAPTER_BASE = 7;
+    private static final int LIST_VIEW_UPDATE = 7;
+    private static final int LIST_VIEW_ADAPTER_BASE = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("ListViewItem界面展示");
         data.add("ListView邮件已读");
         data.add("ListView加载更多");
+        data.add("ListView下拉刷新");
         data.add("万能的adapter适配器");
         return data;
     }
@@ -120,6 +122,10 @@ public class ListViewActivity extends ActionBarActivity {
                                 break;
                             case LIST_VIEW_LOAD_MORE:
                                 intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
+                                startActivity(intent);
+                                break;
+                            case LIST_VIEW_UPDATE:
+                                intent =new Intent(ListViewActivity.this, ListViewUpdateActivity.class);
                                 startActivity(intent);
                                 break;
                             case LIST_VIEW_ADAPTER_BASE:

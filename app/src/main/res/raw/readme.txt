@@ -49,6 +49,13 @@ tasklist|findstr "18212"
  3.adb start-server
  4.重启Eclipse
 
+ 设计模式的使用场景
+ 1： 装饰者--io stream
+ 2：观察者--回调
+ 3：单例--全局变量
+ 4：建造者--按需构造实例，例如dialog，参数太多了。
+ 5：模板方法--就是抽取共同代码，父类与子类
+
 1:Fragment  transaction.replace() VS transaction.add() hide() show()
 Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
 那么最合适的处理方式是这样的：
@@ -64,3 +71,15 @@ android:duplicateParentState，如果设置此属性，将直接从父容器中�
 注意仅仅是获取绘图状态，而没有获取事件，也就是你点一下LinearLayout时Button有被点击的效果，但是不执行点击事件。
 在TextView中设置字体颜色一般使用，android:textColor="@color/red"，但是我们在使用selector动态修改字体颜色的时候要使用android:color="@color/red"。
 代码来设置textColor 的，需要用 textView.setTextColor(getResources().getColorStateList(R.color.text_selector_color));来设置。
+
+3:ListView
+--ListView记得把layout_height属性设置成match_parent。若设置成"wrap_content"则会调用多次。
+--cacheColorHint="#00000000" 自定义listview的时候，不使用#00000000会出现选中一个空间黑色底色的情况.
+--当不使用android:listSelector属性，默认会显示选中的item为橙黄底色
+
+4:坐标
+坐标原点是左上角.
+getRowX：触摸点相对于屏幕的坐标
+getX： 触摸点相对于按钮的坐标
+getTop： 按钮左上角相对于父view（LinerLayout）的y坐标
+getLeft： 按钮左上角相对于父view（LinerLayout）的x坐标
