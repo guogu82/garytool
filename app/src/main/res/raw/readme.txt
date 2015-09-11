@@ -13,7 +13,7 @@ BottomMenuWithFragmentActivity
 多次出现的成员变量，通过前缀区分,只是view对象有前缀
 ImageView iv_about_time
 类里面基本是唯一的变量，用小写开头的全名来表示
-DisplayMetrics displayMetrics
+DisplayMetrics mDisplayMetrics
 
 类临时变量命名规范
 ImageView aboutTimeInDay
@@ -55,6 +55,9 @@ tasklist|findstr "18212"
  3：单例--全局变量
  4：建造者--按需构造实例，例如dialog，参数太多了。
  5：模板方法--就是抽取共同代码，父类与子类
+
+ 软件版本规则
+ V3.5.12   左边是大版本，中间是策划评审通过的版本，右边是策划版本
 
 1:Fragment  transaction.replace() VS transaction.add() hide() show()
 Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#

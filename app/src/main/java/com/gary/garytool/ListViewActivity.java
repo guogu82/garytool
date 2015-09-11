@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.gary.garytool.adapter.ListAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,9 +23,10 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int BOTTOM_MENU_WITH_FRAGMENT = 3;
     private static final int LIST_VIEW_ITEM_UI = 4;
     private static final int LIST_VIEW_MESSAGE_READED = 5;
-    private static final int LIST_VIEW_LOAD_MORE = 6;
-    private static final int LIST_VIEW_UPDATE = 7;
+    private static final int LIST_VIEW_UPDATE = 6;
+    private static final int LIST_VIEW_LOAD_MORE = 7;
     private static final int LIST_VIEW_ADAPTER_BASE = 8;
+    private static final int VIEW_PAGER_GUIDE = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +37,10 @@ public class ListViewActivity extends ActionBarActivity {
         mListView.setAdapter(adapter);
     }
 
+    /**
+     * 功能列表展示
+     * @return
+     */
     private List<String> getData() {
         List<String> data = new ArrayList<>();
         data.add("微信6.0主界面");
@@ -47,9 +49,36 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("底部菜单WithFragment");
         data.add("ListViewItem界面展示");
         data.add("ListView邮件已读");
-        data.add("ListView加载更多");
         data.add("ListView下拉刷新");
+        data.add("ListView上拉加载更多");
         data.add("万能的adapter适配器");
+        data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
+        /*-----done------*/
+        //actionbar
+        //listview
+        //adapter
+        //viewpager
+        //textview
+        //edittext
+        //imageview
+        //button
+        //fragment
+        /*----will do---*/
+        //数据库操作
+        //json操作
+        //网络访问
+        //volley
+        //PullToRefresh
+        //EventBus
+        //ButterKnife
+        //省市三级联动
+        //webView
+        //login 第三方登录
+        //socket tcp通信
+        //地图应用
+        //DiskLruCache
+        //OOM
+        //生成验证码
         return data;
     }
 
@@ -120,15 +149,19 @@ public class ListViewActivity extends ActionBarActivity {
                                 intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
                                 startActivity(intent);
                                 break;
-                            case LIST_VIEW_LOAD_MORE:
-                                intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
-                                startActivity(intent);
-                                break;
                             case LIST_VIEW_UPDATE:
                                 intent =new Intent(ListViewActivity.this, ListViewUpdateActivity.class);
                                 startActivity(intent);
                                 break;
+                            case LIST_VIEW_LOAD_MORE:
+                                intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
+                                startActivity(intent);
+                                break;
                             case LIST_VIEW_ADAPTER_BASE:
+                                intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
+                                startActivity(intent);
+                                break;
+                            case VIEW_PAGER_GUIDE:
                                 intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
                                 startActivity(intent);
                                 break;

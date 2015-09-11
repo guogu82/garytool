@@ -3,15 +3,15 @@ package com.gary.garytool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.gary.garytool.adapter.ContentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,5 +203,36 @@ public class BottomMenuWithViewpager extends Activity implements View.OnClickLis
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    public class ContentAdapter extends PagerAdapter {
+
+        private List<View> views;
+        public ContentAdapter(List<View> views)
+        {
+            this.views=views;
+        }
+        @Override
+        public int getCount() {
+            return views.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view==object;
+        }
+        @Override
+        public Object instantiateItem(ViewGroup container,int position)
+        {
+            View view=views.get(position);
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container,int position,Object object)
+        {
+            container.removeView(views.get(position));
+        }
     }
 }

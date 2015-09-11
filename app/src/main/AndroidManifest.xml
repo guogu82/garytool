@@ -50,6 +50,10 @@
             android:name=".ListViewUpdateActivity"
             android:label="@string/title_activity_list_view_update" >
         </activity>
+        <activity
+            android:name=".ViewPaperGuideActivity"
+            android:label="@string/title_activity_view_paper_guide" >
+        </activity>
     </application>
 
 </manifest>
