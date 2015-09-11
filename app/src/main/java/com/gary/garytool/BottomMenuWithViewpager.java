@@ -205,6 +205,15 @@ public class BottomMenuWithViewpager extends Activity implements View.OnClickLis
 
     }
 
+    /**
+     * ViewPager的适配器是PagerAdapter，它是基类提供适配器来填充页面ViewPager内部，你很可能想要使用一个更具体的实现,
+     * 如FragmentPagerAdapter或FragmentStatePagerAdapter。在这里需要说明一下，其实ViewPager应该和Fragment一起使用，至少谷歌官方是这么想的，
+     * 但是在3.0之下，我们没有必要这么做。下面要注意，当你实现一个PagerAdapter,你必须至少覆盖以下方法:
+     * instantiateItem(ViewGroup, int)
+     * destroyItem(ViewGroup, int, Object)
+     * getCount()
+     * isViewFromObject(View, Object)
+     */
     public class ContentAdapter extends PagerAdapter {
 
         private List<View> views;

@@ -3,6 +3,9 @@ activity_bottom_menu_with_fragment
 
 布局文件 里面的view id命名规范
 ImageView iv_about_time
+
+资源文件命名规范
+类型_模块_描述_状态
 Selector selector_skin_tabbar_icon_about
 
 类  命名规范
