@@ -5,4 +5,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_list_view_adapter_m">ListViewAdapterMActivity</string>
+    <string name="title_activity_list_view_update">ListViewUpdateActivity</string>
+    <string name="title_activity_view_paper_guide">ViewPaperGuideActivity</string>
 </resources>

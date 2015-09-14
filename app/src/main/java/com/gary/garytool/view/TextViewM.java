@@ -7,10 +7,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gary.garytool.util.LogUtil;
+
 /**
  * Created by Gary on 2015/9/5.
  */
 public class TextViewM extends TextView {
+    private static final String TAG = "TextViewM";
     private int textColori=0;//控件的文字颜色，Int
     private String textColors="";//控件的文字颜色，String
     private int textColorSelectedi=0;//控件被按下后的文字颜色，Int
@@ -21,6 +24,23 @@ public class TextViewM extends TextView {
 
     public TextViewM(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                LogUtil.d(TAG, "ACTION_DOWN,getY()=" + getY());
+                break;
+            case MotionEvent.ACTION_MOVE:
+                LogUtil.d(TAG,"ACTION_MOVE,getY()="+getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                LogUtil.d(TAG,"ACTION_UP,getY()="+getY());
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
     /**

@@ -1,11 +1,13 @@
 package com.gary.garytool;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.gary.garytool.adapter.ListAdapter;
 import com.gary.garytool.info.MessageBean;
+import com.gary.garytool.view.AdapterM;
+import com.gary.garytool.view.ViewHolderM;
 
 
 public class ListViewAdapterMActivity extends Activity {
@@ -39,6 +41,21 @@ public class ListViewAdapterMActivity extends Activity {
         lv= (ListView) findViewById(R.id.lv);
         listAdapter=new ListAdapter(this,R.layout.listview_item_adapter_m,messageBeans);
         lv.setAdapter(listAdapter);
+    }
+
+     class ListAdapter extends AdapterM<MessageBean> {
+        public ListAdapter(Context context, int layoutId, MessageBean[] dataArray) {
+            super(context, layoutId, dataArray);
+        }
+
+        @Override
+        public void convert(ViewHolderM holder, MessageBean model) {
+            // 为个控件绑定内容
+            holder.setText(R.id.tv_title, model.getTitle());
+            holder.setText(R.id.tv_content, model.getContent());
+            holder.setText(R.id.tv_comment, model.getComment() + "条评论");
+            holder.setText(R.id.tv_read, model.getRead() + "阅读");
+        }
     }
 
 
