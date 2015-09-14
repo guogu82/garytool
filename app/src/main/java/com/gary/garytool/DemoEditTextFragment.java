@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 public class DemoEditTextFragment extends Fragment {
 
 
+    //1:EditText加入图标 更改边框颜色 设置透明 代码  2015-09-14
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-               return inflater.inflate(R.layout.layout_page_03,container,false);
+               return inflater.inflate(R.layout.fragment_edittext,container,false);
     }
 
 
