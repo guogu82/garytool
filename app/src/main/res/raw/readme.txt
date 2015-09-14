@@ -51,6 +51,7 @@ ctrl+alt+o  自动清理import
 alt+enter 错误修正提示列表
 ctrl+alt+T  包裹if或者try
 ctrl+J   生成for循环
+ctrl+P 显示方法的参数
 
 adb 启动失败
 netstat -aon|findstr "5037"      （netstat -aon|findstr "5037" | more--分屏）
