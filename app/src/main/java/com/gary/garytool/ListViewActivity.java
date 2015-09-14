@@ -67,10 +67,6 @@ public class ListViewActivity extends ActionBarActivity {
         //数据库操作
         //json操作
         //网络访问
-        //volley
-        //PullToRefresh
-        //EventBus
-        //ButterKnife
         //省市三级联动
         //webView
         //login 第三方登录
@@ -79,6 +75,16 @@ public class ListViewActivity extends ActionBarActivity {
         //DiskLruCache
         //OOM
         //生成验证码
+
+        /*----框架---*/
+        //volley VS OkHttp VS universal-image-loader
+        //PullToRefresh
+        //EventBus
+        //ButterKnife
+        //xUtils(Afinal)
+        //GreenDAO
+        //DiskLruCache
+
         return data;
     }
 

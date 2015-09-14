@@ -214,6 +214,7 @@ public class BottomMenuWithViewpager extends Activity implements View.OnClickLis
      * getCount()
      * isViewFromObject(View, Object)
      */
+    //TODO: note pageradapter是基础的adapter ，还有FragmentPagerAdapter与FragmentStatePagerAdapter。这两个类不知道干嘛的。
     public class ContentAdapter extends PagerAdapter {
 
         private List<View> views;

@@ -1,3 +1,13 @@
+本文档记录了android开发中长期要看的备忘。
+
+ android.os
+ android.app
+ android.content
+ android.view
+ android.widget
+ android.util
+ android.text
+
 布局文件 命名规范
 activity_bottom_menu_with_fragment
 
@@ -62,30 +72,9 @@ tasklist|findstr "18212"
  软件版本规则
  V3.5.12   左边是大版本，中间是策划评审通过的版本，右边是策划版本
 
-1:Fragment  transaction.replace() VS transaction.add() hide() show()
-Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
-那么最合适的处理方式是这样的：
-在add的时候，加上一个tab参数transaction.add(R.id.content, IndexFragment,”Tab1″);
-然后当IndexFragment引用被回收置空的话，先通过IndexFragment＝FragmentManager.findFragmentByTag(“Tab1″);
-找到对应的引用，然后继续上面的hide,show;
+ 我的框架主体
+volley  OkHttp Gson universal-image-loader DiskLruCache xUtils GreenDAO
+PullToRefresh
 
-2:TextView,Button,EditText 如果要做到按下去有变化，请使用selector
-点击父布局 使子控件（TextView等）响应点击效果 （子控件中加上这个属性 duplicateParentState）。
-例如：组件RelativeLayout上有两个TextView，这两个TextView具有不同的颜色值，现在要的效果是，当RelativeLayout被点击时，整个item有高亮背景。
-同时这两个TextView要变色。就是父控件响应点击事件，子View不响应点击事件，但是颜色要随着点击而发生变化。这样就用到了属性duplicateParentState。
-android:duplicateParentState，如果设置此属性，将直接从父容器中获取绘图状态（光标，按下等）。
-注意仅仅是获取绘图状态，而没有获取事件，也就是你点一下LinearLayout时Button有被点击的效果，但是不执行点击事件。
-在TextView中设置字体颜色一般使用，android:textColor="@color/red"，但是我们在使用selector动态修改字体颜色的时候要使用android:color="@color/red"。
-代码来设置textColor 的，需要用 textView.setTextColor(getResources().getColorStateList(R.color.text_selector_color));来设置。
 
-3:ListView
---ListView记得把layout_height属性设置成match_parent。若设置成"wrap_content"则会调用多次。
---cacheColorHint="#00000000" 自定义listview的时候，不使用#00000000会出现选中一个空间黑色底色的情况.
---当不使用android:listSelector属性，默认会显示选中的item为橙黄底色
 
-4:坐标
-坐标原点是左上角.
-getRowX：触摸点相对于屏幕的坐标
-getX： 触摸点相对于按钮的坐标
-getTop： 按钮左上角相对于父view（LinerLayout）的y坐标
-getLeft： 按钮左上角相对于父view（LinerLayout）的x坐标
