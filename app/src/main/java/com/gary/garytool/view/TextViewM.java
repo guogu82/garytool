@@ -52,6 +52,7 @@ public class TextViewM extends TextView {
             {
                 //按下
                 if(textColorSelectedi!=0)
+
                 {
                     setTextColor(textColorSelectedi);
                 }else if (!textColorSelecteds.equals(""))
