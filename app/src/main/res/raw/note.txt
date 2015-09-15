@@ -18,6 +18,15 @@ SDK
  3:使用极光做推送
  4：使用
 
+Android Studio开发入门-引用jar及so文件 http://www.cnblogs.com/xrwang/p/AndroidStudioImportJarAndSoLibrary.html
+一、引用jar文件
+    1.将jar文件复制、粘贴到app的libs目录中；
+    2.右键点击jar文件，并点击弹出菜单中的“Add As Library”，将jar文件作为类库添加到项目中；
+    3.选择指定的类库。
+    二、引用so文件
+        网上有很多引用so文件的方法，多数都很麻烦，在KYLE THIELK的博客中找到了一种简单的方法。
+        1.在“src/main”目录中新建名为“jniLibs”的目录；
+        2.将so文件复制、粘贴到“jniLibs”目录内。
 libs
 1：一款漂亮实用的Android开源日期控件timessquare
 2:推荐一个Android开发懒人库 -- ButterKnife
