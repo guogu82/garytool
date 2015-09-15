@@ -53,7 +53,6 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("ListView上拉加载更多");
         data.add("万能的adapter适配器");
         data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
-        data.add("PullToRefresh+universal-image-loader");//http://www.cnblogs.com/smyhvae/p/4488049.html
         /*-----done------*/
         //actionbar
         //listview
@@ -81,7 +80,7 @@ public class ListViewActivity extends ActionBarActivity {
         //ActionBar to ToolBar
 
         /*----框架---*/
-        //volley VS OkHttp VS universal-image-loader
+        //volley VS OkHttp VS universal-image-loader VS android-async-http
         //PullToRefresh
         //EventBus
         //ButterKnife

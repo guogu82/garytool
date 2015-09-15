@@ -54,6 +54,10 @@
             android:name=".ViewPagerGuideActivity"
             android:label="@string/title_activity_view_paper_guide" >
         </activity>
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base" >
+        </activity>
     </application>
 
 </manifest>

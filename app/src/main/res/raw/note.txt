@@ -23,8 +23,6 @@ libs
 2:推荐一个Android开发懒人库 -- ButterKnife
 3: Android图表引擎AChartEngine
 
-
-
  1:Fragment  transaction.replace() VS transaction.add() hide() show()
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
  那么最合适的处理方式是这样的：
