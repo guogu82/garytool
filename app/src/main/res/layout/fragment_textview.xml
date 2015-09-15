@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:ignore="HardcodedText">
-<com.gary.garytool.view.TextViewM
-    android:id="@+id/tv_custom1"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="#AA6666"
-    android:gravity="center"
-    android:text="TEXT1"
-    android:textSize="20sp"/>
+
+    <com.gary.garytool.view.TextViewM
+        android:id="@+id/tv_custom1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#AA6666"
+        android:gravity="center"
+        android:text="TEXT1"
+        android:textSize="20sp" />
+
     <com.gary.garytool.view.TextViewM
         android:id="@+id/tv_custom2"
         android:layout_width="match_parent"
@@ -19,5 +22,13 @@
         android:background="#66FF66"
         android:gravity="center"
         android:text="TEXT1"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_demo2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/silver"
+        android:padding="10dp"
+        android:textColor="@color/salmon" />
 </LinearLayout>

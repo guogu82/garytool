@@ -64,6 +64,7 @@ public class ListViewActivity extends ActionBarActivity {
         //imageview
         //button
         //fragment
+
         /*----will do---*/
         //数据库操作
         //json操作
@@ -76,6 +77,8 @@ public class ListViewActivity extends ActionBarActivity {
         //DiskLruCache
         //OOM
         //生成验证码
+        //RecycleView + CardView 控件
+        //ActionBar to ToolBar
 
         /*----框架---*/
         //volley VS OkHttp VS universal-image-loader
@@ -85,6 +88,8 @@ public class ListViewActivity extends ActionBarActivity {
         //xUtils(Afinal)
         //GreenDAO
         //DiskLruCache
+
+        //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
 
         return data;
     }
@@ -169,7 +174,7 @@ public class ListViewActivity extends ActionBarActivity {
                                 startActivity(intent);
                                 break;
                             case VIEW_PAGER_GUIDE:
-                                intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
+                                intent =new Intent(ListViewActivity.this, ViewPagerGuideActivity.class);
                                 startActivity(intent);
                                 break;
                             default:
