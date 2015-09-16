@@ -32,6 +32,16 @@ libs
 2:推荐一个Android开发懒人库 -- ButterKnife
 3: Android图表引擎AChartEngine
 
+百度出了个api store可以查询各类服务 http://apistore.baidu.com/
+身份证号码查询：http://apistore.baidu.com/apiworks/servicedetail/113.html
+手机号码：http://apistore.baidu.com/apiworks/servicedetail/117.html
+天气查询 http://apistore.baidu.com/apiworks/servicedetail/112.html
+
+图灵也出了个api 图灵机器人
+http://www.tuling123.com/openapi/api?key=0697f52f60f49d3a607ea09cb4e94c4a&info=帮我查一下听日广州天气
+http://www.tuling123.com/openapi/modules.do?name=show
+
+
  1:Fragment  transaction.replace() VS transaction.add() hide() show()
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
  那么最合适的处理方式是这样的：
@@ -55,6 +65,14 @@ libs
  ---如果你的自定义ListViewItem中有Button或者Checkable的子类控件的话，那么默认focus是交给了子控件，而ListView的Item能被选中的基础是它能获取Focus，
  也就是说我们可以通过将ListView中Item中包含的所有控件的focusable属性设置为false，这样的话ListView的Item自动获得了Focus的权限，也就可以被选中了.
  或者父控件 设置android:descendantFocusability="blocksDescendants"
+
+ VIEWPAGER和FRAGMENT的结合使用FRAGMENT里包含着LISTVIEW的常见问题
+ 在我们开发的过程中可能会遇到类似需求，我们需要做一个左右滑动的tab导航，这个时候有些朋友可能会想到viewpager和fragment的结合来实现这个功能；当然实现的方法不单单着一种。我们这个随笔讨论的是这种方式实现的效果、现在假如我们选中了服务这个列，服务列下有一个listview用来展示数据。然后滑动到第二个评价的fragment再到第三个商家fragment，或者是直接到最后一个fragment，然后再回来第一个fragment，我们会发现fragment刷新了一下。这里fragment重新create了，这个时候会发现listview的数据不对了。但我们并没有进行刷新操作！这个时候我们只需要重写适配器的
+ 　　@Override
+         public void destroyItem(ViewGroup container, int position, Object object) {
+             //super.destroyItem(container, position, object);
+         }
+ 然后把super.destroyItem(container, position, object);注释掉，让fragment一直存在着。这样你再次运行会发现刚刚那个问题已经解决了、、该问题暂时描述到这里
 
  4:坐标
  坐标原点是左上角.
@@ -112,4 +130,14 @@ libs
   回复最怕认真：你可以自己写一个图片的缓存存起来，然后调用啊
   Re: lanhun7 2015-08-28 23:29发表 [回复]
   回复wikikii：第一次进入，没有缓存（getbitmap这里要自己实现如lrucache），再读取diskbasedcache,然后再读取网络。网络数据获取到后，先存到diskbasedcache，然后在存到你自己实现的lrucache，在putbitmap这个接口里面。最后再回调你自己的lisenter。
-    当然过期，比如是获取图片getbitmap在这个之后所以这里就判断不了直接读的以前的。若你没自己缓存到自己的内存，那么过期了就直接申请网络的了
+  当然过期，比如是获取图片getbitmap在这个之后所以这里就判断不了直接读的以前的。若你没自己缓存到自己的内存，那么过期了就直接申请网络的了
+
+随着Android的发展，各路大神的贡献，我们可用的轮子越来越多。比如HTTP请求框架，有自家的Volley，Square的okhttp, async-http-lib, 还有聚合版的xUtils以及AFinal。我想你肯定用过其中一个。
+当然Stay今天不是来科普的，而是来跟大家一起思考一个问题的。我们暂且不提他们在内部做了多少优化，我们就说lib的返回数据。
+ 在常用的http请求的返回值中，文件，JSON占绝大多数（图片有其他框架，这里不考虑）。文件下载都有专门的response，会帮你下载到制定路径，这个肯定都支持。那JSON呢？貌似都返回一个JSONObject或者JSONArray。
+ 我去，做好事得做全啊，返回JSONObject是个什么鬼，难道还得自己动手写解析反序列化成自己要得对象？那是最低级的程序员干的事。好在我们都不傻，还有GSON，fastJson，Jackson帮我们来完成这步转化。
+
+
+ Volley的源代码存放在这里，你可以用git clone直接获取：
+ git clone https://android.googlesource.com/platform/frameworks/volley
+ 在下载后的代码目录中适用”ant jar”命令完成编译，会生成volley.jar包，这样你就能在Eclipse或Android Studio中适用啦。

@@ -78,4 +78,16 @@ volley  OkHttp Gson universal-image-loader DiskLruCache xUtils GreenDAO
 PullToRefresh
 
 
+我的技术发展规划。
+第1年内熟悉安卓开发细节。控件的熟悉，框架的使用。
+
+第2年改动开源框架，重构应用场景。
+不管team有多少人，一开始写代码尽量写伪代码(TODO)，把整体逻辑写完，TODO的地方慢慢加上，一个Activity就写完了。
+而且如果不做了，或者让别人来做，能很快顺着你的思路继续下去。
+如果你有很好的画流程图的习惯。把它们变成TODO试试。你会发现代码写起来很轻松。把写代码当成一种享受。
+
+第3年用mindmanager画自己的想法，用axure，mockup设计原型，用Visio，gliffy设计框架流程，然后用代码实现。
+在产品的周期里，coding是最不起眼的角色，伪脑力的体力劳动者。如何让自己折腾出这个圈子，站在更高的角度看自己。
+
+
 
