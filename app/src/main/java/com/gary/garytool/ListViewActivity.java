@@ -27,6 +27,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int LIST_VIEW_LOAD_MORE = 7;
     private static final int LIST_VIEW_ADAPTER_BASE = 8;
     private static final int VIEW_PAGER_GUIDE = 9;
+    private static final int VOLLEY = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("ListView上拉加载更多");
         data.add("万能的adapter适配器");
         data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
+        data.add("volley");
         /*-----done------*/
         //actionbar
         //listview
@@ -174,6 +176,10 @@ public class ListViewActivity extends ActionBarActivity {
                                 break;
                             case VIEW_PAGER_GUIDE:
                                 intent =new Intent(ListViewActivity.this, ViewPagerGuideActivity.class);
+                                startActivity(intent);
+                                break;
+                            case VOLLEY:
+                                intent =new Intent(ListViewActivity.this, VolleyActivity.class);
                                 startActivity(intent);
                                 break;
                             default:
