@@ -74,8 +74,7 @@ tasklist|findstr "18212"
  V3.5.12   左边是大版本，中间是策划评审通过的版本，右边是策划版本
 
  我的框架主体
-volley  OkHttp Gson universal-image-loader DiskLruCache xUtils GreenDAO
-PullToRefresh
+volley Gson xUtils PullToRefresh
 
 
 我的技术发展规划。

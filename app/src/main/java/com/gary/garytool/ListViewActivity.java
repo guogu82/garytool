@@ -82,7 +82,9 @@ public class ListViewActivity extends ActionBarActivity {
         //ActionBar to ToolBar
 
         /*----框架---*/
-        //volley VS OkHttp VS universal-image-loader VS android-async-http
+        //volley VS universal-image-loader VS android-async-http
+        //Volley是将AsyncHttpClient和Universal-Image-Loader的优点集成于一身的一个框架
+        //OkHttp 可以与volley配合，做volley的传输层
         //PullToRefresh
         //EventBus
         //ButterKnife
