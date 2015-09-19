@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gary.garytool.VolleyActivity">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <Button
@@ -20,31 +21,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="JsonRequest" />
+
         <Button
-        android:id="@+id/bt_volley_quest3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ImageRequest" />
-        <Button
-            android:id="@+id/bt_volley_quest4"
+            android:id="@+id/bt_volley_quest3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ImageLoader" />
-        <Button
-            android:id="@+id/bt_volley_quest5"
+            android:text="ImageRequest" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NetworkImageView" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_volley_quest4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ImageLoader" />
+
+            <Button
+                android:id="@+id/bt_volley_quest5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="NetworkImgView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_volley_quest6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="XmlRequest" />
+
+            <Button
+                android:id="@+id/bt_volley_quest7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="GsonRequest" />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_volley"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
+
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/iv_volley_networkimageview"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
+
         <TextView
             android:id="@+id/tv_volley_string_response"
             android:layout_width="match_parent"
