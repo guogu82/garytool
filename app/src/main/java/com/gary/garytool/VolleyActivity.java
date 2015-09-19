@@ -20,6 +20,8 @@ import com.gary.garytool.info.Weather;
 import com.gary.garytool.info.WeatherInfo;
 import com.gary.garytool.volley.BitmapCache;
 import com.gary.garytool.volley.GsonRequest;
+import com.gary.garytool.volley.VolleyInterface;
+import com.gary.garytool.volley.VolleyRequest;
 import com.gary.garytool.volley.XMLRequest;
 
 import org.json.JSONObject;
@@ -36,11 +38,12 @@ import java.io.IOException;
  * 5:NetworkImageView
  * 6:XMLRequest
  * 7:GsonRequest
- * 8:activity volley request 生命周期控制
- * 9:request 的二次封装。为请求前打开请求框，请求后打开错误提示框
+ * 8:request 的二次封装。为请求前打开请求框，请求后打开错误提示框
+ * 9:activity volley request 生命周期控制
  */
 public class VolleyActivity extends Activity {
     static final String TAG = "VolleyActivity";
+    static final String REQUESTTAG = "VolleyActivityGet";
 
     String mUrl = "http://www.baidu.com";
     String mJsonUrl = "http://m.weather.com.cn/atad/101230201.html";
@@ -51,6 +54,7 @@ public class VolleyActivity extends Activity {
     Button bt_volley_quest5;
     Button bt_volley_quest6;
     Button bt_volley_quest7;
+    Button bt_volley_quest8;
 
     ImageView iv_volley;
     TextView tv_response;
@@ -89,6 +93,8 @@ public class VolleyActivity extends Activity {
                         tv_response.setText(volleyError.toString());
                     }
                 });
+                //activity volley request 生命周期控制
+                request.setTag(REQUESTTAG);
                 GaryApplication.getVolleyRequestQueue().add(request);
             }
         });
@@ -206,6 +212,7 @@ public class VolleyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String url = "http://www.weather.com.cn/data/sk/101010100.html";
+                //{"weatherinfo":{"city":"北京","cityid":"101010100","temp":"9","WD":"西南风","WS":"2级","SD":"22%","WSE":"2","time":"10:35","isRadar":"1","Radar":"JC_RADAR_AZ9010_JB","njd":"暂无实况","qy":"1015"}}
                 GsonRequest<Weather> gsonRequest = new GsonRequest<Weather>(url, Weather.class, new Response.Listener<Weather>() {
                     @Override
                     public void onResponse(Weather weather) {
@@ -224,7 +231,31 @@ public class VolleyActivity extends Activity {
             }
         });
 
+bt_volley_quest8= (Button) findViewById(R.id.bt_volley_quest8);
+        bt_volley_quest8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VolleyRequest.RequestGet(VolleyActivity.this,mUrl,REQUESTTAG, new VolleyInterface(VolleyActivity.this) {
+                    @Override
+                    public void onMySuccess(String result) {
+tv_response.setText(result);
+                    }
+
+                    @Override
+                    public void onMyError(VolleyError error) {
+tv_response.setText(error.toString());
+                    }
+                });
+            }
+        });
+
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //activity volley request 生命周期控制.退出activity时，清除所有请求。
+        GaryApplication.getVolleyRequestQueue().cancelAll(REQUESTTAG);
+    }
 }
