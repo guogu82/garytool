@@ -74,7 +74,22 @@ tasklist|findstr "18212"
  V3.5.12   左边是大版本，中间是策划评审通过的版本，右边是策划版本
 
  我的框架主体
-volley Gson xUtils PullToRefresh
+volley Gson xUtils PullToRefresh LruCache
+
+代码功能讲解（把各个activity的关联文件说明清楚。功能，使用的技术。特点讲解。完成日期。疑惑点，引申的问题。）
+1：地区、学校选择二级联动
+demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html
+demo代码 https://github.com/tonycheng93/PopWindow
+使用控件 PopupWindow  ListView
+使用框架 Volley Gson
+相关文件
+类
+PopupWindowActivity
+资源文件
+popwindow_layout.xml
+popwindow_view_select_province_list.xml
+popwindow_item_school_list.xml
+popwindow_item_province_list.xml
 
 
 我的技术发展规划。

@@ -28,6 +28,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int LIST_VIEW_ADAPTER_BASE = 8;
     private static final int VIEW_PAGER_GUIDE = 9;
     private static final int VOLLEY = 10;
+    private static final int POPUPWINDOW = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("万能的adapter适配器");
         data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
         data.add("volley");
+        data.add("地区学校二级联动-PopupWindow");
         /*-----done------*/
         //actionbar
         //listview
@@ -182,6 +184,10 @@ public class ListViewActivity extends ActionBarActivity {
                                 break;
                             case VOLLEY:
                                 intent =new Intent(ListViewActivity.this, VolleyActivity.class);
+                                startActivity(intent);
+                                break;
+                            case POPUPWINDOW:
+                                intent =new Intent(ListViewActivity.this, PopupWindowActivity.class);
                                 startActivity(intent);
                                 break;
                             default:

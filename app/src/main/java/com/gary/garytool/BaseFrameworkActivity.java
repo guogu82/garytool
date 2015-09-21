@@ -32,7 +32,7 @@ import java.util.List;
  * https://github.com/Tim9Liu9/volley_demo
  * 4：xUtils 用于数据库也支持大文件上传 vs GreenDAO vs LitePal
  */
-public class BaseActivity extends Activity {
+public class BaseFrameworkActivity extends Activity {
 
     private PullToRefreshListView mListView;
     private Context mContext;
