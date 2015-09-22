@@ -76,8 +76,8 @@ tasklist|findstr "18212"
  我的框架主体
 volley Gson xUtils PullToRefresh LruCache
 
-代码功能讲解（把各个activity的关联文件说明清楚。功能，使用的技术。特点讲解。完成日期。疑惑点，引申的问题。）
-1：地区、学校选择二级联动
+代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）
+1：地区、学校选择二级联动 (20150922)
 demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html
 demo代码 https://github.com/tonycheng93/PopWindow
 使用控件 PopupWindow  ListView
@@ -85,12 +85,17 @@ demo代码 https://github.com/tonycheng93/PopWindow
 相关文件
 类
 PopupWindowActivity
+ProvinceList
+SchoolList
+Province
+School
 资源文件
 popwindow_layout.xml
 popwindow_view_select_province_list.xml
 popwindow_item_school_list.xml
 popwindow_item_province_list.xml
-
+特点讲解，疑惑点，引申的问题。
+ ListView 要设置match_parent,否则getView()会执行多次。convertView是一屏所有view都是空，只有滑出去后的view才不为空。
 
 我的技术发展规划。
 第1年内熟悉安卓开发细节。控件的熟悉，框架的使用。

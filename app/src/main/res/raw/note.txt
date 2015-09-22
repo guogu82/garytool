@@ -90,6 +90,7 @@ http://www.tuling123.com/openapi/modules.do?name=show
   这让软引用和弱引用变得不再可靠。另外，Android 3.0 (API Level 11)中，图片的数据会存储在本地的内存当中，
   因而无法用一种可预见的方式将其释放，这就有潜在的风险造成应用程序的内存溢出并崩溃。
 
+
 6：各类框架的评价
  Volley被设计用于小的网络请求，所以像上传下载大文件什么的就不适合了，虽然网上已有相应的扩展，而且原生是没有文件上传的。
  Volley还有NetImageView，ImageLoader等和加载图片相关的，不过我个人习惯了使用UniversalImageLoader
@@ -144,3 +145,27 @@ http://www.tuling123.com/openapi/modules.do?name=show
  Volley的源代码存放在这里，你可以用git clone直接获取：
  git clone https://android.googlesource.com/platform/frameworks/volley
  在下载后的代码目录中适用”ant jar”命令完成编译，会生成volley.jar包，这样你就能在Eclipse或Android Studio中适用啦。
+
+ 7:Sqlite操作框架的评价
+-------------- SugarORM-------------
+ 最近开发的一个项目主要有两个特点，这两点也是在项目开发前需要着重去规划解决方案的：
+ 需要和Rest服务端请求大量的数据
+ 同时这些数据本地也要保存到sqlite数据库
+ 对于第一点，目前的Volley、Gson等框架既可以解决从服务端请求数据拉下Json数据并解析成java对象的全过程。但是对于第二点，就有点头疼了。
+ 因为Android开发也是用Java语言，所以Android平台上涌现了一些Android的ORM框架，比如ORMLite、GreenDao、SugarORM，ORMLite并不是专为Android打造的，GreenDao据称性能比较高，但是有重大的缺陷，这里后面会说到。所以最后选用了SugarORM这个框架，同时SugarORM一直在更新维护，所以也推荐使用这个框架。
+ 它具有下列优点：
+ 不用写复杂的sql语句，而用简单的API即可完成创建和操纵数据
+ 可以在原有的Bean上仅仅添加小的修改而复用Bean
+ 简化而明了的数据库设计和创建过程，同时提供表的一对多的支持
+ SugarORM在github上的官网为：
+ http://satyan.github.io/sugar/index.html
+
+ SugarORM中Bean可复用Gson的Bean
+ SugarORM最大的好处是，用于创建表的Bean是你自己可以定义的，这点相对于GreenDao而言是不言而喻的。GreenDao是自动帮你创建了bean类，但是如果这个Bean你又需要用来解析网络拉下来的Json数据，那么就有问题了。
+ 我们知道Gson也是通过Bean对象来解析Json数据的，但是Gson支持在Bean中的属性上加一些注解（比如@Expose这个注解）。那么这里你可能想到解析Json所用的bean和储存数据库所用的bean能共用，那么这里的存储数据库的bean因为需要加一些gson或者别的框架的注解，就不能让ORM框架来自动生成了。所以， GeenDao没法使用。
+ 开发中注意的地方
+ 命名问题
+ 数据库更改的问题
+ 第一个问题是本文开头所提到的“Bean的属性名所采用驼峰命名法，那么大写的字母会在创建的表中字段转换成下划线”这个问题，从SugarORM公布的源码里面能看到它是自己加上的"_"而并不是一个bug，这里可能是为了想和java web的一些开发方式保持一致吧，或许是为了规避sqlite对大小写敏感而导致的各种问题而引入的这种策略。所以开发者在用SugarORM的时候要注意命名的改变。你在Bean中写了一个属性名，而数据库中的字段名并不是这个。当然了，这里可以通过@Column注解来搞定
+  第二个问题是一个习惯性问题。开发中由于不用直接操作SqliteDataBase这种类型的类了，所以多人同时开发的时候某个人提交代码的时候只是修改了他所负责的表的对应的Bean的结构，而这个时候你再更新代码在重新安装Apk后会发现报错，比如找不到某个表的字段的错。这个是因为表结构改了，所以你不得不先卸载原来的应用而重新安装apk。所以这里最好在多人开发的时候养成一个习惯：某个人修改了某个Bean后（即更新了表结构）一定要通知其他人
+  -------------- SugarORM-------------

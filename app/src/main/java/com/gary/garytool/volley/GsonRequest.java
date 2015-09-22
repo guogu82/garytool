@@ -1,9 +1,11 @@
 package com.gary.garytool.volley;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 
@@ -25,6 +27,12 @@ public class GsonRequest<T> extends Request<T> {
         mListener = listener;
         mGson=new Gson();
         mClass=clazz;
+        setRetryPolicy(getMyDefaultRetryPolicy());
+    }
+
+    private RetryPolicy getMyDefaultRetryPolicy() {
+        RetryPolicy retryPolicy=new DefaultRetryPolicy(5000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        return retryPolicy;
     }
 
     @Override

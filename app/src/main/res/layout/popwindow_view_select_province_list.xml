@@ -17,7 +17,7 @@
     <ListView
         android:id="@+id/lv_province"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="#e4e4e4"
         android:divider="#aeaeae"
@@ -27,7 +27,7 @@
     <ListView
         android:id="@+id/lv_school"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:visibility="gone"
         android:layout_gravity="center"
         android:background="#e4e4e4"

@@ -9,7 +9,7 @@ public class Constants {
 
 
     //TODO：note volley 的常量定义方式
-    public interface Method {
+    private interface Method {
         int DEPRECATED_GET_OR_POST = -1;
         int GET = 0;
         int POST = 1;
