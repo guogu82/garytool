@@ -26,7 +26,8 @@ public class MainActivity extends Activity {
         });
 
         mTextView= (TextView) findViewById(R.id.tv);
-        mTextView.setText("我的个人框架组合 \n PullToRefresh \n volley \n universal-image-loader \n adaper封装 \n xUtils \ngson");
+        mTextView.setText("我的个人框架组合 \n Volley \n xUtils \n Gson \n" +
+                " PullToRefresh ");
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

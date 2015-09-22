@@ -76,6 +76,17 @@ tasklist|findstr "18212"
  我的框架主体
 volley Gson xUtils PullToRefresh LruCache
 
+我的技术发展规划。
+第1年内熟悉安卓开发细节。控件的熟悉，框架的使用。
+
+第2年改动开源框架，重构应用场景。
+不管team有多少人，一开始写代码尽量写伪代码(TODO)，把整体逻辑写完，TODO的地方慢慢加上，一个Activity就写完了。
+而且如果不做了，或者让别人来做，能很快顺着你的思路继续下去。
+如果你有很好的画流程图的习惯。把它们变成TODO试试。你会发现代码写起来很轻松。把写代码当成一种享受。
+
+第3年用mindmanager画自己的想法，用axure，mockup设计原型，用Visio，gliffy设计框架流程，然后用代码实现。
+在产品的周期里，coding是最不起眼的角色，伪脑力的体力劳动者。如何让自己折腾出这个圈子，站在更高的角度看自己。
+
 代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）
 1：地区、学校选择二级联动 (20150922)
 demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html
@@ -97,16 +108,20 @@ popwindow_item_province_list.xml
 特点讲解，疑惑点，引申的问题。
  ListView 要设置match_parent,否则getView()会执行多次。convertView是一屏所有view都是空，只有滑出去后的view才不为空。
 
-我的技术发展规划。
-第1年内熟悉安卓开发细节。控件的熟悉，框架的使用。
+ 2：一个实时获取股票数据的安卓应用程序 (201509)
+ demo文章 http://www.cnblogs.com/ldlchina/p/4822406.html
+ demo代码 https://github.com/ldlchina/Mystock
+ 使用控件 TableLayout ScrollView Timer(定时刷新数据) SharedPreferences AppCompatActivity HashSet Vector
+ 使用框架 Volley Gson
+ 相关文件
+ 类
+VolleyTableLayoutActivity
+ 资源文件
+ activity_volley_table_layout.xml
+ 特点讲解，疑惑点，引申的问题。
 
-第2年改动开源框架，重构应用场景。
-不管team有多少人，一开始写代码尽量写伪代码(TODO)，把整体逻辑写完，TODO的地方慢慢加上，一个Activity就写完了。
-而且如果不做了，或者让别人来做，能很快顺着你的思路继续下去。
-如果你有很好的画流程图的习惯。把它们变成TODO试试。你会发现代码写起来很轻松。把写代码当成一种享受。
 
-第3年用mindmanager画自己的想法，用axure，mockup设计原型，用Visio，gliffy设计框架流程，然后用代码实现。
-在产品的周期里，coding是最不起眼的角色，伪脑力的体力劳动者。如何让自己折腾出这个圈子，站在更高的角度看自己。
+
 
 
 

@@ -28,7 +28,8 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int LIST_VIEW_ADAPTER_BASE = 8;
     private static final int VIEW_PAGER_GUIDE = 9;
     private static final int VOLLEY = 10;
-    private static final int POPUPWINDOW = 11;
+    private static final int POPUP_WINDOW = 11;
+    private static final int VOLLEY_TABLE_LAYOUT = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,9 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("万能的adapter适配器");
         data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
         data.add("volley");
-        data.add("地区学校二级联动-PopupWindow");
+        data.add("地区学校二级联动-PopupWindow");//http://www.cnblogs.com/tonycheng93/p/4823860.html
+        data.add("股票显示-TableLayout");
+
         /*-----done------*/
         //actionbar
         //listview
@@ -67,12 +70,12 @@ public class ListViewActivity extends ActionBarActivity {
         //imageview
         //button
         //fragment
+        //popupWindow 省学校二级联动
 
         /*----will do---*/
         //数据库操作
         //json操作
         //网络访问
-        //省市三级联动
         //webView
         //login 第三方登录
         //socket tcp通信
@@ -105,6 +108,66 @@ public class ListViewActivity extends ActionBarActivity {
 
     private class MyAdapter extends BaseAdapter {
 
+        private void onItemClick(int position) {
+            Intent intent;
+            switch (position) {
+                case BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6:
+                    intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
+                    startActivity(intent);
+                    break;
+                case BOTTOM_MENU_WITH_POPUPWINDOW:
+                    intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
+                    startActivity(intent);
+                    break;
+                case BOTTOM_MENU_WITH_VIEWPAGER:
+                    intent = new Intent(ListViewActivity.this, BottomMenuWithViewpager.class);
+                    startActivity(intent);
+                    break;
+                case BOTTOM_MENU_WITH_FRAGMENT:
+                    intent = new Intent(ListViewActivity.this, BottomMenuWithFragment.class);
+                    startActivity(intent);
+                    break;
+                case LIST_VIEW_ITEM_UI:
+                    intent = new Intent(ListViewActivity.this, ListViewItemUIActivity.class);
+                    startActivity(intent);
+                    break;
+                case LIST_VIEW_MESSAGE_READED:
+                    intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
+                    startActivity(intent);
+                    break;
+                case LIST_VIEW_UPDATE:
+                    intent =new Intent(ListViewActivity.this, ListViewUpdateActivity.class);
+                    startActivity(intent);
+                    break;
+                case LIST_VIEW_LOAD_MORE:
+                    intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
+                    startActivity(intent);
+                    break;
+                case LIST_VIEW_ADAPTER_BASE:
+                    intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
+                    startActivity(intent);
+                    break;
+                case VIEW_PAGER_GUIDE:
+                    intent =new Intent(ListViewActivity.this, ViewPagerGuideActivity.class);
+                    startActivity(intent);
+                    break;
+                case VOLLEY:
+                    intent =new Intent(ListViewActivity.this, VolleyActivity.class);
+                    startActivity(intent);
+                    break;
+                case POPUP_WINDOW:
+                    intent =new Intent(ListViewActivity.this, PopupWindowActivity.class);
+                    startActivity(intent);
+                    break;
+                case VOLLEY_TABLE_LAYOUT:
+                    intent =new Intent(ListViewActivity.this, VolleyTableLayoutActivity.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private LayoutInflater mInflater;
         public MyAdapter(Context context) {
             this.mInflater = LayoutInflater.from(context);
@@ -125,7 +188,6 @@ public class ListViewActivity extends ActionBarActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
 
-
                 ViewHolder holder;
                 if (convertView == null) {
                     holder = new ViewHolder();
@@ -140,65 +202,13 @@ public class ListViewActivity extends ActionBarActivity {
                 holder.item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent;
-                        switch (position) {
-                            case BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6:
-                                intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
-                                startActivity(intent);
-                                break;
-                            case BOTTOM_MENU_WITH_POPUPWINDOW:
-                                intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
-                                startActivity(intent);
-                                break;
-                            case BOTTOM_MENU_WITH_VIEWPAGER:
-                                intent = new Intent(ListViewActivity.this, BottomMenuWithViewpager.class);
-                                startActivity(intent);
-                                break;
-                            case BOTTOM_MENU_WITH_FRAGMENT:
-                                intent = new Intent(ListViewActivity.this, BottomMenuWithFragment.class);
-                                startActivity(intent);
-                                break;
-                            case LIST_VIEW_ITEM_UI:
-                                intent = new Intent(ListViewActivity.this, ListViewItemUIActivity.class);
-                                startActivity(intent);
-                                break;
-                            case LIST_VIEW_MESSAGE_READED:
-                                intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
-                                startActivity(intent);
-                                break;
-                            case LIST_VIEW_UPDATE:
-                                intent =new Intent(ListViewActivity.this, ListViewUpdateActivity.class);
-                                startActivity(intent);
-                                break;
-                            case LIST_VIEW_LOAD_MORE:
-                                intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
-                                startActivity(intent);
-                                break;
-                            case LIST_VIEW_ADAPTER_BASE:
-                                intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
-                                startActivity(intent);
-                                break;
-                            case VIEW_PAGER_GUIDE:
-                                intent =new Intent(ListViewActivity.this, ViewPagerGuideActivity.class);
-                                startActivity(intent);
-                                break;
-                            case VOLLEY:
-                                intent =new Intent(ListViewActivity.this, VolleyActivity.class);
-                                startActivity(intent);
-                                break;
-                            case POPUPWINDOW:
-                                intent =new Intent(ListViewActivity.this, PopupWindowActivity.class);
-                                startActivity(intent);
-                                break;
-                            default:
-                                break;
-                        }
-
-
+                        onItemClick(position);
                     }
                 });
             return convertView;
         }
+
+
 
     }
 
