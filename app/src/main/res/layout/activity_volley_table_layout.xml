@@ -85,6 +85,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
         <EditText
@@ -99,6 +101,7 @@
             android:id="@+id/bt_add_stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="addStock"
             android:text="添加"/>
     </LinearLayout>
     <ScrollView

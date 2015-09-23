@@ -111,7 +111,7 @@ popwindow_item_province_list.xml
  2：一个实时获取股票数据的安卓应用程序 (201509)
  demo文章 http://www.cnblogs.com/ldlchina/p/4822406.html
  demo代码 https://github.com/ldlchina/Mystock
- 使用控件 TableLayout ScrollView Timer(定时刷新数据) SharedPreferences AppCompatActivity HashSet Vector
+ 使用控件 TableLayout ScrollView Timer(定时刷新数据) SharedPreferences AppCompatActivity HashSet Vector Notification
  使用框架 Volley Gson
  相关文件
  类
@@ -119,7 +119,7 @@ VolleyTableLayoutActivity
  资源文件
  activity_volley_table_layout.xml
  特点讲解，疑惑点，引申的问题。
-
+EditText 抢焦点弹键盘。所以要在它的父类设置    android:focusable="true" android:focusableInTouchMode="true"。
 
 
 

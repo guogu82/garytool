@@ -169,3 +169,30 @@ http://www.tuling123.com/openapi/modules.do?name=show
  第一个问题是本文开头所提到的“Bean的属性名所采用驼峰命名法，那么大写的字母会在创建的表中字段转换成下划线”这个问题，从SugarORM公布的源码里面能看到它是自己加上的"_"而并不是一个bug，这里可能是为了想和java web的一些开发方式保持一致吧，或许是为了规避sqlite对大小写敏感而导致的各种问题而引入的这种策略。所以开发者在用SugarORM的时候要注意命名的改变。你在Bean中写了一个属性名，而数据库中的字段名并不是这个。当然了，这里可以通过@Column注解来搞定
   第二个问题是一个习惯性问题。开发中由于不用直接操作SqliteDataBase这种类型的类了，所以多人同时开发的时候某个人提交代码的时候只是修改了他所负责的表的对应的Bean的结构，而这个时候你再更新代码在重新安装Apk后会发现报错，比如找不到某个表的字段的错。这个是因为表结构改了，所以你不得不先卸载原来的应用而重新安装apk。所以这里最好在多人开发的时候养成一个习惯：某个人修改了某个Bean后（即更新了表结构）一定要通知其他人
   -------------- SugarORM-------------
+
+
+  7:
+  ---------------app--------------
+  在默认情况下同一app的所有组件都是运行在同一进程中的，而且大多数app并不需要去更改这个设定。
+  但如果我们真的需要指定进程来运行特定组件，那么可以在manifest文件中设置。我们在manifest文件中定义了各个组件，
+  例如activity，service，receiver，provider等等，我们可以设置process属性来指定一个新线程来运行该组件。
+  通过设置process属性，我们可以设置每个组件都运行在不同的进程中，也可以指定几个组件运行在同一个进程中。
+  我们甚至可以设置不同来自app的组件运行在同一个进程中（通过指定相同的process属性并共享相同的user ID）。
+  之前的文章中提到，Android系统启动后会载入通用的framework的代码与资源之后，启动一个Zygote进程。
+  为了启动一个新的程序进程，系统会fork Zygote进程生成一个新的进程，然后在新的进程中加载并运行应用程序的代码。
+  这就使得大多数的RAM pages被用来分配给framework的代码，同时促使RAM资源能够在应用的所有进程之间进行共享。
+  1、前台进程foreground process
+  当前正在与用户交互的进程。如果一个进程P满足如下任意一个条件，则进程P被称为前台进程：
+  当前正在与用户交互(调用过resume方法)的activity在进程P中运行
+  某个service与当前正在与用户交互的activity相互绑定，该service运行于进程P中
+  某个service调用了startForeground()方法，该service运行在进程P中
+  某个service正在执行某个生命周期的回调方法，该service运行在进程P中
+  某个broadcastReceiver正在执行它的onReceive函数，该broadcastReceiver运行在进程P中
+
+  2、可见进程Visable process
+ 没有任何前台组件在此进程中运行，但是仍然可以影响到用户所看到的屏幕。如果进程P满足以下任意一个条件，则进程P被称为可见进程：
+  某个activity并不运行于前台，但仍能被用户所见(调用了pause方法)，activity运行于进程P中。例如某activity启动了一个dialog，仍然可以看到该activity。
+  如果某个service与visible activity或foreground activity绑定，该service运行于进程P中。
+  3、服务进程service process
+  4、后台进程background process
+  5、空进程    empty process
