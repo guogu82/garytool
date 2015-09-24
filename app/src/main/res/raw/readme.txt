@@ -108,7 +108,7 @@ popwindow_item_province_list.xml
 特点讲解，疑惑点，引申的问题。
  ListView 要设置match_parent,否则getView()会执行多次。convertView是一屏所有view都是空，只有滑出去后的view才不为空。
 
- 2：一个实时获取股票数据的安卓应用程序 (201509)
+ 2：一个实时获取股票数据的安卓应用程序 (20150923)
  demo文章 http://www.cnblogs.com/ldlchina/p/4822406.html
  demo代码 https://github.com/ldlchina/Mystock
  使用控件 TableLayout ScrollView Timer(定时刷新数据) SharedPreferences AppCompatActivity HashSet Vector Notification
@@ -120,6 +120,37 @@ VolleyTableLayoutActivity
  activity_volley_table_layout.xml
  特点讲解，疑惑点，引申的问题。
 EditText 抢焦点弹键盘。所以要在它的父类设置    android:focusable="true" android:focusableInTouchMode="true"。
+
+3:PullToRefresh控件的使用例子
+demo文章 http://www.cnblogs.com/zhaoyanjun/p/4555401.html
+使用控件 PullToRefresh android.text.format.DateUtils.formatDateTime AsyncTask
+相关文件
+类
+PullToRefreshActivity
+资源文件
+activity_pull_to_refresh.xml
+特点讲解，疑惑点，引申的问题。
+DateUtils的好好运用
+
+4：超高仿微信图片选择器  (201509)
+  demo文章 http://blog.csdn.net/lmj623565791/article/details/39943731
+  demo代码 http://blog.csdn.net/lmj623565791/article/details/39943731
+  使用控件 GridView PopupWindow ProgressDialog
+  使用框架
+  相关文件
+  类
+  PictureChoseActivity
+  ImageFolder
+  ListImageDirPopupWindow
+  BasePopupWindowForListView
+  资源文件
+  activity_picture_chose.xml
+  picture_chose_grid_item.xml
+  picture_chose_list_dir.xml
+
+  特点讲解，疑惑点，引申的问题。
+  OOM，图片的压缩，缓存。popupwindow的弹出动画
+   android:scaleType="centerCrop"
 
 
 

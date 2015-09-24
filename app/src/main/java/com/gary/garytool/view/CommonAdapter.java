@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
  * Created by Administrator on 2015/9/7.
  * 公共的Adapter List适配器
  */
-public abstract class AdapterM<T> extends BaseAdapter {
+public abstract class CommonAdapter<T> extends BaseAdapter {
     private Context context;
     //为丰富程序功能，提供了两种常见的数据类型
     private List<T> dataList=null;
@@ -17,14 +17,14 @@ public abstract class AdapterM<T> extends BaseAdapter {
     //布局文件ID
     private int layoutId;
 
-    public AdapterM(Context context,int layoutId,List<T> dataList)
+    public CommonAdapter(Context context, int layoutId, List<T> dataList)
     {
         this.context=context;
         this.layoutId=layoutId;
         this.dataList=dataList;
     }
 
-    public AdapterM(Context context,int layoutId,T[] dataArray)
+    public CommonAdapter(Context context, int layoutId, T[] dataArray)
     {
         this.context=context;
         this.layoutId=layoutId;

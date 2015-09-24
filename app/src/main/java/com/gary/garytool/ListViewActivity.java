@@ -30,6 +30,8 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int VOLLEY = 10;
     private static final int POPUP_WINDOW = 11;
     private static final int VOLLEY_TABLE_LAYOUT = 12;
+    private static final int PULL_TO_REFRESH = 13;
+    private static final int WECHAT_PICTURE_CHOSE = 14;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("volley");
         data.add("地区学校二级联动-PopupWindow");//http://www.cnblogs.com/tonycheng93/p/4823860.html
         data.add("股票显示-TableLayout");
+        data.add("PullToRefresh");
+        data.add("微信图片选择器");
 
         /*-----done------*/
         //actionbar
@@ -71,32 +75,31 @@ public class ListViewActivity extends ActionBarActivity {
         //button
         //fragment
         //popupWindow 省学校二级联动
+        //json操作
+        //网络访问
+        //OOM
 
         /*----will do---*/
         //数据库操作
-        //json操作
-        //网络访问
         //webView
         //login 第三方登录
         //socket tcp通信
         //地图应用
         //DiskLruCache
-        //OOM
         //生成验证码
         //RecycleView + CardView 控件
         //ActionBar to ToolBar
 
         /*----框架---*/
-        //volley VS universal-image-loader VS android-async-http
+        //volley VS universal-image-loader VS android-async-http  VS DiskLruCache
         //Volley是将AsyncHttpClient和Universal-Image-Loader的优点集成于一身的一个框架
         //OkHttp 可以与volley配合，做volley的传输层
+        //Gson
         //PullToRefresh
+        //xUtils(Afinal) VS GreenDAO
+
         //EventBus
         //ButterKnife
-        //xUtils(Afinal)
-        //GreenDAO
-        //DiskLruCache
-
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
 
         return data;
@@ -161,6 +164,14 @@ public class ListViewActivity extends ActionBarActivity {
                     break;
                 case VOLLEY_TABLE_LAYOUT:
                     intent =new Intent(ListViewActivity.this, VolleyTableLayoutActivity.class);
+                    startActivity(intent);
+                    break;
+                case PULL_TO_REFRESH:
+                    intent =new Intent(ListViewActivity.this, PullToRefreshActivity.class);
+                    startActivity(intent);
+                    break;
+                case WECHAT_PICTURE_CHOSE:
+                    intent =new Intent(ListViewActivity.this, PictureChoseActivity.class);
                     startActivity(intent);
                     break;
                 default:
