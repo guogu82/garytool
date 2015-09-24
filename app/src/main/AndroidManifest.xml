@@ -3,6 +3,7 @@
     package="com.gary.garytool" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".GaryApplication"
@@ -69,8 +70,10 @@
         <activity
             android:name=".VolleyTableLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".PullToRefreshActivity" >
+        </activity>
         <activity
-            android:name=".PullToRefreshActivity">
+            android:name=".PictureChoseActivity" >
         </activity>
     </application>
 

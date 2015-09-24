@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.gary.garytool.info.MessageBean;
-import com.gary.garytool.view.AdapterM;
+import com.gary.garytool.view.CommonAdapter;
 import com.gary.garytool.view.ViewHolderM;
 
 
@@ -43,7 +43,7 @@ public class ListViewAdapterMActivity extends Activity {
         lv.setAdapter(listAdapter);
     }
 
-     class ListAdapter extends AdapterM<MessageBean> {
+     class ListAdapter extends CommonAdapter<MessageBean> {
         public ListAdapter(Context context, int layoutId, MessageBean[] dataArray) {
             super(context, layoutId, dataArray);
         }

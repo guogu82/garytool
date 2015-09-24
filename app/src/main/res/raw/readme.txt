@@ -130,7 +130,27 @@ PullToRefreshActivity
 资源文件
 activity_pull_to_refresh.xml
 特点讲解，疑惑点，引申的问题。
+DateUtils的好好运用
 
+4：超高仿微信图片选择器  (201509)
+  demo文章 http://blog.csdn.net/lmj623565791/article/details/39943731
+  demo代码 http://blog.csdn.net/lmj623565791/article/details/39943731
+  使用控件 GridView PopupWindow ProgressDialog
+  使用框架
+  相关文件
+  类
+  PictureChoseActivity
+  ImageFolder
+  ListImageDirPopupWindow
+  BasePopupWindowForListView
+  资源文件
+  activity_picture_chose.xml
+  picture_chose_grid_item.xml
+  picture_chose_list_dir.xml
+
+  特点讲解，疑惑点，引申的问题。
+  OOM，图片的压缩，缓存。popupwindow的弹出动画
+   android:scaleType="centerCrop"
 
 
 
