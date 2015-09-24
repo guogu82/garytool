@@ -30,6 +30,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int VOLLEY = 10;
     private static final int POPUP_WINDOW = 11;
     private static final int VOLLEY_TABLE_LAYOUT = 12;
+    private static final int PULL_TO_REFRESH = 13;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("volley");
         data.add("地区学校二级联动-PopupWindow");//http://www.cnblogs.com/tonycheng93/p/4823860.html
         data.add("股票显示-TableLayout");
+        data.add("PullToRefresh");
 
         /*-----done------*/
         //actionbar
@@ -161,6 +163,10 @@ public class ListViewActivity extends ActionBarActivity {
                     break;
                 case VOLLEY_TABLE_LAYOUT:
                     intent =new Intent(ListViewActivity.this, VolleyTableLayoutActivity.class);
+                    startActivity(intent);
+                    break;
+                case PULL_TO_REFRESH:
+                    intent =new Intent(ListViewActivity.this, PullToRefreshActivity.class);
                     startActivity(intent);
                     break;
                 default:

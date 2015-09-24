@@ -187,7 +187,7 @@ public class VolleyTableLayoutActivity extends AppCompatActivity {
             }
         });
 
-        GaryApplication.getVolleyRequestQueue().add(stringRequest);
+       // GaryApplication.getVolleyRequestQueue().add(stringRequest);
     }
 
 

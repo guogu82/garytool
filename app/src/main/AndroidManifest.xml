@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gary.garytool" >
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GaryApplication"
         android:allowBackup="true"
@@ -15,6 +17,7 @@
             android:theme="@style/MainWindowTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -62,11 +65,13 @@
             android:name=".VolleyActivity"
             android:label="@string/title_activity_volley" >
         </activity>
-        <activity
-            android:name=".PopupWindowActivity"/>
+        <activity android:name=".PopupWindowActivity" />
         <activity
             android:name=".VolleyTableLayoutActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".PullToRefreshActivity">
+        </activity>
     </application>
 
 </manifest>
