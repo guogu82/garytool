@@ -6,8 +6,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.PopupWindow;
 
-import com.gary.garytool.info.ImageFolder;
-
 import java.util.List;
 import java.util.Objects;
 

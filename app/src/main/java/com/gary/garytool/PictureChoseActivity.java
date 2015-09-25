@@ -146,7 +146,7 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
      */
     private void getImages() {
 
-        if(!Environment.getExternalStorageDirectory().equals(Environment.MEDIA_MOUNTED))
+        if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
         {
             Toast.makeText(this,"暂无外部存储",Toast.LENGTH_SHORT).show();
         }

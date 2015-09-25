@@ -147,6 +147,7 @@ DateUtils的好好运用
   activity_picture_chose.xml
   picture_chose_grid_item.xml
   picture_chose_list_dir.xml
+  picture_chose_list_dir_item.xml
 
   特点讲解，疑惑点，引申的问题。
   OOM，图片的压缩，缓存。popupwindow的弹出动画

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gary.garytool.R;
+import com.gary.garytool.adapter.ViewHolder;
 import com.gary.garytool.util.LogUtil;
 
 /**
@@ -128,7 +129,13 @@ public class ViewHolderM {
     public ViewHolderM setImageViewVisible(int viewId,Boolean visible)
     {
         ImageView iv=getView(viewId);
-        iv.setVisibility(visible?View.VISIBLE:View.GONE);
+        iv.setVisibility(visible ? View.VISIBLE : View.GONE);
+        return this;
+    }
+
+    public ViewHolderM setImageByUrl(int viewId,String url)
+    {
+        //TODO: finish this function
         return this;
     }
 
