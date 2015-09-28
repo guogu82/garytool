@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gary.garytool.adapter.CommonViewHolder;
 import com.gary.garytool.adapter.ListViewAdapter;
-import com.gary.garytool.adapter.ViewHolder;
 import com.gary.garytool.info.Video;
 import com.gary.garytool.util.Constants;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -144,7 +144,7 @@ public class BaseFrameworkActivity extends Activity {
         }
 
         @Override
-        public void convert(ViewHolder holder, Video video) {
+        public void convert(CommonViewHolder holder, Video video) {
             //1：作者的头像
             ImageButton videoAvatar = holder.getView(R.id.ib_video_avatar);
             String imageUrl = "http://t11.baidu.com/it/u=287161387,919419279&fm=76";

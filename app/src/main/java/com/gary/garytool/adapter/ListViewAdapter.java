@@ -49,11 +49,11 @@ public abstract class ListViewAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //初始化ViewHolder,使用通用的ViewHolder,一行代码就搞定ViewHolder的初始化。
-        ViewHolder holder=ViewHolder.get(mContext,convertView,parent,mLayoutId,position);
+        CommonViewHolder holder=CommonViewHolder.get(mContext,convertView,parent,mLayoutId,position);
         convert(holder,getItem(position));
         return holder.getConvertView();
     }
 
     //TODO:note 设置模式，模板方法的使用场景
-    public abstract void convert(ViewHolder holder, T item);
+    public abstract void convert(CommonViewHolder holder, T item);
 }

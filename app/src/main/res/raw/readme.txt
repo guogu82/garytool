@@ -143,11 +143,15 @@ DateUtils的好好运用
   ImageFolder
   ListImageDirPopupWindow
   BasePopupWindowForListView
+  ImageLoader
+  CommonViewHolder
   资源文件
   activity_picture_chose.xml
   picture_chose_grid_item.xml
   picture_chose_list_dir.xml
   picture_chose_list_dir_item.xml
+  slide_in.xml
+  slide_oout.xml
 
   特点讲解，疑惑点，引申的问题。
   OOM，图片的压缩，缓存。popupwindow的弹出动画

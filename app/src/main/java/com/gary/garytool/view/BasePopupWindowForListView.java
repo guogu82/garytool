@@ -29,7 +29,7 @@ public abstract class BasePopupWindowForListView<T> extends PopupWindow {
     }
 
     public BasePopupWindowForListView(View contentView, int width, int height, boolean focusable, List<T> datas) {
-        this(contentView,width,height,focusable,datas,new Objects[0]);
+        this(contentView,width,height,focusable,datas,new Object[0]);
     }
 
     public BasePopupWindowForListView(View contentView, int width, int height, boolean focusable, List<T> datas,Object... params) {

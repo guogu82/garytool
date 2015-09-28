@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.gary.garytool.info.MessageBean;
 import com.gary.garytool.view.CommonAdapter;
-import com.gary.garytool.view.ViewHolderM;
+import com.gary.garytool.adapter.CommonViewHolder;
 
 
 public class ListViewAdapterMActivity extends Activity {
@@ -49,7 +49,7 @@ public class ListViewAdapterMActivity extends Activity {
         }
 
         @Override
-        public void convert(ViewHolderM holder, MessageBean model) {
+        public void convert(CommonViewHolder holder, MessageBean model) {
             // 为个控件绑定内容
             holder.setText(R.id.tv_title, model.getTitle());
             holder.setText(R.id.tv_content, model.getContent());

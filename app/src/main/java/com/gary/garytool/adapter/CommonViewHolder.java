@@ -1,5 +1,6 @@
-package com.gary.garytool.view;
+package com.gary.garytool.adapter;
 
+import android.graphics.Bitmap;
 import android.util.SparseArray;
 import android.view.View;
 import android.content.Context;
@@ -9,14 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gary.garytool.R;
-import com.gary.garytool.adapter.ViewHolder;
+import com.gary.garytool.util.ImageLoader;
 import com.gary.garytool.util.LogUtil;
 
 /**
  * Created by Administrator on 2015/9/7.
  */
-public class ViewHolderM {
+public class CommonViewHolder {
     private SparseArray<View> viewArray;
 
 
@@ -25,7 +25,7 @@ public class ViewHolderM {
     private Object tag;
 
     //TODO:question 为什么要用get方法来获取实例，不是用new产生实例。为何用这个模式。
-    public ViewHolderM(Context context,View converView,ViewGroup parent,int layoutId,int position)
+    public CommonViewHolder(Context context, View converView, ViewGroup parent, int layoutId, int position)
     {
         this.position=position;
         //使用SparseArray效率高一些
@@ -36,17 +36,17 @@ public class ViewHolderM {
         mConvertView.setTag(this);
     }
 
-    public static ViewHolderM get(Context context,View convertView,ViewGroup parent,int layoutId,int position)
+    public static CommonViewHolder get(Context context,View convertView,ViewGroup parent,int layoutId,int position)
     {
-        LogUtil.d("ViewHolderM",""+position);
+        LogUtil.d("CommonViewHolder",""+position);
         if(convertView==null)
         {
             //如果convertView为空，则实例化ViewHolderM
-            return new ViewHolderM(context,convertView,parent,layoutId,position);
+            return new CommonViewHolder(context,convertView,parent,layoutId,position);
         }else
         {
             //否则从converView的Tag中取出ViewHolderM，避免重复创建
-            ViewHolderM holder= (ViewHolderM) convertView.getTag();
+            CommonViewHolder holder= (CommonViewHolder) convertView.getTag();
             holder.position=position;
             return holder;
         }
@@ -100,7 +100,7 @@ public class ViewHolderM {
      * @param text
      * @return
      */
-    public ViewHolderM setText(int viewId,String text)
+    public CommonViewHolder setText(int viewId,String text)
     {
         TextView tv=getView(viewId);
         tv.setText(text);
@@ -113,10 +113,36 @@ public class ViewHolderM {
      * @param text,Spanned类型，可设置部分字体变色
      * @return
      */
-    public ViewHolderM setText(int viewId,Spanned text)
+    public CommonViewHolder setText(int viewId,Spanned text)
     {
         TextView tv =getView(viewId);
         tv.setText(text);
+        return this;
+    }
+
+    /**
+     * 为ImageView设置图片
+     * @param viewId
+     * @param drawableId
+     * @return
+     */
+    public CommonViewHolder setImageResource(int viewId,int drawableId)
+    {
+        ImageView view=getView(viewId);
+        view.setImageResource(drawableId);
+        return this;
+    }
+
+    /**
+     * 为ImageView设置图片
+     * @param viewId
+     * @param bm
+     * @return
+     */
+    public CommonViewHolder setImageBitmap(int viewId,Bitmap bm)
+    {
+        ImageView view=getView(viewId);
+        view.setImageBitmap(bm);
         return this;
     }
 
@@ -126,16 +152,16 @@ public class ViewHolderM {
      * @param visible
      * @return
      */
-    public ViewHolderM setImageViewVisible(int viewId,Boolean visible)
+    public CommonViewHolder setImageViewVisible(int viewId,Boolean visible)
     {
         ImageView iv=getView(viewId);
         iv.setVisibility(visible ? View.VISIBLE : View.GONE);
         return this;
     }
 
-    public ViewHolderM setImageByUrl(int viewId,String url)
+    public CommonViewHolder setImageByUrl(int viewId,String url)
     {
-        //TODO: finish this function
+        ImageLoader.getInstance(3, ImageLoader.Type.LIFO).loadImage(url, (ImageView) getView(viewId));
         return this;
     }
 

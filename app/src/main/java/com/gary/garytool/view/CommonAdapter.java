@@ -5,6 +5,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.gary.garytool.adapter.CommonViewHolder;
+
 /**
  * Created by Administrator on 2015/9/7.
  * 公共的Adapter List适配器
@@ -63,8 +66,8 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //TODO:CHECK this function
-        ViewHolderM holder=ViewHolderM.get(context,convertView,parent,layoutId,position);
-        //ViewHolderM holder=new ViewHolderM(context,convertView,parent,layoutId,position);
+        CommonViewHolder holder= CommonViewHolder.get(context, convertView, parent, layoutId, position);
+        //CommonViewHolder holder=new CommonViewHolder(context,convertView,parent,layoutId,position);
         convert(holder,getItem(position));
         return holder.getConvertView();
     }
@@ -74,5 +77,5 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
      * @param holder
      * @param item
      */
-    public abstract void convert(ViewHolderM holder, T item);
+    public abstract void convert(CommonViewHolder holder, T item);
 }
