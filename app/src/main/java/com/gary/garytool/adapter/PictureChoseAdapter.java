@@ -34,13 +34,13 @@ public class PictureChoseAdapter extends CommonAdapter<String> {
     @Override
     public void convert(CommonViewHolder holder, String item) {
         //设置no_pic
-        holder.setImageResource(R.id.iv_dir_item_image,R.drawable.pictures_no);
+        holder.setImageResource(R.id.iv_image,R.drawable.pictures_no);
         //设置no_selected
-        holder.setImageResource(R.id.iv_dir_item_select, R.drawable.picture_unselected);
+        holder.setImageResource(R.id.ib_item_select, R.drawable.picture_unselected);
         //设置图片
-        holder.setImageByUrl(R.id.iv_dir_item_image,mDirPath+"/"+item);
+        holder.setImageByUrl(R.id.iv_image,mDirPath+"/"+item);
 
-        final ImageView mImageView=holder.getView(R.id.iv_dir_item_image);
+        final ImageView mImageView=holder.getView(R.id.iv_image);
         final ImageView mSelect=holder.getView(R.id.ib_item_select);
 
         final String fullPath=mDirPath+"/"+item;
@@ -71,7 +71,7 @@ public class PictureChoseAdapter extends CommonAdapter<String> {
         if(mSelectedImage.contains(fullPath))
         {
             mSelect.setImageResource(R.drawable.pictures_selected);
-            mImageView.setColorFilter(Color.parseColor("#770000000"));
+            mImageView.setColorFilter(Color.parseColor("#77000000"));
         }
     }
 }

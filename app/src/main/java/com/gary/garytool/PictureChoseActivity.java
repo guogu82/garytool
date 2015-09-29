@@ -21,9 +21,9 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -102,8 +102,9 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
      * 初始化展示文件夹菜单列表的popupWindow
      */
     private void initListDirPopupWindow() {
+        View frame=LayoutInflater.from(getApplicationContext()).inflate(R.layout.picture_chose_list_dir, null);
 
-        mListImageDirPopupWindow=new ListImageDirPopupWindow(LinearLayout.LayoutParams.MATCH_PARENT, (int) (mScreenHeight*0.7),mImageFolders,LayoutInflater.from(getApplicationContext()).inflate(R.layout.picture_chose_list_dir, null));
+        mListImageDirPopupWindow=new ListImageDirPopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, (int) (mScreenHeight*0.7),mImageFolders,frame);
 
         mListImageDirPopupWindow.setOnDismissListener(new OnDismissListener() {
             @Override

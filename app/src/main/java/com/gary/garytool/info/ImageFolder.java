@@ -29,7 +29,7 @@ public class ImageFolder {
 
     public void setDir(String dir) {
         this.dir = dir;
-        int lastIndexOf=this.dir.lastIndexOf("/")-1;
+        int lastIndexOf=this.dir.lastIndexOf("/")+1;
         this.name=this.dir.substring(lastIndexOf);
     }
 

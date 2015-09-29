@@ -34,6 +34,7 @@ public abstract class BasePopupWindowForListView<T> extends PopupWindow {
 
     public BasePopupWindowForListView(View contentView, int width, int height, boolean focusable, List<T> datas,Object... params) {
         super(contentView, width, height, focusable);
+        mContentView=contentView;
         context=contentView.getContext();
         if(datas!=null)
             mDatas=datas;
