@@ -313,11 +313,11 @@ public class ImageLoader {
         int width=options.outWidth;
         int height=options.outHeight;
         int inSampleSize=1;
-        if(width>reqWidth&&height>reqHeight)
+        if(width>reqWidth||height>reqHeight)
         {
             //计算出实际宽度和目标宽度的比率
-            int widthRatio=Math.round((float)width/(float)reqWidth);
-            int heightRatio=Math.round((float)height/(float)reqHeight);
+            int widthRatio=Math.round(width*1.0f/reqWidth);
+            int heightRatio=Math.round(height*1.0f/reqHeight);
             inSampleSize=Math.max(widthRatio,heightRatio);
         }
         return inSampleSize;

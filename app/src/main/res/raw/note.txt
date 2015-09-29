@@ -42,14 +42,14 @@ http://www.tuling123.com/openapi/api?key=0697f52f60f49d3a607ea09cb4e94c4a&info=�
 http://www.tuling123.com/openapi/modules.do?name=show
 
 
- 1:Fragment  transaction.replace() VS transaction.add() hide() show()
+ 1:----------Fragment  transaction.replace() VS transaction.add() hide() show()------------
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
  那么最合适的处理方式是这样的：
  在add的时候，加上一个tab参数transaction.add(R.id.content, IndexFragment,”Tab1″);
  然后当IndexFragment引用被回收置空的话，先通过IndexFragment＝FragmentManager.findFragmentByTag(“Tab1″);
  找到对应的引用，然后继续上面的hide,show;
 
- 2:TextView,Button,EditText 如果要做到按下去有变化，请使用selector
+ 2:-------------TextView,Button,EditText 如果要做到按下去有变化，请使用selector--------------
  点击父布局 使子控件（TextView等）响应点击效果 （子控件中加上这个属性 duplicateParentState）。
  例如：组件RelativeLayout上有两个TextView，这两个TextView具有不同的颜色值，现在要的效果是，当RelativeLayout被点击时，整个item有高亮背景。
  同时这两个TextView要变色。就是父控件响应点击事件，子View不响应点击事件，但是颜色要随着点击而发生变化。这样就用到了属性duplicateParentState。
@@ -58,7 +58,7 @@ http://www.tuling123.com/openapi/modules.do?name=show
  在TextView中设置字体颜色一般使用，android:textColor="@color/red"，但是我们在使用selector动态修改字体颜色的时候要使用android:color="@color/red"。
  代码来设置textColor 的，需要用 textView.setTextColor(getResources().getColorStateList(R.color.text_selector_color));来设置。
 
- 3:ListView
+ 3:--------------------ListView---------------------
  --ListView记得把layout_height属性设置成match_parent。若设置成"wrap_content"则会调用多次。
  --cacheColorHint="#00000000" 自定义listview的时候，不使用#00000000会出现选中一个空间黑色底色的情况.
  --当不使用android:listSelector属性，默认会显示选中的item为橙黄底色
@@ -74,14 +74,21 @@ http://www.tuling123.com/openapi/modules.do?name=show
          }
  然后把super.destroyItem(container, position, object);注释掉，让fragment一直存在着。这样你再次运行会发现刚刚那个问题已经解决了、、该问题暂时描述到这里
 
- 4:坐标
+Android AdapterView View的复用机制 分析
+ 设想1：拿ListView为例，如果ListView的ItemView复用机制，所有的ItemView复用同一个，如果在多线程下载图片的情况下，
+ 可能最终只有最后一个View显示图片吧，因为你前面的设置setTag(url)，后面马上就会将你的Tag的值覆盖掉，最终findViewByTag找到的都是最后一个。
+ 由此可见ListView缓存的不是一个，至少是一屏幕可显示的数量。也就是说ListView维护着一个ItemView的池子。
+  跟大家解释下，为啥缓存了一个屏幕的可显示最大的ItemView数量的池子，我们可能上千个ItemView，仅依靠Tag就能实现不混乱呢。
+在getView里面记得重置；比如图片，每次在getView首先设为默认的图片，然后再去加载实际的图；
+
+ 4:--------------------------坐标-----------------------
  坐标原点是左上角.
  getRowX：触摸点相对于屏幕的坐标
  getX： 触摸点相对于按钮的坐标
  getTop： 按钮左上角相对于父view（LinerLayout）的y坐标
  getLeft： 按钮左上角相对于父view（LinerLayout）的x坐标
 
- 5:缓存 LruCache DisLruCache
+ 5:--------------------缓存 LruCache DisLruCache--------------------
  核心的类是LruCache (此类在android-support-v4的包中提供) 。
  这个类非常适合用来缓存图片，它的主要算法原理是把最近使用的对象用强引用存储在 LinkedHashMap 中，
  并且把最近最少使用的对象在缓存值达到预设定值之前从内存中移除。
@@ -91,7 +98,7 @@ http://www.tuling123.com/openapi/modules.do?name=show
   因而无法用一种可预见的方式将其释放，这就有潜在的风险造成应用程序的内存溢出并崩溃。
 
 
-6：各类框架的评价
+6：-------------------各类框架的评价-------------------------------
  Volley被设计用于小的网络请求，所以像上传下载大文件什么的就不适合了，虽然网上已有相应的扩展，而且原生是没有文件上传的。
  Volley还有NetImageView，ImageLoader等和加载图片相关的，不过我个人习惯了使用UniversalImageLoader
  虽然网上都说Volley速度快，易于扩展，也给出了对比数据，但总归是要自己手工扩展，也没看出特别大的优势，和Android-Async-Http相比有一点不同就是2.3后使用了官方建议的HttpUrlConnection。
@@ -146,8 +153,7 @@ http://www.tuling123.com/openapi/modules.do?name=show
  git clone https://android.googlesource.com/platform/frameworks/volley
  在下载后的代码目录中适用”ant jar”命令完成编译，会生成volley.jar包，这样你就能在Eclipse或Android Studio中适用啦。
 
- 7:Sqlite操作框架的评价
--------------- SugarORM-------------
+ 7:-------------------Sqlite操作框架的评价--------------------------
  最近开发的一个项目主要有两个特点，这两点也是在项目开发前需要着重去规划解决方案的：
  需要和Rest服务端请求大量的数据
  同时这些数据本地也要保存到sqlite数据库
@@ -168,11 +174,9 @@ http://www.tuling123.com/openapi/modules.do?name=show
  数据库更改的问题
  第一个问题是本文开头所提到的“Bean的属性名所采用驼峰命名法，那么大写的字母会在创建的表中字段转换成下划线”这个问题，从SugarORM公布的源码里面能看到它是自己加上的"_"而并不是一个bug，这里可能是为了想和java web的一些开发方式保持一致吧，或许是为了规避sqlite对大小写敏感而导致的各种问题而引入的这种策略。所以开发者在用SugarORM的时候要注意命名的改变。你在Bean中写了一个属性名，而数据库中的字段名并不是这个。当然了，这里可以通过@Column注解来搞定
   第二个问题是一个习惯性问题。开发中由于不用直接操作SqliteDataBase这种类型的类了，所以多人同时开发的时候某个人提交代码的时候只是修改了他所负责的表的对应的Bean的结构，而这个时候你再更新代码在重新安装Apk后会发现报错，比如找不到某个表的字段的错。这个是因为表结构改了，所以你不得不先卸载原来的应用而重新安装apk。所以这里最好在多人开发的时候养成一个习惯：某个人修改了某个Bean后（即更新了表结构）一定要通知其他人
-  -------------- SugarORM-------------
 
 
-  7:
-  ---------------app--------------
+8:  ---------------app--------------
   在默认情况下同一app的所有组件都是运行在同一进程中的，而且大多数app并不需要去更改这个设定。
   但如果我们真的需要指定进程来运行特定组件，那么可以在manifest文件中设置。我们在manifest文件中定义了各个组件，
   例如activity，service，receiver，provider等等，我们可以设置process属性来指定一个新线程来运行该组件。
@@ -196,3 +200,66 @@ http://www.tuling123.com/openapi/modules.do?name=show
   3、服务进程service process
   4、后台进程background process
   5、空进程    empty process
+
+
+  9:---------------------------------bitmap----------------------------------
+  需要注意的是inBitmap只能在3.0以后使用。2.3上，bitmap的数据是存储在native的内存区域，并不是在Dalvik的内存堆上。
+  在android3.0开始，系统在BitmapFactory.Options里引入了inBitmap机制来配合缓存机制。如果在载入图片时传入了inBitmap那么载入的图片就是inBitmap里的值。
+  这样可以统一有缓存和无缓存的载入方式。
+  使用inBitmap，在4.4之前，只能重用相同大小的bitmap的内存区域，而4.4之后你可以重用任何bitmap的内存区域，只要这块内存比将要分配内存的bitmap大就可以。
+  例如给inBitmap赋值的图片大小为100-100，那么新申请的bitmap必须也为100-100才能够被重用。
+  从SDK 19开始，新申请的bitmap大小必须小于或者等于已经赋值过的bitmap大小。
+
+  10:--------------------------------Looper , Handler , Message---------------------------
+  今天有人问我，你说Handler的post方法创建的线程和UI线程有什么关系？
+  其实这个问题也是出现这篇博客的原因之一；这里需要说明，有时候为了方便，我们会直接写如下代码：
+  [java] view plaincopy在CODE上查看代码片派生到我的代码片
+  mHandler.post(new Runnable()
+          {
+              @Override
+              public void run()
+              {
+                  Log.e("TAG", Thread.currentThread().getName());
+                  mTxt.setText("yoxi");
+              }
+          });
+
+  然后run方法中可以写更新UI的代码，其实这个Runnable并没有创建什么线程，而是发送了一条消息，下面看源码：
+  [java] view plaincopy在CODE上查看代码片派生到我的代码片
+  public final boolean post(Runnable r)
+     {
+        return  sendMessageDelayed(getPostMessage(r), 0);
+     }
+  [java] view plaincopy在CODE上查看代码片派生到我的代码片
+  private static Message getPostMessage(Runnable r) {
+        Message m = Message.obtain();
+        m.callback = r;
+        return m;
+    }
+  可以看到，在getPostMessage中，得到了一个Message对象，然后将我们创建的Runable对象作为callback属性，赋值给了此message.
+  注：产生一个Message对象，可以new  ，也可以使用Message.obtain()方法；
+  两者都可以，但是更建议使用obtain方法，因为Message内部维护了一个Message池用于Message的复用，避免使用new 重新分配内存。
+  可以看到，这里msg的callback和target都有值，那么会执行哪个呢？
+  其实上面已经贴过代码，就是dispatchMessage方法：
+
+  [java] view plaincopy在CODE上查看代码片派生到我的代码片
+  public void dispatchMessage(Message msg) {
+         if (msg.callback != null) {
+             handleCallback(msg);
+         } else {
+             if (mCallback != null) {
+                 if (mCallback.handleMessage(msg)) {
+                     return;
+                 }
+             }
+             handleMessage(msg);
+         }
+     }
+  第2行，如果不为null，则执行callback回调，也就是我们的Runnable对象。
+
+
+11: ----------------------------String---------------------------------------
+2、正确使用String，避免创建不必要的对象
+很多人面试的时候都遇到过这样的问题：String s = new String("abc")；请问创建了几个对象。也从侧面说明了这是个反面的代码写法：
+a、String s = new String("abc")；“abc”本身就是一个String的实例，所以new String创建了不必要的String实例
+b、如果改写成 String s = "abc"，不仅只创建了一个实例，而且在同一台VM中，对于“abc”（字符串的字面常量）还会重用。

@@ -83,10 +83,11 @@ public class ListViewActivity extends ActionBarActivity {
         //数据库操作
         //webView
         //login 第三方登录
-        //socket tcp通信
+        //socket tcp通信 --文件上传下载--http://blog.csdn.net/lmj623565791/article/details/23781773
+        //               --文件上传下载--http://blog.csdn.net/lmj623565791/article/details/26994463
         //地图应用
         //DiskLruCache
-        //生成验证码
+        //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
         //RecycleView + CardView 控件
         //ActionBar to ToolBar
 
