@@ -44,6 +44,7 @@ public abstract class BasePopupWindowForListView<T> extends PopupWindow {
             beforeInitWeNeedSomeParams(params);
         }
 
+        //popupWindow 的常规设置 例如 点击外面可以消失
         setBackgroundDrawable(new BitmapDrawable());
         setTouchable(true);
         setOutsideTouchable(true);

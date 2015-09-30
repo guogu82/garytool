@@ -140,6 +140,7 @@ DateUtils的好好运用
   相关文件
   类
   PictureChoseActivity
+  PictureChoseAdapter
   ImageFolder
   ListImageDirPopupWindow
   BasePopupWindowForListView

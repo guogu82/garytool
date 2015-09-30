@@ -1,12 +1,5 @@
 package com.gary.garytool;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -34,6 +27,13 @@ import com.gary.garytool.info.ImageFolder;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.view.ListImageDirPopupWindow;
 import com.gary.garytool.view.ListImageDirPopupWindow.OnImageDirSelected;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 public class PictureChoseActivity extends Activity implements OnImageDirSelected {
 
@@ -69,6 +69,7 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
     private int mScreenHeight;
 
     private ListImageDirPopupWindow mListImageDirPopupWindow;
+    //异步扫描手机图片，扫描完毕回调handle,在UI线程进行数据绑定和展示
     private Handler mHandler =new Handler()
     {
         @Override
@@ -91,9 +92,16 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
             return;
         }
 
-        mImgs=Arrays.asList(mImgDir.list());
+        mImgs=Arrays.asList(mImgDir.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String filename) {
+                if(filename.endsWith(".jpg")||filename.endsWith(".png")||filename.endsWith(".jpeg"))
+                    return true;
+                return false;
+            }
+        }));
 
-        mAdapter=new PictureChoseAdapter(getApplicationContext(),mImgs,R.layout.picture_chose_grid_item,mImgDir.getAbsolutePath());
+        mAdapter=new PictureChoseAdapter(this,mImgs,R.layout.picture_chose_grid_item,mImgDir.getAbsolutePath());
         mGridView.setAdapter(mAdapter);
         mImageCount.setText(totalCount + "");
     }
@@ -102,7 +110,7 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
      * 初始化展示文件夹菜单列表的popupWindow
      */
     private void initListDirPopupWindow() {
-        View frame=LayoutInflater.from(getApplicationContext()).inflate(R.layout.picture_chose_list_dir, null);
+        View frame=LayoutInflater.from(this).inflate(R.layout.picture_chose_list_dir, null);
 
         mListImageDirPopupWindow=new ListImageDirPopupWindow(ViewGroup.LayoutParams.MATCH_PARENT, (int) (mScreenHeight*0.7),mImageFolders,frame);
 
@@ -119,6 +127,8 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
 
         //设置选择文件夹的回调
         mListImageDirPopupWindow.setOnImageDirSelected(this);
+        //设置选择文件夹菜单的弹出收回动画
+        mListImageDirPopupWindow.setAnimationStyle(R.style.anim_popup_dir);
     }
 
 
@@ -165,19 +175,18 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String firstImage=null;
+
                 Uri mImageUri=MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
                 ContentResolver mContentResolver=PictureChoseActivity.this.getContentResolver();
 
                 //只查询jpeg和png的图片
                 Cursor mCursor=mContentResolver.query(mImageUri,null,MediaStore.Images.Media.MIME_TYPE+"=? or "+MediaStore.Images.Media.MIME_TYPE+"=?",new String[]{"image/jpeg","image/png"}, MediaStore.Images.Media.DATE_MODIFIED);
-                LogUtil.e(TAG,mCursor.getCount()+"");
 
                 while (mCursor.moveToNext())
                 {
                     //获取图片的路径
                     String path=mCursor.getString(mCursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                    LogUtil.e(TAG,path);
+
                     //拿到第一张图片的路径
                     File parentFile=new File(path).getParentFile();
                     if(parentFile==null)
@@ -237,7 +246,6 @@ public class PictureChoseActivity extends Activity implements OnImageDirSelected
         mBottomLy.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListImageDirPopupWindow.setAnimationStyle(R.style.anim_popup_dir);
                 mListImageDirPopupWindow.showAsDropDown(mBottomLy,0,0);
 
                 //设置背景颜色变暗
