@@ -21,71 +21,16 @@ import java.util.List;
  * 3:XUtils 用于数据库也支持大文件上传 https://github.com/wyouflf/xUtils
  */
 public class BaseFrameworkActivity extends Activity {
-   TextView tv;
-   Button bt;
-   DbUtils db;
-    Button bt_search;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        initView();
+
     }
 
-    private void initView() {
-        DbUtils.DaoConfig config=new DbUtils.DaoConfig(this);
-        config.setDbName("gary-util-db");
-        config.setDbVersion(1);
-        db=DbUtils.create(config);
-        try {
-            db.createTableIfNotExist(Student.class);
-        } catch (DbException e) {
-
-        }
-
-
-        tv= (TextView) findViewById(R.id.tv);
-        tv.setText("gary is going");
-
-        bt= (Button) findViewById(R.id.bt);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Student stu = new Student();
-                int base=RandomUtil.getRandomInt();
-                stu.setAge(base);
-                stu.setName("gary" + base);
-                try {
-                    db.save(stu);
-                } catch (DbException e) {
-
-                }
-
-
-            }
-        });
-
-        bt_search= (Button) findViewById(R.id.bt_search);
-        bt_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                  List<Student> list= db.findAll(Selector.from(Student.class));
-                    String result="";
-                    for(Student stu:list)
-                    {
-                        result=result+stu.getName()+","+stu.getAge()+";";
-                    }
-                    tv.setText(result);
-                } catch (DbException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-    }
 
 
 

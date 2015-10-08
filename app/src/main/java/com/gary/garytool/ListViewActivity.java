@@ -32,6 +32,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int VOLLEY_TABLE_LAYOUT = 12;
     private static final int PULL_TO_REFRESH = 13;
     private static final int WECHAT_PICTURE_CHOSE = 14;
+    private static final int X_UTILS = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("股票显示-TableLayout");
         data.add("PullToRefresh");
         data.add("微信图片选择器");
+        data.add("XUtils");
 
         /*-----done------*/
         //actionbar
@@ -78,6 +80,12 @@ public class ListViewActivity extends ActionBarActivity {
         //json操作
         //网络访问
         //OOM
+        //xUtils(Afinal) VS GreenDAO https://github.com/wyouflf/xUtils
+        //Gson
+        //PullToRefresh
+        //volley VS universal-image-loader VS android-async-http  VS DiskLruCache
+        //Volley是将AsyncHttpClient和Universal-Image-Loader的优点集成于一身的一个框架
+
 
         /*----will do---*/
         //数据库操作
@@ -90,15 +98,8 @@ public class ListViewActivity extends ActionBarActivity {
         //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
         //RecycleView + CardView 控件
         //ActionBar to ToolBar
-
         /*----框架---*/
-        //volley VS universal-image-loader VS android-async-http  VS DiskLruCache
-        //Volley是将AsyncHttpClient和Universal-Image-Loader的优点集成于一身的一个框架
         //OkHttp 可以与volley配合，做volley的传输层
-        //Gson
-        //PullToRefresh
-        //xUtils(Afinal) VS GreenDAO
-
         //EventBus
         //ButterKnife
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
@@ -173,6 +174,10 @@ public class ListViewActivity extends ActionBarActivity {
                     break;
                 case WECHAT_PICTURE_CHOSE:
                     intent =new Intent(ListViewActivity.this, PictureChoseActivity.class);
+                    startActivity(intent);
+                    break;
+                case X_UTILS:
+                    intent =new Intent(ListViewActivity.this, XUtilsActivity.class);
                     startActivity(intent);
                     break;
                 default:

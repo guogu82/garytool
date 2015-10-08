@@ -3,7 +3,7 @@
     package="com.gary.garytool" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".GaryApplication"
@@ -58,9 +58,7 @@
             android:name=".ViewPagerGuideActivity"
             android:label="@string/title_activity_view_paper_guide" >
         </activity>
-        <activity
-            android:name=".BaseFrameworkActivity"
-            >
+        <activity android:name=".BaseFrameworkActivity" >
         </activity>
         <activity
             android:name=".VolleyActivity"
@@ -72,8 +70,11 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".PullToRefreshActivity" >
         </activity>
+        <activity android:name=".PictureChoseActivity" >
+        </activity>
         <activity
-            android:name=".PictureChoseActivity" >
+            android:name=".XUtilsActivity"
+            android:label="@string/title_activity_xutils" >
         </activity>
     </application>
 
