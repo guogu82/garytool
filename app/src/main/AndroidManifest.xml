@@ -60,7 +60,7 @@
         </activity>
         <activity
             android:name=".BaseFrameworkActivity"
-            android:label="@string/title_activity_base" >
+            >
         </activity>
         <activity
             android:name=".VolleyActivity"

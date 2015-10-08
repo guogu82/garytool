@@ -2,29 +2,7 @@
  android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<LinearLayout
+<TextView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:paddingTop="28dp">
-<ImageButton
-    android:id="@+id/ib_video_avatar"
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:background="@drawable/tab1_s"/>
-    <TextView
-        android:id="@+id/tv_nick_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:singleLine="true"
-        android:text="张三"
-        android:textSize="16sp"/>
-</LinearLayout>
-    <ImageButton
-        android:id="@+id/ib_video_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:layout_height="match_parent" />
 </LinearLayout>
