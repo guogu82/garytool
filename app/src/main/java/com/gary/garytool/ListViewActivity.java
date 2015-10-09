@@ -68,15 +68,23 @@ public class ListViewActivity extends ActionBarActivity {
 
         /*-----done------*/
         //actionbar
+        //fragment
+        //activity
+        //popupWindow 省学校二级联动
+
         //listview
         //adapter
         //viewpager
+
         //textview
         //edittext
         //imageview
         //button
-        //fragment
-        //popupWindow 省学校二级联动
+
+
+        //dialog
+        //notify
+        //toast
         //json操作
         //网络访问
         //OOM
@@ -90,6 +98,7 @@ public class ListViewActivity extends ActionBarActivity {
         /*----will do---*/
         //数据库操作
         //webView
+        //Loader
         //login 第三方登录
         //socket tcp通信 --文件上传下载--http://blog.csdn.net/lmj623565791/article/details/23781773
         //               --文件上传下载--http://blog.csdn.net/lmj623565791/article/details/26994463

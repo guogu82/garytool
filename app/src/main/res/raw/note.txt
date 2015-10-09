@@ -32,6 +32,7 @@ libs
 2:推荐一个Android开发懒人库 -- ButterKnife
 3: Android图表引擎AChartEngine
 
+----有用的网络接口---------
 百度出了个api store可以查询各类服务 http://apistore.baidu.com/
 身份证号码查询：http://apistore.baidu.com/apiworks/servicedetail/113.html
 手机号码：http://apistore.baidu.com/apiworks/servicedetail/117.html
@@ -41,6 +42,17 @@ libs
 http://www.tuling123.com/openapi/api?key=0697f52f60f49d3a607ea09cb4e94c4a&info=帮我查一下听日广州天气
 http://www.tuling123.com/openapi/modules.do?name=show
 
+http://www.juhe.cn/                     聚合数据              目前很多接口都收费
+https://www.showapi.com                 易源接口              存在收费项                            API接口少
+http://www.atool.org/httptest.php       在线http请求
+
+------有用的网站--------
+http://www.androiddevtools.cn/
+收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。
+http://wear.techbrood.com
+Android developer 最新国内镜像：http://wear.techbrood.com，包含Android最新文档以及Android Wear，Android TV，Android Auto各个子领域方面的内容。
+Android 开源项目分类汇总
+http://www.cnblogs.com/deBug-hao/p/4730959.html
 
  1:----------Fragment  transaction.replace() VS transaction.add() hide() show()------------
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
@@ -263,3 +275,13 @@ Android AdapterView View的复用机制 分析
 很多人面试的时候都遇到过这样的问题：String s = new String("abc")；请问创建了几个对象。也从侧面说明了这是个反面的代码写法：
 a、String s = new String("abc")；“abc”本身就是一个String的实例，所以new String创建了不必要的String实例
 b、如果改写成 String s = "abc"，不仅只创建了一个实例，而且在同一台VM中，对于“abc”（字符串的字面常量）还会重用。
+
+
+
+12:----------------------------Android v4、v7、v13 的区别-------------------------------------
+Android Support v4:  这个包是为了照顾1.6及更高版本而设计的，这个包是使用最广泛的，eclipse新建工程时，都默认带有了。
+Android Support v7:  这个包是为了考虑照顾2.1及以上版本而设计的，但不包含更低，故如果不考虑1.6,我们可以采用再加上这个包，另外注意，v7是要依赖v4这个包的，即，两个得同时被包含。
+Android Support v13  :这个包的设计是为了android 3.2及更高版本的，一般我们都不常用，平板开发中能用到。
+1、为什么还要用V7呢？V4向下兼容的版本不是更多吗？
+    V7版本不是为了提供一些V4提供不了的内容，它不是补丁。V7以后你如果创建一个工程，它给你创建的都是FragmentActivity了。
+     也就是说，以后Android开发所有的界面都可以是碎片模式了。V7是一种新的框架和更优解决方案.
