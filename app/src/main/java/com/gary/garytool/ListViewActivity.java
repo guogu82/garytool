@@ -82,7 +82,7 @@ public class ListViewActivity extends ActionBarActivity {
         //button
 
 
-        //dialog
+        //Dialog 主要保护后面四个子类 AlterDialog, ProgressDialog, DatePickerDialog, TimePikerDialog
         //notify
         //toast
         //json操作
@@ -96,6 +96,12 @@ public class ListViewActivity extends ActionBarActivity {
 
 
         /*----will do---*/
+        //android-percent-support-lib-sample http://blog.csdn.net/lmj623565791/article/details/46695347
+        //RecycleView + CardView 控件
+        //RecyclerView，CardView，Palette http://www.open-open.com/lib/view/open1434014850864.html
+        //ActionBar to ToolBar
+
+        //自定义view 内存缓存 硬盘缓存 图像处理
         //数据库操作
         //webView
         //Loader
@@ -105,8 +111,7 @@ public class ListViewActivity extends ActionBarActivity {
         //地图应用
         //DiskLruCache
         //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
-        //RecycleView + CardView 控件
-        //ActionBar to ToolBar
+
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层
         //EventBus

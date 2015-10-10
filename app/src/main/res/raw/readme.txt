@@ -8,6 +8,7 @@
  android.util
  android.text
 
+--------------------------命名规范-----------------------------
 布局文件 命名规范
 activity_bottom_menu_with_fragment
 
@@ -35,7 +36,7 @@ ImageView aboutTimeInDay
 必须是动词+名词
 initView
 
-我的快捷键
+-------------------------我的快捷键---------------------
 ctrl+d 复制一行
 shift+enter 任意地方换行并新开一行
 ctrl+w 选中当前单词
@@ -53,7 +54,7 @@ ctrl+alt+T  包裹if或者try
 ctrl+J   生成for循环
 ctrl+P 显示方法的参数
 
-adb 启动失败
+------------------adb 启动失败-----------------
 netstat -aon|findstr "5037"      （netstat -aon|findstr "5037" | more--分屏）
  TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       18212
 tasklist|findstr "18212"
@@ -63,20 +64,29 @@ tasklist|findstr "18212"
  3.adb start-server
  4.重启Eclipse
 
- 设计模式的使用场景
+ ----------------------------git----------------------------
+ git add --al
+ git commit -m ""
+ git push
+ git pull
+ 3个人协同开发，那么用Git同步代码，会将模块中的大量iml文件同步，每次都会提交和更新，一个一个的去忽略他们，显然是最笨的方法。
+ 那些ide文件和iml文件根本不需要同步，如何设置呢？？
+git update-index --assume-unchanged $(git ls-files *.iml   idea/*.*)
+
+ ---------------------设计模式的使用场景--------------------
  1： 装饰者--io stream
  2：观察者--回调
  3：单例--全局变量
  4：建造者--按需构造实例，例如dialog，参数太多了。
  5：模板方法--就是抽取共同代码，父类与子类
 
- 软件版本规则
+-------------------------软件版本规则---------------------------
  V3.5.12   左边是大版本，中间是策划评审通过的版本，右边是策划版本
 
- 我的框架主体
+ -----------------我的框架主体-----------------
 volley Gson xUtils PullToRefresh LruCache
 
-我的技术发展规划。
+--------------------------我的技术发展规划。----------------------
 第1年内熟悉安卓开发细节。控件的熟悉，框架的使用。
 
 第2年改动开源框架，重构应用场景。
@@ -87,7 +97,7 @@ volley Gson xUtils PullToRefresh LruCache
 第3年用mindmanager画自己的想法，用axure，mockup设计原型，用Visio，gliffy设计框架流程，然后用代码实现。
 在产品的周期里，coding是最不起眼的角色，伪脑力的体力劳动者。如何让自己折腾出这个圈子，站在更高的角度看自己。
 
-代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）
+-----------代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）-----------
 1：地区、学校选择二级联动 (20150922)
 demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html
 demo代码 https://github.com/tonycheng93/PopWindow

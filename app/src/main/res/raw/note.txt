@@ -54,6 +54,13 @@ Android developer 最新国内镜像：http://wear.techbrood.com，包含Android
 Android 开源项目分类汇总
 http://www.cnblogs.com/deBug-hao/p/4730959.html
 
+----博客---------------
+http://blog.csdn.net/lmj623565791 ;鸿洋_
+http://blog.csdn.net/guolin_blog     郭霖
+http://blog.csdn.net/lmj623565791  xiaanming
+http://blog.csdn.net/luoshengyang   罗升阳
+http://www.cnblogs.com/JczmDeveloper/
+
  1:----------Fragment  transaction.replace() VS transaction.add() hide() show()------------
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
  那么最合适的处理方式是这样的：
@@ -108,6 +115,16 @@ Android AdapterView View的复用机制 分析
   但是现在已经不再推荐使用这种方式了，因为从 Android 2.3 (API Level 9)开始，垃圾回收器会更倾向于回收持有软引用或弱引用的对象，
   这让软引用和弱引用变得不再可靠。另外，Android 3.0 (API Level 11)中，图片的数据会存储在本地的内存当中，
   因而无法用一种可预见的方式将其释放，这就有潜在的风险造成应用程序的内存溢出并崩溃。
+
+ BitmapUtils内存缓存的核心类LruMemoryCache，LruMemoryCache代码和v4包的LruCache一样，只是加了一个存储超期的处理，这里分析LruCache源码。
+ LRU即Least Recently Used，近期最少使用算法。也就是当内存缓存达到设定的最大值时将内存缓存中近期最少使用的对象移除，有效的避免了OOM的出现。
+讲到LruCache不得不提一下LinkedHashMap，因为LruCache中Lru算法的实现就是通过LinkedHashMap来实现的。
+LinkedHashMap继承于HashMap，它使用了一个双向链表来存储Map中的Entry顺序关系，这种顺序有两种，一种是LRU顺序，一种是插入顺序，
+这可以由其构造函数public LinkedHashMap(int initialCapacity,float loadFactor, boolean accessOrder)指定。
+所以，对于get、put、remove等操作，LinkedHashMap除了要做HashMap做的事情，还做些调整Entry顺序链表的工作。
+LruCache中将LinkedHashMap的顺序设置为LRU顺序来实现LRU缓存，每次调用get(也就是从内存缓存中取图片)，则将该对象移到链表的尾端。
+调用put插入新的对象也是存储在链表尾端，这样当内存缓存达到设定的最大值时，将链表头部的对象（近期最少用到的）移除。
+关于LinkedHashMap详解请前往http://www.cnblogs.com/children/archive/2012/10/02/2710624.html。
 
 
 6：-------------------各类框架的评价-------------------------------

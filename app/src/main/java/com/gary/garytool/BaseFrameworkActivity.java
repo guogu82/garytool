@@ -29,6 +29,7 @@ import java.util.LinkedList;
  * 1:PullToRefresh https://github.com/chrisbanes/Android-PullToRefresh
  * 2:Volley 用于网络请求.缺点-它不适合数据的上传和下载。大文件上传。 https://github.com/Tim9Liu9/volley_demo
  * 3:XUtils 用于数据库也支持大文件上传 https://github.com/wyouflf/xUtils
+ * 4:界面组成 RecyclerView Fragment ViewPager FragmentAdapter
  */
 public class BaseFrameworkActivity extends ListActivity {
 
