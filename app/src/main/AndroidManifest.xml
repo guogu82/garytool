@@ -76,6 +76,10 @@
             android:name=".XUtilsActivity"
             android:label="@string/title_activity_xutils" >
         </activity>
+        <activity
+            android:name=".PullToRefreshListViewActivity"
+            android:label="@string/title_activity_pull_to_refresh_list_view" >
+        </activity>
     </application>
 
 </manifest>

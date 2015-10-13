@@ -11,6 +11,7 @@ android layout的一些注意事项
 
 
 android 使用Monkey进行压力测试。
+墙内免vpn下载sdk 进入超级ping，在ip或域名内输入g.cn，然后点击查询，讲得到一系列的iP地址，选择任意一个，在sdk manager中设置proxy的ip和端口(80)，然后reload。你会发现的下载速度杠杠的
 
 SDK
  1:使用友盟进行apk的自动更新

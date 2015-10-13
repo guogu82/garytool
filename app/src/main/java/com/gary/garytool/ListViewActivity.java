@@ -74,7 +74,7 @@ public class ListViewActivity extends ActionBarActivity {
 
         //listview
         //adapter
-        //viewpager
+        //viewpager   JazzyViewPager https://github.com/jfeinstein10/JazzyViewPager
 
         //textview
         //edittext
@@ -90,10 +90,10 @@ public class ListViewActivity extends ActionBarActivity {
         //OOM
         //xUtils(Afinal) VS GreenDAO https://github.com/wyouflf/xUtils
         //Gson
-        //PullToRefresh
+        //PullToRefresh http://blog.csdn.net/lmj623565791/article/details/38238749
         //volley VS universal-image-loader VS android-async-http  VS DiskLruCache
         //Volley是将AsyncHttpClient和Universal-Image-Loader的优点集成于一身的一个框架
-
+        //底部导航栏 http://blog.csdn.net/lmj623565791/article/details/24740977
 
         /*----will do---*/
         //android-percent-support-lib-sample http://blog.csdn.net/lmj623565791/article/details/46695347
@@ -111,7 +111,9 @@ public class ListViewActivity extends ActionBarActivity {
         //地图应用
         //DiskLruCache
         //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
-
+        //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
+        //IntentService http://blog.csdn.net/lmj623565791/article/details/47143563 后台服务
+        //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层
         //EventBus

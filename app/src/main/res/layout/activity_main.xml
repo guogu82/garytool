@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="功能列表"
         android:textAllCaps="false"
-        android:id="@+id/button"
+        android:id="@+id/bt_functions"
         />
 
     <TextView
@@ -24,7 +24,12 @@
         android:background="@color/silver"
         />
 
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PullToRefresh专题"
+        android:id="@+id/bt_pull_to_refresh"
+        android:layout_gravity="right" />
 
 
 </LinearLayout>

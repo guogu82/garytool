@@ -88,6 +88,7 @@ public class ImageLoader {
                 mPoolThreadHandler = new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
+                        //取到UI线程的任务添加的消息，去任务队列拿任务，如果没有信号量了，就阻塞
                         mThreadPool.execute(getTask());
                         try {
                             mPoolSemaphore.acquire();
@@ -155,9 +156,11 @@ public class ImageLoader {
             message.obj = holder;
             mHandler.sendMessage(message);
         } else {
+            //在UI线程向队列添加任务
             addTask(new Runnable() {
                 @Override
                 public void run() {
+                    //下面是任务要执行的内容
                     ImageSize imageSize = getImageViewWidth(imageView);
                     int reqWidth = imageSize.width;
                     int reqHeight = imageSize.height;
@@ -191,7 +194,9 @@ public class ImageLoader {
             e.printStackTrace();
         }
 
+        //向队列添加任务
         mTasks.add(runnable);
+        //发送任务添加的消息给守护线程的handler
         mPoolThreadHandler.sendEmptyMessage(0x110);
     }
 

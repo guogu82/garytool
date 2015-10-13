@@ -10,14 +10,16 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+    Button mFunctions;
     TextView mTextView;
+    Button mPullToRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        mFunctions = (Button) findViewById(R.id.bt_functions);
+        mFunctions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
@@ -32,6 +34,17 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BaseFrameworkActivity.class);
+                startActivity(intent);
+            }
+        });
+        //PullToRefresh 控件专题
+        //https://github.com/chrisbanes/Android-PullToRefresh
+        //http://blog.csdn.net/lmj623565791/article/details/38238749
+        mPullToRefresh= (Button) findViewById(R.id.bt_pull_to_refresh);
+        mPullToRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,PullToRefreshListViewActivity.class);
                 startActivity(intent);
             }
         });
