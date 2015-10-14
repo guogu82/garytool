@@ -115,9 +115,10 @@ public class ListViewActivity extends ActionBarActivity {
         //IntentService http://blog.csdn.net/lmj623565791/article/details/47143563 后台服务
         //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
         /*----框架---*/
-        //OkHttp 可以与volley配合，做volley的传输层
+        //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
         //EventBus
         //ButterKnife
+        //ViewPageIndicator https://github.com/JakeWharton/Android-ViewPagerIndicator http://blog.csdn.net/xiaanming/article/details/10766053/
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
 
         return data;
