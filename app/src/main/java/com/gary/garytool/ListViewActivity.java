@@ -111,14 +111,28 @@ public class ListViewActivity extends ActionBarActivity {
         //地图应用
         //DiskLruCache
         //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
-        //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
         //IntentService http://blog.csdn.net/lmj623565791/article/details/47143563 后台服务
         //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
+
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
         //EventBus
         //ButterKnife
+
+        //项目里差不多都用自己写的框架，除了一些UI会找lib，能自己写的基本自己动手，毕竟架构再完善也很难去满足一个特定的需求
+        //网络层： Retrofit或者Volley＋OkHttp，async-http-lib尽量就别用了，比较老。另外这些都需要再进一步扩展的，可以自己搜下，有用的就集成进去。
+        //数据库： Ormlite或者Realm，要加密的话用SqlCipher
+        //图片缓存： Fresco， Picasso，如果集成的效果不理想，多看看配置参数是否正确
+        //工具： 查内存泄漏（leakcanary）异步通知（RxJava谨慎使用）数学计算表达式（expression4j）日期处理（joda time）
+
+        //Fresco https://github.com/facebook/fresco Fresco是Facebook最新推出的一款用于Android应用中展示图片的强大图片库，可以从网络、本地存储和本地资源中加载图片。
+        //Picasso http://square.github.io/picasso/  Picasso是Square公司开源的一个Android图形缓存库.
+
+        // --UI liberty
+        //JazzyViewPager https://github.com/jfeinstein10/JazzyViewPager
         //ViewPageIndicator https://github.com/JakeWharton/Android-ViewPagerIndicator http://blog.csdn.net/xiaanming/article/details/10766053/
+        //CircleProgress  https://github.com/lzyzsd/CircleProgress  进度条UI
+        //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
 
         return data;

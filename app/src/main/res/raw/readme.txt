@@ -43,6 +43,7 @@ ctrl+w 选中当前单词
 alt+enter 修复当前问题，view类型强转
 先敲“/”在敲两个**，然后回车  为方法添加注释
 ctrl+q 查看方法的文档
+ctrl+shift+f12 代码编辑区全屏
 
 ctrl+TAB  编辑器文档切换
 alt+左右箭头 编辑器文档左右切换
@@ -53,6 +54,8 @@ alt+enter 错误修正提示列表
 ctrl+alt+T  包裹if或者try
 ctrl+J   生成for循环
 ctrl+P 显示方法的参数
+f11  将当前位置添加到书签中或者从书签中移除。
+shift+f11 显示有哪些书签
 
 ------------------adb 启动失败-----------------
 netstat -aon|findstr "5037"      （netstat -aon|findstr "5037" | more--分屏）

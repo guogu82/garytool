@@ -25,6 +25,7 @@ import com.gary.garytool.info.School;
 import com.gary.garytool.info.SchoolList;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.volley.GsonRequest;
+import com.gary.garytool.volley.VolleyManger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,7 @@ public class PopupWindowActivity extends Activity {
                 Toast.makeText(PopupWindowActivity.this, "省份列表获取失败", Toast.LENGTH_SHORT).show();
             }
         });
-        GaryApplication.getVolleyRequestQueue().add(request);
+        VolleyManger.getVolleyRequestQueue().add(request);
     }
 
     private void showPopWindow() {
@@ -174,7 +175,7 @@ public class PopupWindowActivity extends Activity {
             }
         });
 
-        GaryApplication.getVolleyRequestQueue().add(request);
+        VolleyManger.getVolleyRequestQueue().add(request);
     }
 
     private PopupWindow.OnDismissListener listener = new PopupWindow.OnDismissListener() {

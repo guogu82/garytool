@@ -34,7 +34,7 @@ libs
 3: Android图表引擎AChartEngine
 
 ----有用的网络接口---------
-百度出了个api store可以查询各类服务 http://apistore.baidu.com/
+百度出了个api store可以查询各类服务 http://apistore.baidu.com/   最重要了。
 身份证号码查询：http://apistore.baidu.com/apiworks/servicedetail/113.html
 手机号码：http://apistore.baidu.com/apiworks/servicedetail/117.html
 天气查询 http://apistore.baidu.com/apiworks/servicedetail/112.html
@@ -230,6 +230,12 @@ LruCache中将LinkedHashMap的顺序设置为LRU顺序来实现LRU缓存，每�
   3、服务进程service process
   4、后台进程background process
   5、空进程    empty process
+
+  -An activity has one or more windows (e.g. dialogs)
+  -A window has one or more surfaces (e.g. surface views)
+  -However, in window manager, a window is called a session
+  -A surface is called a window
+  -And an activity becomes roughly a token
 
 
   9:---------------------------------bitmap----------------------------------

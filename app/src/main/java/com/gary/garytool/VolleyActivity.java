@@ -21,6 +21,7 @@ import com.gary.garytool.info.WeatherInfo;
 import com.gary.garytool.volley.BitmapCache;
 import com.gary.garytool.volley.GsonRequest;
 import com.gary.garytool.volley.VolleyInterface;
+import com.gary.garytool.volley.VolleyManger;
 import com.gary.garytool.volley.VolleyRequest;
 import com.gary.garytool.volley.XMLRequest;
 
@@ -73,7 +74,7 @@ public class VolleyActivity extends Activity {
         //每次都会new新的imageCahce和imageLoader,所以缓存的图片相当于每次都存到新的ImageCache中所以无法显示。
         //解决办法是在Application中设置全局的ImageLoader这样断网也可以获取上次的缓存图片。
         // 而且即使在屏幕旋转时，activity重新onCreate也可以读取缓存的图片，而不用再次通过网路获取了。
-        mImageLoader = new ImageLoader(GaryApplication.getVolleyRequestQueue(), new BitmapCache());
+        mImageLoader = new ImageLoader(VolleyManger.getVolleyRequestQueue(), new BitmapCache());
         mNetworkImageView = (NetworkImageView) findViewById(R.id.iv_volley_networkimageview);
 
         //StringRequest demo
@@ -95,7 +96,7 @@ public class VolleyActivity extends Activity {
                 });
                 //activity volley request 生命周期控制
                 request.setTag(REQUESTTAG);
-                GaryApplication.getVolleyRequestQueue().add(request);
+                VolleyManger.getVolleyRequestQueue().add(request);
             }
         });
 
@@ -115,7 +116,7 @@ public class VolleyActivity extends Activity {
                         tv_response.setText(volleyError.toString());
                     }
                 });
-                GaryApplication.getVolleyRequestQueue().add(request);
+                VolleyManger.getVolleyRequestQueue().add(request);
             }
         });
 
@@ -137,7 +138,7 @@ public class VolleyActivity extends Activity {
                     }
                 });
 
-                GaryApplication.getVolleyRequestQueue().add(imageRequest);
+                VolleyManger.getVolleyRequestQueue().add(imageRequest);
             }
         });
 
@@ -202,7 +203,7 @@ public class VolleyActivity extends Activity {
                         tv_response.setText(volleyError.toString());
                     }
                 });
-                GaryApplication.getVolleyRequestQueue().add(xmlRequest);
+                VolleyManger.getVolleyRequestQueue().add(xmlRequest);
             }
         });
 
@@ -227,7 +228,7 @@ public class VolleyActivity extends Activity {
                     }
                 });
 
-                GaryApplication.getVolleyRequestQueue().add(gsonRequest);
+                VolleyManger.getVolleyRequestQueue().add(gsonRequest);
             }
         });
 
@@ -256,6 +257,6 @@ tv_response.setText(error.toString());
     protected void onStop() {
         super.onStop();
         //activity volley request 生命周期控制.退出activity时，清除所有请求。
-        GaryApplication.getVolleyRequestQueue().cancelAll(REQUESTTAG);
+        VolleyManger.getVolleyRequestQueue().cancelAll(REQUESTTAG);
     }
 }

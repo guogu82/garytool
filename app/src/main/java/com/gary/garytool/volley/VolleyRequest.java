@@ -20,15 +20,15 @@ public class VolleyRequest {
 
     public static void RequestGet(Context context, String url, String tag, VolleyInterface vif) {
         mContext = context;
-        GaryApplication.getVolleyRequestQueue().cancelAll(tag);
+        VolleyManger.getVolleyRequestQueue().cancelAll(tag);
         mRequest = new StringRequest(Request.Method.GET, url, vif.loadingListener(), vif.errorListener());
         mRequest.setTag(tag);
-        GaryApplication.getVolleyRequestQueue().add(mRequest);
-        GaryApplication.getVolleyRequestQueue().start();
+        VolleyManger.getVolleyRequestQueue().add(mRequest);
+        VolleyManger.getVolleyRequestQueue().start();
     }
 
     public static void RequestPost(Context context, String url, String tag, final Map<String, String> params, VolleyInterface vif) {
-        GaryApplication.getVolleyRequestQueue().cancelAll(tag);
+        VolleyManger.getVolleyRequestQueue().cancelAll(tag);
         mRequest = new StringRequest(url, vif.loadingListener(), vif.errorListener()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -36,7 +36,7 @@ public class VolleyRequest {
             }
         };
         mRequest.setTag(tag);
-        GaryApplication.getVolleyRequestQueue().add(mRequest);
-        GaryApplication.getVolleyRequestQueue().start();
+        VolleyManger.getVolleyRequestQueue().add(mRequest);
+        VolleyManger.getVolleyRequestQueue().start();
     }
 }

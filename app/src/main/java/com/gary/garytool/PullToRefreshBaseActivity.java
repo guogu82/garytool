@@ -7,6 +7,11 @@ import android.text.format.DateUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.gary.garytool.util.LogUtil;
+import com.gary.garytool.volley.GsonRequest;
+import com.gary.garytool.volley.VolleyManger;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -14,6 +19,8 @@ import java.util.LinkedList;
 
 
 public class PullToRefreshBaseActivity extends Activity {
+
+    private static final String TAG="PullToRefreshBaseActivity";
 
     private LinkedList<String> mListItems;
     private PullToRefreshListView mPullRefreshListView;
@@ -57,7 +64,12 @@ public class PullToRefreshBaseActivity extends Activity {
             try
             {
                 Thread.sleep(2000);
-            }catch (InterruptedException e) {
+                String httpUrl = "http://apis.baidu.com/txapi/world/world";
+                String httpArg = "num=5&page="+mItemCount;
+                String jsonResult = VolleyManger.request(httpUrl, httpArg);
+              LogUtil.d(TAG,jsonResult);
+            }
+            catch (InterruptedException e) {
             }
             return ""+(mItemCount++);
         }
