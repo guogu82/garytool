@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -20,9 +19,7 @@ import com.gary.garytool.info.Weather;
 import com.gary.garytool.info.WeatherInfo;
 import com.gary.garytool.volley.BitmapCache;
 import com.gary.garytool.volley.GsonRequest;
-import com.gary.garytool.volley.VolleyInterface;
 import com.gary.garytool.volley.VolleyManger;
-import com.gary.garytool.volley.VolleyRequest;
 import com.gary.garytool.volley.XMLRequest;
 
 import org.json.JSONObject;
@@ -232,23 +229,6 @@ public class VolleyActivity extends Activity {
             }
         });
 
-bt_volley_quest8= (Button) findViewById(R.id.bt_volley_quest8);
-        bt_volley_quest8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VolleyRequest.RequestGet(VolleyActivity.this,mUrl,REQUESTTAG, new VolleyInterface(VolleyActivity.this) {
-                    @Override
-                    public void onMySuccess(String result) {
-tv_response.setText(result);
-                    }
-
-                    @Override
-                    public void onMyError(VolleyError error) {
-tv_response.setText(error.toString());
-                    }
-                });
-            }
-        });
 
 
     }

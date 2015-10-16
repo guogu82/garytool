@@ -134,7 +134,8 @@ public class ListViewActivity extends ActionBarActivity {
         //CircleProgress  https://github.com/lzyzsd/CircleProgress  进度条UI
         //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
-
+        //BadgeView https://github.com/stefanjauker/BadgeView 数字提醒
+        //nineoldandroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
         return data;
     }
 
