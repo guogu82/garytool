@@ -100,6 +100,8 @@ public class ListViewActivity extends ActionBarActivity {
         //RecycleView + CardView 控件
         //RecyclerView，CardView，Palette http://www.open-open.com/lib/view/open1434014850864.html
         //ActionBar to ToolBar
+        //RemoteViews
+        //Drawable Bitmap
 
         //自定义view 内存缓存 硬盘缓存 图像处理
         //数据库操作
@@ -111,8 +113,11 @@ public class ListViewActivity extends ActionBarActivity {
         //地图应用
         //DiskLruCache
         //生成验证码--自定义view --http://blog.csdn.net/lmj623565791/article/details/24252901
+        //CrashHandler and multidex
+        //AsyncTask
         //IntentService http://blog.csdn.net/lmj623565791/article/details/47143563 后台服务
         //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
+        //ThreadPoolExecutor
 
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
