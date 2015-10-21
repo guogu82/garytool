@@ -36,8 +36,7 @@ import java.io.IOException;
  * 5:NetworkImageView
  * 6:XMLRequest
  * 7:GsonRequest
- * 8:request 的二次封装。为请求前打开请求框，请求后打开错误提示框
- * 9:activity volley request 生命周期控制
+ * 8:activity volley request 生命周期控制
  */
 public class VolleyActivity extends Activity {
     static final String TAG = "VolleyActivity";
@@ -52,7 +51,6 @@ public class VolleyActivity extends Activity {
     Button bt_volley_quest5;
     Button bt_volley_quest6;
     Button bt_volley_quest7;
-    Button bt_volley_quest8;
 
     ImageView iv_volley;
     TextView tv_response;

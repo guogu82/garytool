@@ -138,7 +138,7 @@ public class ListViewActivity extends ActionBarActivity {
         //ViewPageIndicator https://github.com/JakeWharton/Android-ViewPagerIndicator http://blog.csdn.net/xiaanming/article/details/10766053/
         //CircleProgress  https://github.com/lzyzsd/CircleProgress  进度条UI
         //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
-        //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library
+        //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library 一款扩展自Android ImageView ，支持通过单点/多点触摸来进行图片缩放的智能控件
         //BadgeView https://github.com/stefanjauker/BadgeView 数字提醒
         //nineoldandroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
         return data;

@@ -11,6 +11,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.gary.garytool.info.ForeignNew;
 import com.gary.garytool.util.LogUtil;
@@ -98,13 +100,11 @@ public class PullToRefreshBaseActivity extends Activity {
 //               "code": 200,
 //               "msg": "ok"
 //                }
-                StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+                JsonObjectRequest request = new JsonObjectRequest(url,null, new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String result) {
-                        JSONObject jsonObj = null;
+                    public void onResponse(JSONObject result) {
                         try {
-                            jsonObj = new JSONObject(result);
-                            JSONObject first = jsonObj.getJSONObject("0");
+                            JSONObject first = result.getJSONObject("0");
                             ForeignNew foreignNew=new ForeignNew();
                             foreignNew.setDescription(first.getString("description"));
 

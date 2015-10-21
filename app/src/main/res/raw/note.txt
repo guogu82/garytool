@@ -58,12 +58,12 @@ http://www.cnblogs.com/deBug-hao/p/4730959.html
 ----博客---------------
 http://blog.csdn.net/lmj623565791 ;鸿洋_
 http://blog.csdn.net/guolin_blog     郭霖
-http://blog.csdn.net/lmj623565791  xiaanming
 http://blog.csdn.net/luoshengyang   罗升阳
-http://www.cnblogs.com/JczmDeveloper/
+http://www.cnblogs.com/JczmDeveloper/ Jamy Cai
+http://blog.csdn.net/singwhatiwanna  任玉刚  https://github.com/singwhatiwanna
 
 -----------------------工具----------------
-HiJson  json格式化工具
+json 在线自动生成java代码工具 http://api.stay4it.com/json/index.html
 
  1:----------Fragment  transaction.replace() VS transaction.add() hide() show()------------
  Fragment销毁时replace和add两个方法的区别 http://m.blog.csdn.net/blog/shimiso/44677007#
@@ -80,6 +80,27 @@ HiJson  json格式化工具
  注意仅仅是获取绘图状态，而没有获取事件，也就是你点一下LinearLayout时Button有被点击的效果，但是不执行点击事件。
  在TextView中设置字体颜色一般使用，android:textColor="@color/red"，但是我们在使用selector动态修改字体颜色的时候要使用android:color="@color/red"。
  代码来设置textColor 的，需要用 textView.setTextColor(getResources().getColorStateList(R.color.text_selector_color));来设置。
+
+  注意Android里TextView控件的一个小坑，用android:theme来设置样式时动态载入的layout会丢失该样式。
+  比如在用ListView的时候，如果在List_Item的layout布局在用的是android:theme 而不是style的话，那么，显示的结果你会发现你的样式全没有了。改成style就ok了
+
+  设置TextView的行间距（非行高）
+  Android系统中TextView默认显示中文时会比较紧凑，不是很美观。为了让每行保持一定的行间距，可以设置属性android:lineSpacingExtra或android:lineSpacingMultiplier。
+  1、android:lineSpacingExtra  设置行间距，如”3dp”。  2、android:lineSpacingMultiplier  设置行间距的倍数，如”1.2″。
+
+  android-getTextSize返回值是以像素(px)为单位的,setTextSize()以sp为单位
+  使用如下代码时，发现字号不会变大，反而会变小：
+  size = (int) mText.getTextSize() + 1;
+  mText.setTextSize(size);
+  后来发现getTextSize返回值是以像素(px)为单位的，而setTextSize()是以sp为单位的，两者单位不一致才造成这样的结果。
+  这里可以用setTextSize()的另外一种形式，可以指定单位：
+  setTextSize(int unit, int size)
+  TypedValue.COMPLEX_UNIT_PX : Pixels
+  TypedValue.COMPLEX_UNIT_SP : Scaled Pixels
+  TypedValue.COMPLEX_UNIT_DIP : Device Independent Pixels
+  下面这样就正常了：
+  size = (int) mText.getTextSize() + 1;
+  mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
 
  3:--------------------ListView---------------------
  --ListView记得把layout_height属性设置成match_parent。若设置成"wrap_content"则会调用多次。
@@ -312,3 +333,25 @@ Android Support v13  :这个包的设计是为了android 3.2及更高版本的�
 1、为什么还要用V7呢？V4向下兼容的版本不是更多吗？
     V7版本不是为了提供一些V4提供不了的内容，它不是补丁。V7以后你如果创建一个工程，它给你创建的都是FragmentActivity了。
      也就是说，以后Android开发所有的界面都可以是碎片模式了。V7是一种新的框架和更优解决方案.
+
+
+
+13：---------------------android 源码分析--------------------
+**  一段精彩的位与计算应用。** MeasureSpec  代表一个 32 位 int 值   高 2 位代表 SpecMode ，低 30 位代表 SpecSize
+private static final int MODE_SHIFT = 30;
+private static final int MODE_MASK = 0x3 << MODE_SHIFT;
+public static final int UNSPECIFIED = 0 << MODE_SHIFT;
+public static final int EXACTLY = 1 << MODE_SHIFT;
+public static final int AT_MOST = 2 << MODE_SHIFT;
+public static int makeMeasureSpec(int size, int mode) {
+	if (sUseBrokenMakeMeasureSpec) {		return size + mode;	}
+	else {		return (size & ~MODE_MASK) | (mode & MODE_MASK);	}}
+public static int getMode(int measureSpec) {	return (measureSpec & MODE_MASK);}
+public static int getSize(int measureSpec) {	return (measureSpec & ~MODE_MASK);}
+
+在渲染前获取 View 的宽高。这是一个比较有意义的问题，或者说有难度的问题，
+问题的背景为：有时候我们需要在view渲染前去获取其宽高，典型的情形是，我们想在onCreate、onStart、onResume中去获取view的宽高。
+如果大家尝试过，会发现，这个时候view还没有measure好，宽高都为0，那到底该怎么做才能正确获取其宽高呢，下面给出三种方法
+Activity/View#onWindowFocusChanged ：这个方法表明，view已经初始化完毕了，宽高已经准备好了
+view.post(runnable) ：通过post可以将一个runnable投递到消息队列的尾部，然后等待looper调用此runnable的时候，view也已经初始化好了
+view.measure(int widthMeasureSpec, int heightMeasureSpec) ：通过手动去measure来视图得到view的宽高
