@@ -48,6 +48,7 @@ https://www.showapi.com                 易源接口              存在收费�
 http://www.atool.org/httptest.php       在线http请求
 
 ------有用的网站--------
+http://stackoverflow.com/  问题解决网站
 http://www.androiddevtools.cn/
 收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。
 http://wear.techbrood.com
@@ -59,8 +60,10 @@ http://www.cnblogs.com/deBug-hao/p/4730959.html
 http://blog.csdn.net/lmj623565791 ;鸿洋_
 http://blog.csdn.net/guolin_blog     郭霖
 http://blog.csdn.net/luoshengyang   罗升阳
+http://blog.csdn.net/xiaanming   
 http://www.cnblogs.com/JczmDeveloper/ Jamy Cai
 http://blog.csdn.net/singwhatiwanna  任玉刚  https://github.com/singwhatiwanna
+http://blog.csdn.net/xyz_lmn  张兴业 有设计ui的特长
 
 -----------------------工具----------------
 json 在线自动生成java代码工具 http://api.stay4it.com/json/index.html
@@ -355,3 +358,10 @@ public static int getSize(int measureSpec) {	return (measureSpec & ~MODE_MASK);}
 Activity/View#onWindowFocusChanged ：这个方法表明，view已经初始化完毕了，宽高已经准备好了
 view.post(runnable) ：通过post可以将一个runnable投递到消息队列的尾部，然后等待looper调用此runnable的时候，view也已经初始化好了
 view.measure(int widthMeasureSpec, int heightMeasureSpec) ：通过手动去measure来视图得到view的宽高
+
+14:----------------splash 界面的主要作用--------------
+现在大部分APP都有Splash界面，下面列一下Splash页面的几个作用：
+1、展示logo,提高公司形象
+2、初始化数据 (拷贝数据到SD)
+3、提高用户体验
+4、连接服务器是否有新的版本等。
