@@ -142,6 +142,7 @@ public class ListViewActivity extends ActionBarActivity {
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library 一款扩展自Android ImageView ，支持通过单点/多点触摸来进行图片缩放的智能控件
         //BadgeView https://github.com/stefanjauker/BadgeView 数字提醒
         //nineoldandroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
+        //NiftyDialogEffects 对话框UI库 https://github.com/sd6352051/NiftyDialogEffects
         return data;
     }
 
