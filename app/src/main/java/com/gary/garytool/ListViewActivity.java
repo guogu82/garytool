@@ -118,6 +118,7 @@ public class ListViewActivity extends ActionBarActivity {
         //IntentService http://blog.csdn.net/lmj623565791/article/details/47143563 后台服务
         //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
         //ThreadPoolExecutor
+        //DownLoadManager http://www.cnblogs.com/819158327fan/p/4906436.html
 
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
@@ -141,6 +142,7 @@ public class ListViewActivity extends ActionBarActivity {
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library 一款扩展自Android ImageView ，支持通过单点/多点触摸来进行图片缩放的智能控件
         //BadgeView https://github.com/stefanjauker/BadgeView 数字提醒
         //nineoldandroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
+        //NiftyDialogEffects 对话框UI库 https://github.com/sd6352051/NiftyDialogEffects
         return data;
     }
 

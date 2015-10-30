@@ -18,7 +18,7 @@ import com.gary.garytool.util.LogUtil;
  */
 public class ButtonM extends Button {
 
-    static final String TAG="ButtonM";
+    public static final String TAG="ButtonM";
 
     private GradientDrawable gradientDrawable;//控件的样式
     private String backColors="";//背景色  String
