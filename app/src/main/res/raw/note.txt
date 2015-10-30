@@ -374,3 +374,16 @@ new LocationClientOption().setCoorType ("gcj02")
 new LocationClientOption().setCoorType ("bd09ll")
 百度墨卡托标准
 new LocationClientOption().setCoorType ("bd09")
+
+16:------------为ImageView 设置图片的方法分析--------------
+ImageView imageView = new ImageView(this);
+imageView.setImageDrawable();  // 参数为一个Drawable 对象
+imageView.setImageResource();  // 参数为一个资源文件
+imageView.setImageBitmap();    // 参数为一个Bitmap 对象
+
+实际上setImageBitmap做的事情就是把Bitmap对象封装成Drawable对象,然后调用setImageDrawable来设置图片。
+因此代码里面才写上了建议,如果需要频繁调用这个方法的话最好自己封装个固定的Drawable对象,直接调用setImageDrawable,这样可以减少Drawable对象。
+因为每次调用setImageBitmap方法都会对Bitmap对象new出一个Drawable。
+setImageDrawable参数是Drawable,也是可以接受不同来源的图片,方法中所做的事情就是更新ImageView的图片。
+上面两个方法实际上最后调用的都是setImageDrawable(setImageResource没有直接调用,不过更新的方法与setImageDrawable一样)。
+所以综合来看setImageDrawable是最省内存高效的,如果担心图片过大或者图片过多影响内存和加载效率,可以自己解析图片然后通过调用setImageDrawable方法进行设置。

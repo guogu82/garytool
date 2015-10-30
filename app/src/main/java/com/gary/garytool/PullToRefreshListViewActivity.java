@@ -30,6 +30,8 @@ public class PullToRefreshListViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pull_to_refresh_list_view);
+        //http://blog.csdn.net/lmj623565791/article/details/38238749 --鸿洋PullToRefresh demo
+
         mDatas=new ArrayList<>();
         mDatas.add("最轻量入门");
         mListView= (ListView) findViewById(R.id.lv);
