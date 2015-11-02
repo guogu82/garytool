@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.gary.garytool.view.TextViewM;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lidroid.xutils.view.annotation.event.OnItemClick;
 
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ public class PullToRefreshListViewActivity extends Activity {
         //http://blog.csdn.net/lmj623565791/article/details/38238749 --鸿洋PullToRefresh demo
 
         mDatas=new ArrayList<>();
-        mDatas.add("最轻量入门");
+        mDatas.add("下拉加载");
+        mDatas.add("上拉下拉都加载");
         mListView= (ListView) findViewById(R.id.lv);
         mInfrater=LayoutInflater.from(this);
         mAdapter=new ArrayAdapter(this,-1,mDatas){
@@ -55,13 +57,20 @@ public class PullToRefreshListViewActivity extends Activity {
         };
         mListView.setAdapter(mAdapter);
     }
+    //仅仅实现了下拉刷新数据
     private static final int BASE=0;
+    //实现了上拉和下拉刷新数据
+    private static final int BOTH=1;
     private void onItemClick(int position) {
         Intent intent;
         switch (position)
         {
             case BASE:
                 intent = new Intent(PullToRefreshListViewActivity.this, PullToRefreshBaseActivity.class);
+                startActivity(intent);
+                break;
+            case BOTH:
+                intent =new Intent(PullToRefreshListViewActivity.this,PullToRefreshBothActivity.class);
                 startActivity(intent);
                 break;
         }

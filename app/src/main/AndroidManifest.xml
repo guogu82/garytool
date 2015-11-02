@@ -80,8 +80,11 @@
             android:name=".PullToRefreshListViewActivity"
             android:label="@string/title_activity_pull_to_refresh_list_view" >
         </activity>
+        <activity android:name=".PullToRefreshBaseActivity" >
+        </activity>
         <activity
-            android:name=".PullToRefreshBaseActivity">
+            android:name=".PullToRefreshBothActivity"
+            >
         </activity>
     </application>
 
