@@ -8,6 +8,9 @@ android layout的一些注意事项
 5. margin这个属性，不是上下左右都一定能生效的，一般来说，左上角的margin能生效，右下角的margin就未必了
 6.LinearLayout中元素无法直接覆盖，把margin设成负值可以覆盖。
 7.RelativeLayout和FrameLayout默认都是从左上角开始一层一层的叠上去的，如果上层不设背景或者背景透明的话，下层的东西还是可以可见并且可以点击的，即使看不见了，下层的东西也还是可以被点击到并触发其点击事件
+8.padding and margin
+这二个属性是相对的，假设B是A的子控件，设置B的margin和设置A的padding能达到相同的效果。
+设置padding的好处：  如果imageview对应的图片比较小，点击不容易点中，通过增加padding可以增大点触敏感度
 
 
 android 使用Monkey进行压力测试。
