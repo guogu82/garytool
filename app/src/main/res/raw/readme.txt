@@ -100,6 +100,17 @@ volley Gson xUtils PullToRefresh LruCache
 第3年用mindmanager画自己的想法，用axure，mockup设计原型，用Visio，gliffy设计框架流程，然后用代码实现。
 在产品的周期里，coding是最不起眼的角色，伪脑力的体力劳动者。如何让自己折腾出这个圈子，站在更高的角度看自己。
 
+
+----------------------常用语句片段----------------------
+TextUtils.isEmpty() 简单的工具类,用于检测是否为空。
+Build.VERSION_CODES 这个标明了当前的版本号,在处理兼容性问题的时候经常会用到.点进去可以看到各个版本的不同特性。
+LayoutInflater.from() 顾名思义,用于Inflate一个layout,参数是layout的id.这个经常写Adapter的人会用的比较多。
+Context.getCacheDir() 获取缓存数据文件夹的路径,很简单但是知道的人不多,这个路径通常在SD卡上(这里的SD卡指的是广义上的SD卡,包括外部存储和内部存储)Adnroid/data/您的应用程序包名/cache/ 下面.
+测试的时候,可以去这里面看是否缓存成功.缓存在这里的好处是:不用自己再去手动创建文件夹,不用担心用户把自己创建的文件夹删掉,在应用程序卸载的时候,这里会被清空,使用第三方的清理工具的时候,这里也会被清空。
+ContextThemeWrapper 方便在运行的时候修改主题。
+apache提供的一系列jar包：commons-lang.jar，commons-collections.jar，commons-beanutils.jar等，里面很多方法可能是你曾经用几十几百行代码实现过的，但是执行效率或许要差很多，比如：ArrayUtils，StringUtils……
+
+
 -----------代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）-----------
 1：地区、学校选择二级联动 (20150922)
 demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html

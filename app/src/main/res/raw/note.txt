@@ -387,3 +387,12 @@ imageView.setImageBitmap();    // 参数为一个Bitmap 对象
 setImageDrawable参数是Drawable,也是可以接受不同来源的图片,方法中所做的事情就是更新ImageView的图片。
 上面两个方法实际上最后调用的都是setImageDrawable(setImageResource没有直接调用,不过更新的方法与setImageDrawable一样)。
 所以综合来看setImageDrawable是最省内存高效的,如果担心图片过大或者图片过多影响内存和加载效率,可以自己解析图片然后通过调用setImageDrawable方法进行设置。
+
+
+17：----------------------loader AsyncTaskLoader LoaderManager-------------------------------
+Fragment，AsyncTaskLoader以及LoaderManager的一点体会
+今天项目中涉及到了一个listview的功能：listview分段加载，下拉加载之前的数据，上拉加载之后的数据。
+不是很麻烦的事情，所以我用到了开源库pulltorefresh，结合ListFragment和LoaderManager，在fragment起来后initLoader，启动我自定义的AsyncTaskLoader，重载loadInBackground加载数据，并且保存当前头尾节点标识，当上拉或者下拉时，在当前保存的节点基础上调用restartLoader继续加载数据片段（要注意的是，继承AsyncTaskLoader不光要重载loadInBackground方法，还要重载onStartLoading方法强制加载，否则不会调用loadInBackground）。
+本来很简单的模式，但是还是遇到了问题：加载没问题，加载之前或之后的数据也没问题，但是如果我启动其他activity，然后重启该fragment所在的activity，该fragment却自动启动loader加载数据。奇怪了，我仔仔细细查了代码，我并没有在onResume的过程中的任何地方主动启动loader啊。后来没办法，单步调试，这才发现frgment在onStart中会对该activity的LoaderManager进行检查，遍历并重启其中的loader，调用onStartLoading（每个activity对应一个LoaderManager，每个LoaderManager可包含多个loader），而我重载的onStartLoading做法很简单，就是forceLoader，所以就造成了每次onStart就重新forceLoader一遍的怪现象，而这并非我需要的。
+这时我才知道，其实我的这种情况并不适合用LoaderManager，看CursorLoader的源码可发现，android设计Loader的初衷是想让大家像CursorLoader的做法一样，通过loader去维护数据，每次启动loader时先检查有没有旧的数据并把旧的数据先deliver给用户，然后再考虑要不要重新加载新的数据。而我需要的，是我自己维护数据，loader只是用来加载并返回给我数据的工具，完全由我来控制何时加载，这时用AsyncTaskLoader和LoaderManager就不太合适了，简单来说就是太复杂了。最后我没用AsyncTaskLoader，而是用了AsyncTask，需要的时候才启动它，简单。
+所以大家在用loader的时候一定要小心，尤其是在需要分段加载数据的时候，如果必须要用，一定要仔细书写重载方法的逻辑。
