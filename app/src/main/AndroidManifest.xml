@@ -82,8 +82,10 @@
         </activity>
         <activity android:name=".PullToRefreshBaseActivity" >
         </activity>
+        <activity android:name=".PullToRefreshBothActivity" >
+        </activity>
         <activity
-            android:name=".PullToRefreshBothActivity"
+            android:name=".PullToRefreshGradViewActivity"
             >
         </activity>
     </application>

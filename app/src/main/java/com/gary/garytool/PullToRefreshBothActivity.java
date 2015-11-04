@@ -16,6 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.gary.garytool.info.ForeignNew;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.volley.VolleyManger;
+import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -49,6 +50,12 @@ public class PullToRefreshBothActivity extends Activity {
         mPullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                ILoadingLayout label=mPullToRefreshListView.getLoadingLayoutProxy();
+                label.setPullLabel("刚下拉时显示的文字");
+                label.setRefreshingLabel("正在刷新时显示的文字");
+                label.setReleaseLabel("拉动一定距离时候显示的文字");
+                label.setLastUpdatedLabel("上次刷新时间显示位置");
+                //initIndicator();上拉下拉单独改变
                 loadData();
             }
 
@@ -57,6 +64,22 @@ public class PullToRefreshBothActivity extends Activity {
                 loadData();
             }
         });
+    }
+
+    //mPullRefreshListView.getLoadingLayoutProxy(true, false);接收两个参数，为true,false返回设置下拉的ILoadingLayout；为false,true返回设置上拉的。
+    private void initIndicator()
+    {
+        ILoadingLayout startLabels = mPullToRefreshListView
+                .getLoadingLayoutProxy(true, false);
+        startLabels.setPullLabel("你可劲拉，拉...");// 刚下拉时，显示的提示
+        startLabels.setRefreshingLabel("好嘞，正在刷新...");// 刷新时
+        startLabels.setReleaseLabel("你敢放，我就敢刷新...");// 下来达到一定距离时，显示的提示
+
+        ILoadingLayout endLabels = mPullToRefreshListView.getLoadingLayoutProxy(
+                false, true);
+        endLabels.setPullLabel("你可劲拉，拉2...");// 刚下拉时，显示的提示
+        endLabels.setRefreshingLabel("好嘞，正在刷新2...");// 刷新时
+        endLabels.setReleaseLabel("你敢放，我就敢刷新2...");// 下来达到一定距离时，显示的提示
     }
 
     private void loadData() {
