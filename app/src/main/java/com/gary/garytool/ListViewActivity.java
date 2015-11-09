@@ -82,7 +82,8 @@ public class ListViewActivity extends ActionBarActivity {
         //button
 
 
-        //Dialog 主要保护后面四个子类 AlterDialog, ProgressDialog, DatePickerDialog, TimePikerDialog
+        //Dialog 主要保护后面四个子类 AlterDialog, ProgressDialog, DatePickerDialog, TimePikerDialog  VS DialogFragment
+        //PreferenceActivity VS PreferenceFragment
         //notify
         //toast
         //json操作
