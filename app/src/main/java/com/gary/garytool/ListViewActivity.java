@@ -120,6 +120,8 @@ public class ListViewActivity extends ActionBarActivity {
         //HandlerThread http://blog.csdn.net/lmj623565791/article/details/47079737 子线程执行looper
         //ThreadPoolExecutor
         //DownLoadManager http://www.cnblogs.com/819158327fan/p/4906436.html
+        //CountDownTimer http://www.cnblogs.com/shiwei-bai/p/4949997.html
+        //ViewDragHelper并不是第一个用于分析手势处理的类，gesturedetector也是，但是在和拖动相关的手势分析方面gesturedetector只能说是勉为其难。
 
         /*----框架---*/
         //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
