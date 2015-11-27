@@ -2,8 +2,6 @@ package com.gary.garytool;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +13,7 @@ public class MainActivity extends Activity {
     Button mFunctions;
     TextView mTextView;
     Button mPullToRefresh;
+    Button bt_insane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,15 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,PullToRefreshListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bt_insane= (Button) findViewById(R.id.bt_insane);
+        bt_insane.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MainInsaneActivity.class);
                 startActivity(intent);
             }
         });

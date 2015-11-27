@@ -10,5 +10,9 @@
     <string name="title_activity_volley">VolleyActivity</string>
     <string name="title_activity_xutils">XUtilsActivity</string>
     <string name="title_activity_pull_to_refresh_list_view">PullToRefresh专题列表</string>
+    <string name="title_activity_main_insane">MainInsaneActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_insane_demo">InsaneDemoActivity</string>
 
 </resources>

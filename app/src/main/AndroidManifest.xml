@@ -84,9 +84,15 @@
         </activity>
         <activity android:name=".PullToRefreshBothActivity" >
         </activity>
+        <activity android:name=".PullToRefreshGradViewActivity" >
+        </activity>
         <activity
-            android:name=".PullToRefreshGradViewActivity"
-            >
+            android:name=".MainInsaneActivity"
+            android:label="@string/title_activity_main_insane" >
+        </activity>
+        <activity
+            android:name=".InsaneDemoActivity"
+            android:label="@string/title_activity_insane_demo" >
         </activity>
     </application>
 

@@ -110,6 +110,12 @@ json 在线自动生成java代码工具 http://api.stay4it.com/json/index.html
   size = (int) mText.getTextSize() + 1;
   mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
 
+  textview的上下滑动效果
+  1.xml文件中
+  <TextView     android:scrollbars="vertical"/>
+  2.java文件中
+  textview.setMovementMethod(ScrollingMovementMethod.getInstance());
+
  3:--------------------ListView---------------------
  --ListView记得把layout_height属性设置成match_parent。若设置成"wrap_content"则会调用多次。
  --cacheColorHint="#00000000" 自定义listview的时候，不使用#00000000会出现选中一个空间黑色底色的情况.

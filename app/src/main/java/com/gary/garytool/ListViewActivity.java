@@ -133,6 +133,7 @@ public class ListViewActivity extends ActionBarActivity {
         //数据库： Ormlite或者Realm，要加密的话用SqlCipher
         //图片缓存： Fresco， Picasso，如果集成的效果不理想，多看看配置参数是否正确
         //工具： 查内存泄漏（leakcanary）异步通知（RxJava谨慎使用）数学计算表达式（expression4j）日期处理（joda time）
+        //sourceinsight java源码查看工具
 
         //Fresco https://github.com/facebook/fresco Fresco是Facebook最新推出的一款用于Android应用中展示图片的强大图片库，可以从网络、本地存储和本地资源中加载图片。
         //Picasso http://square.github.io/picasso/  Picasso是Square公司开源的一个Android图形缓存库.
