@@ -145,8 +145,11 @@ public class ListViewActivity extends ActionBarActivity {
         //SlidingMenu 侧滑菜单 http://blog.csdn.net/lmj623565791/article/details/36677279
         //PhotoView  https://github.com/chrisbanes/PhotoView/tree/master/library 一款扩展自Android ImageView ，支持通过单点/多点触摸来进行图片缩放的智能控件
         //BadgeView https://github.com/stefanjauker/BadgeView 数字提醒
-        //nineoldandroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
+        //NineOldAndroids https://github.com/JakeWharton/NineOldAndroids http://blog.csdn.net/singwhatiwanna/article/details/17639987 动画库
+        //NiftyNotification动画效果生动有趣的通知（Android Toast替代品）https://github.com/sd6352051/NiftyNotification 本身又依赖于另外一个github上的第三方开源项目NineOldAndroids
         //NiftyDialogEffects 对话框UI库 https://github.com/sd6352051/NiftyDialogEffects
+        //CustomShapeImageView https://github.com/MostafaGazar/CustomShapeImageView  如果仅仅是需要获取圆形、心形、花瓣形头像图片（具体看Demo），那么经过Android CustomShapeImageView简单XML设置就可以实现。
+        //SweetAlertDialog  制作精美、动画效果的对话、消息提示框插件 https://github.com/pedant/sweet-alert-dialog  注意，其自身依赖materialish-progress（https://github.com/pnikosis/materialish-progress ）。
         return data;
     }
 

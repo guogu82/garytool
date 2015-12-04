@@ -38,7 +38,7 @@
         <Button
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:background="@drawable/dlbtn_selector"
+            android:background="@drawable/selector_dlbtn"
             android:id="@+id/btn_setup"
             android:layout_marginRight="10dp"
             android:text="安装"/>

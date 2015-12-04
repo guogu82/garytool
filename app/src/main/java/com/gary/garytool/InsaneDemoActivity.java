@@ -2,58 +2,82 @@ package com.gary.garytool;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.gary.garytool.util.HanziToPinyin;
-import com.gary.garytool.util.LogUtil;
-
-import java.util.ArrayList;
+import android.view.ViewGroup;
+import android.widget.AdapterViewFlipper;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
 
 public class InsaneDemoActivity extends Activity {
 
-   TextView textView;
-    Button bt;
+
+    int[] imageIds=new int[]{
+        R.drawable.shuangzi,
+        R.drawable.shuangyu,
+        R.drawable.chunv,
+        R.drawable.tiancheng,
+        R.drawable.tianxie,
+        R.drawable.sheshou,
+        R.drawable.juxie,
+        R.drawable.shuiping,
+        R.drawable.shizi,
+        R.drawable.baiyang,
+        R.drawable.jinniu,
+        R.drawable.mojie,
+    };
+
+    private AdapterViewFlipper flipper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insane_demo);
 
-        textView= (TextView) findViewById(R.id.textView);
-        textView.setMovementMethod(ScrollingMovementMethod.getInstance());
-        bt= (Button) findViewById(R.id.bt);
-        bt.setOnClickListener(new View.OnClickListener() {
+        flipper= (AdapterViewFlipper) findViewById(R.id.flipper);
+        BaseAdapter adapter=new BaseAdapter() {
             @Override
-            public void onClick(View v) {
-
-                LogUtil.d("TAG", getPinYin(textView.getText().toString()));
+            public int getCount() {
+                return imageIds.length;
             }
-        });
+
+            @Override
+            public Object getItem(int position) {
+                return position;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                ImageView imageView=new ImageView(InsaneDemoActivity.this);
+                imageView.setImageResource(imageIds[position]);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                return imageView;
+            }
+        };
+
+        flipper.setAdapter(adapter);
     }
 
-    public static String getPinYin(String hanzi)
+    public void prev(View source)
     {
-        ArrayList<HanziToPinyin.Token> tokens=HanziToPinyin.getInstance().get(hanzi);
-        StringBuilder sb=new StringBuilder();
-        if(tokens!=null&&tokens.size()>0)
-        {
-            for(HanziToPinyin.Token token: tokens)
-            {
-                if(HanziToPinyin.Token .PINYIN==token.type)
-                {
-                    sb.append(token.target);
-                }
-                else
-                {
-                    sb.append(token.source);
-                }
-            }
-        }
-        return sb.toString().toUpperCase();
+        flipper.showPrevious();
+        flipper.stopFlipping();
+    }
+    public void next(View source)
+    {
+        flipper.showNext();
+        flipper.stopFlipping();
+    }
+
+    public void auto(View source)
+    {
+        flipper.startFlipping();
     }
 
 }

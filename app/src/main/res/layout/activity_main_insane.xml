@@ -40,11 +40,61 @@
         android:text="2.2-TableLayout--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-Button--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-CheckButton--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-Chronometer--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-InputUI--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-NinePatch--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-TextView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.3-ToggleButton--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.4-ImageButton--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.4-ImageView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
 
+        android:textAllCaps="false"
+        android:text="2.4-QuickContactBadge--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/bt"
         android:textAllCaps="false"
-        android:text="2.3-Button--done"
+        android:text="2.5-AdapterViewFlipper--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
