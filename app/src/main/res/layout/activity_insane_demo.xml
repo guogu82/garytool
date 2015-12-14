@@ -1,31 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <AdapterViewFlipper
-        android:id="@+id/flipper"
-        android:flipInterval="5000"
-        android:layout_alignParentTop="true"
+    <ExpandableListView
+        android:id="@+id/lv"
+        android:childIndicator="@drawable/pictures_selected"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></AdapterViewFlipper>
-    <Button
-        android:onClick="prev"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="上一个"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:onClick="next"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="下一个"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:onClick="auto"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="自动播放"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="match_parent"></ExpandableListView>
+
+</LinearLayout>

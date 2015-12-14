@@ -107,6 +107,7 @@ public class ListViewActivity extends ActionBarActivity {
         //自定义view 内存缓存 硬盘缓存 图像处理
         //数据库操作
         //webView
+        //progressbar ProgressDialog
         //Loader
         //login 第三方登录
         //socket tcp通信 --文件上传下载--http://blog.csdn.net/lmj623565791/article/details/23781773
@@ -150,6 +151,8 @@ public class ListViewActivity extends ActionBarActivity {
         //NiftyDialogEffects 对话框UI库 https://github.com/sd6352051/NiftyDialogEffects
         //CustomShapeImageView https://github.com/MostafaGazar/CustomShapeImageView  如果仅仅是需要获取圆形、心形、花瓣形头像图片（具体看Demo），那么经过Android CustomShapeImageView简单XML设置就可以实现。
         //SweetAlertDialog  制作精美、动画效果的对话、消息提示框插件 https://github.com/pedant/sweet-alert-dialog  注意，其自身依赖materialish-progress（https://github.com/pnikosis/materialish-progress ）。
+        //LabelView：https://github.com/linger1216//labelview 电商、商城类APP常用标签"hot"
+        //MPAndroidChart 统计图表 https://github.com/PhilJay/MPAndroidChart
         return data;
     }
 

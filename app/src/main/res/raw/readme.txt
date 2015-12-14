@@ -115,6 +115,24 @@ ContextThemeWrapper 方便在运行的时候修改主题。
 apache提供的一系列jar包：commons-lang.jar，commons-collections.jar，commons-beanutils.jar等，里面很多方法可能是你曾经用几十几百行代码实现过的，但是执行效率或许要差很多，比如：ArrayUtils，StringUtils……
 
 
+-------有趣的面试问答题-------------
+基础篇
+java的基础类型有多少种，分别是什么。
+activity的生命周期。
+final的类，方法，变量。
+
+提高篇
+adapter 的 返回item的方法 getView
+button  的 点击方法  setOnClickListener
+listview 的 优化方法
+为什么组合优秀于继承
+
+高级篇
+多线程，信号量
+单例的使用
+接口与回调
+如何封装事件
+
 -----------代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）-----------
 1：地区、学校选择二级联动 (20150922)
 demo文章 http://www.cnblogs.com/tonycheng93/p/4823860.html
