@@ -2,10 +2,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ExpandableListView
-        android:id="@+id/lv"
-        android:childIndicator="@drawable/pictures_selected"
+    <Spinner
+        android:entries="@array/books"
+        android:prompt="@string/tip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ExpandableListView>
-
+        android:layout_height="wrap_content"></Spinner>
+    <Spinner
+        android:id="@+id/spinner"
+        android:prompt="@string/tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
 </LinearLayout>

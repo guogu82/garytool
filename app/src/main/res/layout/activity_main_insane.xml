@@ -112,10 +112,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/bt"
         android:textAllCaps="false"
         android:text="2.5-ExpandableListView--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.5-GridView--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.5-ListActivity--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.5-SimpleAdapter--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:id="@+id/bt"
+    android:textAllCaps="false"
+    android:text="2.5-Spinner--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 </LinearLayout>
 </ScrollView>
