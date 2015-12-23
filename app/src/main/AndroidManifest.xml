@@ -44,25 +44,25 @@
         </activity>
         <activity
             android:name=".ListViewLoadMoreActivity"
-            android:label="@string/title_activity_list_view_load_more" >
+           >
         </activity>
         <activity
             android:name=".ListViewAdapterMActivity"
-            android:label="@string/title_activity_list_view_adapter_m" >
+            >
         </activity>
         <activity
             android:name=".ListViewUpdateActivity"
-            android:label="@string/title_activity_list_view_update" >
+             >
         </activity>
         <activity
             android:name=".ViewPagerGuideActivity"
-            android:label="@string/title_activity_view_paper_guide" >
+            >
         </activity>
         <activity android:name=".BaseFrameworkActivity" >
         </activity>
         <activity
             android:name=".VolleyActivity"
-            android:label="@string/title_activity_volley" >
+            >
         </activity>
         <activity android:name=".PopupWindowActivity" />
         <activity
@@ -74,11 +74,11 @@
         </activity>
         <activity
             android:name=".XUtilsActivity"
-            android:label="@string/title_activity_xutils" >
+             >
         </activity>
         <activity
             android:name=".PullToRefreshListViewActivity"
-            android:label="@string/title_activity_pull_to_refresh_list_view" >
+            >
         </activity>
         <activity android:name=".PullToRefreshBaseActivity" >
         </activity>
@@ -88,11 +88,11 @@
         </activity>
         <activity
             android:name=".MainInsaneActivity"
-            android:label="@string/title_activity_main_insane" >
+            >
         </activity>
         <activity
             android:name=".InsaneDemoActivity"
-            android:label="@string/title_activity_insane_demo" >
+            >
         </activity>
     </application>
 

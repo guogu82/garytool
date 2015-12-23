@@ -126,11 +126,13 @@ adapter 的 返回item的方法 getView
 button  的 点击方法  setOnClickListener
 listview 的 优化方法
 为什么组合优秀于继承
+接口的定义--接口的构造函数能否传人参数  m.setOnClickListener(new OnClickListener(这里能否带参) { });
 
 高级篇
 多线程，信号量
 单例的使用
 接口与回调
+callback 回调的作用
 如何封装事件
 
 -----------代码功能讲解（功能，完成日期，参考文章和源码，使用的技术和控件，把各个activity的关联文件说明清楚。特点讲解，疑惑点，引申的问题。）-----------

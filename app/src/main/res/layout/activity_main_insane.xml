@@ -132,10 +132,80 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
     <Button
-    android:id="@+id/bt"
     android:textAllCaps="false"
     android:text="2.5-Spinner--done"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.5-StackView--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.6-ProgressBar--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.6-RatingBar--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.6-SeekBar--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+    android:textAllCaps="false"
+    android:text="2.6-TitleProgressBar--done"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.7-ImageSwitcher--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.7-TextSwitcher--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.7-ViewFlipper--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.7-ViewSwitcher--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.8-CalendarView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.8-ChooseDate--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.8-Notification--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:textAllCaps="false"
+        android:text="2.8-NumberPicker--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/bt"
+        android:textAllCaps="false"
+        android:text="2.8-ScrollView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
 </ScrollView>
