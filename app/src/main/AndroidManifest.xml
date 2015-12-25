@@ -42,27 +42,17 @@
             android:name=".BottomMenuWithPopupWindowLikeQQ"
             android:label="高仿QQ底部菜单" >
         </activity>
-        <activity
-            android:name=".ListViewLoadMoreActivity"
-           >
+        <activity android:name=".ListViewLoadMoreActivity" >
         </activity>
-        <activity
-            android:name=".ListViewAdapterMActivity"
-            >
+        <activity android:name=".ListViewAdapterMActivity" >
         </activity>
-        <activity
-            android:name=".ListViewUpdateActivity"
-             >
+        <activity android:name=".ListViewUpdateActivity" >
         </activity>
-        <activity
-            android:name=".ViewPagerGuideActivity"
-            >
+        <activity android:name=".ViewPagerGuideActivity" >
         </activity>
         <activity android:name=".BaseFrameworkActivity" >
         </activity>
-        <activity
-            android:name=".VolleyActivity"
-            >
+        <activity android:name=".VolleyActivity" >
         </activity>
         <activity android:name=".PopupWindowActivity" />
         <activity
@@ -72,13 +62,9 @@
         </activity>
         <activity android:name=".PictureChoseActivity" >
         </activity>
-        <activity
-            android:name=".XUtilsActivity"
-             >
+        <activity android:name=".XUtilsActivity" >
         </activity>
-        <activity
-            android:name=".PullToRefreshListViewActivity"
-            >
+        <activity android:name=".PullToRefreshListViewActivity" >
         </activity>
         <activity android:name=".PullToRefreshBaseActivity" >
         </activity>
@@ -86,13 +72,14 @@
         </activity>
         <activity android:name=".PullToRefreshGradViewActivity" >
         </activity>
-        <activity
-            android:name=".MainInsaneActivity"
-            >
+        <activity android:name=".MainInsaneActivity" >
+        </activity>
+        <activity android:name=".InsaneDemoActivity" >
+        </activity>
+        <activity android:name=".InsaneToastActivity" >
         </activity>
         <activity
-            android:name=".InsaneDemoActivity"
-            >
+            android:name=".InsaneAlertDialogActivity" >
         </activity>
     </application>
 

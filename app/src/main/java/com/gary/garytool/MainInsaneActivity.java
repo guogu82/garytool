@@ -30,4 +30,17 @@ public class MainInsaneActivity extends Activity {
     }
 
 
+    //2.8 Toast
+    public void toToast(View view)
+    {
+        Intent intent=new Intent(MainInsaneActivity.this,InsaneToastActivity.class);
+        startActivity(intent);
+    }
+    //2.9 AlertDialog
+    public void toAlertDialog(View view)
+    {
+        Intent intent=new Intent(MainInsaneActivity.this,InsaneAlertDialogActivity.class);
+        startActivity(intent);
+    }
+
 }

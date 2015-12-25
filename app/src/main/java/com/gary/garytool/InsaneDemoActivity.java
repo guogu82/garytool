@@ -3,9 +3,7 @@ package com.gary.garytool;
 import android.app.Activity;
 import android.os.Bundle;
 
-
 public  class InsaneDemoActivity extends Activity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,8 +12,6 @@ public  class InsaneDemoActivity extends Activity {
 
 
     }
-
-
 
 
 }
