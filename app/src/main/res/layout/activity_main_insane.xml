@@ -207,7 +207,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/bt"
         android:textAllCaps="false"
         android:text="2.8-SearchView--done"
         android:layout_width="match_parent"
@@ -222,6 +221,30 @@
         android:onClick="toAlertDialog"
         android:textAllCaps="false"
         android:text="2.9-AlertDialog--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toDateDialog"
+        android:textAllCaps="false"
+        android:text="2.9-DateDialog--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.9-DialogTheme--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.9-PopupWindow--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toProgressDialog"
+        android:textAllCaps="false"
+        android:text="2.9-ProgressDialog--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
