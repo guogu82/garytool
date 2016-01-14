@@ -253,5 +253,17 @@
         android:text="2.10-ActivityMenu--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.10-ContextMenu--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.10-MenuRes--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
 </ScrollView>
