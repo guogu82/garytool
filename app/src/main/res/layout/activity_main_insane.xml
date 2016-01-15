@@ -265,5 +265,17 @@
         android:text="2.10-MenuRes--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.10-Menu--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionBar--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
 </ScrollView>

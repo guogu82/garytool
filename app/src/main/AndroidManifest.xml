@@ -72,9 +72,9 @@
         </activity>
         <activity android:name=".PullToRefreshGradViewActivity" >
         </activity>
-        <activity android:name=".MainInsaneActivity" >
+        <activity android:name=".MainInsaneActivity"  >
         </activity>
-        <activity android:name=".InsaneDemoActivity" >
+        <activity android:name=".InsaneDemoActivity"  android:theme="@style/AppBaseTheme">
         </activity>
         <activity android:name=".InsaneToastActivity" >
         </activity>
