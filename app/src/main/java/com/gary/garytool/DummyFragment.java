@@ -1,20 +1,19 @@
 package com.gary.garytool;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gary.garytool.view.TextViewM;
-
 /**
- * Created by Administrator on 2016/1/15.
+ * Created by Administrator on 2016/1/19.
  */
 public class DummyFragment extends Fragment {
+
     public static final String ARG_SECTION_NUMBER="section_number";
 
     @Nullable
