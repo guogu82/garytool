@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="font_size" android:showAsAction="always|withText" android:icon="@drawable/font">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/fon_10" android:title="font_10"></item>
+                <item android:id="@+id/fon_12" android:title="font_12"></item>
+                <item android:id="@+id/fon_14" android:title="font_14"></item>
+                <item android:id="@+id/fon_16" android:title="font_16"></item>
+                <item android:id="@+id/fon_18" android:title="font_18"></item>
+            </group>
+        </menu>
+    </item>
+    <item android:id="@+id/plain_item" android:title="plain_item" android:showAsAction="always|withText"></item>
+    <item android:title="font_color" android:showAsAction="always" android:icon="@drawable/color">
+        <menu><group>
+            <item android:id="@+id/red_font" android:title="red_title"></item>
+            <item android:id="@+id/green_font" android:title="green_title"></item>
+            <item android:id="@+id/blue_font" android:title="blue_title"></item>
+        </group></menu>
+    </item>
+</menu>

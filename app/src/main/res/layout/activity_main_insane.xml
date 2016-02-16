@@ -11,6 +11,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="3.2-ActivityListener--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toPlane"
+        android:textAllCaps="false"
+        android:text="3.2-Plane--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
         android:text="2.1-CodeView--done"
         android:textAllCaps="false"
         android:layout_width="match_parent"
@@ -283,5 +295,36 @@
         android:text="2.11-ActionBarSwipeNav--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionBarTabNav--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionBar--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionHome--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionItem--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="2.11-ActionView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
 </ScrollView>

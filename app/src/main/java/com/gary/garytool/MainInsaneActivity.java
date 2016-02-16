@@ -24,6 +24,12 @@ public class MainInsaneActivity extends Activity {
         Intent intent=new Intent(MainInsaneActivity.this,InsaneDemoActivity.class);
         startActivity(intent);
     }
+    //3.2 PlaneView
+    public void toPlane(View view)
+    {
+        Intent intent=new Intent(MainInsaneActivity.this,InsanePlaneActivity.class);
+        startActivity(intent);
+    }
 
     //2.9 toProgressDialog
     public void toProgressDialog(View view)

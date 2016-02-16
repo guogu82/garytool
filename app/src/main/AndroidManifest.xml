@@ -72,9 +72,11 @@
         </activity>
         <activity android:name=".PullToRefreshGradViewActivity" >
         </activity>
-        <activity android:name=".MainInsaneActivity"  >
+        <activity android:name=".MainInsaneActivity" >
         </activity>
-        <activity android:name=".InsaneDemoActivity"  android:theme="@style/AppBaseTheme">
+        <activity
+            android:name=".InsaneDemoActivity"
+            android:theme="@style/AppBaseTheme" >
         </activity>
         <activity android:name=".InsaneToastActivity" >
         </activity>
@@ -82,8 +84,11 @@
         </activity>
         <activity android:name=".InsaneDateDialogActivity" >
         </activity>
+        <activity android:name=".InsaneProgressDialogActivity" >
+        </activity>
         <activity
-            android:name=".InsaneProgressDialogActivity" >
+            android:name=".InsanePlaneActivity"
+            android:label="@string/title_activity_insane_plane" >
         </activity>
     </application>
 
