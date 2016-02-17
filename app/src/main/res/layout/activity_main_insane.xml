@@ -13,6 +13,18 @@
     <Button
         android:onClick="toInsaneDemo"
         android:textAllCaps="false"
+        android:text="3.3-Propagation--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
+        android:text="3.3-CustomView--done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="toInsaneDemo"
+        android:textAllCaps="false"
         android:text="3.2-ActivityListener--done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
