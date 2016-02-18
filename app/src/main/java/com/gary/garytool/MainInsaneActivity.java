@@ -3,6 +3,7 @@ package com.gary.garytool;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 
 
@@ -17,7 +18,11 @@ public class MainInsaneActivity extends Activity {
 
         }
 
-
+ public void toIntentService(View view)
+ {
+     Intent intent=new Intent(MainInsaneActivity.this,IntentServiceActivity.class);
+     startActivity(intent);
+ }
 
     public void toInsaneDemo(View view)
     {

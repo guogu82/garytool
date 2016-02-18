@@ -21,17 +21,12 @@ public  class InsaneDemoActivity extends Activity{
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(event.getAction()==KeyEvent.ACTION_DOWN)
                 {
-                    Log.v("-Listener","the onKeyDown inListener");
+                    Log.d("-Listener","the onKeyDown inListener");
                 }
                 return true;
             }
         });
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        super.onKeyDown(keyCode,event);
-        Log.v("-Activity","the onKeyDown in Activity");
-        return false;
-    }
+
 }

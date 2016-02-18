@@ -17,7 +17,7 @@ public class MyButton extends Button{
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         super.onKeyDown(keyCode, event);
-        Log.v("-MyButton","the onKeyDown in MyButton");
+        Log.d("-MyButton","the onKeyDown in MyButton");
         return false;
     }
 }

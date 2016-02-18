@@ -90,6 +90,11 @@
             android:name=".InsanePlaneActivity"
             android:label="@string/title_activity_insane_plane" >
         </activity>
+        <activity
+            android:name=".IntentServiceActivity"
+            android:label="@string/title_activity_intent_service" >
+        </activity>
+        <service android:name=".UploadImgService" android:exported="false"></service>
     </application>
 
 </manifest>
