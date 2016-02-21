@@ -1,6 +1,7 @@
 package com.gary.garytool;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -18,6 +19,7 @@ public class GaryApplication extends Application {
         //调用Volley的封装类，初始化
         VolleyManger.initRequestQueue(this);
     }
+
 
 
 }
