@@ -33,18 +33,41 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        String fileDay=mEtToday.getText().toString().trim();
+        if(!checkDate(fileDay))
+            return;
+
         //从sd卡读取外部本日数据，并写入sd卡的自身数据里面
-        stockManager.buildMyTodayStockData(mEtToday.getText().toString().trim());
-        mTv.setText(mEtToday.getText().toString().trim()+"归集完毕");
+        if(!stockManager.buildMyTodayStockData(fileDay,mTv))
+            return;
+
         //从sd卡读取自身本日数据，并写入sd卡的分析数据里面
-        stockManager.updateMyStockData(mEtToday.getText().toString().trim());
-        mTv.setText(mEtToday.getText().toString().trim()+"更新完毕");
+        stockManager.updateMyStockData(fileDay,mTv);
     }
 
     public void statistics(View view)
     {
-        stockManager.statisticsStockData(mEtToday.getText().toString().trim(),mTv);
+        String fileDay=mEtToday.getText().toString().trim();
+        if(!checkDate(fileDay))
+            return;
+
+        stockManager.statisticsStockData(fileDay, mTv);
        // mTv.setText(mEtToday.getText().toString().trim()+"分析完毕");
+    }
+
+    private boolean checkDate(String fileDay)
+    {
+        boolean result=true;
+        if(fileDay.trim().length()!=8)
+            result=false;
+        try {
+            Integer.valueOf(fileDay);
+            StockManager.dayForWeek(fileDay);
+        } catch (Exception e) {
+            result=false;
+            mTv.setText("您输入的日期不正确");
+        }
+        return result;
     }
 
 }

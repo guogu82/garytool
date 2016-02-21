@@ -12,7 +12,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,7 +49,12 @@ public class StockManager {
 
     //分析数据整理
     public void statisticsStockData(String fileToday,TextView textView) {
-        List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(fileToday);
+        File file = new File(pathName + fileToday+fileNameAnalysis);
+        if (!file.exists()) {
+            textView.setText("文件不存在"+file.getPath());
+            return;
+        }
+        List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
         List<StockInfoForAnalysis> result=new ArrayList<>();
         List<StockInfoForAnalysis> errors=new ArrayList<>();
         int countTotal=stockInfoForAnalysises.size();
@@ -92,7 +101,7 @@ public class StockManager {
 
         if(errors.size()>0)
         {
-            comment.append("注意如下"+result.size()+"个分析失败股票"+SEPARATOR_OBJECT_TAG);
+            comment.append("注意如下"+errors.size()+"个分析失败股票"+SEPARATOR_OBJECT_TAG);
             for(StockInfoForAnalysis errorInfo:errors)
             {
                 comment.append(errorInfo.toString());
@@ -102,21 +111,34 @@ public class StockManager {
     }
 
     //更新历史数据
-    public void updateMyStockData(String fileToday) {
+    public void updateMyStockData(String fileToday,TextView textView) {
         //读取历史分析数据
-        int yestesday = Integer.valueOf(fileToday) - 1;
-        List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(yestesday + "");
+        String yestesday=fileToday;
+        File file = null;
+        for(int i=0;i<5;i++)
+        {
+            yestesday=getYesterday(yestesday);
+            file = new File(pathName + yestesday+fileNameAnalysis);
+            if (file.exists()) {
+                break;
+            }
+        }
+
+
+
 
         //读取本日最新数据
         List<StockInfo> stockInfos = getTodayStockInfo(fileToday);
 
         //更新最新分析数据
         StringBuffer sb = new StringBuffer("");
-        if (stockInfoForAnalysises.size() == 0) {
+        if (!file.exists()) {
             for (StockInfo stock : stockInfos) {
                 sb.append(stock.getCode() + SEPARATOR_ATTR_TAG + stock.getName() + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + stock.getTurnoverRate() + SEPARATOR_OBJECT_TAG);
             }
         } else {
+            List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
+
             for (StockInfoForAnalysis stock : stockInfoForAnalysises) {
                 sb.append(stock.getCode() + SEPARATOR_ATTR_TAG);
                 sb.append(stock.getName() + SEPARATOR_ATTR_TAG);
@@ -136,14 +158,29 @@ public class StockManager {
             }
         }
 
-        writeSDFile(fileToday+fileNameAnalysis, sb.toString());
-
+        writeSDFile(fileToday + fileNameAnalysis, sb.toString());
+        textView.setText(fileToday + "更新完成");
     }
 
-    private List<StockInfoForAnalysis> getAnalysisStockInfo(String fileDay) {
+    private String getYesterday(String today)
+    {
+        SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
+        Date  d = null;
+        try {
+            d = df.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.DATE, -1);  //减1天
+        return df.format(cal.getTime());
+    }
+
+    private List<StockInfoForAnalysis> getAnalysisStockInfo(File fileDay) {
         List<StockInfoForAnalysis> stockInfos = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + fileDay+fileNameAnalysis), CHARACTER);
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(fileDay), CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -196,10 +233,15 @@ public class StockManager {
     }
 
     //本日数据归集
-    public void buildMyTodayStockData(String fileToday) {
+    public boolean buildMyTodayStockData(String fileToday,TextView textView) {
         StringBuffer sb = new StringBuffer("");
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + fileToday+fileNameStock + ".txt"), CHARACTER);
+            File file = new File(pathName + fileToday+fileNameStock + ".txt");
+            if (!file.exists()) {
+                textView.setText("文件不存在"+file.getPath());
+                return false;
+            }
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -216,8 +258,9 @@ public class StockManager {
             Toast.makeText(mContext, TAG + ":" + e.toString(), Toast.LENGTH_SHORT).show();
         }
         //写到sd卡
-        writeSDFile(fileToday+fileNameStockMy, sb.toString());
-
+        writeSDFile(fileToday + fileNameStockMy, sb.toString());
+        textView.setText(fileToday + "归集完成");
+        return true;
     }
 
 
@@ -245,6 +288,26 @@ public class StockManager {
         } catch (Exception e) {
             Toast.makeText(mContext, TAG + ":" + e.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 判断当前日期是星期几
+     *
+     * @param pTime 修要判断的时间
+     * @return dayForWeek 判断结果
+     * @Exception 发生异常
+     */
+    public static int dayForWeek(String pTime) throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(format.parse(pTime));
+        int dayForWeek = 0;
+        if(c.get(Calendar.DAY_OF_WEEK) == 1){
+            dayForWeek = 7;
+        }else{
+            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        }
+        return dayForWeek;
     }
 
 
