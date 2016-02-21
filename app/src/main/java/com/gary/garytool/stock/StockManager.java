@@ -2,9 +2,8 @@ package com.gary.garytool.stock;
 
 import android.content.Context;
 import android.os.Environment;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.gary.garytool.R;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +22,11 @@ public class StockManager {
     public static final String TAG = "StockManager";
     public static final String SEPARATOR_ATTR_TAG = "\t";
     public static final String SEPARATOR_OBJECT_TAG = "\n";
+
     public static final String NO_VALUE = "--";
     public static final String CHARACTER = "UTF-8";
+
+    public static final double INCREASE = 1.5;
 
     private Context mContext;
     private String pathName = "/sdcard/stock/";
@@ -34,7 +36,7 @@ public class StockManager {
     private String fileNameStock =  "stock";
     private String fileNameStockMy =  "stockMy";
     private String fileNameAnalysis =  "stockAnalysis";
-    private String fileNameAnalysisYesterday =  "stockAnalysis";
+
 
 
     public StockManager(Context context) {
@@ -42,10 +44,68 @@ public class StockManager {
     }
 
     //分析数据整理
+    public void statisticsStockData(String fileToday,TextView textView) {
+        List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(fileToday);
+        List<StockInfoForAnalysis> result=new ArrayList<>();
+        List<StockInfoForAnalysis> errors=new ArrayList<>();
+        int countTotal=stockInfoForAnalysises.size();
+        int countDone=0;
+        for (StockInfoForAnalysis info:stockInfoForAnalysises)
+        {
+            float todayTurnoverRate;
+            float beforeOneTurnoverRate;
+            float beforeTwoTurnoverRate;
+            float beforeThreeTurnoverRate;
+            float beforeFourTurnoverRate;
+            float beforeFiveTurnoverRate;
+            try {
+                todayTurnoverRate=Float.valueOf(info.getTodayTurnoverRate());
+                beforeOneTurnoverRate=Float.valueOf(info.getBeforeOneTurnoverRate());
+                beforeTwoTurnoverRate=Float.valueOf(info.getBeforeTwoTurnoverRate());
+                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
+                beforeFourTurnoverRate=Float.valueOf(info.getBeforeFourRate());
+                beforeFiveTurnoverRate=Float.valueOf(info.getBeforeFiveTurnoverRate());
+
+                double firstIncrease=todayTurnoverRate/beforeOneTurnoverRate;
+                if(firstIncrease>INCREASE)
+                {
+                    result.add(info);
+                }
+                countDone++;
+            }
+            catch (Exception e)
+            {
+                errors.add(info);
+            }
+        }
+        StringBuilder comment=new StringBuilder();
+        comment.append("共："+countTotal+",完成："+countDone+",失败："+errors.size()+SEPARATOR_OBJECT_TAG);
+
+        if(result.size()>0)
+        {
+            comment.append("注意如下"+result.size()+"个优质股票"+SEPARATOR_OBJECT_TAG);
+            for(StockInfoForAnalysis good:result)
+            {
+                comment.append(good.toString());
+            }
+        }
+
+        if(errors.size()>0)
+        {
+            comment.append("注意如下"+result.size()+"个分析失败股票"+SEPARATOR_OBJECT_TAG);
+            for(StockInfoForAnalysis errorInfo:errors)
+            {
+                comment.append(errorInfo.toString());
+            }
+        }
+        textView.setText(comment.toString());
+    }
+
+    //更新历史数据
     public void updateMyStockData(String fileToday) {
         //读取历史分析数据
         int yestesday = Integer.valueOf(fileToday) - 1;
-        List<StockInfoForAnalysis> stockInfoForAnalysises = getYesterdayAnalysisStockInfo(yestesday+"");
+        List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(yestesday + "");
 
         //读取本日最新数据
         List<StockInfo> stockInfos = getTodayStockInfo(fileToday);
@@ -80,10 +140,10 @@ public class StockManager {
 
     }
 
-    private List<StockInfoForAnalysis> getYesterdayAnalysisStockInfo(String yestesday) {
+    private List<StockInfoForAnalysis> getAnalysisStockInfo(String fileDay) {
         List<StockInfoForAnalysis> stockInfos = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + yestesday+fileNameAnalysisYesterday), CHARACTER);
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + fileDay+fileNameAnalysis), CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -183,9 +243,10 @@ public class StockManager {
             fout.write(bytes);
             fout.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(mContext, TAG + ":" + e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
+
 
 
 }

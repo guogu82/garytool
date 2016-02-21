@@ -9,10 +9,10 @@
         android:layout_height="wrap_content"
         android:text="本日数据归集" />
     <Button
-        android:onClick="update"
+        android:onClick="statistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="分析数据整理" />
+        android:text="分析数据" />
     <EditText
         android:id="@+id/et_today"
         android:hint="输入今天日期如20160221"

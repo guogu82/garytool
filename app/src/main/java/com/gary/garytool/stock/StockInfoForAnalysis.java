@@ -17,7 +17,7 @@ public class StockInfoForAnalysis {
     //第三天换手率
     private String mBeforeThreeTurnoverRate;
      //第四天换手率
-    private String mBeforeFourRate;
+    private String mBeforeFourTurnoverRate;
      //第五天换手率
     private String mBeforeFiveTurnoverRate;
 
@@ -70,11 +70,11 @@ public class StockInfoForAnalysis {
     }
 
     public String getBeforeFourRate() {
-        return mBeforeFourRate;
+        return mBeforeFourTurnoverRate;
     }
 
     public void setBeforeFourRate(String BeforeFourRate) {
-        this.mBeforeFourRate = BeforeFourRate;
+        this.mBeforeFourTurnoverRate = BeforeFourRate;
     }
 
     public String getBeforeFiveTurnoverRate() {
@@ -88,14 +88,14 @@ public class StockInfoForAnalysis {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(" " + getName() + " ");
-        sb.append(" " + getCode() + " ");
-        sb.append(" " + getTodayTurnoverRate() + " ");
-        sb.append(" " + getBeforeOneTurnoverRate() + " ");
-        sb.append(" " + getBeforeTwoTurnoverRate() + " ");
-        sb.append(" " + getBeforeThreeTurnoverRate() + " ");
-        sb.append(" " + getBeforeFourRate() + " ");
-        sb.append(" " + getBeforeFiveTurnoverRate() + "\n");
+        sb.append(" " + getName().trim());
+        sb.append(" " + getCode().trim());
+        sb.append(" " + getBeforeFiveTurnoverRate().trim());
+        sb.append(" " + getBeforeFourRate().trim());
+        sb.append(" " + getBeforeThreeTurnoverRate().trim());
+        sb.append(" " + getBeforeTwoTurnoverRate().trim());
+        sb.append(" " + getBeforeOneTurnoverRate().trim());
+        sb.append(" " + getTodayTurnoverRate().trim() + "\n");
         return sb.toString();
     }
 

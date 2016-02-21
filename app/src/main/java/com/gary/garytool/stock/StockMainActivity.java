@@ -33,14 +33,18 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        //从sd卡读取外部本日数据，并写入sd卡的自身数据里面
         stockManager.buildMyTodayStockData(mEtToday.getText().toString().trim());
         mTv.setText(mEtToday.getText().toString().trim()+"归集完毕");
+        //从sd卡读取自身本日数据，并写入sd卡的分析数据里面
+        stockManager.updateMyStockData(mEtToday.getText().toString().trim());
+        mTv.setText(mEtToday.getText().toString().trim()+"更新完毕");
     }
 
-    public void update(View view)
+    public void statistics(View view)
     {
-        //从sd卡读取本日数据，并写入sd卡的分析数据里面
-        stockManager.updateMyStockData(mEtToday.getText().toString().trim());
-        mTv.setText(mEtToday.getText().toString().trim()+"分析完毕");
+        stockManager.statisticsStockData(mEtToday.getText().toString().trim(),mTv);
+       // mTv.setText(mEtToday.getText().toString().trim()+"分析完毕");
     }
+
 }
