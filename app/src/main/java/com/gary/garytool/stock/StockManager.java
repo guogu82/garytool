@@ -30,8 +30,6 @@ public class StockManager {
     public static final String NO_VALUE = "--";
     public static final String CHARACTER = "UTF-8";
 
-    public static final double INCREASE = 1.5;
-
     private Context mContext;
     private String pathName = "/sdcard/stock/";
 
@@ -40,6 +38,7 @@ public class StockManager {
     private String fileNameStock =  "stock";
     private String fileNameStockMy =  "stockMy";
     private String fileNameAnalysis =  "stockAnalysis";
+    private String fileNameAnalysisResult =  "stockAnalysisResult";
 
 
 
@@ -48,35 +47,52 @@ public class StockManager {
     }
 
     //分析数据整理
-    public void statisticsStockData(String fileToday,TextView textView) {
+    public void statisticsStockData(String fileToday,String statistic,TextView textView) {
         File file = new File(pathName + fileToday+fileNameAnalysis);
         if (!file.exists()) {
             textView.setText("文件不存在"+file.getPath());
             return;
         }
+
+        double volume = 1.5;
+        double turnoverRate=3;
+
+        String[] statistics=statistic.split(",");
+        if(statistics.length==2)
+        {
+            volume= Double.parseDouble(statistics[0]);
+            turnoverRate= Double.parseDouble(statistics[1]);
+        }
+
+        //量大1.5倍，量大2倍，量大2.5倍，量大3倍
+        //换手率大于3%，换手率大于5%，换手率大于8%，换手率大于10%
+        //分析规则 3,3 则是1.5倍的放量，大于3%的换手率。5,8则是2.5倍的放量，大于8%的换手率。
         List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
         List<StockInfoForAnalysis> result=new ArrayList<>();
         List<StockInfoForAnalysis> errors=new ArrayList<>();
         int countTotal=stockInfoForAnalysises.size();
         int countDone=0;
+
+
+
         for (StockInfoForAnalysis info:stockInfoForAnalysises)
         {
             float todayTurnoverRate;
             float beforeOneTurnoverRate;
-            float beforeTwoTurnoverRate;
-            float beforeThreeTurnoverRate;
-            float beforeFourTurnoverRate;
-            float beforeFiveTurnoverRate;
+//            float beforeTwoTurnoverRate;
+//            float beforeThreeTurnoverRate;
+//            float beforeFourTurnoverRate;
+//            float beforeFiveTurnoverRate;
             try {
                 todayTurnoverRate=Float.valueOf(info.getTodayTurnoverRate());
                 beforeOneTurnoverRate=Float.valueOf(info.getBeforeOneTurnoverRate());
-                beforeTwoTurnoverRate=Float.valueOf(info.getBeforeTwoTurnoverRate());
-                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
-                beforeFourTurnoverRate=Float.valueOf(info.getBeforeFourRate());
-                beforeFiveTurnoverRate=Float.valueOf(info.getBeforeFiveTurnoverRate());
+//                beforeTwoTurnoverRate=Float.valueOf(info.getBeforeTwoTurnoverRate());
+//                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
+//                beforeFourTurnoverRate=Float.valueOf(info.getBeforeFourRate());
+//                beforeFiveTurnoverRate=Float.valueOf(info.getBeforeFiveTurnoverRate());
 
                 double firstIncrease=todayTurnoverRate/beforeOneTurnoverRate;
-                if(firstIncrease>INCREASE)
+                if(firstIncrease>volume&&todayTurnoverRate>turnoverRate)
                 {
                     result.add(info);
                 }
@@ -107,6 +123,7 @@ public class StockManager {
                 comment.append(errorInfo.toString());
             }
         }
+        writeSDFile(fileToday + fileNameAnalysisResult+statistic, comment.toString());
         textView.setText(comment.toString());
     }
 
@@ -123,9 +140,6 @@ public class StockManager {
                 break;
             }
         }
-
-
-
 
         //读取本日最新数据
         List<StockInfo> stockInfos = getTodayStockInfo(fileToday);

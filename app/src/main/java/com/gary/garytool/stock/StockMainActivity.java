@@ -11,9 +11,10 @@ import com.gary.garytool.R;
 
 public class StockMainActivity extends Activity implements View.OnClickListener {
 
-    private Button btn;
+    private Button mBtCollect;
     private TextView mTv;
     private EditText mEtToday;
+    private EditText mEtStatistics;
 
     private StockManager stockManager;
 
@@ -22,11 +23,12 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_main);
 
-        btn = (Button) findViewById(R.id.btn);
-        btn.setOnClickListener(this);
+        mBtCollect = (Button) findViewById(R.id.bt_collect);
+        mBtCollect.setOnClickListener(this);
 
-        mTv= (TextView) findViewById(R.id.txt);
+        mTv= (TextView) findViewById(R.id.tv);
         mEtToday= (EditText) findViewById(R.id.et_today);
+        mEtStatistics= (EditText) findViewById(R.id.et_statistics);
 
         stockManager =new StockManager(this);
     }
@@ -42,7 +44,7 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
             return;
 
         //从sd卡读取自身本日数据，并写入sd卡的分析数据里面
-        stockManager.updateMyStockData(fileDay,mTv);
+        stockManager.updateMyStockData(fileDay, mTv);
     }
 
     public void statistics(View view)
@@ -51,8 +53,13 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
         if(!checkDate(fileDay))
             return;
 
-        stockManager.statisticsStockData(fileDay, mTv);
-       // mTv.setText(mEtToday.getText().toString().trim()+"分析完毕");
+        String statistic=mEtStatistics.getText().toString().trim();
+        if(statistic.length()!=3) {
+            mTv.setText("分析失败，分析规则不对。");
+            return;
+        }
+        stockManager.statisticsStockData(fileDay,statistic, mTv);
+
     }
 
     private boolean checkDate(String fileDay)

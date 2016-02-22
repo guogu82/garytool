@@ -3,27 +3,46 @@
     android:layout_height="match_parent"
     android:background="#FFFFFFFF"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="本日数据归集" />
-    <Button
-        android:onClick="statistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="分析数据" />
-    <EditText
-        android:id="@+id/et_today"
-        android:hint="输入今天日期如20160221"
-        android:text="20160221"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_today"
+            android:hint="输入日期如20160222"
+            android:text="20160222"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数据归集" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_statistics"
+            android:hint="输入分析规则"
+            android:text="3,3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:onClick="statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分析数据" />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:id="@+id/txt"
+            android:id="@+id/tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
