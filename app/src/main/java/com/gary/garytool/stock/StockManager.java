@@ -1,14 +1,12 @@
 package com.gary.garytool.stock;
 
 import android.content.Context;
-import android.os.Environment;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -31,111 +29,125 @@ public class StockManager {
     public static final String CHARACTER = "UTF-8";
 
     private Context mContext;
-    private String pathName = "/sdcard/stock/";
+    private String pathName = StockUtil.getSDPath("/stock") + "/";
 
-
-
-    private String fileNameStock =  "stock";
-    private String fileNameStockMy =  "stockMy";
-    private String fileNameAnalysis =  "stockAnalysis";
-    private String fileNameAnalysisResult =  "stockAnalysisResult";
-
+    private String fileNameStock = "stock";
+    private String fileNameStockMy = "stockMy";
+    private String fileNameAnalysis = "stockAnalysis";
+    private String fileNameAnalysisResult = "stockAnalysisResult";
 
 
     public StockManager(Context context) {
         this.mContext = context;
     }
 
+
     //分析数据整理
-    public void statisticsStockData(String fileToday,String statistic,TextView textView) {
-        File file = new File(pathName + fileToday+fileNameAnalysis);
+    public void statisticsStockData(String fileToday, String statistic, TextView textView) {
+        File file = new File(pathName + fileToday + fileNameAnalysis);
         if (!file.exists()) {
-            textView.setText("文件不存在"+file.getPath());
+            textView.setText("文件不存在" + file.getPath());
             return;
         }
 
         double volume = 1.5;
-        double turnoverRate=3;
+        double turnoverRate = 3;
 
-        String[] statistics=statistic.split(",");
-        if(statistics.length==2)
-        {
-            volume= Double.parseDouble(statistics[0]);
-            turnoverRate= Double.parseDouble(statistics[1]);
+        String[] statistics = statistic.split(",");
+        if (statistics.length == 2) {
+            Double tempVolume = Double.parseDouble(statistics[0]);
+            if (tempVolume == 1) {
+                volume = 1;
+            } else if (tempVolume == 2) {
+                volume = 1.2;
+            } else {
+                volume = tempVolume * 0.5;
+            }
+            turnoverRate = Double.parseDouble(statistics[1]);
         }
 
+        //分析规则：
         //量大1.5倍，量大2倍，量大2.5倍，量大3倍
         //换手率大于3%，换手率大于5%，换手率大于8%，换手率大于10%
         //分析规则 3,3 则是1.5倍的放量，大于3%的换手率。5,8则是2.5倍的放量，大于8%的换手率。
+
         List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
-        List<StockInfoForAnalysis> result=new ArrayList<>();
-        List<StockInfoForAnalysis> errors=new ArrayList<>();
-        int countTotal=stockInfoForAnalysises.size();
-        int countDone=0;
 
+        //分析逻辑：最有价值是3比3,4比2
+        //一共6天 5,4,3,2,1,0；
+        //一天量大 观察 （比前2天都大OneDayForTwo，比前3天都大OneDayForThree）
+        //二天量大 观察 （比前2天都大TwoDayForTwo，比前3天都大TwoDayForThree）
+        //三天量大 观察可以在下午2点前买入 （比前2天都大，比前3天都大）
+        //四天量大 买入 在早上10点前买入 （比前2天都大）
+        //五天量大 买入 在早上10点前买入 （比前1天都大）
 
+        //本日比上日的分析
+        StringBuilder comment = new StringBuilder();
+        List<StockInfoForAnalysis> resultOneDayForTwo = new ArrayList<>();
+        List<StockInfoForAnalysis> errors = new ArrayList<>();
+        int countTotal = stockInfoForAnalysises.size();
+        int countDone = 0;
 
-        for (StockInfoForAnalysis info:stockInfoForAnalysises)
-        {
-            float todayTurnoverRate;
-            float beforeOneTurnoverRate;
-//            float beforeTwoTurnoverRate;
+        for (StockInfoForAnalysis info : stockInfoForAnalysises) {
+            try {
+                float todayTurnoverRate;
+                float beforeOneTurnoverRate;
+                float beforeTwoTurnoverRate;
 //            float beforeThreeTurnoverRate;
 //            float beforeFourTurnoverRate;
 //            float beforeFiveTurnoverRate;
-            try {
-                todayTurnoverRate=Float.valueOf(info.getTodayTurnoverRate());
-                beforeOneTurnoverRate=Float.valueOf(info.getBeforeOneTurnoverRate());
-//                beforeTwoTurnoverRate=Float.valueOf(info.getBeforeTwoTurnoverRate());
+
+                todayTurnoverRate = Float.valueOf(info.getTodayTurnoverRate());
+                beforeOneTurnoverRate = Float.valueOf(info.getBeforeOneTurnoverRate());
+                beforeTwoTurnoverRate = Float.valueOf(info.getBeforeTwoTurnoverRate());
 //                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
 //                beforeFourTurnoverRate=Float.valueOf(info.getBeforeFourRate());
 //                beforeFiveTurnoverRate=Float.valueOf(info.getBeforeFiveTurnoverRate());
 
-                double firstIncrease=todayTurnoverRate/beforeOneTurnoverRate;
-                if(firstIncrease>volume&&todayTurnoverRate>turnoverRate)
-                {
-                    result.add(info);
+                //一天量大 观察 （比前2天都大OneDayForTwo，比前3天都大OneDayForThree）
+                double firstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
+                double secondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
+                if (firstIncrease > volume&&secondIncrease>volume && todayTurnoverRate > turnoverRate) {
+                    resultOneDayForTwo.add(info);
                 }
+                //TODO:比前3天都大OneDayForThree还没做。
+
+
                 countDone++;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 errors.add(info);
             }
         }
-        StringBuilder comment=new StringBuilder();
-        comment.append("共："+countTotal+",完成："+countDone+",失败："+errors.size()+SEPARATOR_OBJECT_TAG);
 
-        if(result.size()>0)
-        {
-            comment.append("注意如下"+result.size()+"个优质股票"+SEPARATOR_OBJECT_TAG);
-            for(StockInfoForAnalysis good:result)
-            {
+        comment.append("共：" + countTotal + ",完成：" + countDone + ",失败：" + errors.size() + SEPARATOR_OBJECT_TAG);
+
+        if (resultOneDayForTwo.size() > 0) {
+            comment.append("注意如下" + resultOneDayForTwo.size() + "个优质股票" + SEPARATOR_OBJECT_TAG);
+            for (StockInfoForAnalysis good : resultOneDayForTwo) {
                 comment.append(good.toString());
             }
         }
 
-        if(errors.size()>0)
-        {
-            comment.append("注意如下"+errors.size()+"个分析失败股票"+SEPARATOR_OBJECT_TAG);
-            for(StockInfoForAnalysis errorInfo:errors)
-            {
+        if (errors.size() > 0) {
+            comment.append("注意如下" + errors.size() + "个分析失败股票" + SEPARATOR_OBJECT_TAG);
+            for (StockInfoForAnalysis errorInfo : errors) {
                 comment.append(errorInfo.toString());
             }
         }
-        writeSDFile(fileToday + fileNameAnalysisResult+statistic, comment.toString());
+
+        StockUtil.writeSDFile(pathName, fileToday + fileNameAnalysisResult + statistic, comment.toString());
         textView.setText(comment.toString());
     }
 
+
     //更新历史数据
-    public void updateMyStockData(String fileToday,TextView textView) {
+    public void updateMyStockData(String fileToday, TextView textView) {
         //读取历史分析数据
-        String yestesday=fileToday;
+        String yestesday = fileToday;
         File file = null;
-        for(int i=0;i<5;i++)
-        {
-            yestesday=getYesterday(yestesday);
-            file = new File(pathName + yestesday+fileNameAnalysis);
+        for (int i = 0; i < 5; i++) {
+            yestesday = getYesterday(yestesday);
+            file = new File(pathName + yestesday + fileNameAnalysis);
             if (file.exists()) {
                 break;
             }
@@ -146,46 +158,70 @@ public class StockManager {
 
         //更新最新分析数据
         StringBuffer sb = new StringBuffer("");
+
+        //打印提示日志
+        StringBuilder comment = new StringBuilder("");
+        comment.append(fileToday).append("更新完成").append(SEPARATOR_OBJECT_TAG);
+
         if (!file.exists()) {
             for (StockInfo stock : stockInfos) {
                 sb.append(stock.getCode() + SEPARATOR_ATTR_TAG + stock.getName() + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + stock.getTurnoverRate() + SEPARATOR_OBJECT_TAG);
             }
         } else {
             List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
-
-            for (StockInfoForAnalysis stock : stockInfoForAnalysises) {
+            comment.append("整理如下：").append(SEPARATOR_OBJECT_TAG);
+            comment.append("上次 ").append(yestesday + SEPARATOR_ATTR_TAG).append(stockInfoForAnalysises.size()).append("个").append(SEPARATOR_OBJECT_TAG);
+            ;
+            comment.append("本次 ").append(fileToday + SEPARATOR_ATTR_TAG).append(stockInfos.size()).append("个").append(SEPARATOR_OBJECT_TAG);
+            for (StockInfo stock : stockInfos) {
                 sb.append(stock.getCode() + SEPARATOR_ATTR_TAG);
                 sb.append(stock.getName() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getBeforeFourRate() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getBeforeThreeTurnoverRate() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getBeforeTwoTurnoverRate() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getBeforeOneTurnoverRate() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getTodayTurnoverRate() + SEPARATOR_ATTR_TAG);
-                for (StockInfo stockinfo : stockInfos) {
-                    if(stockinfo.getCode().equals(stock.getCode()))
-                    {
-                        sb.append(stockinfo.getTurnoverRate());
+                boolean hasNewStock = true;
+                for (StockInfoForAnalysis old : stockInfoForAnalysises) {
+                    if (old.getCode().equals(stock.getCode())) {
+                        hasNewStock = false;
+                        sb.append(old.getBeforeFourRate() + SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeThreeTurnoverRate() + SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeTwoTurnoverRate() + SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeOneTurnoverRate() + SEPARATOR_ATTR_TAG);
+                        sb.append(old.getTodayTurnoverRate() + SEPARATOR_ATTR_TAG);
+
+                        if (!old.getName().equals(stock.getName())) {
+                            comment.append(stock.getCode()).append(" 名字变更 ").append(old.getName()).append(" 改为 ").append(stock.getName()).append(SEPARATOR_OBJECT_TAG);
+                        }
                     }
+
                 }
+                if (hasNewStock) {
+                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+
+
+                    comment.append(stock.getCode()).append(SEPARATOR_ATTR_TAG).append(stock.getName()).append(SEPARATOR_ATTR_TAG).append("新增").append(SEPARATOR_OBJECT_TAG);
+                }
+                sb.append(stock.getTurnoverRate());
                 //一行结束，需要换行。
                 sb.append(SEPARATOR_OBJECT_TAG);
             }
+
         }
 
-        writeSDFile(fileToday + fileNameAnalysis, sb.toString());
-        textView.setText(fileToday + "更新完成");
+        StockUtil.writeSDFile(pathName, fileToday + fileNameAnalysis, sb.toString());
+        textView.setText(comment.toString());
     }
 
-    private String getYesterday(String today)
-    {
-        SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
-        Date  d = null;
+    private String getYesterday(String today) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        Date d = null;
         try {
             d = df.parse(today);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Calendar cal=Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         cal.setTime(d);
         cal.add(Calendar.DATE, -1);  //减1天
         return df.format(cal.getTime());
@@ -224,7 +260,7 @@ public class StockManager {
     private List<StockInfo> getTodayStockInfo(String today) {
         List<StockInfo> stockInfos = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName +today +fileNameStockMy), CHARACTER);
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + today + fileNameStockMy), CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
@@ -247,22 +283,22 @@ public class StockManager {
     }
 
     //本日数据归集
-    public boolean buildMyTodayStockData(String fileToday,TextView textView) {
+    public boolean buildMyTodayStockData(String fileToday, TextView textView) {
         StringBuffer sb = new StringBuffer("");
         try {
-            File file = new File(pathName + fileToday+fileNameStock + ".txt");
+            File file = new File(pathName + fileToday + fileNameStock + ".txt");
             if (!file.exists()) {
-                textView.setText("文件不存在"+file.getPath());
+                textView.setText("文件不存在" + file.getPath());
                 return false;
             }
             InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
+                if (line.contains("代码"))
+                    continue;
                 String[] infoAttrs = line.split(SEPARATOR_ATTR_TAG);
                 if (infoAttrs.length > 9) {
-                    if (infoAttrs[0].equals("代码"))
-                        continue;
                     sb.append(infoAttrs[0] + "\t" + infoAttrs[1] + "\t" + infoAttrs[10] + "\n");
                 }
             }
@@ -272,58 +308,10 @@ public class StockManager {
             Toast.makeText(mContext, TAG + ":" + e.toString(), Toast.LENGTH_SHORT).show();
         }
         //写到sd卡
-        writeSDFile(fileToday + fileNameStockMy, sb.toString());
+        StockUtil.writeSDFile(pathName, fileToday + fileNameStockMy, sb.toString());
         textView.setText(fileToday + "归集完成");
         return true;
     }
-
-
-    // 写在/mnt/sdcard/目录下面的文件
-    public void writeSDFile(String fileName, String message) {
-        String sdStatus = Environment.getExternalStorageState();
-        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
-            Toast.makeText(mContext, "SD卡不能用", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        try {
-
-            File fileDir = new File(pathName);
-            if (!fileDir.exists()) {
-                fileDir.mkdirs();
-            }
-            File file = new File(pathName + fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileOutputStream fout = new FileOutputStream(file.getPath());
-            byte[] bytes = message.getBytes();
-            fout.write(bytes);
-            fout.close();
-        } catch (Exception e) {
-            Toast.makeText(mContext, TAG + ":" + e.toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * 判断当前日期是星期几
-     *
-     * @param pTime 修要判断的时间
-     * @return dayForWeek 判断结果
-     * @Exception 发生异常
-     */
-    public static int dayForWeek(String pTime) throws Exception {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        Calendar c = Calendar.getInstance();
-        c.setTime(format.parse(pTime));
-        int dayForWeek = 0;
-        if(c.get(Calendar.DAY_OF_WEEK) == 1){
-            dayForWeek = 7;
-        }else{
-            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
-        }
-        return dayForWeek;
-    }
-
 
 
 }

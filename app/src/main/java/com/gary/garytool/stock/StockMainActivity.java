@@ -69,7 +69,7 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
             result=false;
         try {
             Integer.valueOf(fileDay);
-            StockManager.dayForWeek(fileDay);
+            StockUtil.dayForWeek(fileDay);
         } catch (Exception e) {
             result=false;
             mTv.setText("您输入的日期不正确");
