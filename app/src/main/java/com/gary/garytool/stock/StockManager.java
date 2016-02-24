@@ -67,23 +67,26 @@ public class StockManager {
         }
 
         //分析规则：
+        //股价低于5块或者高过40块的忽略--没有实施。
         //量大1.5倍，量大2倍，量大2.5倍，量大3倍
         //换手率大于3%，换手率大于5%，换手率大于8%，换手率大于10%
         //分析规则 3,3 则是1.5倍的放量，大于3%的换手率。5,8则是2.5倍的放量，大于8%的换手率。
 
         List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(file);
 
-        //分析逻辑：最有价值是3比3,4比2
+        //分析逻辑：最有价值是3比2
         //一共6天 5,4,3,2,1,0；
         //一天量大 观察 （比前2天都大OneDayForTwo，比前3天都大OneDayForThree）
-        //二天量大 观察 （比前2天都大TwoDayForTwo，比前3天都大TwoDayForThree）
+        //二天量大 观察 （比前1天都大TwoDayForOne,比前2天都大TwoDayForTwo）
         //三天量大 观察可以在下午2点前买入 （比前2天都大，比前3天都大）
         //四天量大 买入 在早上10点前买入 （比前2天都大）
-        //五天量大 买入 在早上10点前买入 （比前1天都大）
 
         //本日比上日的分析
         StringBuilder comment = new StringBuilder();
         List<StockInfoForAnalysis> resultOneDayForTwo = new ArrayList<>();
+        List<StockInfoForAnalysis> resultOneDayForThree = new ArrayList<>();
+        List<StockInfoForAnalysis> resultTwoDayForOne = new ArrayList<>();
+        List<StockInfoForAnalysis> resultTwoDayForTwo = new ArrayList<>();
         List<StockInfoForAnalysis> errors = new ArrayList<>();
         int countTotal = stockInfoForAnalysises.size();
         int countDone = 0;
@@ -93,25 +96,53 @@ public class StockManager {
                 float todayTurnoverRate;
                 float beforeOneTurnoverRate;
                 float beforeTwoTurnoverRate;
-//            float beforeThreeTurnoverRate;
+                float beforeThreeTurnoverRate;
 //            float beforeFourTurnoverRate;
 //            float beforeFiveTurnoverRate;
 
                 todayTurnoverRate = Float.valueOf(info.getTodayTurnoverRate());
                 beforeOneTurnoverRate = Float.valueOf(info.getBeforeOneTurnoverRate());
                 beforeTwoTurnoverRate = Float.valueOf(info.getBeforeTwoTurnoverRate());
-//                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
+                beforeThreeTurnoverRate=Float.valueOf(info.getBeforeThreeTurnoverRate());
 //                beforeFourTurnoverRate=Float.valueOf(info.getBeforeFourRate());
 //                beforeFiveTurnoverRate=Float.valueOf(info.getBeforeFiveTurnoverRate());
 
-                //一天量大 观察 （比前2天都大OneDayForTwo，比前3天都大OneDayForThree）
-                double firstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
-                double secondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
-                if (firstIncrease > volume&&secondIncrease>volume && todayTurnoverRate > turnoverRate) {
+                if(todayTurnoverRate==0||beforeOneTurnoverRate==0||beforeTwoTurnoverRate==0||beforeThreeTurnoverRate==0)
+                {
+                    countDone++;
+                    continue;
+                }
+
+                //一天量大 观察 （比前2天都大OneDayForTwo）
+                double OneDayForTwoFirstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
+                double OneDayForTwoSecondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
+                if (OneDayForTwoFirstIncrease > volume&&OneDayForTwoSecondIncrease>volume && todayTurnoverRate > turnoverRate) {
                     resultOneDayForTwo.add(info);
                 }
-                //TODO:比前3天都大OneDayForThree还没做。
+                //一天量大 观察 （比前3天都大OneDayForThree）
+                double OneDayForThreeFirstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
+                double OneDayForThreeSecondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
+                double OneDayForThreeThreeIncrease = todayTurnoverRate / beforeThreeTurnoverRate;
+                if (OneDayForThreeFirstIncrease > volume&&OneDayForThreeSecondIncrease>volume &&OneDayForThreeThreeIncrease>volume &&  todayTurnoverRate > turnoverRate) {
+                    resultOneDayForThree.add(info);
+                }
 
+
+                //二天量大 观察 （比前1天都大TwoDayForOne）
+                double TwoDayForOneThreeFirstIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
+                double TwoDayForOneSecondIncrease = beforeOneTurnoverRate / beforeTwoTurnoverRate;
+                if (TwoDayForOneThreeFirstIncrease > volume&&TwoDayForOneSecondIncrease>volume &&  todayTurnoverRate > turnoverRate) {
+                    resultTwoDayForOne.add(info);
+                }
+
+                //二天量大 观察 （比前2天都大TwoDayForTwo）
+                double TwoDayForTwoFirstIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
+                double TwoDayForTwoSecondIncrease = todayTurnoverRate / beforeThreeTurnoverRate;
+                double TwoDayForTwoThreeIncrease = beforeOneTurnoverRate / beforeTwoTurnoverRate;
+                double TwoDayForTwoFourIncrease = beforeOneTurnoverRate / beforeThreeTurnoverRate;
+                if (TwoDayForTwoFirstIncrease > volume&&TwoDayForTwoSecondIncrease>volume &&  TwoDayForTwoThreeIncrease>volume &&TwoDayForTwoFourIncrease>volume &&todayTurnoverRate > turnoverRate) {
+                    resultTwoDayForTwo.add(info);
+                }
 
                 countDone++;
             } catch (Exception e) {
@@ -121,15 +152,40 @@ public class StockManager {
 
         comment.append("共：" + countTotal + ",完成：" + countDone + ",失败：" + errors.size() + SEPARATOR_OBJECT_TAG);
 
+
+        //二天量大 观察 （比前1天都大TwoDayForTwo）
+        if (resultTwoDayForTwo.size() > 0) {
+            comment.append(SEPARATOR_OBJECT_TAG+"注意如下" + resultTwoDayForTwo.size() + "个TwoDayForTwo股票" + SEPARATOR_OBJECT_TAG);
+            for (StockInfoForAnalysis good : resultTwoDayForTwo) {
+                comment.append(good.toString());
+            }
+        }
+
+        //二天量大 观察 （比前1天都大TwoDayForOne）
+        if (resultTwoDayForOne.size() > 0) {
+            comment.append(SEPARATOR_OBJECT_TAG+"注意如下" + resultTwoDayForOne.size() + "个TwoDayForOne股票" + SEPARATOR_OBJECT_TAG);
+            for (StockInfoForAnalysis good : resultTwoDayForOne) {
+                comment.append(good.toString());
+            }
+        }
+
+        //一天量大 观察 （比前3天都大OneDayForThree）
+        if (resultOneDayForThree.size() > 0) {
+            comment.append(SEPARATOR_OBJECT_TAG+"注意如下" + resultOneDayForThree.size() + "个OneDayForThree股票" + SEPARATOR_OBJECT_TAG);
+            for (StockInfoForAnalysis good : resultOneDayForThree) {
+                comment.append(good.toString());
+            }
+        }
+        //一天量大 观察 （比前2天都大OneDayForTwo）
         if (resultOneDayForTwo.size() > 0) {
-            comment.append("注意如下" + resultOneDayForTwo.size() + "个优质股票" + SEPARATOR_OBJECT_TAG);
+            comment.append(SEPARATOR_OBJECT_TAG+"注意如下" + resultOneDayForTwo.size() + "个OneDayForTwo股票" + SEPARATOR_OBJECT_TAG);
             for (StockInfoForAnalysis good : resultOneDayForTwo) {
                 comment.append(good.toString());
             }
         }
 
         if (errors.size() > 0) {
-            comment.append("注意如下" + errors.size() + "个分析失败股票" + SEPARATOR_OBJECT_TAG);
+            comment.append(SEPARATOR_OBJECT_TAG+"注意如下" + errors.size() + "个分析失败股票" + SEPARATOR_OBJECT_TAG);
             for (StockInfoForAnalysis errorInfo : errors) {
                 comment.append(errorInfo.toString());
             }
