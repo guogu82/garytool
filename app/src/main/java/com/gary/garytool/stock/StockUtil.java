@@ -4,8 +4,10 @@ import android.os.Environment;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/2/23.
@@ -65,5 +67,19 @@ public class StockUtil {
             dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
         }
         return dayForWeek;
+    }
+
+    public static String getYesterday(String today) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        Date d = null;
+        try {
+            d = df.parse(today);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.DATE, -1);  //减1天
+        return df.format(cal.getTime());
     }
 }

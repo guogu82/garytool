@@ -21,6 +21,9 @@ public class StockInfoForAnalysis {
      //第五天换手率
     private String mBeforeFiveTurnoverRate;
 
+    //细分行业
+    private String mIndustry;
+
     public String getName() {
         return mName;
     }
@@ -69,11 +72,11 @@ public class StockInfoForAnalysis {
         this.mBeforeThreeTurnoverRate = BeforeThreeTurnoverRate;
     }
 
-    public String getBeforeFourRate() {
+    public String getBeforeFourTurnoverRate() {
         return mBeforeFourTurnoverRate;
     }
 
-    public void setBeforeFourRate(String BeforeFourRate) {
+    public void setBeforeFourTurnoverRate(String BeforeFourRate) {
         this.mBeforeFourTurnoverRate = BeforeFourRate;
     }
 
@@ -85,17 +88,26 @@ public class StockInfoForAnalysis {
         this.mBeforeFiveTurnoverRate = BeforeFiveTurnoverRate;
     }
 
+    public String getIndustry() {
+        return mIndustry;
+    }
+
+    public void setIndustry(String mIndustry) {
+        this.mIndustry = mIndustry;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(" " + getName().trim());
         sb.append(" " + getCode().trim());
-        sb.append(" " + getBeforeFiveTurnoverRate().trim());
-        sb.append(" " + getBeforeFourRate().trim());
+        //sb.append(" " + getBeforeFiveTurnoverRate().trim());
+        sb.append(" " + getBeforeFourTurnoverRate().trim());
         sb.append(" " + getBeforeThreeTurnoverRate().trim());
         sb.append(" " + getBeforeTwoTurnoverRate().trim());
         sb.append(" " + getBeforeOneTurnoverRate().trim());
-        sb.append(" " + getTodayTurnoverRate().trim() + "\n");
+        sb.append(" " + getTodayTurnoverRate().trim());
+        sb.append(" " + getIndustry() + "\n");
         return sb.toString();
     }
 

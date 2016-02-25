@@ -11,6 +11,9 @@ public class StockInfo {
     //换手率
     private String mTurnoverRate;
 
+    //细分行业
+    private String mIndustry;
+
     public String getName() {
         return mName;
     }
@@ -35,12 +38,21 @@ public class StockInfo {
         this.mTurnoverRate = mTurnoverRate;
     }
 
+    public String getIndustry() {
+        return mIndustry;
+    }
+
+    public void setIndustry(String mIndustry) {
+        this.mIndustry = mIndustry;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(" " + getName() + " ");
         sb.append(" " + getCode() + " ");
-        sb.append(" " + getTurnoverRate() + "\n");
+        sb.append(" " + getTurnoverRate() + " ");
+        sb.append(" " + getIndustry() + "\n");
         return sb.toString();
     }
 
