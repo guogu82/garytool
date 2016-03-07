@@ -127,8 +127,9 @@ public class StockManager {
         //一共6天 5,4,3,2,1,0；
         //一天量大 观察 （比前2天都大OneDayForTwo，比前3天都大OneDayForThree）
         //二天量大 观察 （比前1天都大TwoDayForOne,比前2天都大TwoDayForTwo）
-        //三天量大 观察可以在下午2点前买入 （比前2天都大ThreeDayForTwo）
-        //四天量大 买入 在早上10点前买入 （比前2天都大FourDayForTwo）
+        //三天量大 观察 （比前2天都大ThreeDayForTwo）
+        //四天量大 观察 （比前2天都大FourDayForTwo）
+        //五天量大 观察 （比前1天都大FiveDayForOne）
 
         //本日比上日的分析
         List<StockInfoForAnalysis> resultOneDayForTwo = new ArrayList<>();
@@ -136,6 +137,9 @@ public class StockManager {
         List<StockInfoForAnalysis> resultTwoDayForOne = new ArrayList<>();
         List<StockInfoForAnalysis> resultTwoDayForTwo = new ArrayList<>();
         List<StockInfoForAnalysis> resultThreeDayForTwo = new ArrayList<>();
+        List<StockInfoForAnalysis> resultFourDayForTwo = new ArrayList<>();
+        List<StockInfoForAnalysis> resultFiveDayForOne = new ArrayList<>();
+
         List<StockInfoForAnalysis> errors = new ArrayList<>();
         int countTotal = stockInfoForAnalysises.size();
         int countDone = 0;
@@ -147,19 +151,45 @@ public class StockManager {
                 float beforeTwoTurnoverRate;
                 float beforeThreeTurnoverRate;
                 float beforeFourTurnoverRate;
+                float beforeFiveTurnoverRate;
+
 
                 todayTurnoverRate = Float.valueOf(info.getTodayTurnoverRate());
                 beforeOneTurnoverRate = Float.valueOf(info.getBeforeOneTurnoverRate());
                 beforeTwoTurnoverRate = Float.valueOf(info.getBeforeTwoTurnoverRate());
                 beforeThreeTurnoverRate = Float.valueOf(info.getBeforeThreeTurnoverRate());
                 beforeFourTurnoverRate = Float.valueOf(info.getBeforeFourTurnoverRate());
+                beforeFiveTurnoverRate = Float.valueOf(info.getBeforeFiveTurnoverRate());
 
-                if (todayTurnoverRate < MINVOLUME || beforeOneTurnoverRate < MINVOLUME || beforeTwoTurnoverRate < MINVOLUME || beforeThreeTurnoverRate < MINVOLUME || beforeFourTurnoverRate < MINVOLUME) {
+                if (todayTurnoverRate < MINVOLUME || beforeOneTurnoverRate < MINVOLUME || beforeTwoTurnoverRate < MINVOLUME || beforeThreeTurnoverRate < MINVOLUME || beforeFourTurnoverRate < MINVOLUME|| beforeFiveTurnoverRate < MINVOLUME) {
                     countDone++;
                     continue;
                 }
+                //五天量大 观察 （比前1天都大FiveDayForOne）
+                double FiveDayForOneFirstIncrease = todayTurnoverRate / beforeFiveTurnoverRate;
+                double FiveDayForOneSecondIncrease = beforeOneTurnoverRate / beforeFiveTurnoverRate;
+                double FiveDayForOneThreeIncrease = beforeTwoTurnoverRate / beforeFiveTurnoverRate;
+                double FiveDayForOneFourIncrease = beforeThreeTurnoverRate / beforeFiveTurnoverRate;
+                double FiveDayForOneFiveIncrease = beforeFourTurnoverRate / beforeFiveTurnoverRate;
+      ;
+                if (FiveDayForOneFirstIncrease > volume && FiveDayForOneSecondIncrease > volume && FiveDayForOneThreeIncrease > volume && FiveDayForOneFourIncrease > volume && FiveDayForOneFiveIncrease > volume  && todayTurnoverRate > turnoverRate) {
+                    //不打印  resultFiveDayForOne.add(info);
+                }
 
-                //三天量大 观察可以在下午2点前买入 （比前2天都大ThreeDayForTwo）
+                //四天量大 观察 （比前2天都大FourDayForTwo）
+                double FourDayForTwoFirstIncrease = todayTurnoverRate / beforeFourTurnoverRate;
+                double FourDayForTwoSecondIncrease = todayTurnoverRate / beforeFiveTurnoverRate;
+                double FourDayForTwoThreeIncrease = beforeOneTurnoverRate / beforeFourTurnoverRate;
+                double FourDayForTwoFourIncrease = beforeOneTurnoverRate / beforeFiveTurnoverRate;
+                double FourDayForTwoFiveIncrease = beforeTwoTurnoverRate / beforeFourTurnoverRate;
+                double FourDayForTwoSixIncrease = beforeTwoTurnoverRate / beforeFiveTurnoverRate;
+                double FourDayForTwoSevenIncrease = beforeThreeTurnoverRate / beforeFourTurnoverRate;
+                double FourDayForTwoEightIncrease = beforeThreeTurnoverRate / beforeFiveTurnoverRate;
+                if (FourDayForTwoFirstIncrease > volume && FourDayForTwoSecondIncrease > volume && FourDayForTwoThreeIncrease > volume && FourDayForTwoFourIncrease > volume && FourDayForTwoFiveIncrease > volume && FourDayForTwoSixIncrease > volume && FourDayForTwoSevenIncrease > volume && FourDayForTwoEightIncrease > volume && todayTurnoverRate > turnoverRate) {
+                    resultFourDayForTwo.add(info);
+                }
+
+                //三天量大 观察 （比前2天都大ThreeDayForTwo）
                 double ThreeDayForTwoFirstIncrease = todayTurnoverRate / beforeThreeTurnoverRate;
                 double ThreeDayForTwoSecondIncrease = todayTurnoverRate / beforeFourTurnoverRate;
                 double ThreeDayForTwoThreeIncrease = beforeOneTurnoverRate / beforeThreeTurnoverRate;
@@ -209,10 +239,17 @@ public class StockManager {
 
         StringBuilder comment = new StringBuilder();
         comment.append(fileToday + "共：" + countTotal + ",完成：" + countDone + ",失败：" + errors.size() + SEPARATOR_OBJECT_TAG);
-        //三天量大 观察可以在下午2点前买入 （比前2天都大ThreeDayForTwo）
+        //五天量大 观察 （比前1天都大FiveDayForOne）
+        appendComment(comment, resultFiveDayForOne, "FiveDayForOne");
+
+        //四天量大 观察（比前2天都大FourDayForTwo）
+        appendComment(comment, resultFourDayForTwo, "FourDayForTwo");
+
+        //三天量大 观察（比前2天都大ThreeDayForTwo）
         appendComment(comment, resultThreeDayForTwo, "ThreeDayForTwo");
+
         //统计行业动态
-        statisticsIndustry(comment, resultThreeDayForTwo);
+        statisticsIndustry(comment, resultFourDayForTwo);
 
 
         //二天量大 观察 （比前1天都大TwoDayForTwo）
