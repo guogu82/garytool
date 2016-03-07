@@ -11,6 +11,8 @@ import com.gary.garytool.R;
 
 public class StockMainActivity extends Activity implements View.OnClickListener {
 
+    public static final String KEY = "fileDay";
+
     private Button mBtCollect;
     private TextView mTv;
     private EditText mEtToday;
@@ -30,6 +32,13 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
         mEtToday= (EditText) findViewById(R.id.et_today);
         mEtStatistics= (EditText) findViewById(R.id.et_statistics);
 
+        String fileDay=StockUtil.getFileDay(this,KEY);
+
+        if(fileDay.length()>0)
+        {
+            mEtToday.setText(fileDay);
+        }
+
         stockManager =new StockManager(this);
     }
 
@@ -38,6 +47,9 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
         String fileDay=mEtToday.getText().toString().trim();
         if(!checkDate(fileDay))
             return;
+
+        //保存查询的日期
+        StockUtil.saveFileDay(this,KEY,fileDay);
 
         //从sd卡读取外部本日数据，并写入sd卡的自身数据里面
         if(!stockManager.buildMyTodayStockData(fileDay,mTv))

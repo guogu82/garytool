@@ -1,5 +1,7 @@
 package com.gary.garytool.stock;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Environment;
 
 import java.io.File;
@@ -9,10 +11,26 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
 /**
  * Created by Administrator on 2016/2/23.
  */
 public class StockUtil {
+
+    public static void saveFileDay(Context context,String key,String value){
+
+        SharedPreferences sp =context.getSharedPreferences("config.txt", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public static String getFileDay(Context context,String key){
+            SharedPreferences sp =context.getSharedPreferences("config.txt",  Context.MODE_PRIVATE);
+            return sp.getString(key, "");
+    }
+
+
     // 写在/mnt/sdcard/目录下面的文件
     public static void writeSDFile(String pathName,String fileName, String message) {
         try {

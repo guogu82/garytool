@@ -204,7 +204,7 @@ public class StockManager {
                 double TwoDayForOneThreeFirstIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
                 double TwoDayForOneSecondIncrease = beforeOneTurnoverRate / beforeTwoTurnoverRate;
                 if (TwoDayForOneThreeFirstIncrease > volume && TwoDayForOneSecondIncrease > volume && todayTurnoverRate > turnoverRate) {
-                    //不打印 resultTwoDayForOne.add(info);
+                    resultTwoDayForOne.add(info);
                 }
 
                 //二天量大 观察 （比前2天都大TwoDayForTwo）
@@ -251,6 +251,8 @@ public class StockManager {
         //统计行业动态
         statisticsIndustry(comment, resultFourDayForTwo);
 
+        //分析失败的股票
+        appendComment(comment, errors,"分析失败");
 
         //二天量大 观察 （比前1天都大TwoDayForTwo）
         appendComment(comment, resultTwoDayForTwo, "TwoDayForTwo");
@@ -264,8 +266,7 @@ public class StockManager {
         //一天量大 观察 （比前2天都大OneDayForTwo）
         appendComment(comment, resultOneDayForTwo, "OneDayForTwo");
 
-        //分析失败的股票
-        //appendComment(comment, errors,"分析失败");
+
 
 
         StockUtil.writeSDFile(pathName, fileToday + fileNameAnalysisResult + statistic, comment.toString());
