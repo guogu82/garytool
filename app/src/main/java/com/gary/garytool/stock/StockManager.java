@@ -21,11 +21,10 @@ import java.util.Map;
  */
 public class StockManager {
     public static final String TAG = "StockManager";
-    public static final String SEPARATOR_ATTR_TAG = "\t";
-    public static final String SEPARATOR_OBJECT_TAG = "\n";
+
 
     public static final String NO_VALUE = "--";
-    public static final String CHARACTER = "UTF-8";
+
     public static final double MINVOLUME = 0.5;
 
     private Context mContext;
@@ -50,19 +49,17 @@ public class StockManager {
                 textView.setText("文件不存在" + file.getPath());
                 return false;
             }
-            InputStreamReader inputStreamReader;
 
-            inputStreamReader = new InputStreamReader(new FileInputStream(file), CHARACTER);
-
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), StockUtil.CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
 
             while ((line = reader.readLine()) != null) {
                 if (line.contains("代码"))
                     continue;
-                String[] infoAttrs = line.split(SEPARATOR_ATTR_TAG);
+                String[] infoAttrs = line.split(StockUtil.SEPARATOR_ATTR_TAG);
                 if (infoAttrs.length > 9) {
-                    sb.append(infoAttrs[0] + SEPARATOR_ATTR_TAG + infoAttrs[1] + SEPARATOR_ATTR_TAG + infoAttrs[10] + SEPARATOR_ATTR_TAG);
+                    sb.append(infoAttrs[0] + StockUtil.SEPARATOR_ATTR_TAG + infoAttrs[1] + StockUtil.SEPARATOR_ATTR_TAG + infoAttrs[10] + StockUtil.SEPARATOR_ATTR_TAG);
                     if (infoAttrs.length > 18) {
                         if (infoAttrs[18] == null || infoAttrs[18].length() == 0)
                             sb.append(NO_VALUE);
@@ -71,9 +68,12 @@ public class StockManager {
                         sb.append(NO_VALUE);
                     }
 
-                    sb.append(SEPARATOR_OBJECT_TAG);
+                    sb.append(StockUtil.SEPARATOR_OBJECT_TAG);
                 }
             }
+
+            reader.close();
+            inputStreamReader.close();
 
 
         } catch (UnsupportedEncodingException e) {
@@ -173,7 +173,7 @@ public class StockManager {
                 double FiveDayForOneFiveIncrease = beforeFourTurnoverRate / beforeFiveTurnoverRate;
       ;
                 if (FiveDayForOneFirstIncrease > volume && FiveDayForOneSecondIncrease > volume && FiveDayForOneThreeIncrease > volume && FiveDayForOneFourIncrease > volume && FiveDayForOneFiveIncrease > volume  && todayTurnoverRate > turnoverRate) {
-                    //不打印  resultFiveDayForOne.add(info);
+                    resultFiveDayForOne.add(info);
                 }
 
                 //四天量大 观察 （比前2天都大FourDayForTwo）
@@ -213,21 +213,21 @@ public class StockManager {
                 double TwoDayForTwoThreeIncrease = beforeOneTurnoverRate / beforeTwoTurnoverRate;
                 double TwoDayForTwoFourIncrease = beforeOneTurnoverRate / beforeThreeTurnoverRate;
                 if (TwoDayForTwoFirstIncrease > volume && TwoDayForTwoSecondIncrease > volume && TwoDayForTwoThreeIncrease > volume && TwoDayForTwoFourIncrease > volume && todayTurnoverRate > turnoverRate) {
-                    //不打印  resultTwoDayForTwo.add(info);
+                    resultTwoDayForTwo.add(info);
                 }
 
                 //一天量大 观察 （比前2天都大OneDayForTwo）
                 double OneDayForTwoFirstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
                 double OneDayForTwoSecondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
                 if (OneDayForTwoFirstIncrease > volume && OneDayForTwoSecondIncrease > volume && todayTurnoverRate > turnoverRate) {
-                    //不打印 resultOneDayForTwo.add(info);
+                    resultOneDayForTwo.add(info);
                 }
                 //一天量大 观察 （比前3天都大OneDayForThree）
                 double OneDayForThreeFirstIncrease = todayTurnoverRate / beforeOneTurnoverRate;
                 double OneDayForThreeSecondIncrease = todayTurnoverRate / beforeTwoTurnoverRate;
                 double OneDayForThreeThreeIncrease = todayTurnoverRate / beforeThreeTurnoverRate;
                 if (OneDayForThreeFirstIncrease > volume && OneDayForThreeSecondIncrease > volume && OneDayForThreeThreeIncrease > volume && todayTurnoverRate > turnoverRate) {
-                    //不打印 resultOneDayForThree.add(info);
+                    resultOneDayForThree.add(info);
                 }
 
                 countDone++;
@@ -238,33 +238,50 @@ public class StockManager {
 
 
         StringBuilder comment = new StringBuilder();
-        comment.append(fileToday + "共：" + countTotal + ",完成：" + countDone + ",失败：" + errors.size() + SEPARATOR_OBJECT_TAG);
+        comment.append(fileToday + "共：" + countTotal + ",完成：" + countDone + ",失败：" + errors.size() + StockUtil.SEPARATOR_OBJECT_TAG);
         //五天量大 观察 （比前1天都大FiveDayForOne）
-        appendComment(comment, resultFiveDayForOne, "FiveDayForOne");
+        appendComment(comment, resultFiveDayForOne, "FiveDayForOne", false);
 
         //四天量大 观察（比前2天都大FourDayForTwo）
-        appendComment(comment, resultFourDayForTwo, "FourDayForTwo");
+        appendComment(comment, resultFourDayForTwo, "FourDayForTwo", true);
 
         //三天量大 观察（比前2天都大ThreeDayForTwo）
-        appendComment(comment, resultThreeDayForTwo, "ThreeDayForTwo");
+        appendComment(comment, resultThreeDayForTwo, "ThreeDayForTwo", true);
 
         //统计行业动态
         statisticsIndustry(comment, resultFourDayForTwo);
 
+
+        //统计分析结果
+        String fileNameForStatic="addStock.txt";
+        StringBuilder addStock=new StringBuilder(fileToday);
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+"5-1");
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+"4-2");
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+"3-2");
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+"2-1");
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+"1-3");
+        addStock.append(StockUtil.SEPARATOR_OBJECT_TAG+fileToday);
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+resultFiveDayForOne.size());
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+resultFourDayForTwo.size());
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+resultThreeDayForTwo.size());
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+resultTwoDayForOne.size());
+        addStock.append(StockUtil.SEPARATOR_ATTR_TAG+resultOneDayForThree.size());
+        StockUtil.writeSDFile(pathName, fileNameForStatic, addStock.toString(),true);
+
         //分析失败的股票
-        appendComment(comment, errors,"分析失败");
+        appendComment(comment, errors,"分析失败",true);
 
         //二天量大 观察 （比前1天都大TwoDayForTwo）
-        appendComment(comment, resultTwoDayForTwo, "TwoDayForTwo");
+        appendComment(comment, resultTwoDayForTwo, "TwoDayForTwo",false);
 
         //二天量大 观察 （比前1天都大TwoDayForOne）
-        appendComment(comment, resultTwoDayForOne, "woDayForOne");
+        appendComment(comment, resultTwoDayForOne, "TwoDayForOne",false);
 
         //一天量大 观察 （比前3天都大OneDayForThree）
-        appendComment(comment, resultOneDayForThree, "OneDayForThree");
+        appendComment(comment, resultOneDayForThree, "OneDayForThree",false);
 
         //一天量大 观察 （比前2天都大OneDayForTwo）
-        appendComment(comment, resultOneDayForTwo, "OneDayForTwo");
+        appendComment(comment, resultOneDayForTwo, "OneDayForTwo",false);
 
 
 
@@ -274,7 +291,7 @@ public class StockManager {
     }
 
     private void statisticsIndustry(StringBuilder comment, List<StockInfoForAnalysis> list) {
-        comment.append(SEPARATOR_OBJECT_TAG).append("行业归类统计:共" + list.size() + "个").append(SEPARATOR_OBJECT_TAG);
+        comment.append(StockUtil.SEPARATOR_OBJECT_TAG).append("行业归类统计:共" + list.size() + "个").append(StockUtil.SEPARATOR_OBJECT_TAG);
         Map<String, Integer> count = new HashMap<String, Integer>();
 
         for (StockInfoForAnalysis info : list) {
@@ -293,13 +310,13 @@ public class StockManager {
 
         for (Map.Entry<String, Integer> entry : count.entrySet()) {
             if(entry.getValue()>1)
-            comment.append(entry.getKey()).append(SEPARATOR_ATTR_TAG).append(entry.getValue()).append(SEPARATOR_OBJECT_TAG);
+            comment.append(entry.getKey()).append(StockUtil.SEPARATOR_ATTR_TAG).append(entry.getValue()).append(StockUtil.SEPARATOR_OBJECT_TAG);
         }
     }
 
-    private void appendComment(StringBuilder comment, List<StockInfoForAnalysis> resultTwoDayForTwo, String name) {
-        if (resultTwoDayForTwo.size() > 0) {
-            comment.append(SEPARATOR_OBJECT_TAG + "注意如下" + resultTwoDayForTwo.size() + "个" + name + "股票" + SEPARATOR_OBJECT_TAG);
+    private void appendComment(StringBuilder comment, List<StockInfoForAnalysis> resultTwoDayForTwo, String name,boolean isShow) {
+        if (resultTwoDayForTwo.size() > 0&&isShow) {
+            comment.append(StockUtil.SEPARATOR_OBJECT_TAG + "注意如下" + resultTwoDayForTwo.size() + "个" + name + "股票" + StockUtil.SEPARATOR_OBJECT_TAG);
             for (StockInfoForAnalysis good : resultTwoDayForTwo) {
                 comment.append(good.toString());
             }
@@ -328,51 +345,51 @@ public class StockManager {
 
         //打印提示日志
         StringBuilder comment = new StringBuilder("");
-        comment.append(fileToday).append("更新完成").append(SEPARATOR_OBJECT_TAG);
+        comment.append(fileToday).append("更新完成").append(StockUtil.SEPARATOR_OBJECT_TAG);
 
         if (!fileForYesterday.exists()) {
             for (StockInfo stock : stockInfos) {
-                sb.append(stock.getCode() + SEPARATOR_ATTR_TAG + stock.getName() + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_ATTR_TAG + stock.getTurnoverRate() + SEPARATOR_ATTR_TAG + NO_VALUE + SEPARATOR_OBJECT_TAG);
+                sb.append(stock.getCode() + StockUtil.SEPARATOR_ATTR_TAG + stock.getName() + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG + stock.getTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG + NO_VALUE + StockUtil.SEPARATOR_OBJECT_TAG);
             }
         } else {
             List<StockInfoForAnalysis> stockInfoForAnalysises = getAnalysisStockInfo(fileForYesterday);
-            comment.append("整理如下：").append(SEPARATOR_OBJECT_TAG);
-            comment.append("上次 ").append(yestesday + SEPARATOR_ATTR_TAG).append(stockInfoForAnalysises.size()).append("个").append(SEPARATOR_OBJECT_TAG);
+            comment.append("整理如下：").append(StockUtil.SEPARATOR_OBJECT_TAG);
+            comment.append("上次 ").append(yestesday + StockUtil.SEPARATOR_ATTR_TAG).append(stockInfoForAnalysises.size()).append("个").append(StockUtil.SEPARATOR_OBJECT_TAG);
             ;
-            comment.append("本次 ").append(fileToday + SEPARATOR_ATTR_TAG).append(stockInfos.size()).append("个").append(SEPARATOR_OBJECT_TAG);
+            comment.append("本次 ").append(fileToday + StockUtil.SEPARATOR_ATTR_TAG).append(stockInfos.size()).append("个").append(StockUtil.SEPARATOR_OBJECT_TAG);
             for (StockInfo stock : stockInfos) {
-                sb.append(stock.getCode() + SEPARATOR_ATTR_TAG);
-                sb.append(stock.getName() + SEPARATOR_ATTR_TAG);
+                sb.append(stock.getCode() + StockUtil.SEPARATOR_ATTR_TAG);
+                sb.append(stock.getName() + StockUtil.SEPARATOR_ATTR_TAG);
                 boolean hasNewStock = true;
                 for (StockInfoForAnalysis old : stockInfoForAnalysises) {
                     if (old.getCode().equals(stock.getCode())) {
                         hasNewStock = false;
-                        sb.append(old.getBeforeFourTurnoverRate() + SEPARATOR_ATTR_TAG);
-                        sb.append(old.getBeforeThreeTurnoverRate() + SEPARATOR_ATTR_TAG);
-                        sb.append(old.getBeforeTwoTurnoverRate() + SEPARATOR_ATTR_TAG);
-                        sb.append(old.getBeforeOneTurnoverRate() + SEPARATOR_ATTR_TAG);
-                        sb.append(old.getTodayTurnoverRate() + SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeFourTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeThreeTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeTwoTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG);
+                        sb.append(old.getBeforeOneTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG);
+                        sb.append(old.getTodayTurnoverRate() + StockUtil.SEPARATOR_ATTR_TAG);
 
                         if (!old.getName().equals(stock.getName())) {
-                            comment.append(stock.getCode()).append(" 名字变更 ").append(old.getName()).append(" 改为 ").append(stock.getName()).append(SEPARATOR_OBJECT_TAG);
+                            comment.append(stock.getCode()).append(" 名字变更 ").append(old.getName()).append(" 改为 ").append(stock.getName()).append(StockUtil.SEPARATOR_OBJECT_TAG);
                         }
                     }
 
                 }
                 if (hasNewStock) {
-                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
-                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
-                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
-                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
-                    sb.append(NO_VALUE + SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG);
+                    sb.append(NO_VALUE + StockUtil.SEPARATOR_ATTR_TAG);
 
 
-                    comment.append(stock.getCode()).append(SEPARATOR_ATTR_TAG).append(stock.getName()).append(SEPARATOR_ATTR_TAG).append("新增").append(SEPARATOR_OBJECT_TAG);
+                    comment.append(stock.getCode()).append(StockUtil.SEPARATOR_ATTR_TAG).append(stock.getName()).append(StockUtil.SEPARATOR_ATTR_TAG).append("新增").append(StockUtil.SEPARATOR_OBJECT_TAG);
                 }
-                sb.append(stock.getTurnoverRate()).append(SEPARATOR_ATTR_TAG);
+                sb.append(stock.getTurnoverRate()).append(StockUtil.SEPARATOR_ATTR_TAG);
                 sb.append(stock.getIndustry());
                 //一行结束，需要换行。
-                sb.append(SEPARATOR_OBJECT_TAG);
+                sb.append(StockUtil.SEPARATOR_OBJECT_TAG);
             }
 
         }
@@ -385,11 +402,11 @@ public class StockManager {
     private List<StockInfoForAnalysis> getAnalysisStockInfo(File fileDay) {
         List<StockInfoForAnalysis> stockInfos = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(fileDay), CHARACTER);
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(fileDay), StockUtil.CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] stockAttrs = line.split(SEPARATOR_ATTR_TAG);
+                String[] stockAttrs = line.split(StockUtil.SEPARATOR_ATTR_TAG);
                 StockInfoForAnalysis info;
                 if (stockAttrs.length > 8) {
                     info = new StockInfoForAnalysis();
@@ -414,11 +431,11 @@ public class StockManager {
     private List<StockInfo> getTodayStockInfo(String today) {
         List<StockInfo> stockInfos = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + today + fileNameStockMy), CHARACTER);
+            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(pathName + today + fileNameStockMy), StockUtil.CHARACTER);
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] stockAttrs = line.split(SEPARATOR_ATTR_TAG);
+                String[] stockAttrs = line.split(StockUtil.SEPARATOR_ATTR_TAG);
                 StockInfo info;
                 if (stockAttrs.length > 2) {
                     info = new StockInfo();

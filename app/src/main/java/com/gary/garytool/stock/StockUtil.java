@@ -4,8 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +21,10 @@ import java.util.Date;
  * Created by Administrator on 2016/2/23.
  */
 public class StockUtil {
+
+    public static final String CHARACTER = "UTF-8";
+    public static final String SEPARATOR_ATTR_TAG = "\t";
+    public static final String SEPARATOR_OBJECT_TAG = "\n";
 
     public static void saveFileDay(Context context,String key,String value){
 
@@ -33,19 +42,52 @@ public class StockUtil {
 
     // 写在/mnt/sdcard/目录下面的文件
     public static void writeSDFile(String pathName,String fileName, String message) {
+        writeSDFile(pathName,fileName,message,false);
+    }
+
+    public   static   void  writeSDFile(String pathName,String fileName, String message,boolean isAdd) {
         try {
 
             File file = new File(pathName + fileName);
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileOutputStream fout = new FileOutputStream(file.getPath());
-            byte[] bytes = message.getBytes();
-            fout.write(bytes);
+
+
+
+            StringBuilder before=new StringBuilder();
+            //读取旧数据
+            if(isAdd)
+            {
+                InputStreamReader   inputStreamReader = new InputStreamReader(new FileInputStream(file), StockUtil.CHARACTER);
+                BufferedReader   reader= new BufferedReader(inputStreamReader);
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if(line.contains("4-2"))
+                        continue;
+                    before.append(StockUtil.SEPARATOR_OBJECT_TAG+line );
+                }
+                reader.close();
+                inputStreamReader.close();
+            }
+
+            FileOutputStream fout= new FileOutputStream(file.getPath());
+
+            //写入新数据
+            fout.write(message.getBytes());
+
+            //写入旧数据
+            if(isAdd&&before.length()>0)
+            {
+                fout.write(before.toString().getBytes());
+            }
+
+
             fout.close();
         } catch (Exception e) {
 
         }
+
     }
 
     public static String getSDPath(String dir){
