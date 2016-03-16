@@ -89,4 +89,9 @@ public class StockMainActivity extends Activity implements View.OnClickListener 
         return result;
     }
 
+
+   public static void  main(String[] args)
+   {
+        System.out.print("hello garyts");
+   }
 }
