@@ -10,6 +10,13 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+
+    public static void  main(String[] args)
+    {
+        System.out.print("hello garyts");
+        System.out.print(2<<3);
+    }
+
     Button mFunctions;
     TextView mTextView;
     Button mPullToRefresh;
