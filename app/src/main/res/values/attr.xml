@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="visible_tab_count" format="integer"></attr>
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="visible_tab_count"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="MessageStatus">
+        <attr name="state_message_readed" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="ChangeColorIconView">
+        <attr name="iconattr" format="reference"/>
+        <attr name="colorattr" format="color"/>
+        <attr name="textattr" format="string"/>
+        <attr name="text_sizeattr" format="dimension" />
+    </declare-styleable>
+</resources>

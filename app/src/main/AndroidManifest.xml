@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- SDCard中创建与删除文件权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 向SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".GaryApplication"
@@ -22,13 +22,14 @@
             android:theme="@style/MainWindowTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".business.stock.StockMainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_stock_main" >
+            android:label="@string/title_activity_stock_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".view.listview.ListViewActivity"
@@ -107,7 +108,9 @@
             android:name=".view.UploadImgService"
             android:exported="false" />
 
-
+        <activity
+            android:name=".view.viewpager.ViewPagerIndicatorActivity" >
+        </activity>
     </application>
 
 </manifest>
