@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gary.garytool.ListViewActivity">
+    tools:context="com.gary.garytool.view.listview.ListViewActivity">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

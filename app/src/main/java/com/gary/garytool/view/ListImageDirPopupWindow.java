@@ -5,8 +5,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.gary.garytool.R;
-import com.gary.garytool.adapter.CommonViewHolder;
-import com.gary.garytool.info.ImageFolder;
+import com.gary.garytool.business.adapter.CommonViewHolder;
+import com.gary.garytool.model.ImageFolder;
 
 import java.util.List;
 

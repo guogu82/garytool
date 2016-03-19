@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <com.gary.garytool.MyButton
+  <com.gary.garytool.view.MyButton
       android:id="@+id/bn"
       android:text="单击我"
       android:layout_width="match_parent"

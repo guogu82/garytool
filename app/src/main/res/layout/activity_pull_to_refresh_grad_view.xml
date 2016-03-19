@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gary.garytool.PullToRefreshGradViewActivity">
+    tools:context="com.gary.garytool.view.pulltorefresh.PullToRefreshGradViewActivity">
    <com.handmark.pulltorefresh.library.PullToRefreshGridView
        xmlns:ptr="http://schemas.android.com/apk/res-auto"
        android:id="@+id/pull_to_refresh_grid"

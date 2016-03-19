@@ -26,76 +26,76 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".stock.StockMainActivity"
+            android:name=".business.stock.StockMainActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_stock_main" >
         </activity>
         <activity
-            android:name=".ListViewActivity"
+            android:name=".view.listview.ListViewActivity"
             android:label="功能列表" />
         <activity
-            android:name=".BottomMenuWithActionbarLikeWeChat6Activity"
+            android:name=".view.viewpager.BottomMenuWithActionbarLikeWeChat6Activity"
             android:icon="@drawable/arrow_left_n"
             android:label="微信"
             android:theme="@style/AppBaseTheme" />
         <activity
-            android:name=".ListViewItemUIActivity"
+            android:name=".view.listview.ListViewItemUIActivity"
             android:label="ListViewItem展示" />
         <activity
-            android:name=".ListViewCustomStateActivity"
+            android:name=".view.listview.ListViewCustomStateActivity"
             android:label="背景渐变" />
-        <activity android:name=".BottomMenuWithFragment" />
-        <activity android:name=".BottomMenuWithViewpager" />
+        <activity android:name=".view.viewpager.BottomMenuWithFragment" />
+        <activity android:name=".view.viewpager.BottomMenuWithViewpager" />
         <activity
-            android:name=".BottomMenuWithPopupWindowLikeQQ"
+            android:name=".view.viewpager.BottomMenuWithPopupWindowLikeQQ"
             android:label="高仿QQ底部菜单" >
         </activity>
-        <activity android:name=".ListViewLoadMoreActivity" >
+        <activity android:name=".view.listview.ListViewLoadMoreActivity" >
         </activity>
-        <activity android:name=".ListViewAdapterMActivity" >
+        <activity android:name=".view.listview.ListViewAdapterMActivity" >
         </activity>
-        <activity android:name=".ListViewUpdateActivity" >
+        <activity android:name=".view.listview.ListViewUpdateActivity" >
         </activity>
-        <activity android:name=".ViewPagerGuideActivity" >
+        <activity android:name=".view.viewpager.ViewPagerGuideActivity" >
         </activity>
         <activity android:name=".BaseFrameworkActivity" >
         </activity>
-        <activity android:name=".VolleyActivity" >
+        <activity android:name=".business.volley.VolleyActivity" >
         </activity>
-        <activity android:name=".PopupWindowActivity" />
+        <activity android:name=".view.PopupWindowActivity" />
         <activity
-            android:name=".VolleyTableLayoutActivity"
+            android:name=".business.volley.VolleyTableLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".PullToRefreshActivity" >
+        <activity android:name=".view.pulltorefresh.PullToRefreshActivity" >
         </activity>
-        <activity android:name=".PictureChoseActivity" >
+        <activity android:name=".view.PictureChoseActivity" >
         </activity>
-        <activity android:name=".XUtilsActivity" >
+        <activity android:name=".business.xutil.XUtilsActivity" >
         </activity>
-        <activity android:name=".PullToRefreshListViewActivity" >
+        <activity android:name=".view.pulltorefresh.PullToRefreshListViewActivity" >
         </activity>
-        <activity android:name=".PullToRefreshBaseActivity" >
+        <activity android:name=".view.pulltorefresh.PullToRefreshBaseActivity" >
         </activity>
-        <activity android:name=".PullToRefreshBothActivity" >
+        <activity android:name=".view.pulltorefresh.PullToRefreshBothActivity" >
         </activity>
-        <activity android:name=".PullToRefreshGradViewActivity" >
+        <activity android:name=".view.pulltorefresh.PullToRefreshGradViewActivity" >
         </activity>
-        <activity android:name=".MainInsaneActivity" >
+        <activity android:name=".business.insane.MainInsaneActivity" >
         </activity>
         <activity
-            android:name=".InsaneDemoActivity"
+            android:name=".business.insane.InsaneDemoActivity"
             android:theme="@style/AppBaseTheme" >
         </activity>
-        <activity android:name=".InsaneToastActivity" >
+        <activity android:name=".business.insane.InsaneToastActivity" >
         </activity>
-        <activity android:name=".InsaneAlertDialogActivity" >
+        <activity android:name=".business.insane.InsaneAlertDialogActivity" >
         </activity>
-        <activity android:name=".InsaneDateDialogActivity" >
+        <activity android:name=".business.insane.InsaneDateDialogActivity" >
         </activity>
-        <activity android:name=".InsaneProgressDialogActivity" >
+        <activity android:name=".business.insane.InsaneProgressDialogActivity" >
         </activity>
         <activity
-            android:name=".InsanePlaneActivity"
+            android:name=".business.insane.InsanePlaneActivity"
             android:label="@string/title_activity_insane_plane" >
         </activity>
         <activity
@@ -104,7 +104,7 @@
         </activity>
 
         <service
-            android:name=".UploadImgService"
+            android:name=".view.UploadImgService"
             android:exported="false" />
 
 

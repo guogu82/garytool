@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.gary.garytool.adapter.CommonViewHolder;
+import com.gary.garytool.business.adapter.CommonViewHolder;
 
 /**
  * Created by Administrator on 2015/9/7.

@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gary.garytool.view.UploadImgService;
+
 public class IntentServiceActivity extends Activity {
 
     public static final String UPLOAD_RESULT="com.gary.garytool.UPLOAD_RESULT";

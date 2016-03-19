@@ -1,11 +1,8 @@
 package com.gary.garytool;
 
 import android.app.Application;
-import android.content.Context;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.gary.garytool.volley.VolleyManger;
+import com.gary.garytool.business.volley.VolleyManger;
 
 /**
  * Created by Administrator on 2015/9/15.
