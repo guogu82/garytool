@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -24,6 +26,8 @@ public class MyGridView extends GridView {
     private ArrayList<WordButton> mArrayList=new ArrayList<WordButton>();
     private MyGridAdapter mAdapter;
     private Context mContext;
+    private Animation mScaleAnimation;
+    private IWordButtonClickListener mWordButtonListener;
     public MyGridView(Context context) {
         super(context);
     }
@@ -49,6 +53,15 @@ public class MyGridView extends GridView {
         setAdapter(mAdapter);
     }
 
+    /**
+     * 注册监听接口
+     * @param listener
+     */
+    public void registOnWordButtonClick(IWordButtonClickListener listener)
+    {
+        mWordButtonListener=listener;
+    }
+
 
     class MyGridAdapter extends BaseAdapter
     {
@@ -71,13 +84,28 @@ public class MyGridView extends GridView {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            WordButton holder;
+            final WordButton holder;
             if(convertView ==null)
             {
                 convertView= Util.getView(mContext, R.layout.guess_music_sel_gridview_item);
                 holder=mArrayList.get(position);
+                //加载动画
+                mScaleAnimation= AnimationUtils.loadAnimation(mContext,R.anim.guess_music_scale);
+                //设置动画延时时间
+                mScaleAnimation.setStartOffset(position * 100);
+
                 holder.setIndex(position);
-                holder.setViewButton((Button) convertView.findViewById(R.id.bt_item));
+                Button button=(Button) convertView.findViewById(R.id.bt_item);
+                button.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(mWordButtonListener!=null)
+                        {
+                            mWordButtonListener.onWordButtonClick(holder);
+                        }
+                    }
+                });
+                holder.setViewButton(button);
                 convertView.setTag(holder);
             }
             else
@@ -85,6 +113,8 @@ public class MyGridView extends GridView {
                 holder= (WordButton) convertView.getTag();
             }
             holder.getViewButton().setText(holder.getWordString());
+            //播放动画
+            convertView.startAnimation(mScaleAnimation);
             return convertView;
         }
     }

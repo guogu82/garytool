@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.gary.garytool.R;
 import com.gary.garytool.util.Util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Administrator on 2016/3/25.
  */
-public class GuessMusicMainActivity extends Activity {
+public class GuessMusicMainActivity extends Activity implements IWordButtonClickListener{
 
     //唱片相关动画
     private Animation mPanAnim;
@@ -47,6 +49,11 @@ public class GuessMusicMainActivity extends Activity {
 
     //已现在文字框UI容器
     private LinearLayout mViewWordsContainer;
+
+    //当前的歌曲
+    private Song mCurrentSong;
+    //当前关的索引
+    private int mCurrentStageIndex=-1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +64,8 @@ public class GuessMusicMainActivity extends Activity {
         mViewPanBar= (ImageView) findViewById(R.id.iv2);
 
         mMyGridView= (MyGridView) findViewById(R.id.gridview);
+
+        mMyGridView.registOnWordButtonClick(this);
 
         mViewWordsContainer= (LinearLayout) findViewById(R.id.word_select_container);
 
@@ -138,6 +147,10 @@ public class GuessMusicMainActivity extends Activity {
         //初始化游戏数据
         initCurrentStateData();
     }
+    @Override
+    public void onWordButtonClick(WordButton wordButton) {
+        Toast.makeText(this,"gary",Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 盘片按钮的点击事件处理
@@ -159,8 +172,28 @@ public class GuessMusicMainActivity extends Activity {
         super.onPause();
     }
 
+    /**
+     * 读取当前关歌曲信息
+     * @param stageIndex
+     * @return
+     */
+    private Song loadStageSongInfo(int stageIndex)
+    {
+        Song song=new Song();
+        String[] stage=Const.SONG_INFO[stageIndex];
+        song.setSongFileName(stage[Const.INDEX_FILE_NAME]);
+        song.setSongName(stage[Const.INDEX_SONG_NAME]);
+        return song;
+    }
+
+    /**
+     * 初始化当前关卡的数据
+     */
     private void initCurrentStateData()
     {
+        //读取当前关的歌曲信息
+        mCurrentSong=loadStageSongInfo(++mCurrentStageIndex);
+
         //初始化已选择文字框
         mSelectWords= initWordSelect();
 
@@ -182,11 +215,13 @@ public class GuessMusicMainActivity extends Activity {
     private ArrayList<WordButton> initAllWord()
     {
         //获得所有待选文字
+        String[] words=generateWords();
+
         ArrayList<WordButton> data=new ArrayList<WordButton>();
         for(int i=0;i<MyGridView.COUNT_WORDS;i++)
         {
             WordButton button=new WordButton();
-            button.setWordString("8");
+            button.setWordString(words[i]);
            data.add(button);
         }
         return data;
@@ -199,7 +234,7 @@ public class GuessMusicMainActivity extends Activity {
     private ArrayList<WordButton> initWordSelect()
     {
         ArrayList<WordButton> data=new ArrayList<WordButton>();
-        for(int i=0;i<4;i++)
+        for(int i=0;i<mCurrentSong.getNameLength();i++)
         {
             View view= Util.getView(GuessMusicMainActivity.this,R.layout.guess_music_sel_gridview_item);
             WordButton holder=new WordButton();
@@ -213,4 +248,61 @@ public class GuessMusicMainActivity extends Activity {
         }
         return data;
     }
+
+    /**
+     * 生成所有的待选文字
+     * @return
+     */
+    private String[] generateWords()
+    {
+        String[] words=new String[MyGridView.COUNT_WORDS];
+        //存入歌名
+        for(int i=0;i<mCurrentSong.getNameLength();i++)
+        {
+            words[i]=mCurrentSong.getNameCharacters()[i]+"";
+        }
+        //获取随机文字并存入数组
+        for (int i=mCurrentSong.getNameLength();i<MyGridView.COUNT_WORDS;i++)
+        {
+            words[i]=getRandomChar()+"";
+        }
+
+        //打乱文字顺序,首先从所有元素中随机选取一个与最后一个元素进行交换，
+        //然后在第二个周选择一个元素与倒数第二个元素交换，直到第一个元素。
+        //这样能够确保每个元素在每个位置的概率都是1/n
+        Random random=new Random();
+        for(int i=MyGridView.COUNT_WORDS-1;i>=0;i--)
+        {
+            int index=random.nextInt(i+1);
+            String buf=words[index];
+            words[index]=words[i];
+            words[i]=buf;
+        }
+        return words;
+    }
+    /**
+     * 生成随机汉字
+     * @return
+     */
+    private char getRandomChar()
+    {
+        String str="";
+        int hightPos;
+        int lowPos;
+        Random random=new Random();
+        hightPos=(176+Math.abs(random.nextInt(39)));
+        lowPos=(161+Math.abs(random.nextInt(93)));
+        //TODO:byte数组低位对应数字的高位吗？
+        byte[] b=new byte[2];
+        b[0]= Integer.valueOf(hightPos).byteValue();
+        b[1]=Integer.valueOf(lowPos).byteValue();
+        try {
+            str=new String(b,"GBK");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return str.charAt(0);
+    }
+
+
 }
