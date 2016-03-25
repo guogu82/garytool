@@ -111,6 +111,8 @@
         <activity
             android:name=".view.viewpager.ViewPagerIndicatorActivity" >
         </activity>
+
+        <activity android:name=".business.guessmusic.GuessMusicMainActivity"></activity>
     </application>
 
 </manifest>

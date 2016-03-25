@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gary.garytool.business.guessmusic.GuessMusicMainActivity;
 import com.gary.garytool.business.insane.MainInsaneActivity;
+import com.gary.garytool.business.stock.StockMainActivity;
 import com.gary.garytool.view.listview.ListViewActivity;
 import com.gary.garytool.view.pulltorefresh.PullToRefreshListViewActivity;
 
@@ -73,6 +75,21 @@ public class MainActivity extends Activity {
         });
     }
 
+    /**
+     * 进入股票分析功能
+     * @param view
+     */
+    public void stockMain(View view)
+    {
+        Intent intent=new Intent(MainActivity.this, StockMainActivity.class);
+        startActivity(intent);
+    }
+
+    public void guessMusic(View view)
+    {
+        Intent intent=new Intent(MainActivity.this, GuessMusicMainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {

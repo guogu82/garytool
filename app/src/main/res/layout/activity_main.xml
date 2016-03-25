@@ -38,5 +38,22 @@
         android:layout_height="wrap_content"
         android:text="疯狂android第三版"/>
 
+    <Button
+        android:id="@+id/bt_stock"
+        android:onClick="stockMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="stock function"/>
+
+
+    <Button
+        android:id="@+id/bt_guess_music"
+        android:onClick="guessMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="guess music"/>
+
+
+
 
 </LinearLayout>
