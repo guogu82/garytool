@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -15,8 +17,17 @@ import java.util.Map;
 
 /**
  * Created by gary on 2015/10/27.
+ * @author gary guo
  */
 public class Util {
+
+    //通过id 获取 view
+    public static View getView(Context context,int layoutId)
+    {
+        LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout=inflater.inflate(layoutId,null);
+        return layout;
+    }
 
 
     /*

@@ -8,6 +8,11 @@
         android:background="@drawable/guess_music_index_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!--top bar-->
         <include layout="@layout/guess_music_top_bar"></include>
+        <!-- 盘片 -->
+        <include layout="@layout/guess_music_pan_layout"></include>
+        <!-- 文字框 -->
+        <include layout="@layout/guess_music_name_select"></include>
     </LinearLayout>
 </FrameLayout>
