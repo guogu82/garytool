@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -12,19 +11,33 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.gary.garytool.R;
+import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.util.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Administrator on 2016/3/25.
+ * @author gary guo
  */
 public class GuessMusicMainActivity extends Activity implements IWordButtonClickListener{
+
+    public static final String TAG="GuessMusicMainActivity";
+
+    /** 答案状态 --正确*/
+    public static final int STATUS_ANSWER_RIGHT=1;
+    /** 答案状态 --错误*/
+    public static final int STATUS_ANSWER_WRONG=2;
+    /** 答案状态 --不完整*/
+    public static final int STATUS_ANSWER_LACK=3;
+    //闪烁次数
+    public static final int SPARD_TIMES=6;
 
     //唱片相关动画
     private Animation mPanAnim;
@@ -38,6 +51,9 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
 
     //Play 按键事件
     private ImageButton mBtPlayStart;
+
+    //过关界面
+    private View mPassView;
 
     //是否处于播放状态
     private boolean mIsRunning=false;
@@ -149,8 +165,88 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
     }
     @Override
     public void onWordButtonClick(WordButton wordButton) {
-        Toast.makeText(this,"gary",Toast.LENGTH_SHORT).show();
+        //填充文字到文本框
+        setSelectWord(wordButton);
+
+        //监测答案是否正确
+        int checkResult=checkTheAnswer();
+        //根据答案结果显示动态提示
+        if(checkResult==STATUS_ANSWER_RIGHT)
+        {
+            // 过关并获得奖励
+            handlePassEvent();
+        }else  if(checkResult==STATUS_ANSWER_WRONG)
+        {
+            //闪烁文字，提示用户
+            sparkTheWords();
+        }else if(checkResult==STATUS_ANSWER_LACK)
+        {
+            //就是一般正常状态，恢复状态。设置文字为白色
+            for(int i=0;i<mSelectWords.size();i++)
+            {
+                mSelectWords.get(i).getViewButton().setTextColor(Color.WHITE);
+            }
+        }
     }
+
+    /**
+     * 处理过关界面及事件
+     */
+    private void handlePassEvent()
+    {
+        mPassView=(LinearLayout)findViewById(R.id.pass_view);
+        mPassView.setVisibility(View.VISIBLE);
+    }
+    /**
+     * 清除已选框的可见
+     * @param wordButton
+     */
+    private  void clearTheAnswer(WordButton wordButton)
+    {
+        wordButton.getViewButton().setText("");
+        wordButton.setWordString("");
+        wordButton.setIsVisible(false);
+        //恢复待选框的可见
+        setButtonVisible(mAllWords.get(wordButton.getIndex()), View.VISIBLE);
+    }
+    /**
+     * 设置答案
+     * @param wordButton
+     */
+    private void setSelectWord(WordButton wordButton)
+    {
+        for(int i=0;i<mSelectWords.size();i++)
+        {
+            if(mSelectWords.get(i).getWordString().length()==0)
+            {
+                //设置答案文字框内容及可见性
+                mSelectWords.get(i).getViewButton().setText(wordButton.getWordString());
+                mSelectWords.get(i).setIsVisible(true);
+                mSelectWords.get(i).setWordString(wordButton.getWordString());
+                mSelectWords.get(i).setIndex(wordButton.getIndex());
+
+                LogUtil.d(TAG,mSelectWords.get(i).getIndex()+"");
+
+                //设置待选框的可见性
+                setButtonVisible(wordButton, View.INVISIBLE);
+                return;
+            }
+        }
+    }
+
+    /**
+     * 设置待选文字框是否可见
+     * @param button
+     * @param visibility
+     */
+    private void setButtonVisible(WordButton button,int visibility)
+    {
+        button.getViewButton().setVisibility(visibility);
+        button.setIsVisible(visibility == View.VISIBLE ? true : false);
+
+        LogUtil.d(TAG,button.getIsVisible()+"");
+    }
+
 
     /**
      * 盘片按钮的点击事件处理
@@ -237,13 +333,19 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         for(int i=0;i<mCurrentSong.getNameLength();i++)
         {
             View view= Util.getView(GuessMusicMainActivity.this,R.layout.guess_music_sel_gridview_item);
-            WordButton holder=new WordButton();
+            final WordButton holder=new WordButton();
             Button button=(Button) view.findViewById(R.id.bt_item);
             holder.setViewButton(button);
             button.setTextColor(Color.WHITE);
             button.setText("");
             holder.setIsVisible(false);
             button.setBackgroundResource(R.drawable.guess_music_game_wordblank);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearTheAnswer(holder);
+                }
+            });
             data.add(holder);
         }
         return data;
@@ -273,7 +375,7 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         Random random=new Random();
         for(int i=MyGridView.COUNT_WORDS-1;i>=0;i--)
         {
-            int index=random.nextInt(i+1);
+            int index=random.nextInt(i + 1);
             String buf=words[index];
             words[index]=words[i];
             words[i]=buf;
@@ -304,5 +406,65 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         return str.charAt(0);
     }
 
+    /**
+     * 检查答案
+     * @return
+     */
+    private int checkTheAnswer()
+    {
+        //判断长度
+        for(int i=0;i<mSelectWords.size();i++)
+        {
+            //如果有空的，说明答案还没完整
+            if(mSelectWords.get(i).getWordString().length()==0)
+            {
+                return STATUS_ANSWER_LACK;
+            }
+        }
+
+        //检查答案是否正确
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<mSelectWords.size();i++)
+        {
+            sb.append(mSelectWords.get(i).getWordString());
+        }
+     return sb.toString().equals(mCurrentSong.getSongName())?STATUS_ANSWER_RIGHT:STATUS_ANSWER_WRONG;
+    }
+
+    /**
+     * 文字闪烁
+     */
+    private void sparkTheWords()
+    {
+        //定时器相关
+        TimerTask timerTask=new TimerTask() {
+
+            boolean mChange=false;
+            int mSparkTimes=0;
+            @Override
+            public void run() {
+                //在ui线程刷新界面
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //闪烁的次数
+                        if(++mSparkTimes>SPARD_TIMES)
+                        {
+                            return;
+                        }
+
+                        //执行闪烁逻辑，交替显示红色和白色文字
+                        for(int i=0;i<mSelectWords.size();i++)
+                        {
+                            mSelectWords.get(i).getViewButton().setTextColor(mChange?Color.RED:Color.WHITE);
+                        }
+                        mChange=!mChange;
+                    }
+                });
+            }
+        };
+        Timer timer=new Timer();
+        timer.schedule(timerTask,1,150);
+    }
 
 }

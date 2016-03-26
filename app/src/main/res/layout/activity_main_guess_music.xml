@@ -15,4 +15,9 @@
         <!-- 文字框 -->
         <include layout="@layout/guess_music_name_select"></include>
     </LinearLayout>
+    <!--浮动按钮-->
+    <include layout="@layout/guess_music_float_buttons"></include>
+
+    <!--答案正确界面-->
+    <include layout="@layout/guess_music_answer_right"></include>
 </FrameLayout>
