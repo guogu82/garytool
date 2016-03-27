@@ -1,6 +1,7 @@
 package com.gary.garytool.util;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,11 @@ import android.os.Environment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.gary.garytool.R;
+import com.gary.garytool.business.guessmusic.IAlertDialogButtonListener;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -43,6 +49,55 @@ public class Util {
 
         //关闭当前的Activity
         ((Activity)context).finish();
+    }
+
+    private static AlertDialog mAlertDialog;
+    /**
+     * 显示自定义对话框
+     * @param context
+     * @param message
+     * @param listener 确认按钮点击事件回调
+     */
+    public static void showDialog(Context context,String message, final IAlertDialogButtonListener listener)
+    {
+        View dialogView=null;
+        //TODO:静态方法可以调用其它对象的非静态字段，不过要创建该对象实例
+        //AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        //如果有背景框，可以用下面的主题来控制
+        AlertDialog.Builder builder=new AlertDialog.Builder(context,R.style.GuessMusic_Theme_Transparent);
+        dialogView=getView(context, R.layout.guess_music_dialog_view);
+        ImageButton btOk= (ImageButton) dialogView.findViewById(R.id.bt_dialog_ok);
+        btOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mAlertDialog!=null)
+                {
+                    mAlertDialog.cancel();
+                }
+
+                if(listener!=null) {
+                    listener.onClick();
+                }
+            }
+        });
+        ImageButton btCancel= (ImageButton) dialogView.findViewById(R.id.bt_dialog_cancel);
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mAlertDialog!=null)
+                {
+                    mAlertDialog.cancel();
+                }
+            }
+        });
+        TextView tv_message= (TextView) dialogView.findViewById(R.id.tv_dialog_message);
+        tv_message.setText(message);
+        //为dialog设置view
+        builder.setView(dialogView);
+        mAlertDialog=builder.create();
+        mAlertDialog.show();
+
+
     }
 
 

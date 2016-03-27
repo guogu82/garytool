@@ -41,6 +41,10 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
     //闪烁次数
     public static final int SPARD_TIMES=6;
 
+    public static final int ID_DIALOG_DELETE_WORD=1;
+    public static final int ID_DIALOG_TIP_ANSWER=2;
+    public static final int ID_DIALOG_LACK_COINS=3;
+
     //唱片相关动画
     private Animation mPanAnim;
     private LinearInterpolator mPanLin;
@@ -570,6 +574,7 @@ mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
                 if(!handleCoins(-getTipCoins()))
                 {
                     //金币数量不够，显示对话框
+                    showConfirmDialog(ID_DIALOG_LACK_COINS);
                     return;
                 }
                 else
@@ -601,6 +606,7 @@ mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
         if(!handleCoins(-getDeleteWordCoins()))
         {
             //金币不够，显示提示对话框
+            showConfirmDialog(ID_DIALOG_LACK_COINS);
             return;
 
         }
@@ -711,7 +717,8 @@ mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteOneWord();
+
+                showConfirmDialog(ID_DIALOG_DELETE_WORD);
             }
         });
     }
@@ -723,9 +730,52 @@ mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tipAnswer();
+                showConfirmDialog(ID_DIALOG_TIP_ANSWER);
             }
         });
+    }
+
+    //自定义AlertDialog事件响应
+    //删除错误答案
+    private IAlertDialogButtonListener mBtOkDeleteWordListener=new IAlertDialogButtonListener() {
+        @Override
+        public void onClick() {
+            deleteOneWord();
+        }
+    };
+    //答案提示
+    private IAlertDialogButtonListener mBtOkTipAnswerListener=new IAlertDialogButtonListener() {
+        @Override
+        public void onClick() {
+            tipAnswer();
+        }
+    };
+    //金币不足
+    private IAlertDialogButtonListener mBtOkLackCoinsListener=new IAlertDialogButtonListener() {
+        @Override
+        public void onClick() {
+//执行事件 添加金币
+        }
+    };
+
+    /**
+     * 显示对话框
+     * @param id
+     */
+    private void showConfirmDialog(int id)
+    {
+        switch (id)
+        {
+            case ID_DIALOG_DELETE_WORD:
+                Util.showDialog(GuessMusicMainActivity.this,"确认花掉"+getDeleteWordCoins()+"个金币去掉一个错误答案？",mBtOkDeleteWordListener);
+                break;
+            case ID_DIALOG_TIP_ANSWER:
+                Util.showDialog(GuessMusicMainActivity.this,"确认花掉"+getTipCoins()+"个金币活动一个文字提示？",mBtOkTipAnswerListener);
+                break;
+            case ID_DIALOG_LACK_COINS:
+                Util.showDialog(GuessMusicMainActivity.this,"金币不足，去商店补充？",mBtOkLackCoinsListener);
+                break;
+        }
     }
 
 }
