@@ -97,6 +97,11 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_guess_music);
 
+        //读取游戏数据
+        int[] datas=GuessMusicUtil.loadData(this);
+        mCurrentStageIndex=datas[GuessMusicUtil.INDEX_LOAD_DATA_STAGE];
+        mCurrentCoins=datas[GuessMusicUtil.INDEX_LOAD_DATA_COIN];
+
         //初始化控件
         mViewPan= (ImageView) findViewById(R.id.iv1);
         mViewPanBar= (ImageView) findViewById(R.id.iv2);
@@ -181,7 +186,7 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         mBtPlayStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              handlePlayButton();
+                handlePlayButton();
             }
         });
 
@@ -193,6 +198,8 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
 
         //处理提示按钮事件
         handleTipAnswer();
+
+
     }
     @Override
     public void onWordButtonClick(WordButton wordButton) {
@@ -230,6 +237,11 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         mPassView.setVisibility(View.VISIBLE);
         //停止未完成的动画
         mViewPan.clearAnimation();
+        //停止正在播放的音乐
+        MyPlayer.stopTheSong(GuessMusicMainActivity.this);
+
+        //播放音效
+        MyPlayer.playTone(GuessMusicMainActivity.this,MyPlayer.INDEX_STONE_COIN);
         //当前关的索引
         mCurrentStagePassView= (TextView) findViewById(R.id.tv_current_stage_pass);
         if(mCurrentStagePassView!=null)
@@ -334,13 +346,22 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
                 mIsRunning = true;
                 mViewPanBar.startAnimation(mBarInAnim);
                 mBtPlayStart.setVisibility(View.INVISIBLE);
+
+                //播放音乐
+                MyPlayer.playSong(GuessMusicMainActivity.this,mCurrentSong.getSongFileName());
             }
         }
     }
 
     @Override
     protected void onPause() {
+        //停止盘片动画，则其它动画也会停止
         mViewPan.clearAnimation();
+        //停止音乐
+        MyPlayer.stopTheSong(GuessMusicMainActivity.this);
+
+        //保存游戏数据
+        GuessMusicUtil.saveData(GuessMusicMainActivity.this,mCurrentStageIndex-1,mCurrentCoins);
         super.onPause();
     }
 
@@ -380,7 +401,7 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         }
 
         //显示当前关的索引
-mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
+        mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
         if(mCurrentStageView!=null)
         {
             mCurrentStageView.setText((mCurrentStageIndex+1)+"");
@@ -390,6 +411,9 @@ mCurrentStageView= (TextView) findViewById(R.id.tv_game_level);
         mAllWords=initAllWord();
         //更新数据 MyGridView
         mMyGridView.updateData(mAllWords);
+
+        //一开始播放音乐
+        handlePlayButton();
     }
 
     /**

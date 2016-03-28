@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.gary.garytool.R;
 import com.gary.garytool.business.guessmusic.IAlertDialogButtonListener;
+import com.gary.garytool.business.guessmusic.MyPlayer;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -58,7 +59,7 @@ public class Util {
      * @param message
      * @param listener 确认按钮点击事件回调
      */
-    public static void showDialog(Context context,String message, final IAlertDialogButtonListener listener)
+    public static void showDialog(final Context context,String message, final IAlertDialogButtonListener listener)
     {
         View dialogView=null;
         //TODO:静态方法可以调用其它对象的非静态字段，不过要创建该对象实例
@@ -78,6 +79,8 @@ public class Util {
                 if(listener!=null) {
                     listener.onClick();
                 }
+                //播放音效
+                MyPlayer.playTone(context,MyPlayer.INDEX_STONE_ENTER);
             }
         });
         ImageButton btCancel= (ImageButton) dialogView.findViewById(R.id.bt_dialog_cancel);
@@ -88,6 +91,8 @@ public class Util {
                 {
                     mAlertDialog.cancel();
                 }
+                //播放音效
+                MyPlayer.playTone(context,MyPlayer.INDEX_STONE_CANCEL);
             }
         });
         TextView tv_message= (TextView) dialogView.findViewById(R.id.tv_dialog_message);
