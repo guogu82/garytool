@@ -53,7 +53,12 @@
         android:layout_height="wrap_content"
         android:text="guess music"/>
 
-
+    <Button
+        android:id="@+id/bt_map"
+        android:onClick="map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="map"/>
 
 
 </LinearLayout>

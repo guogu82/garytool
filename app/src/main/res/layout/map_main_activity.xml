@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pass_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.gary.garytool.business.map.api.MapViewGroup
+        android:id="@+id/mapview_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.gary.garytool.business.map.api.MapViewGroup>
+    <LinearLayout
+        android:id="@+id/mapview_bottomlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="4dp"
+        android:gravity="right" >
+
+        <ImageView
+            android:id="@+id/mapview_zoomout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/selector_map_zoom_out_eft" />
+
+        <ImageView
+            android:id="@+id/mapview_zoomin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/selector_map_zoom_in_eft" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/mapview_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="4dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/selector_map_location_eft" />
+
+</RelativeLayout>
+

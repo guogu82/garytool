@@ -51,69 +51,41 @@
             android:name=".view.viewpager.BottomMenuWithPopupWindowLikeQQ"
             android:label="高仿QQ底部菜单" >
         </activity>
-        <activity android:name=".view.listview.ListViewLoadMoreActivity" >
-        </activity>
-        <activity android:name=".view.listview.ListViewAdapterMActivity" >
-        </activity>
-        <activity android:name=".view.listview.ListViewUpdateActivity" >
-        </activity>
-        <activity android:name=".view.viewpager.ViewPagerGuideActivity" >
-        </activity>
-        <activity android:name=".BaseFrameworkActivity" >
-        </activity>
-        <activity android:name=".business.volley.VolleyActivity" >
-        </activity>
+        <activity android:name=".view.listview.ListViewLoadMoreActivity" >        </activity>
+        <activity android:name=".view.listview.ListViewAdapterMActivity" >        </activity>
+        <activity android:name=".view.listview.ListViewUpdateActivity" >        </activity>
+        <activity android:name=".view.viewpager.ViewPagerGuideActivity" >        </activity>
+        <activity android:name=".BaseFrameworkActivity" >        </activity>
+        <activity android:name=".business.volley.VolleyActivity" >        </activity>
         <activity android:name=".view.PopupWindowActivity" />
         <activity
             android:name=".business.volley.VolleyTableLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.pulltorefresh.PullToRefreshActivity" >
-        </activity>
-        <activity android:name=".view.PictureChoseActivity" >
-        </activity>
-        <activity android:name=".business.xutil.XUtilsActivity" >
-        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshListViewActivity" >
-        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshBaseActivity" >
-        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshBothActivity" >
-        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshGradViewActivity" >
-        </activity>
-        <activity android:name=".business.insane.MainInsaneActivity" >
-        </activity>
+        <activity android:name=".view.pulltorefresh.PullToRefreshActivity" >        </activity>
+        <activity android:name=".view.PictureChoseActivity" >        </activity>
+        <activity android:name=".business.xutil.XUtilsActivity" >        </activity>
+        <activity android:name=".view.pulltorefresh.PullToRefreshListViewActivity" >        </activity>
+        <activity android:name=".view.pulltorefresh.PullToRefreshBaseActivity" >        </activity>
+        <activity android:name=".view.pulltorefresh.PullToRefreshBothActivity" >        </activity>
+        <activity android:name=".view.pulltorefresh.PullToRefreshGradViewActivity" >        </activity>
+        <activity android:name=".business.insane.MainInsaneActivity" >        </activity>
         <activity
             android:name=".business.insane.InsaneDemoActivity"
             android:theme="@style/AppBaseTheme" >
         </activity>
-        <activity android:name=".business.insane.InsaneToastActivity" >
-        </activity>
-        <activity android:name=".business.insane.InsaneAlertDialogActivity" >
-        </activity>
-        <activity android:name=".business.insane.InsaneDateDialogActivity" >
-        </activity>
-        <activity android:name=".business.insane.InsaneProgressDialogActivity" >
-        </activity>
-        <activity
-            android:name=".business.insane.InsanePlaneActivity"
-            android:label="@string/title_activity_insane_plane" >
-        </activity>
-        <activity
-            android:name=".IntentServiceActivity"
-            android:label="@string/title_activity_intent_service" >
-        </activity>
-
+        <activity android:name=".business.insane.InsaneToastActivity" >  </activity>
+        <activity android:name=".business.insane.InsaneAlertDialogActivity" > </activity>
+        <activity android:name=".business.insane.InsaneDateDialogActivity" ></activity>
+        <activity android:name=".business.insane.InsaneProgressDialogActivity" ></activity>
+        <activity android:name=".business.insane.InsanePlaneActivity"> </activity>
+        <activity android:name=".IntentServiceActivity"></activity>
         <service
             android:name=".view.UploadImgService"
             android:exported="false" />
-
-        <activity
-            android:name=".view.viewpager.ViewPagerIndicatorActivity" >
-        </activity>
-
+        <activity android:name=".view.viewpager.ViewPagerIndicatorActivity" ></activity>
         <activity android:name=".business.guessmusic.GuessMusicMainActivity"></activity>
         <activity android:name=".business.guessmusic.AllPassView"></activity>
+        <activity android:name=".business.map.MapMainActivity"></activity>
     </application>
 
 </manifest>
