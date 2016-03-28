@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gary.garytool.MainActivity;
 import com.gary.garytool.R;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.util.Util;
@@ -199,7 +200,13 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         //处理提示按钮事件
         handleTipAnswer();
 
-
+        ImageButton bt_bar_back= (ImageButton) findViewById(R.id.bt_bar_back);
+        bt_bar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.startActivity(GuessMusicMainActivity.this, MainActivity.class);
+            }
+        });
     }
     @Override
     public void onWordButtonClick(WordButton wordButton) {
