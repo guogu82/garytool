@@ -101,7 +101,7 @@ public class TouristMainActivity extends Activity{
         // 设置图片路径
        // MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";
         MapsConstants.MapsRoot = "";
-        MapsConstants.LocalMapsRoot =extendSdRootPath+"/touristguide/external_sd/cgt_maps/airscape";
+        MapsConstants.LocalMapsRoot =Environment.getExternalStorageDirectory().getPath()+"/touristguide/";
 
         MapsConstants.Directorys = new String[] { "0","1", "2" };
         MapsConstants.ScaleFactors = new double[] {0.0008, 0.0004, 0.0002 };

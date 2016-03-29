@@ -109,16 +109,7 @@ public class ImageLoader {
 				this.loadIndex=0;
 			}else{
 				if(!MapsConstants.isLocal)
-				{
-					//如果是在线地图，则读取网络图片
 					this.loadNetImage();
-				}
-				else
-				{
-					//如果是本地地图，则读取本地文件
-					loadFromLocal();
-				}
-
 			}
 		}else{
 			this.LoadState=ImageLoader.MSG_SUCCESS;
@@ -129,7 +120,8 @@ public class ImageLoader {
 	{
 		MapService map = new MapService();
 
-		int levels= Integer.parseInt(src);;
+		int levels;
+		levels= Integer.parseInt(src);
 
 		byte[] tmp = map.getImageByPNGUrl(levels, xDir, yDir, xFile, yFile);
 
