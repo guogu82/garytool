@@ -1,12 +1,13 @@
 package com.gary.garytool.business.map.api;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -573,17 +574,16 @@ public class BaseMaps extends View {
 
         return tmp;
     }
-    public Coordinates PixelToCoordinates(int tx,int ty){//像素坐标转换为地理坐标
-        int tmpX=tx-this.pTLayer.x;//由屏幕坐标转换成图层坐标
-        int tmpY=ty+this.pTLayer.y;
-
-        double xc=this.m_Cx-(this.m_Cx-this.pTLayer.Cx)-(this.m_MWidth/2-tmpX)*MapsConstants.ScaleFactors[this.m_MapsLevel]/MapsConstants.MPicWidth;
-        double yc=this.m_Cy-(this.pTLayer.Cy-this.m_Cy)+(this.m_MHeight/2-tmpY)*MapsConstants.ScaleFactors[this.m_MapsLevel]/MapsConstants.MPicHeight;
-
-        Coordinates crd=new Coordinates(xc,yc);
-        return crd;
-    }
-
+	public Coordinates PixelToCoordinates(int tx,int ty){//像素坐标转换为地理坐标		
+		int tmpX=tx+this.pTLayer.x;//由屏幕坐标转换成图层坐标
+		int tmpY=ty+this.pTLayer.y;
+		
+		double yc=this.m_Cy+(this.m_MHeight/2-tmpY)*MapsConstants.ScaleFactors[this.m_MapsLevel]/MapsConstants.MPicHeight;
+		double xc=this.m_Cx-(this.m_MWidth/2-tmpX)*MapsConstants.ScaleFactors[this.m_MapsLevel]/MapsConstants.MPicWidth;		
+		Coordinates crd=new Coordinates(xc,yc);
+		return crd;
+	}
+	
     public Bounds getMapsBounds(){//获取当前地图的边界坐标
         double sxc=MapsConstants.ScaleFactors[this.m_MapsLevel]/MapsConstants.MPicHeight;
 
@@ -612,6 +612,27 @@ public class BaseMaps extends View {
         return re;
     }
 
+	public MapsStatus getAppropriateZoomCenter(List<Coordinates> arrs){//得到显示传入List点集合的最合适的地图等级和中心
+		MapsStatus re = null;
+		if(null != arrs && arrs.size() > 1){
+			Bounds temp = GFunction.getBoundsCoordinates(arrs);
+			re = new MapsStatus(new Coordinates(this.m_Cx, this.m_Cy), 0);
+			re.Center = new Coordinates((temp.MaxCrd.X + temp.MinCrd.X)/2, (temp.MaxCrd.Y + temp.MinCrd.Y)/2);
+			
+			double dyc = temp.MaxCrd.Y - temp.MinCrd.Y;
+			double dxc = temp.MaxCrd.X - temp.MinCrd.X;
+			
+			for (int i = MapsConstants.MapsLevelCount-1; i >= 0; i--) {
+				boolean flag = MapsConstants.ScaleFactors[i]/MapsConstants.MPicHeight*this.m_MHeight>dyc&&MapsConstants.ScaleFactors[i]/MapsConstants.MPicWidth*this.m_MWidth>dxc;
+				if(flag){
+					re.MapsLevel = i;
+					break;
+				}
+			}
+		}
+		return re;
+	}
+	
     public int getAppropriateMinZoomLevel(Coordinates[] arr){//得到显示点集合的小地图等级
         int zoomlevel=this.m_MaxLevel;
         if(arr.length>0){

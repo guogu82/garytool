@@ -148,7 +148,8 @@ public class TileLayer {
 				this.picArr[i][j].xFile=xFile;
 				this.picArr[i][j].yFile=yFile;
 
-				this.picArr[i][j].src=imgName;
+				this.picArr[i][j].src = imgName;
+
 				this.picArr[i][j].LoadState=ImageLoader.MSG_WAIT;
 				this.picArr[i][j].bitmap=null;
 				this.loaderArr.add(picArr[i][j]);
@@ -318,7 +319,9 @@ public class TileLayer {
 					this.loaderArr.remove(this.picArr[i][tyi]);
 				}
 
-				this.picArr[i][tyi].src=imgName;
+
+					this.picArr[i][tyi].src = imgName;
+
 				this.picArr[i][tyi].y=this.picArr[0][this.yIndex].y+(int)MapsConstants.MPicHeight;
 				this.picArr[i][tyi].yGrid=yGrid;
 
@@ -358,7 +361,9 @@ public class TileLayer {
 					this.loaderArr.remove(this.picArr[i][this.yIndex]);//如果存在并且不是正在载入，那么从队列移除
 				}
 
-				this.picArr[i][this.yIndex].src=imgName;
+
+					this.picArr[i][this.yIndex].src = imgName;
+
 				this.picArr[i][this.yIndex].y=this.picArr[0][tyi].y-(int)MapsConstants.MPicHeight;
 				this.picArr[i][this.yIndex].yGrid=yGrid;
 
@@ -401,7 +406,9 @@ public class TileLayer {
 					this.loaderArr.remove(this.picArr[this.xIndex][j]);
 				}
 
-				this.picArr[this.xIndex][j].src=imgName;
+
+					this.picArr[this.xIndex][j].src = imgName;
+
 				this.picArr[this.xIndex][j].x=this.picArr[txi][0].x-(int)MapsConstants.MPicWidth;
 				this.picArr[this.xIndex][j].xGrid=xGrid;
 
@@ -442,7 +449,8 @@ public class TileLayer {
 					this.loaderArr.remove(this.picArr[txi][j]);
 				}
 
-				this.picArr[txi][j].src=imgName;
+				this.picArr[txi][j].src = imgName;
+
 				this.picArr[txi][j].x=this.picArr[this.xIndex][0].x+(int)MapsConstants.MPicWidth;
 				this.picArr[txi][j].xGrid=xGrid;
 

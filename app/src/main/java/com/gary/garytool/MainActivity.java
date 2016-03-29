@@ -11,6 +11,7 @@ import com.gary.garytool.business.guessmusic.GuessMusicMainActivity;
 import com.gary.garytool.business.insane.MainInsaneActivity;
 import com.gary.garytool.business.map.MapMainActivity;
 import com.gary.garytool.business.stock.StockMainActivity;
+import com.gary.garytool.business.tourist.TouristMainActivity;
 import com.gary.garytool.util.Util;
 import com.gary.garytool.view.listview.ListViewActivity;
 import com.gary.garytool.view.pulltorefresh.PullToRefreshListViewActivity;
@@ -77,6 +78,14 @@ public class MainActivity extends Activity {
         });
     }
 
+
+    //景区主页进入事件
+    public void onTourist(View view)
+    {
+        Util.startActivity(MainActivity.this, TouristMainActivity.class);
+    }
+
+
     /**
      * 进入股票分析功能
      * @param view
@@ -87,13 +96,13 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void guessMusic(View view)
+    public void onGuessMusic(View view)
     {
         Intent intent=new Intent(MainActivity.this, GuessMusicMainActivity.class);
         startActivity(intent);
     }
 
-    public void map(View view)
+    public void onMap(View view)
     {
         Util.startActivity(MainActivity.this, MapMainActivity.class);
     }

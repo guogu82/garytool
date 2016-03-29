@@ -22,8 +22,9 @@ public class MapsEvent extends Event {
 
 	public static final String MapsMaxLevelChanged="MapsMaxLevelChanged";//地图的最大等级改变的事件
 	public static final String MapsClicked="MapsClicked";//地图点击事件
-
-
+	public static final String MapsLongPress="MapsLongPress";//地图长按事件
+	
+		
 	public int MapsLevel=0;//地图等级
 	public int MapsMaxLevel=0;//地图最大等级
 
