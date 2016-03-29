@@ -1,14 +1,24 @@
 package com.gary.garytool.business.map.api;
 
-public class MapsConstants {public MapsConstants(){}
+public class MapsConstants {
+
+
+
+
+	public MapsConstants(){}
 
 	public static int EarthRadius=6378137;//地球半径
 
 	//public static String MapsRoot="http://cgmap.shunde.gov.cn/";//地图图片路径
 	public static String MapsRoot = "http://202.104.25.195/rt/mapdb/"; // 图片路径
+
+	public static boolean isLocal=false;//判断是否是本地地图
 	public static String LocalMapsRoot="/mnt/sdcard/external_sd/cgt_maps/";
+	
+
 	//public static String CacheMapsRoot="/mnt/sdcard/external_sd/cgt_maps/cache/";
 	public static String CacheMapsRoot = "/mnt/sdcard/"; // 本地图片缓存
+public static String OffMapsFileRoot = "testMap";//存放在SD卡的离线地图.map文件
 
 //	public static String MapsCoordinatesType=CoordinatesType.BeiJing54;//地图坐标系类型
 

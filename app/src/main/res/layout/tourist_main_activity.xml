@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.gary.garytool.business.map.api.MapViewGroup
+        android:id="@+id/map_tourist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.gary.garytool.business.map.api.MapViewGroup>
+    <TextView
+        android:id="@+id/test_one_textview_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/tourist_top"
+        android:gravity="center"
+        android:text="清晖园"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
+</RelativeLayout>

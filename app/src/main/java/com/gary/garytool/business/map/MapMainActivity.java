@@ -52,8 +52,10 @@ public class MapMainActivity extends Activity {
         // 地图后台自动刷新功能
         localHandler.post(localTasks);
 
-        // 设置栅格地图参数：图片格式、本地图片缓存、图片路径
+        // 设置栅格地图参数：本地地图、图片格式、本地图片缓存、图片路径
         // 示例代码
+        //设置本地地图
+        MapsConstants.isLocal=false;
         //设置图片格式
         MapsConstants.PicType=".png";
         //设置本地图片缓存
@@ -62,7 +64,10 @@ public class MapMainActivity extends Activity {
         //MapsConstants.MapsRoot = "http://202.104.25.195/rt/mapdb/";
         MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";
 
-
+        MapsConstants.Directorys = new String[] { "6","7", "8", "9", "10", "11", "12", "13", "14" };
+        MapsConstants.ScaleFactors = new double[] { 0.4,0.2, 0.1, 0.04, 0.02, 0.01, 0.004, 0.002, 0.001 };
+        MapsConstants.GridFactors = new int[] {  10, 10, 10, 10, 40, 40, 40, 40, 40 };
+        MapsConstants.MapsLevelCount=9;
         //屏幕坐标转换经纬度
         //Coordinates monitorCoordinates=map.getMapView().PixelToCoordinates(100, 200);
         //android.graphics.Point monitorPixel=map.getMapView().CoordinatesToPixel(113.293106, 22.805604);

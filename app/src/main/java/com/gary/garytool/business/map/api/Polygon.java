@@ -22,8 +22,13 @@ public class Polygon extends BaseGraphics{
 			this.FillPen.setStrokeCap(Cap.ROUND);
 		}
 	}
-	
-	//ͼ�ε���仭��
+
+	public void updatePolygon(ArrayList<Coordinates> crds) {
+		if(crds!=null){
+			this.points=crds;
+		}
+	}
+	//图形的填充画笔
 	public Paint FillPen=null;	
 	
 	@Override 
@@ -41,9 +46,9 @@ public class Polygon extends BaseGraphics{
 			}	
 			path.close();
 			if(this.pMaplet.drawingCanvas!=null){
-				//�������ɫ				
+				//绘制填充色
 				this.pMaplet.drawingCanvas.drawPath(path,this.FillPen);
-				//���Ʊ߽�				
+				//绘制边界
 				this.pMaplet.drawingCanvas.drawPath(path,this.pen);
 			}
 			

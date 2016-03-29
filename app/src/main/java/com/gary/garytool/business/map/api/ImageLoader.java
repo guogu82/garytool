@@ -22,6 +22,8 @@ import android.graphics.BitmapFactory;
 
 import android.util.Log;
 
+import com.gary.garytool.business.map.api.mapsevice.MapService;
+
 
 public class ImageLoader {
 //	private static final int MSG_SUCCESS = 1;//获取图片成功的标识
@@ -89,15 +91,16 @@ public class ImageLoader {
 	public void load(){
 		this.bitmap=null;
 		this.LoadState=ImageLoader.MSG_LOADING;
-		String type = this.pTileLayer.getMapType(),
-				directory = MapsConstants.Directorys[this.pTileLayer.MapsLevel];
+        String type = this.pTileLayer.getMapType();
+        String directory = MapsConstants.Directorys[this.pTileLayer.MapsLevel];
 		if(this.idxRcd.loadIndex(type, directory)){
 			this.bitmap=idxRcd.loadImage(this.xDir, this.yDir, this.xFile*1000+this.yFile);
 		}
 
 		if(this.bitmap==null){
 //        	Log.d("文件不存在于本地，开始网络载图ImageLoader", src, null);
-			String str=MapsConstants.CacheMapsRoot+this.pTileLayer.getMapType()+"_"+this.pTileLayer.MapsLevel+"_"+this.xDir+"_"+this.yDir+"_"+this.xFile+"_"+this.yFile;
+			String str=MapsConstants.LocalMapsRoot+this.pTileLayer.getMapType()+"/"+this.pTileLayer.MapsLevel+"/"+this.xDir+"/"+this.yDir+"/"+this.xFile+"_"+this.yFile+".png";
+
 			File file=new File(str);
 			if(file.exists()){
 //    			Log.d("文件存在于本地缓存，开始读取，ImageLoader", str, null);
@@ -105,11 +108,38 @@ public class ImageLoader {
 				this.LoadState=ImageLoader.MSG_SUCCESS;
 				this.loadIndex=0;
 			}else{
-				this.loadNetImage();
+				if(!MapsConstants.isLocal)
+				{
+					//如果是在线地图，则读取网络图片
+					this.loadNetImage();
+				}
+				else
+				{
+					//如果是本地地图，则读取本地文件
+					loadFromLocal();
+				}
+
 			}
 		}else{
 			this.LoadState=ImageLoader.MSG_SUCCESS;
 		}
+	}
+
+	private void loadFromLocal()
+	{
+		MapService map = new MapService();
+
+		int levels= Integer.parseInt(src);;
+
+		byte[] tmp = map.getImageByPNGUrl(levels, xDir, yDir, xFile, yFile);
+
+		if(tmp != null){
+			this.bitmap = BitmapFactory.decodeByteArray(tmp, 0, tmp.length);
+		}
+		//this.saveFile(instream);
+		this.LoadState=ImageLoader.MSG_SUCCESS;
+		this.loadIndex=0;
+
 	}
 
 //	private void loadNetImage(){

@@ -49,7 +49,7 @@ public class Util {
         context.startActivity(intent);
 
         //关闭当前的Activity
-        ((Activity)context).finish();
+        //((Activity)context).finish();
     }
 
     private static AlertDialog mAlertDialog;
