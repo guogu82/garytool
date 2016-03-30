@@ -98,9 +98,9 @@ public class ImageLoader {
 		}
 
 		if(this.bitmap==null){
-//        	Log.d("文件不存在于本地，开始网络载图ImageLoader", src, null);
+			//清晖园离线地图修改，直接到本地目录读取图片，依赖与读取的因子
 			String str=MapsConstants.LocalMapsRoot+this.pTileLayer.getMapType()+"/"+this.pTileLayer.MapsLevel+"/"+this.xDir+"/"+this.yDir+"/"+this.xFile+"_"+this.yFile+".png";
-
+//        	Log.d("文件不存在于本地，开始网络载图ImageLoader", src, null);
 			File file=new File(str);
 			if(file.exists()){
 //    			Log.d("文件存在于本地缓存，开始读取，ImageLoader", str, null);
@@ -108,6 +108,7 @@ public class ImageLoader {
 				this.LoadState=ImageLoader.MSG_SUCCESS;
 				this.loadIndex=0;
 			}else{
+
 				if(!MapsConstants.isLocal)
 					this.loadNetImage();
 			}

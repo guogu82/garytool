@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
 
 import com.gary.garytool.R;
 import com.gary.garytool.business.map.api.Coordinates;
@@ -16,6 +18,7 @@ import com.gary.garytool.business.map.api.MapViewGroup;
 import com.gary.garytool.business.map.api.MapsConstants;
 import com.gary.garytool.business.map.api.MapsType;
 import com.gary.garytool.business.map.api.PointMarker;
+import com.gary.garytool.util.Util;
 
 
 import java.io.File;
@@ -26,32 +29,96 @@ import java.io.File;
 public class TouristMainActivity extends Activity{
     private Double initLongitude = 113.255046875; // 进入activity默认的精度
     private Double initLatitude = 22.835714843; // 进入activity默认的纬度
+    private Coordinates mCenterCoordinates;
     private MapViewGroup mMapTourist = null;
-    private String extendSdRootPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tourist_main_activity);
+        //初始化地图
+        initMap();
+    }
 
+    //设置按钮响应事件
+    public void onSetting(View view)
+    {
+        Util.startActivity(TouristMainActivity.this,TouristSettingActivity.class);
+    }
+
+    private void initMap() {
         // 栅格地图 示例代码
         mMapTourist = (MapViewGroup) findViewById(R.id.map_tourist);
-
-        setExtendSdRootPath();
 
         // 设置地图缓存位置
         setMapCache();
 
         // 将坐标转换成适应清晖园级别的坐标
-        Coordinates coordinates = MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, 0);
+        mCenterCoordinates = MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, 0);
 
         // 参数为地图 中心点位置以及地图显示等级
-        mMapTourist.initMaps(coordinates.X, coordinates.Y, 0);
+        mMapTourist.initMaps(mCenterCoordinates.X, mCenterCoordinates.Y, 0);
         mMapTourist.show();
+
+        // 地图放大缩小
+        zoomInOut();
+        // 定位
+        location();
 
         // 地图后台自动刷新功能
         localHandler.post(localTasks);
     }
+
+    private void location() {
+        Button location = (Button) findViewById(R.id.bt_location);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 定位操作
+                mMapTourist.setCenter(localMarker.Cx, localMarker.Cy);// 设置地图中心点位置
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        localHandler.removeCallbacks(localTasks);
+        localHandler = null;
+        mMapTourist.Dispose();
+        mMapTourist = null;
+    }
+
+    private void zoomInOut() {
+
+        final Button zoomIn = (Button) findViewById(R.id.bt_zoom_in);
+        final Button zoomOut = (Button) findViewById(R.id.bt_zoom_out);
+
+        zoomIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                int level = mMapTourist.getMapsLevel();
+                int max = mMapTourist.getMaxLevel();
+                mMapTourist.setMapsLevel(level + 1);
+                if (level == max) {
+                    zoomIn.setEnabled(false);
+                }
+                zoomOut.setEnabled(true);
+            }
+        });
+
+        zoomOut.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                int level = mMapTourist.getMapsLevel();
+                mMapTourist.setMapsLevel(level - 1);
+                if (level == 0) {
+                    zoomOut.setEnabled(false);
+                }
+                zoomIn.setEnabled(true);
+            }
+        });
+    }
+
     // 地图刷新线程
     private Handler localHandler = new Handler();
     private PointMarker localMarker = null;
@@ -66,9 +133,9 @@ public class TouristMainActivity extends Activity{
                 localMarker = new PointMarker(localBitmap, localBitmap.getWidth() / -2, localBitmap.getHeight() / -2);
                 mMapTourist.addMarker(localMarker);
             }
-
-            localMarker.Cx = 113.293106;
-            localMarker.Cy = 22.805604;
+            mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+            localMarker.Cx = mCenterCoordinates.X;
+            localMarker.Cy = mCenterCoordinates.Y;
             localMarker.nameStr = "我的位置";
             localMarker.Info = -1;
 
@@ -78,57 +145,23 @@ public class TouristMainActivity extends Activity{
         }
     };
     private void setMapCache() {
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels; // 屏幕宽度（像素）
-        int height = metric.heightPixels; // 屏幕高度（像素）
-        float density = metric.density; // 屏幕密度（0.75 / 1.0 / 1.5）
-        int densityDpi = metric.densityDpi; // 屏幕密度DPI（120 / 160 / 240）
-
-
-        if (densityDpi > 320) {// 根据分辨率设置地图显示大小
-            MapsConstants.MPicWidth = 512;
-            MapsConstants.MPicHeight = 512;
-        }
-
         // 设置栅格地图参数：本地地图、图片格式、本地图片缓存、图片路径
         //设置本地地图
         MapsConstants.isLocal=true;
         // 设置图片格式
         MapsConstants.PicType = ".png";
         // 设置本地图片缓存
-        MapsConstants.CacheMapsRoot = "/mnt/sdcard/test/";
+        MapsConstants.CacheMapsRoot = "";
         // 设置图片路径
-       // MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";
         MapsConstants.MapsRoot = "";
-        MapsConstants.LocalMapsRoot =Environment.getExternalStorageDirectory().getPath()+"/touristguide/";
+        MapsConstants.LocalMapsRoot = Util.getSDPath()+"/touristguide/external_sd/cgt_maps/";
 
+        //设置地图的因子，控制读取文件目录路径
         MapsConstants.Directorys = new String[] { "0","1", "2" };
         MapsConstants.ScaleFactors = new double[] {0.0008, 0.0004, 0.0002 };
         MapsConstants.GridFactors = new int[] { 100, 100, 100};
         MapsConstants.MapsLevelCount=3;
-        // Toast.makeText(MainActivity.this,
-        // "path=="+MapsConstants.LocalMapsRoot, Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * 设置文件所在存储卡的跟路径
-     */
-    private void setExtendSdRootPath() {
-        // TODO Auto-generated method stub
-        StorageManager sm = (StorageManager) this.getSystemService(Context.STORAGE_SERVICE);
-        try {
-            String[] paths = (String[]) sm.getClass().getMethod("getVolumePaths", null).invoke(sm, null);
-            for (String path : paths) {
-                // Toast.makeText(this,path,1).show();
-                File file = new File(path + "/touristguide");
-                if (file.exists()) {
-                    extendSdRootPath = path;
-                }
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+
 }

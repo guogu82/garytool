@@ -475,10 +475,10 @@ public class TileLayer {
 	private void initVariable(){//计算栅格图片排列参数
 		this.xAbsolute=(int)Math.floor((this.Cx)/MapsConstants.ScaleFactors[this.MapsLevel]);
 		this.yAbsolute=(int)Math.floor((this.Cy)/MapsConstants.ScaleFactors[this.MapsLevel]);
-		Log.d("gary","this.Cx%MapsConstants.ScaleFactors[this.MapsLevel]="+this.Cx%MapsConstants.ScaleFactors[this.MapsLevel], null);
-		Log.d("gary","(this.Cy%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicHeight="+(this.Cy%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicHeight, null);
-		Log.d("gary","(this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel]="+(this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel], null);
-		Log.d("gary","Math.round((this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel])="+Math.round((this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel]), null);
+		//Log.d("gary","this.Cx%MapsConstants.ScaleFactors[this.MapsLevel]="+this.Cx%MapsConstants.ScaleFactors[this.MapsLevel], null);
+		//Log.d("gary","(this.Cy%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicHeight="+(this.Cy%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicHeight, null);
+		//Log.d("gary","(this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel]="+(this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel], null);
+		//Log.d("gary","Math.round((this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel])="+Math.round((this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel]), null);
 
 
 		this.centerX=(int)(this.MapsWidth/2-Math.round((this.Cx%MapsConstants.ScaleFactors[this.MapsLevel])*MapsConstants.MPicWidth/MapsConstants.ScaleFactors[this.MapsLevel]));

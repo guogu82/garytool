@@ -347,4 +347,9 @@ public class Util {
                 + "TB";
     }
 
+    public static String getSDPath()
+    {
+       return Environment.getExternalStorageDirectory().toString();
+    }
+
 }

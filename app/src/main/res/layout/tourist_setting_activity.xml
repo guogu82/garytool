@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include android:id="@+id/setting_top" android:layout_width="match_parent" android:layout_height="wrap_content" layout="@layout/tourist_bar"></include>
+    <RelativeLayout
+        android:background="@drawable/selector_tourist_item_white_to_gray"
+        android:onClick="toPersonalInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_margin="10dp"
+            android:background="@drawable/tourist_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_toRightOf="@+id/iv_head"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:layout_alignParentTop="true"
+            android:text="小明"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_toRightOf="@+id/iv_head"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:text="用户编号:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@+id/tv_name"
+            android:layout_toRightOf="@+id/tv_num"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:text="A80880678"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/iv_dimensional_code"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_next"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/tourist_dimensional_code"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/tourist_item_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

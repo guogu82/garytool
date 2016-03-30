@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.gary.garytool.business.map.api.MapViewGroup
@@ -17,4 +18,108 @@
         android:text="清晖园"
         android:textColor="@color/white"
         android:textSize="26sp" />
+    <com.gary.garytool.business.tourist.BackgroundButton
+        android:id="@+id/bt_settings"
+        android:onClick="onSetting"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        app:background_normal="@drawable/tourist_setting"
+        app:background_press="@drawable/tourist_setting_pressed"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
+    <com.gary.garytool.business.tourist.BackgroundButton
+        android:id="@+id/bt_location"
+        android:layout_above="@+id/layout_tourist_bottom"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        app:background_normal="@drawable/tourist_location"
+        app:background_press="@drawable/tourist_location_press"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <com.gary.garytool.business.tourist.BackgroundButton
+        android:id="@+id/bt_fence"
+        android:layout_above="@+id/bt_location"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        app:background_normal="@drawable/tourist_fence"
+        app:background_press="@drawable/tourist_fence_press"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <com.gary.garytool.business.tourist.BackgroundButton
+        android:id="@+id/bt_zoom_in"
+        android:layout_above="@+id/bt_zoom_out"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:background_normal="@drawable/tourist_zoom_in"
+        app:background_press="@drawable/tourist_zoom_in_press"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <com.gary.garytool.business.tourist.BackgroundButton
+        android:id="@+id/bt_zoom_out"
+        android:layout_above="@+id/layout_tourist_bottom"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:background_normal="@drawable/tourist_zoom_out"
+        app:background_press="@drawable/tourist_zoom_out_press"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <LinearLayout
+        android:gravity="center"
+        android:background="#B0FFFFFF"
+        android:id="@+id/layout_tourist_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+        <com.gary.garytool.business.tourist.BackgroundButton
+            android:id="@+id/bt_homepage_team"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="70dp"
+            android:text="团队"
+            app:background_normal="@drawable/tourist_homepage_team"
+            app:background_press="@drawable/tourist_homepage_team_press"
+            android:textColor="@color/white"
+            android:layout_width="150dp"
+            android:layout_height="43dp" />
+        <com.gary.garytool.business.tourist.BackgroundButton
+            android:id="@+id/bt_homepage_scenic"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="90dp"
+            android:text="景点"
+            app:background_normal="@drawable/tourist_homepage_scenic"
+            app:background_press="@drawable/tourist_homepage_scenic_press"
+            android:textColor="@color/white"
+            android:layout_width="150dp"
+            android:layout_height="43dp" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_homepage_compass"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/tourist_homepage_compass"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+    <ImageView
+        android:id="@+id/iv_homepage_compass_pointer"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/tourist_homepage_compass_pointer"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
 </RelativeLayout>
