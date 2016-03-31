@@ -12,7 +12,7 @@
         android:onClick="onMap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="map"/>
+        android:text="地图引擎"/>
 
     <Button
         android:id="@+id/bt_tourist"
@@ -27,7 +27,7 @@
         android:onClick="onGuessMusic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="guess music"/>
+        android:text="猜歌游戏"/>
 
 
     <Button

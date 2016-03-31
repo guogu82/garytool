@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/tourist_bar"></include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_build_team"
+            android:gravity="center"
+            android:background="@drawable/selector_tourist_item_white_to_gray"
+            android:text="创建团队"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/tourist_item_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_join_team"
+            android:gravity="center"
+            android:background="@drawable/selector_tourist_item_white_to_gray"
+            android:text="加入团队"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="right|top" />
+
+
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/tourist_item_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+    </FrameLayout>
+</LinearLayout>

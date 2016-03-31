@@ -16,6 +16,7 @@
         app:background_normal="@drawable/tourist_bar_back"
         app:background_press="@drawable/tourist_bar_back_press"
         android:id="@+id/bt_bar_back"
+        android:onClick="onBarBack"
         android:layout_width="48dp"
         android:layout_height="48dp" />
 </RelativeLayout>

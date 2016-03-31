@@ -43,7 +43,12 @@ public class TouristMainActivity extends Activity{
     //设置按钮响应事件
     public void onSetting(View view)
     {
-        Util.startActivity(TouristMainActivity.this,TouristSettingActivity.class);
+        Util.startActivity(TouristMainActivity.this, TouristSettingActivity.class);
+    }
+    //设置按钮响应事件
+    public void onTeam(View view)
+    {
+        Util.startActivity(TouristMainActivity.this,TouristBuildTeamActivity.class);
     }
 
     private void initMap() {

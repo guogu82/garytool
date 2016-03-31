@@ -87,6 +87,7 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="70dp"
             android:text="团队"
+            android:onClick="onTeam"
             app:background_normal="@drawable/tourist_homepage_team"
             app:background_press="@drawable/tourist_homepage_team_press"
             android:textColor="@color/white"
