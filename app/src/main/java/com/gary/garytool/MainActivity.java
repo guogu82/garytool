@@ -102,6 +102,14 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void onPuzzle(View view)
+    {
+        //洪洋的美女拼图小游戏 http://www.imooc.com/learn/224
+        Intent intent=new Intent(MainActivity.this, GuessMusicMainActivity.class);
+        startActivity(intent);
+    }
+
+
     public void onMap(View view)
     {
         Util.startActivity(MainActivity.this, MapMainActivity.class);

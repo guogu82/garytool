@@ -29,6 +29,12 @@
         android:layout_height="wrap_content"
         android:text="猜歌游戏"/>
 
+    <Button
+        android:id="@+id/bt_puzzle"
+        android:onClick="onPuzzle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拼图"/>
 
     <Button
         android:layout_width="match_parent"
