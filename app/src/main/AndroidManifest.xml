@@ -89,6 +89,8 @@
         <activity android:name=".business.tourist.TouristMainActivity"></activity>
         <activity android:name=".business.tourist.TouristSettingActivity"></activity>
         <activity android:name=".business.tourist.TouristBuildTeamActivity"></activity>
+        <activity android:name=".business.tourist.TouristScenicSpotActivity"></activity>
+        <activity android:name=".business.tourist.TouristScenicDetailActivity"></activity>
     </application>
 
 </manifest>

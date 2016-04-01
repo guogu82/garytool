@@ -74,7 +74,7 @@
         android:layout_height="50dp" />
     <LinearLayout
         android:gravity="center"
-        android:background="#B0FFFFFF"
+        android:background="@color/whiteWithA"
         android:id="@+id/layout_tourist_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -100,6 +100,7 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="90dp"
             android:text="景点"
+            android:onClick="onScenicSpot"
             app:background_normal="@drawable/tourist_homepage_scenic"
             app:background_press="@drawable/tourist_homepage_scenic_press"
             android:textColor="@color/white"

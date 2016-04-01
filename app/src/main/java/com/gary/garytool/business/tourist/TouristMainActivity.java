@@ -38,6 +38,11 @@ public class TouristMainActivity extends Activity{
         setContentView(R.layout.tourist_main_activity);
         //初始化地图
         initMap();
+        initData();
+    }
+
+    private void initData() {
+        ScenicUtil.sScenicAll=ScenicUtil.getAllScenicSpot();
     }
 
     //设置按钮响应事件
@@ -45,11 +50,15 @@ public class TouristMainActivity extends Activity{
     {
         Util.startActivity(TouristMainActivity.this, TouristSettingActivity.class);
     }
-    //设置按钮响应事件
+    //团队按钮响应事件
     public void onTeam(View view)
     {
         Util.startActivity(TouristMainActivity.this,TouristBuildTeamActivity.class);
     }
+    //景点按钮响应事件
+    public void onScenicSpot(View view) {
+        Util.startActivity(TouristMainActivity.this, TouristScenicSpotActivity.class);
+     }
 
     private void initMap() {
         // 栅格地图 示例代码

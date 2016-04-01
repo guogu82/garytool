@@ -2,8 +2,10 @@
 <resources>
     <!--透明 --><!--my like 透明 适合做按钮背景，文本框背景-->
     <color name="transparent">#00000000</color>
+    <color name="blackWithA">#20000000</color>
     <color name="skin_tabbar_bg">#FCF8FC</color>
     <color name="white">#FFFFFF</color>
+    <color name="whiteWithA">#B0FFFFFF</color>
     <color name="grayWithA">#80DDDDDD</color>
     <color name="greenNice">#96C927</color>
 
