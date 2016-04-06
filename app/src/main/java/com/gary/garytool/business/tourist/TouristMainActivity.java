@@ -22,6 +22,8 @@ import com.gary.garytool.util.Util;
 
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/29.
@@ -31,6 +33,9 @@ public class TouristMainActivity extends Activity{
     private Double initLatitude = 22.835714843; // 进入activity默认的纬度
     private Coordinates mCenterCoordinates;
     private MapViewGroup mMapTourist = null;
+
+    List<PointMarker> PointMarkerList = new ArrayList<PointMarker>();
+    List<ScenicInfo> mScenicList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,59 @@ public class TouristMainActivity extends Activity{
 
     private void initData() {
         ScenicUtil.sScenicAll=ScenicUtil.getAllScenicSpot();
+        mScenicList=ScenicUtil.getAllScenicSpot();
+        mScenicList.add(new ScenicInfo("商店",113.255573f,22.835100f,false,101,0,"shop"));
+        mScenicList.add(new ScenicInfo("洗手间A",113.254613f,22.836230f,false,201,0,"wc"));
+        mScenicList.add(new ScenicInfo("洗手间B", 113.255933f, 22.835590f, false, 202, 0, "wc"));
+        addAroundMarker();
+    }
+
+    Bitmap pointBitmap = null;// 标注图片
+    PointMarker pointMarker=null;
+    private void addAroundMarker() {
+        PointMarkerList.clear();
+        for (ScenicInfo info : mScenicList) {
+
+            if ("shop".equals(info.getTag())) {
+                pointBitmap = getBitmap("shop");
+            } else if ("wc".equals(info.getTag())) {
+                pointBitmap = getBitmap("wc");
+            } else if ("scenic".equals(info.getTag())) {
+                if (info.isHotSpot()) {
+                    pointBitmap = getBitmap("hot_scenic");
+                } else {
+                    pointBitmap = getBitmap("scenic");
+                }
+
+            } else {
+                pointBitmap = getBitmap("");
+            }
+
+            pointMarker = new PointMarker(pointBitmap, pointBitmap.getWidth() / -2, pointBitmap.getHeight() / -2);
+            PointMarkerList.add(pointMarker);
+            Coordinates coordinates = MapCoordSkewingUtils.CoordSkewingByLevel(info.getLongitude(),info.getLatitude() , mMapTourist.getMapsLevel());
+            pointMarker.Cx = coordinates.X;
+            pointMarker.Cy = coordinates.Y;
+            pointMarker.nameStr = info.getName();
+            mMapTourist.addMarker(pointMarker);
+            pointMarker.show();
+
+        }
+        mMapTourist.getMapView().refreshMaps();
+    }
+
+
+    private Bitmap getBitmap(String tag) {
+        if ("shop".equals(tag)) {
+            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_shop);
+        } else if ("wc".equals(tag)) {
+            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_wc);
+        } else if ("hot_scenic".equals(tag)) {
+            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_hot_scenic);
+        } else {
+            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_scenic);
+        }
+
     }
 
     //设置按钮响应事件

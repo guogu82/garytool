@@ -3,9 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/tourist_bar"/>
-    <TextView
+    <com.gary.garytool.view.viewpager.PhotoCarouselWithViewPager
+        android:id="@+id/tourist_photo_carouse"
         android:layout_weight="1"
-        android:text="轮播"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
     <ScrollView

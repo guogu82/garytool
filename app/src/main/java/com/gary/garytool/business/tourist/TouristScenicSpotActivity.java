@@ -1,12 +1,15 @@
 package com.gary.garytool.business.tourist;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ public class TouristScenicSpotActivity extends Activity{
     private ListView mLvScenic;
     private ScenicAdapter mAdapter;
     private List<ScenicInfo> mData;
+    private ImageView mIvScenic;
 
 
     @Override
@@ -57,6 +61,9 @@ public class TouristScenicSpotActivity extends Activity{
         mTvTopBarTitle = (TextView) findViewById(R.id.tv_bar_title);
         mTvTopBarTitle.setText("景点");
         mLvScenic= (ListView) findViewById(R.id.lv_scenic);
+        mIvScenic= (ImageView) findViewById(R.id.iv_scenic);
+        String path=Util.getSDPath() + "/touristguide/qinghuiyuan/image/p.jpg";
+        mIvScenic.setBackground(new BitmapDrawable(getResources(),BitmapFactory.decodeFile(path)));
     }
 
     public void buildLvData() {

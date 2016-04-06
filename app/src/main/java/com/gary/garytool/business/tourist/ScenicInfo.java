@@ -10,14 +10,16 @@ public class ScenicInfo {
     private boolean isHotSpot;
     private int id;
     private int parentId;
+    private String tag;
 
-    public ScenicInfo(String name, double longitude, double latitude, boolean isHotSpot, int id, int parentId) {
+    public ScenicInfo(String name, double longitude, double latitude, boolean isHotSpot, int id, int parentId,String tag) {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
         this.isHotSpot = isHotSpot;
         this.id = id;
         this.parentId = parentId;
+        this.tag=tag;
     }
 
     public ScenicInfo(ScenicInfo scenicInfo) {
@@ -75,5 +77,13 @@ public class ScenicInfo {
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

@@ -24,9 +24,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class ScenicUtil {
 
+
+
+
+
+
+
     public static ScenicInfo sCurrentSpotDetailScenicInfo;
 
     public static List<ScenicInfo> sScenicAll;
+
 
     /**
      * 获取景区中所有景点的名称
@@ -45,7 +52,7 @@ public class ScenicUtil {
             }
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db;
-            ScenicInfo info=new ScenicInfo("清晖园",0.0f,0.0f,false,0,-1);
+            ScenicInfo info=new ScenicInfo("清晖园",0.0f,0.0f,false,0,-1,"scenic");
             scenicSpotArrayList.add(info);
             try {
                 db = dbf.newDocumentBuilder();
@@ -59,7 +66,7 @@ public class ScenicUtil {
                             Double.valueOf(scenicSpotElement.getAttribute("longitude")),
                             Double.valueOf(scenicSpotElement.getAttribute("latitude")),
                             scenicSpotElement.getAttribute("isHotScenicSpot").equals("0")?false:true,
-                                    i, 0);
+                                    i, 0,"scenic");
                     scenicSpotArrayList.add(info);
                 }
             } catch (Exception e) {
