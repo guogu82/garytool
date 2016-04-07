@@ -1,14 +1,10 @@
 package com.gary.garytool.business.tourist;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.storage.StorageManager;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,12 +12,10 @@ import com.gary.garytool.R;
 import com.gary.garytool.business.map.api.Coordinates;
 import com.gary.garytool.business.map.api.MapViewGroup;
 import com.gary.garytool.business.map.api.MapsConstants;
-import com.gary.garytool.business.map.api.MapsType;
 import com.gary.garytool.business.map.api.PointMarker;
 import com.gary.garytool.util.Util;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +28,7 @@ public class TouristMainActivity extends Activity{
     private Coordinates mCenterCoordinates;
     private MapViewGroup mMapTourist = null;
 
-    List<PointMarker> PointMarkerList = new ArrayList<PointMarker>();
+
     List<ScenicInfo> mScenicList= new ArrayList<>();
 
     @Override
@@ -49,59 +43,41 @@ public class TouristMainActivity extends Activity{
     private void initData() {
         ScenicUtil.sScenicAll=ScenicUtil.getAllScenicSpot();
         mScenicList=ScenicUtil.getAllScenicSpot();
-        mScenicList.add(new ScenicInfo("商店",113.255573f,22.835100f,false,101,0,"shop"));
-        mScenicList.add(new ScenicInfo("洗手间A",113.254613f,22.836230f,false,201,0,"wc"));
-        mScenicList.add(new ScenicInfo("洗手间B", 113.255933f, 22.835590f, false, 202, 0, "wc"));
+        mScenicList.add(new ScenicInfo("商店",113.255573f,22.835100f,false,101,0,ScenicUtil.SCENIC_TAG_SHOP));
+        mScenicList.add(new ScenicInfo("洗手间A",113.254613f,22.836230f,false,201,0,ScenicUtil.SCENIC_TAG_WC));
+        mScenicList.add(new ScenicInfo("洗手间B", 113.255933f, 22.835590f, false, 202, 0,ScenicUtil.SCENIC_TAG_WC));
         addAroundMarker();
+        refreshAroundMarker();
     }
 
-    Bitmap pointBitmap = null;// 标注图片
-    PointMarker pointMarker=null;
+
+
     private void addAroundMarker() {
-        PointMarkerList.clear();
+        Bitmap pointBitmap = null;// 标注图片
         for (ScenicInfo info : mScenicList) {
-
-            if ("shop".equals(info.getTag())) {
-                pointBitmap = getBitmap("shop");
-            } else if ("wc".equals(info.getTag())) {
-                pointBitmap = getBitmap("wc");
-            } else if ("scenic".equals(info.getTag())) {
+            if (ScenicUtil.SCENIC_TAG_SHOP.equals(info.getTag())) {
+                pointBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tourist_shop);;
+            } else if (ScenicUtil.SCENIC_TAG_WC.equals(info.getTag())) {
+                pointBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tourist_wc);
+            } else{
                 if (info.isHotSpot()) {
-                    pointBitmap = getBitmap("hot_scenic");
+                    pointBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tourist_hot_scenic);
                 } else {
-                    pointBitmap = getBitmap("scenic");
+                    pointBitmap =BitmapFactory.decodeResource(getResources(), R.drawable.tourist_scenic);
                 }
-
-            } else {
-                pointBitmap = getBitmap("");
             }
-
-            pointMarker = new PointMarker(pointBitmap, pointBitmap.getWidth() / -2, pointBitmap.getHeight() / -2);
-            PointMarkerList.add(pointMarker);
+            info.setTagIcon(pointBitmap);             ;
+            PointMarker pointMarker = new PointMarker(pointBitmap, pointBitmap.getWidth() / -2, pointBitmap.getHeight() / -2);
             Coordinates coordinates = MapCoordSkewingUtils.CoordSkewingByLevel(info.getLongitude(),info.getLatitude() , mMapTourist.getMapsLevel());
             pointMarker.Cx = coordinates.X;
             pointMarker.Cy = coordinates.Y;
             pointMarker.nameStr = info.getName();
+            info.setTagMarker(pointMarker);
             mMapTourist.addMarker(pointMarker);
-            pointMarker.show();
-
         }
-        mMapTourist.getMapView().refreshMaps();
     }
 
 
-    private Bitmap getBitmap(String tag) {
-        if ("shop".equals(tag)) {
-            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_shop);
-        } else if ("wc".equals(tag)) {
-            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_wc);
-        } else if ("hot_scenic".equals(tag)) {
-            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_hot_scenic);
-        } else {
-            return BitmapFactory.decodeResource(getResources(), R.drawable.tourist_scenic);
-        }
-
-    }
 
     //设置按钮响应事件
     public void onSetting(View view)
@@ -147,7 +123,8 @@ public class TouristMainActivity extends Activity{
             @Override
             public void onClick(View v) {
                 // 定位操作
-                mMapTourist.setCenter(localMarker.Cx, localMarker.Cy);// 设置地图中心点位置
+                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
             }
         });
     }
@@ -176,7 +153,10 @@ public class TouristMainActivity extends Activity{
                     zoomIn.setEnabled(false);
                 }
                 zoomOut.setEnabled(true);
+                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
             }
+
         });
 
         zoomOut.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +167,8 @@ public class TouristMainActivity extends Activity{
                     zoomOut.setEnabled(false);
                 }
                 zoomIn.setEnabled(true);
+                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
             }
         });
     }
@@ -211,11 +193,58 @@ public class TouristMainActivity extends Activity{
             localMarker.nameStr = "我的位置";
             localMarker.Info = -1;
 
+            refreshAroundMarker();
             mMapTourist.refreshMaps();
             localHandler.postDelayed(localTasks, 2000);
 
         }
     };
+
+    private void refreshAroundMarker() {
+        for (ScenicInfo info:mScenicList)
+        {
+            if(info.getTagMarker()!=null)
+            {
+                PointMarker pointMarker = info.getTagMarker();
+                Coordinates coordinates = MapCoordSkewingUtils.CoordSkewingByLevel(info.getLongitude(),info.getLatitude() , mMapTourist.getMapsLevel());
+                pointMarker.Cx = coordinates.X;
+                pointMarker.Cy = coordinates.Y;
+                if(info.getTag().equals(ScenicUtil.SCENIC_TAG_SHOP))
+                {
+                    if(ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_STOP])
+                    {
+                        pointMarker.show();
+                    }
+                    else
+                    {
+                        pointMarker.hide();
+                    }
+                } else if(info.getTag().equals(ScenicUtil.SCENIC_TAG_SCENIC))
+                {
+                    if(ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_HOT_SCENIC])
+                    {
+                        pointMarker.hide();
+                    }
+                    else
+                    {
+                        pointMarker.show();
+                    }
+                } else if(info.getTag().equals(ScenicUtil.SCENIC_TAG_WC))
+                {
+                    if(ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_WC])
+                    {
+                        pointMarker.show();
+                    }
+                    else
+                    {
+                        pointMarker.hide();
+                    }
+                }
+
+            }
+        }
+    }
+
     private void setMapCache() {
         // 设置栅格地图参数：本地地图、图片格式、本地图片缓存、图片路径
         //设置本地地图

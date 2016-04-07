@@ -18,7 +18,6 @@ import com.gary.garytool.R;
 public class TouristSettingActivity extends Activity {
 
     private TextView mTvTopBarTitle;
-    private ImageView mIvScenicName;
     private ImageView mIvHotScenic;
     private ImageView mIvShop;
     private ImageView mIvWc;
@@ -29,7 +28,7 @@ public class TouristSettingActivity extends Activity {
     private boolean mIsSatellite;
 
 
-    private boolean mIsScenicName,mIsHotScenic,mIsWc,mIsShop,mIsTeammateLocation;
+    private boolean mIsHotScenic,mIsWc,mIsShop,mIsTeammateLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class TouristSettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mIsSatellite=true;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE]=mIsSatellite;
                 mLayoutSatelliteImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
                 mLayout2DImagery.setBackgroundColor(Color.WHITE);
             }
@@ -55,22 +55,18 @@ public class TouristSettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mIsSatellite=false;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE]=mIsSatellite;
                 mLayoutSatelliteImagery.setBackgroundColor(Color.WHITE);
                 mLayout2DImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
             }
         });
 
-        mIvScenicName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    mIsScenicName=!mIsScenicName;
-                    changeImageDrawable(mIvScenicName, mIsScenicName);
-            }
-        });
+
         mIvHotScenic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mIsHotScenic= !mIsHotScenic;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_HOT_SCENIC]=mIsHotScenic;
                 changeImageDrawable(mIvHotScenic, mIsHotScenic);
             }
         });
@@ -78,6 +74,7 @@ public class TouristSettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mIsShop= !mIsShop;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_STOP]=mIsShop;
                 changeImageDrawable(mIvShop, mIsShop);
             }
         });
@@ -85,6 +82,7 @@ public class TouristSettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 mIsWc= !mIsWc;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_WC]=mIsWc;
                 changeImageDrawable(mIvWc, mIsWc);
             }
         });
@@ -103,23 +101,44 @@ public class TouristSettingActivity extends Activity {
         mLayout2DImagery= (LinearLayout) findViewById(R.id.layout_2D_imagery);
         mLayoutSatelliteImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
         mLayout2DImagery.setBackgroundColor(Color.WHITE);
-        mIsSatellite=true;
+        mIsSatellite=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE];
 
 
         mTvTopBarTitle = (TextView) findViewById(R.id.tv_bar_title);
         mTvTopBarTitle.setText("设置");
-        mIvScenicName = (ImageView) findViewById(R.id.iv_scenic_name);
-        mIvScenicName.setImageResource(R.drawable.tourist_item_open);
-        mIsScenicName=true;
         mIvHotScenic = (ImageView) findViewById(R.id.iv_hot_scenic);
-        mIvHotScenic.setImageResource(R.drawable.tourist_item_closed);
-        mIsHotScenic=false;
+        mIsHotScenic=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_HOT_SCENIC];
+        if(mIsHotScenic)
+        {
+            mIvHotScenic.setImageResource(R.drawable.tourist_item_open);
+        }
+        else
+        {
+            mIvHotScenic.setImageResource(R.drawable.tourist_item_closed);
+        }
+
         mIvShop = (ImageView) findViewById(R.id.iv_shop);
-        mIvShop.setImageResource(R.drawable.tourist_item_closed);
-        mIsShop=false;
+        mIsShop=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_STOP];
+        if(mIsShop)
+        {
+            mIvShop.setImageResource(R.drawable.tourist_item_open);
+        }
+        else
+        {
+            mIvShop.setImageResource(R.drawable.tourist_item_closed);
+        }
+
         mIvWc = (ImageView) findViewById(R.id.iv_wc);
-        mIvWc.setImageResource(R.drawable.tourist_item_closed);
-        mIsWc=false;
+        mIsWc=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_SHOW_WC];
+        if(mIsWc)
+        {
+            mIvWc.setImageResource(R.drawable.tourist_item_open);
+        }
+        else
+        {
+            mIvWc.setImageResource(R.drawable.tourist_item_closed);
+        }
+
         mIvTeammateLocation = (ImageView) findViewById(R.id.iv_teammate_location);
         mIvTeammateLocation.setImageResource(R.drawable.tourist_item_closed);
         mIsTeammateLocation=false;

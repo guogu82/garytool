@@ -1,5 +1,9 @@
 package com.gary.garytool.business.tourist;
 
+import android.graphics.Bitmap;
+
+import com.gary.garytool.business.map.api.PointMarker;
+
 /**
  * Created by Administrator on 2016/4/1.
  */
@@ -11,6 +15,9 @@ public class ScenicInfo {
     private int id;
     private int parentId;
     private String tag;
+    private Bitmap tagIcon;
+    private PointMarker tagMarker;
+
 
     public ScenicInfo(String name, double longitude, double latitude, boolean isHotSpot, int id, int parentId,String tag) {
         this.name = name;
@@ -85,5 +92,21 @@ public class ScenicInfo {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public Bitmap getTagIcon() {
+        return tagIcon;
+    }
+
+    public void setTagIcon(Bitmap tagIcon) {
+        this.tagIcon = tagIcon;
+    }
+
+    public PointMarker getTagMarker() {
+        return tagMarker;
+    }
+
+    public void setTagMarker(PointMarker tagMarker) {
+        this.tagMarker = tagMarker;
     }
 }

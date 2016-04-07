@@ -25,13 +25,24 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ScenicUtil {
 
 
+    //用布尔数组存放景点的设置
+    public static final int SETTING_INDEX_IS_SATELLITE=0;//默认显示
+    public static final int SETTING_INDEX_IS_HOT_SCENIC=1;//默认显示
+    public static final int SETTING_INDEX_SHOW_STOP=2;//默认隐藏
+    public static final int SETTING_INDEX_SHOW_WC=3;//默认显示
+    public static final boolean [] SETTING_SCENIC =new boolean[]{true,true,false,true};
 
 
+    //景点类别常量
+    public static final String SCENIC_TAG_SHOP="stop";
+    public static final String SCENIC_TAG_HOT_SCENIC="hot_scenic";
+    public static final String SCENIC_TAG_WC="wc";
+    public static final String SCENIC_TAG_SCENIC="scenic";
 
-
-
+    //用于存放景点列表点击进入景点详情页的信息
     public static ScenicInfo sCurrentSpotDetailScenicInfo;
 
+    //存放所有景点列表
     public static List<ScenicInfo> sScenicAll;
 
 
@@ -52,7 +63,7 @@ public class ScenicUtil {
             }
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db;
-            ScenicInfo info=new ScenicInfo("清晖园",0.0f,0.0f,false,0,-1,"scenic");
+            ScenicInfo info=new ScenicInfo("清晖园",0.0f,0.0f,false,0,-1,"");
             scenicSpotArrayList.add(info);
             try {
                 db = dbf.newDocumentBuilder();
@@ -66,7 +77,8 @@ public class ScenicUtil {
                             Double.valueOf(scenicSpotElement.getAttribute("longitude")),
                             Double.valueOf(scenicSpotElement.getAttribute("latitude")),
                             scenicSpotElement.getAttribute("isHotScenicSpot").equals("0")?false:true,
-                                    i, 0,"scenic");
+                                    i, 0,
+                            scenicSpotElement.getAttribute("isHotScenicSpot").equals("0")?SCENIC_TAG_SCENIC:SCENIC_TAG_HOT_SCENIC);
                     scenicSpotArrayList.add(info);
                 }
             } catch (Exception e) {
