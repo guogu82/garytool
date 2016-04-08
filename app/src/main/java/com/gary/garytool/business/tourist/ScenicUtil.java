@@ -1,5 +1,12 @@
 package com.gary.garytool.business.tourist;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.provider.Settings;
+import android.view.WindowManager;
+
+import com.gary.garytool.R;
 import com.gary.garytool.util.Util;
 
 import org.w3c.dom.Document;
@@ -92,6 +99,45 @@ public class ScenicUtil {
         }
         return scenicSpotArrayList;
     }
+
+    //用存放景点阅读的设置
+    public static final int SETTING_READ_SMALL=10;
+    public static final int SETTING_READ_MIDDLE=20;
+    public static final int SETTING_READ_BIG=25;
+    public static final int SETTING_READ_HUGE=30;
+    public static  int sCurrentReadingSetting= R.id.bt_read_middle;
+
+    /**
+     * 获取屏幕的亮度
+     *
+     * @param activity
+     * @return
+     */
+    public static int getScreenBrightness(Activity activity) {
+        int nowBrightnessValue = 0;
+        ContentResolver resolver = activity.getContentResolver();
+        try {
+            nowBrightnessValue = android.provider.Settings.System.getInt(
+                    resolver, Settings.System.SCREEN_BRIGHTNESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nowBrightnessValue;
+    }
+
+    /**
+     * 设置亮度
+     *
+     * @param activity
+     * @param brightness
+     */
+    public static void setBrightness(Activity activity, int brightness) {
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.screenBrightness = Float.valueOf(brightness) * (1f / 255f);
+        activity.getWindow().setAttributes(lp);
+    }
+
+
 
     /**
      * 读取文本文件中的内容并自动转换编码

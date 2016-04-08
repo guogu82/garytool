@@ -25,11 +25,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/bt_voice"
             android:layout_marginLeft="20dp"
             android:background="@drawable/tourist_voice_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/bt_read_setting"
             android:background="@drawable/tourist_read_setting"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include layout="@layout/tourist_divider"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_luminance"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:text="屏幕亮度"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+        <SeekBar
+            android:id="@+id/sb_luminance"
+            android:layout_toRightOf="@+id/tv_luminance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <include layout="@layout/tourist_divider"></include>
+    <LinearLayout
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="字体大小"
+            android:gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_read_small"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:text="小"
+            android:background="@drawable/tourist_reading_button_left"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_read_middle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:text="中"
+            android:background="@drawable/tourist_reading_button_center"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_read_big"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:text="大"
+            android:background="@drawable/tourist_reading_button_center"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_read_huge"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:text="超大"
+            android:background="@drawable/tourist_reading_button_right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <include layout="@layout/tourist_divider"></include>
+</LinearLayout>
