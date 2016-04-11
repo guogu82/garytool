@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.gary.garytool.business.guessmusic.GuessMusicMainActivity;
 import com.gary.garytool.business.insane.MainInsaneActivity;
 import com.gary.garytool.business.map.MapMainActivity;
+import com.gary.garytool.business.puzzle.PuzzleMainActivity;
 import com.gary.garytool.business.stock.StockMainActivity;
 import com.gary.garytool.business.tourist.TouristMainActivity;
 import com.gary.garytool.util.Util;
@@ -105,7 +106,7 @@ public class MainActivity extends Activity {
     public void onPuzzle(View view)
     {
         //洪洋的美女拼图小游戏 http://www.imooc.com/learn/224
-        Intent intent=new Intent(MainActivity.this, GuessMusicMainActivity.class);
+        Intent intent=new Intent(MainActivity.this, PuzzleMainActivity.class);
         startActivity(intent);
     }
 

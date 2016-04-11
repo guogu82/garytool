@@ -91,6 +91,7 @@
         <activity android:name=".business.tourist.TouristBuildTeamActivity"></activity>
         <activity android:name=".business.tourist.TouristScenicSpotActivity"></activity>
         <activity android:name=".business.tourist.TouristScenicDetailActivity"></activity>
+        <activity android:name=".business.puzzle.PuzzleMainActivity"></activity>
     </application>
 
 </manifest>
