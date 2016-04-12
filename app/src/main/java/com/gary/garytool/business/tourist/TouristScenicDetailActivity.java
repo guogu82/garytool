@@ -61,9 +61,9 @@ public class TouristScenicDetailActivity extends Activity{
         mTvTopBarTitle.setText(mScenicInfo.getName());
 
         mTvScenicSpotIntroduction = (TextView) findViewById(R.id.tv_scenic_spot_introduction);
-        //String filePath=Util.getSDPath()+ "/touristguide/qinghuiyuan/text/" + mScenicInfo.getName() + "/"
-        //        + mScenicInfo.getName() + "简介.txt";
-        String text = ScenicUtil.readFileContent(FILE_PATH_TEXT);
+        String filePath=Util.getSDPath()+ "/touristguide/qinghuiyuan/text/" + mScenicInfo.getName() + "/"
+                + mScenicInfo.getName() + "简介.txt";
+        String text = ScenicUtil.readFileContent(filePath);
         mTvScenicSpotIntroduction.setText(text == "" ? "暂无简介" : text);
         mTouristPhotoCarouse = (PhotoCarouselWithViewPager) findViewById(R.id.tourist_photo_carouse);
 
@@ -76,7 +76,7 @@ public class TouristScenicDetailActivity extends Activity{
     private void initReadingSettingPopupWindow() {
         mPopupView =Util.getView(TouristScenicDetailActivity.this, R.layout.tourist_read_setting_popupwindow);
         mPopupView.setBackgroundColor(Color.WHITE);
-        // mPopupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED); // 必须加上这一句，否则view的高度为0
+        mPopupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED); // 必须加上这一句，否则view的高度为0
         mPopupWindow = new PopupWindow(mPopupView,
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setTouchable(true);
@@ -170,7 +170,10 @@ public class TouristScenicDetailActivity extends Activity{
         mBtVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File voiceFile = new File(FILE_PATH_VOICE);
+                String filePath = Util.getSDPath()+ "/touristguide/qinghuiyuan/audio/"
+                        + mScenicInfo.getName() + ".mp3";
+                File voiceFile = new File(filePath);
+                //File voiceFile = new File(FILE_PATH_VOICE);
                 if (!voiceFile.exists()) {
                     return;
                 }
@@ -205,17 +208,21 @@ public class TouristScenicDetailActivity extends Activity{
             @Override
             public void onClick(View v) {
                 // Toast.makeText(ScenicSpotVideoActivity.this,popupView.getMeasuredHeight()+"",Toast.LENGTH_SHORT).show();
-
+                int[] location=new int[2];
+                v.getLocationOnScreen(location);
                 Button b = (Button) v;
+                mPopupWindow.showAtLocation(v, Gravity.NO_GRAVITY, location[0],  location[1]-mPopupView.getMeasuredHeight()-10);
                 b.setBackgroundResource(R.drawable.tourist_read_setting_press);
-                mPopupWindow.showAtLocation(v, Gravity.BOTTOM, 0, 320);
             }
         });
     }
 
     private void initData() {
         mIsPlayingVoice=false;
-        File[] file = { new File(FILE_PATH_IMAGE) };
+
+        String filePath=Util.getSDPath()  + "/touristguide/qinghuiyuan/image/" + mScenicInfo.getName();
+        File[] file = { new File(filePath) };
+        //File[] file = { new File(FILE_PATH_IMAGE) };
         searchFile(file);
         mTouristPhotoCarouse.setImageResources(mImageUrl, new PhotoCarouselWithViewPager.ImageCycleViewListener() {
             @Override

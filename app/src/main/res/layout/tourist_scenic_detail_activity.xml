@@ -20,7 +20,7 @@
     </ScrollView>
     <include layout="@layout/tourist_divider"></include>
     <RelativeLayout
-        android:padding="5dp"
+        android:layout_margin="5dp"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

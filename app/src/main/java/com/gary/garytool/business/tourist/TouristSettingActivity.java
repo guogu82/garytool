@@ -25,7 +25,7 @@ public class TouristSettingActivity extends Activity {
 
     private LinearLayout mLayoutSatelliteImagery;
     private LinearLayout mLayout2DImagery;
-    private boolean mIsSatellite;
+    private boolean mIsAirscape;
 
 
     private boolean mIsHotScenic,mIsWc,mIsShop,mIsTeammateLocation;
@@ -44,8 +44,8 @@ public class TouristSettingActivity extends Activity {
         mLayoutSatelliteImagery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsSatellite=true;
-                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE]=mIsSatellite;
+                mIsAirscape =true;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE]= mIsAirscape;
                 mLayoutSatelliteImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
                 mLayout2DImagery.setBackgroundColor(Color.WHITE);
             }
@@ -54,8 +54,8 @@ public class TouristSettingActivity extends Activity {
         mLayout2DImagery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIsSatellite=false;
-                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE]=mIsSatellite;
+                mIsAirscape =false;
+                ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE]= mIsAirscape;
                 mLayoutSatelliteImagery.setBackgroundColor(Color.WHITE);
                 mLayout2DImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
             }
@@ -96,12 +96,20 @@ public class TouristSettingActivity extends Activity {
     }
 
     private void initView() {
-
-        mLayoutSatelliteImagery= (LinearLayout) findViewById(R.id.layout_satellite_imagery);
+        mIsAirscape =ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE];
         mLayout2DImagery= (LinearLayout) findViewById(R.id.layout_2D_imagery);
-        mLayoutSatelliteImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
-        mLayout2DImagery.setBackgroundColor(Color.WHITE);
-        mIsSatellite=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_SATELLITE];
+        mLayoutSatelliteImagery= (LinearLayout) findViewById(R.id.layout_satellite_imagery);
+
+        if(mIsAirscape)
+        {
+            mLayout2DImagery.setBackgroundColor(Color.WHITE);
+            mLayoutSatelliteImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
+        }
+        else {
+            mLayout2DImagery.setBackgroundColor(getResources().getColor(R.color.greenNice));
+            mLayoutSatelliteImagery.setBackgroundColor(Color.WHITE);
+        }
+
 
 
         mTvTopBarTitle = (TextView) findViewById(R.id.tv_bar_title);

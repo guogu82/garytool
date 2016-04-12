@@ -12,6 +12,7 @@ import com.gary.garytool.R;
 import com.gary.garytool.business.map.api.Coordinates;
 import com.gary.garytool.business.map.api.MapViewGroup;
 import com.gary.garytool.business.map.api.MapsConstants;
+import com.gary.garytool.business.map.api.MapsType;
 import com.gary.garytool.business.map.api.PointMarker;
 import com.gary.garytool.util.Util;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by Administrator on 2016/3/29.
  */
 public class TouristMainActivity extends Activity{
-    private Double initLongitude = 113.255046875; // 进入activity默认的精度
+    private Double initLongitude = 113.255146875; // 进入activity默认的精度
     private Double initLatitude = 22.835714843; // 进入activity默认的纬度
     private Coordinates mCenterCoordinates;
     private MapViewGroup mMapTourist = null;
@@ -38,6 +39,12 @@ public class TouristMainActivity extends Activity{
         //初始化地图
         initMap();
         initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshMainMap();
     }
 
     private void initData() {
@@ -101,11 +108,13 @@ public class TouristMainActivity extends Activity{
         // 设置地图缓存位置
         setMapCache();
 
+        currentMapType=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE];
+
         // 将坐标转换成适应清晖园级别的坐标
-        mCenterCoordinates = MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, 0);
+        mCenterCoordinates = MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, 1);
 
         // 参数为地图 中心点位置以及地图显示等级
-        mMapTourist.initMaps(mCenterCoordinates.X, mCenterCoordinates.Y, 0);
+        mMapTourist.initMaps(mCenterCoordinates.X, mCenterCoordinates.Y, 1);
         mMapTourist.show();
 
         // 地图放大缩小
@@ -122,11 +131,16 @@ public class TouristMainActivity extends Activity{
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 定位操作
-                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
-                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
+                setCenter();
+
             }
         });
+    }
+
+    private void setCenter() {
+        // 定位操作
+        mCenterCoordinates= MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+        mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
     }
 
     @Override
@@ -146,29 +160,36 @@ public class TouristMainActivity extends Activity{
         zoomIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
+
+
                 int level = mMapTourist.getMapsLevel();
                 int max = mMapTourist.getMaxLevel();
                 mMapTourist.setMapsLevel(level + 1);
-                if (level == max) {
-                    zoomIn.setEnabled(false);
+                if (level>= 1) {
+                    zoomIn.setVisibility(View.INVISIBLE);
                 }
-                zoomOut.setEnabled(true);
-                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
-                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
+                zoomOut.setVisibility(View.VISIBLE);
+                setCenter();
+                refreshMainMap();
+
             }
 
         });
 
         zoomOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
+
+
                 int level = mMapTourist.getMapsLevel();
                 mMapTourist.setMapsLevel(level - 1);
-                if (level == 0) {
-                    zoomOut.setEnabled(false);
+                if (level <= 1) {
+                    zoomOut.setVisibility(View.INVISIBLE);
                 }
-                zoomIn.setEnabled(true);
-                mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
-                mMapTourist.setCenter( mCenterCoordinates.X, mCenterCoordinates.Y);// 设置地图中心点位置
+                zoomIn.setVisibility(View.VISIBLE);
+                setCenter();
+                refreshMainMap();
+
             }
         });
     }
@@ -177,28 +198,43 @@ public class TouristMainActivity extends Activity{
     private Handler localHandler = new Handler();
     private PointMarker localMarker = null;
     private Bitmap localBitmap;
+    private boolean currentMapType;
 
     private Runnable localTasks = new Runnable() {
         public void run() {
-            if (localBitmap == null)
-                localBitmap = BitmapFactory.decodeResource(TouristMainActivity.this.getResources(), R.drawable.map_icon_locr_light);
-
-            if (localMarker == null) {
-                localMarker = new PointMarker(localBitmap, localBitmap.getWidth() / -2, localBitmap.getHeight() / -2);
-                mMapTourist.addMarker(localMarker);
-            }
-            mCenterCoordinates=MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
-            localMarker.Cx = mCenterCoordinates.X;
-            localMarker.Cy = mCenterCoordinates.Y;
-            localMarker.nameStr = "我的位置";
-            localMarker.Info = -1;
-
-            refreshAroundMarker();
-            mMapTourist.refreshMaps();
+            refreshMainMap();
             localHandler.postDelayed(localTasks, 2000);
 
         }
     };
+
+    public void refreshMainMap() {
+        refreshMyLocation();
+
+        refreshAroundMarker();
+        if(currentMapType!= ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE])
+        {
+            mMapTourist.setMapsType(ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE]? MapsType.Airscape:MapsType.Typical);
+            currentMapType=ScenicUtil.SETTING_SCENIC[ScenicUtil.SETTING_INDEX_IS_AIRSCAPE];
+        }
+
+        mMapTourist.refreshMaps();
+    }
+
+    private void refreshMyLocation() {
+        if (localBitmap == null)
+            localBitmap = BitmapFactory.decodeResource(TouristMainActivity.this.getResources(), R.drawable.map_icon_locr_light);
+
+        if (localMarker == null) {
+            localMarker = new PointMarker(localBitmap, localBitmap.getWidth() / -2, localBitmap.getHeight() / -2);
+            mMapTourist.addMarker(localMarker);
+        }
+        mCenterCoordinates= MapCoordSkewingUtils.CoordSkewingByLevel(initLongitude, initLatitude, mMapTourist.getMapsLevel());
+        localMarker.Cx = mCenterCoordinates.X;
+        localMarker.Cy = mCenterCoordinates.Y;
+        localMarker.nameStr = "我的位置";
+        localMarker.Info = -1;
+    }
 
     private void refreshAroundMarker() {
         for (ScenicInfo info:mScenicList)

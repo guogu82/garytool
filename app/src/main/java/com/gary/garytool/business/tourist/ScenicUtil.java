@@ -33,11 +33,11 @@ public class ScenicUtil {
 
 
     //用布尔数组存放景点的设置
-    public static final int SETTING_INDEX_IS_SATELLITE=0;//默认显示
+    public static final int SETTING_INDEX_IS_AIRSCAPE =0;//默认显示
     public static final int SETTING_INDEX_IS_HOT_SCENIC=1;//默认显示
     public static final int SETTING_INDEX_SHOW_STOP=2;//默认隐藏
     public static final int SETTING_INDEX_SHOW_WC=3;//默认显示
-    public static final boolean [] SETTING_SCENIC =new boolean[]{true,true,false,true};
+    public static final boolean [] SETTING_SCENIC =new boolean[]{false,true,false,true};
 
 
     //景点类别常量
@@ -84,7 +84,7 @@ public class ScenicUtil {
                             Double.valueOf(scenicSpotElement.getAttribute("longitude")),
                             Double.valueOf(scenicSpotElement.getAttribute("latitude")),
                             scenicSpotElement.getAttribute("isHotScenicSpot").equals("0")?false:true,
-                                    i, 0,
+                                    i+1, 0,
                             scenicSpotElement.getAttribute("isHotScenicSpot").equals("0")?SCENIC_TAG_SCENIC:SCENIC_TAG_HOT_SCENIC);
                     scenicSpotArrayList.add(info);
                 }

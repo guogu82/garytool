@@ -23,6 +23,8 @@
     <include layout="@layout/tourist_divider"></include>
     <LinearLayout
         android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
