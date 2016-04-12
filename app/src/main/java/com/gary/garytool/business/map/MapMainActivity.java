@@ -15,6 +15,7 @@ import com.gary.garytool.R;
 import com.gary.garytool.business.map.api.MapViewGroup;
 import com.gary.garytool.business.map.api.MapsConstants;
 import com.gary.garytool.business.map.api.PointMarker;
+import com.gary.garytool.util.Util;
 
 /**
  * Created by Administrator on 2016/3/28.
@@ -59,7 +60,7 @@ public class MapMainActivity extends Activity {
         //设置图片格式
         MapsConstants.PicType=".png";
         //设置本地图片缓存
-        MapsConstants.CacheMapsRoot="/mnt/sdcard/map/";
+        MapsConstants.CacheMapsRoot= Util.getSDPath()+"/map";
         //设置图片路径
         //MapsConstants.MapsRoot = "http://202.104.25.195/rt/mapdb/";
         MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";
@@ -71,6 +72,17 @@ public class MapMainActivity extends Activity {
         //屏幕坐标转换经纬度
         //Coordinates monitorCoordinates=map.getMapView().PixelToCoordinates(100, 200);
         //android.graphics.Point monitorPixel=map.getMapView().CoordinatesToPixel(113.293106, 22.805604);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(map!=null)
+        {
+            map.Dispose();
+            map=null;
+        }
+        localHandler.removeCallbacks(localTasks);
     }
 
     private void zoomInOut() {

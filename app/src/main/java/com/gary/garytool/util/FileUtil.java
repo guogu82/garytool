@@ -1,8 +1,11 @@
 package com.gary.garytool.util;
 
+import android.graphics.Bitmap;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
@@ -12,6 +15,33 @@ import java.util.zip.ZipInputStream;
  * Created by Gary on 2015/10/28.
  */
 public class FileUtil {
+
+
+    /**
+     *
+     * @param mBitmap
+     * @param filePath
+     */
+    public static void saveBitmap(Bitmap mBitmap,String filePath)  {
+        File f = new File(filePath);
+        FileOutputStream fOut = null;
+        try {
+            fOut = new FileOutputStream(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+        try {
+            fOut.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            fOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 解压缩文件到指定的目录.
      *

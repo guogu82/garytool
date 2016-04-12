@@ -38,4 +38,24 @@
             android:layout_width="70dp"
             android:layout_height="70dp" />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="3dp"
+        android:layout_below="@+id/puzzle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_answer"
+            android:background="@drawable/arrow_left_n"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+        <Button
+            android:layout_centerVertical="true"
+            android:onClick="onChoseAnswer"
+            android:id="@+id/bt_chose_answer"
+            android:text="选择图片"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </RelativeLayout>

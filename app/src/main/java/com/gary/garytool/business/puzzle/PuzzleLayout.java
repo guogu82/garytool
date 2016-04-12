@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gary.garytool.R;
+import com.gary.garytool.util.Util;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -123,6 +125,16 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
         nextLevel();
     }
 
+    public void start()
+    {
+        mBitmap=null;
+        isGameOver=false;
+        mHandler.removeMessages(TIME_CHANGED);
+        mLevel=1;
+        mColumn=2;
+        nextLevel();
+    }
+
     private boolean isPause;
     public void pause()
     {
@@ -221,9 +233,9 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
 
         if(mBitmap==null)
         {
-            mBitmap= BitmapFactory.decodeResource(getResources(), R.drawable.puzzle_image);
+            mBitmap= PuzzleUtil.getPuzzleImage(this.getContext());
         }
-        mItemBitmaps=ImageSplitterUtil.splitImage(mBitmap,mColumn);
+        mItemBitmaps= PuzzleUtil.splitImage(mBitmap, mColumn);
         Collections.sort(mItemBitmaps, new Comparator<ImagePiece>() {
             @Override
             public int compare(ImagePiece a, ImagePiece b) {
@@ -231,6 +243,8 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
             }
         });
     }
+
+
 
 
     /**

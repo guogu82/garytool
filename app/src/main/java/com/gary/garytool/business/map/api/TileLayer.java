@@ -519,6 +519,7 @@ public class TileLayer {
 						Thread.sleep(500);
 					}catch(InterruptedException intExp){
 						Log.w("地图图层","休眠时出错",intExp);
+						//InterruptedException;当线程在活动之前或活动期间处于正在等待、休眠或占用状态且该线程被中断时，抛出该异常。
 					}
 				}
 			}

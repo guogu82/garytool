@@ -99,7 +99,14 @@ public class ImageLoader {
 
 		if(this.bitmap==null){
 			//清晖园离线地图修改，直接到本地目录读取图片，依赖与读取的因子
-			String str=MapsConstants.LocalMapsRoot+this.pTileLayer.getMapType()+"/"+this.pTileLayer.MapsLevel+"/"+this.xDir+"/"+this.yDir+"/"+this.xFile+"_"+this.yFile+".png";
+			String str;
+			if(MapsConstants.isLocal) {
+				str = MapsConstants.LocalMapsRoot + this.pTileLayer.getMapType() + "/" + this.pTileLayer.MapsLevel + "/" + this.xDir + "/" + this.yDir + "/" + this.xFile + "_" + this.yFile + ".png";
+			}
+			else {
+				//如果不是离线地图，则读取缓存本地的图片
+				str = MapsConstants.CacheMapsRoot+this.pTileLayer.getMapType()+"_"+this.pTileLayer.MapsLevel+"_"+this.xDir+"_"+this.yDir+"_"+this.xFile+"_"+this.yFile;
+			}
 //        	Log.d("文件不存在于本地，开始网络载图ImageLoader", src, null);
 			File file=new File(str);
 			if(file.exists()){
@@ -109,6 +116,7 @@ public class ImageLoader {
 				this.loadIndex=0;
 			}else{
 
+				//如果是离线地图，则不用理会，如果是网络地图，则启动网络加载
 				if(!MapsConstants.isLocal)
 					this.loadNetImage();
 			}
@@ -356,6 +364,7 @@ class ImageIndex {
 			return true;
 		}
 		String filename = String.format("%s/%s/%s", MapsConstants.LocalMapsRoot, type, level);
+
 		boolean streamOpened = openStream(filename);
 		if (streamOpened) {
 			this.type = type;
