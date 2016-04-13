@@ -83,15 +83,15 @@
             android:name=".view.UploadImgService"
             android:exported="false" />
         <activity android:name=".view.viewpager.ViewPagerIndicatorActivity" ></activity>
-        <activity android:name=".business.guessmusic.GuessMusicMainActivity"></activity>
-        <activity android:name=".business.guessmusic.AllPassView"></activity>
-        <activity android:name=".business.map.MapMainActivity"></activity>
-        <activity android:name=".business.tourist.TouristMainActivity"></activity>
-        <activity android:name=".business.tourist.TouristSettingActivity"></activity>
-        <activity android:name=".business.tourist.TouristBuildTeamActivity"></activity>
-        <activity android:name=".business.tourist.TouristScenicSpotActivity"></activity>
-        <activity android:name=".business.tourist.TouristScenicDetailActivity"></activity>
-        <activity android:name=".business.puzzle.PuzzleMainActivity"></activity>
+        <activity android:name=".business.guessmusic.GuessMusicMainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.guessmusic.AllPassView" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.map.MapMainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.tourist.TouristMainActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.tourist.TouristSettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.tourist.TouristBuildTeamActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.tourist.TouristScenicSpotActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.tourist.TouristScenicDetailActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".business.puzzle.PuzzleMainActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

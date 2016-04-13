@@ -15,33 +15,38 @@ import android.widget.TextView;
 
 import com.gary.garytool.R;
 import com.gary.garytool.util.FileUtil;
+import com.gary.garytool.util.ImageUtil;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.util.Util;
 
+import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Administrator on 2016/4/11.
  */
 public class PuzzleMainActivity extends Activity {
 
-    private static final String TAG="PuzzleMainActivity";
+    private static final String TAG = "PuzzleMainActivity";
     PuzzleLayout mPuzzleLayout;
     private TextView mTvLevel;
     private TextView mTvTime;
     private ImageView mIvAnswer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.puzzle_main_activity);
 
-        mTvLevel= (TextView) findViewById(R.id.tv_level);
-        mTvTime= (TextView) findViewById(R.id.tv_time);
-        mIvAnswer= (ImageView) findViewById(R.id.iv_answer);
+        mTvLevel = (TextView) findViewById(R.id.tv_level);
+        mTvTime = (TextView) findViewById(R.id.tv_time);
+        mIvAnswer = (ImageView) findViewById(R.id.iv_answer);
 
         mIvAnswer.setImageBitmap(PuzzleUtil.getPuzzleImage(this));
 
-        mPuzzleLayout= (PuzzleLayout) findViewById(R.id.puzzle);
+        mPuzzleLayout = (PuzzleLayout) findViewById(R.id.puzzle);
         mPuzzleLayout.setTimeEnabled(true);
         mPuzzleLayout.setOnPuzzleListener(new PuzzleLayout.PuzzleListener() {
             @Override
@@ -49,8 +54,8 @@ public class PuzzleMainActivity extends Activity {
                 new AlertDialog.Builder(PuzzleMainActivity.this).setTitle("游戏信息").setMessage("下一关!!").setPositiveButton("下一关", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                         mPuzzleLayout.nextLevel();
-                        mTvLevel.setText(nextLevel+"");
+                        mPuzzleLayout.nextLevel();
+                        mTvLevel.setText(nextLevel + "");
                     }
                 }).show();
             }
@@ -61,14 +66,14 @@ public class PuzzleMainActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mPuzzleLayout.nextLevel();
-                        mTvLevel.setText(level+"");
+                        mTvLevel.setText(level + "");
                     }
                 }).show();
             }
 
             @Override
             public void timeChanged(int currentTime) {
-                mTvTime.setText(currentTime+"");
+                mTvTime.setText(currentTime + "");
             }
 
             @Override
@@ -102,8 +107,7 @@ public class PuzzleMainActivity extends Activity {
     }
 
     //响应选择图片按钮事件
-    public void onChoseAnswer(View view)
-    {
+    public void onChoseAnswer(View view) {
         Intent intent = new Intent();
                 /* 开启Pictures画面Type设定为image */
         intent.setType("image/*");
@@ -119,21 +123,52 @@ public class PuzzleMainActivity extends Activity {
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
             ContentResolver cr = this.getContentResolver();
+            InputStream is = null;
             try {
-                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+
+                is=new BufferedInputStream(cr.openInputStream(uri));
+                is.mark(is.available());
+                BitmapFactory.Options opts = new BitmapFactory.Options();
+                opts.inJustDecodeBounds = true;
+                BitmapFactory.decodeStream(is,null,opts);
+                opts.inSampleSize=ImageUtil.caculateInSampleSize(opts,mPuzzleLayout.getWidth(),mPuzzleLayout.getHeight());
+
+                opts.inJustDecodeBounds = false;
+                is.reset();
+                Bitmap bitmap = BitmapFactory.decodeStream(is, null, opts);
+
                 ImageView imageView = (ImageView) findViewById(R.id.iv_answer);
                 /* 将Bitmap设定到ImageView */
                 imageView.setImageBitmap(bitmap);
 
-                String filePath= Util.getSDPath()+"/touristguide/puzzle_sd_image.jpg";
+                String filePath = Util.getSDPath() + "/touristguide/puzzle_sd_image.jpg";
                 FileUtil.saveBitmap(bitmap, filePath);
                 mTvLevel.setText("1");
                 mPuzzleLayout.start();
-                LogUtil.e(TAG,"start image");
+                LogUtil.e(TAG, "start image");
 
-            } catch (FileNotFoundException e) {
+            }  catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if(is!=null)
+                {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private Bitmap  getBitmap()   {
+        Bitmap bitmap=null;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile("", options);
+        return bitmap;
+}
+
 }

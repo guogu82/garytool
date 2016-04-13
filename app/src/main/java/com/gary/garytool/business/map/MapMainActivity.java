@@ -60,7 +60,7 @@ public class MapMainActivity extends Activity {
         //设置图片格式
         MapsConstants.PicType=".png";
         //设置本地图片缓存
-        MapsConstants.CacheMapsRoot= Util.getSDPath()+"/map";
+        MapsConstants.CacheMapsRoot= Util.getSDPath()+"/map/";
         //设置图片路径
         //MapsConstants.MapsRoot = "http://202.104.25.195/rt/mapdb/";
         MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";

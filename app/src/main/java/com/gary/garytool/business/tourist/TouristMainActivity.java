@@ -288,9 +288,9 @@ public class TouristMainActivity extends Activity{
         // 设置图片格式
         MapsConstants.PicType = ".png";
         // 设置本地图片缓存
-        MapsConstants.CacheMapsRoot = "";
+        MapsConstants.CacheMapsRoot = Util.getSDPath()+"/map/";
         // 设置图片路径
-        MapsConstants.MapsRoot = "";
+        MapsConstants.MapsRoot = "http://mapdb.365ditu.cn/rt/mapdb/";
         MapsConstants.LocalMapsRoot = Util.getSDPath()+"/touristguide/external_sd/cgt_maps/";
 
         //设置地图的因子，控制读取文件目录路径
