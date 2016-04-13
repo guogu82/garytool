@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.gary.garytool.R;
 import com.gary.garytool.util.FileUtil;
+import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.util.Util;
 
 import java.io.FileNotFoundException;
@@ -24,6 +25,7 @@ import java.io.FileNotFoundException;
  */
 public class PuzzleMainActivity extends Activity {
 
+    private static final String TAG="PuzzleMainActivity";
     PuzzleLayout mPuzzleLayout;
     private TextView mTvLevel;
     private TextView mTvTime;
@@ -49,6 +51,17 @@ public class PuzzleMainActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                          mPuzzleLayout.nextLevel();
                         mTvLevel.setText(nextLevel+"");
+                    }
+                }).show();
+            }
+
+            @Override
+            public void newPicture(final int level) {
+                new AlertDialog.Builder(PuzzleMainActivity.this).setTitle("游戏信息").setMessage("新图片!!").setPositiveButton("开始新拼图", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPuzzleLayout.nextLevel();
+                        mTvLevel.setText(level+"");
                     }
                 }).show();
             }
@@ -116,6 +129,7 @@ public class PuzzleMainActivity extends Activity {
                 FileUtil.saveBitmap(bitmap, filePath);
                 mTvLevel.setText("1");
                 mPuzzleLayout.start();
+                LogUtil.e(TAG,"start image");
 
             } catch (FileNotFoundException e) {
             }

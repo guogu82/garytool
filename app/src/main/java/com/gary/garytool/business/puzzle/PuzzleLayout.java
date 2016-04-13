@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.gary.garytool.R;
+import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.util.Util;
 
 import java.io.File;
@@ -27,6 +28,7 @@ import java.util.List;
  * @author gray guo
  */
 public class PuzzleLayout extends RelativeLayout implements View.OnClickListener {
+    private static final String TAG="PuzzleLayout";
     private int mColumn=3;
     /**
      *  容器的内边距
@@ -56,11 +58,13 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
     private  boolean isGameSuccess;
     private boolean isGameOver;
 
+
     public interface PuzzleListener
     {
         void nextLevel(int nextLevel);
         void timeChanged(int currentTime);
         void gameOver();
+        void newPicture(int level);
     }
 
     private PuzzleListener mListener;
@@ -73,6 +77,7 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
 
     private static final int TIME_CHANGED=0x110;
     private static final int NEXT_LEVEL=0x111;
+    private static final int NEW_PICTURE=0x112;
 
 
 
@@ -114,6 +119,16 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
                     }
                 }
                     break;
+                case NEW_PICTURE:
+                {
+                    mBitmap=null;
+                    mLevel = 1;
+                    mColumn=2;
+                    if(mListener!=null) {
+                        mListener.newPicture(mLevel);
+                    }
+                }
+                break;
             }
         }
     };
@@ -127,12 +142,9 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
 
     public void start()
     {
-        mBitmap=null;
-        isGameOver=false;
+        isGameSuccess = true;
         mHandler.removeMessages(TIME_CHANGED);
-        mLevel=1;
-        mColumn=2;
-        nextLevel();
+        mHandler.sendEmptyMessage(NEW_PICTURE);
     }
 
     private boolean isPause;
@@ -141,6 +153,7 @@ public class PuzzleLayout extends RelativeLayout implements View.OnClickListener
         isPause=true;
         mHandler.removeMessages(TIME_CHANGED);
     }
+
 
     public void resume()
     {

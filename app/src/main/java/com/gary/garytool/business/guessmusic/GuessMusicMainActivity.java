@@ -204,7 +204,7 @@ public class GuessMusicMainActivity extends Activity implements IWordButtonClick
         bt_bar_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.startActivity(GuessMusicMainActivity.this, MainActivity.class);
+                finish();
             }
         });
     }
