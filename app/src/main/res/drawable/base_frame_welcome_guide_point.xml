@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:drawable="@drawable/base_frame_welcome_guide_point_normal" />
+    <item android:state_enabled="false" android:drawable="@drawable/base_frame_guide_point_selected" />
+</selector>

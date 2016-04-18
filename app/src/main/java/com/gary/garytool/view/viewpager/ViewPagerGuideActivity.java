@@ -22,7 +22,7 @@ public class ViewPagerGuideActivity extends Activity implements OnPageChangeList
     private ViewPagerAdapter mViewPagerAdapter;
     private ArrayList<View> mViews;
     //引导图片的资源数组
-    private static final int[] mPictures={R.drawable.view_pager_guide_guide1,R.drawable.view_pager_guide_guide2,R.drawable.view_pager_guide_guide3,R.drawable.view_pager_guide_guide4};
+    private static final int[] mPictures={R.drawable.base_frame_welcome_guide1,R.drawable.base_frame_welcome_guide2,R.drawable.base_frame_welcome_guide3,R.drawable.base_frame_welcome_guide4};
     //底部小点的图片
     private ImageView[] mPoints;
     //记录当前选中位置

@@ -78,7 +78,7 @@ public class BaseFrameMainActivity extends Activity implements View.OnClickListe
                 if(mFragmentWelcome==null)
                 {
                     mFragmentWelcome=new WelcomeFragment();
-                    transaction.add(R.id.layout_bottom,mFragmentWelcome);
+                    transaction.add(R.id.layout_content,mFragmentWelcome);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ public class BaseFrameMainActivity extends Activity implements View.OnClickListe
                 if(mFragmentIndicator==null)
                 {
                     mFragmentIndicator=new IndicatorFragment();
-                    transaction.add(R.id.layout_bottom,mFragmentIndicator);
+                    transaction.add(R.id.layout_content,mFragmentIndicator);
                 }
                 else
                 {
@@ -104,7 +104,7 @@ public class BaseFrameMainActivity extends Activity implements View.OnClickListe
                 if(mFragmentList==null)
                 {
                     mFragmentList=new ListFragment();
-                    transaction.add(R.id.layout_bottom,mFragmentList);
+                    transaction.add(R.id.layout_content,mFragmentList);
                 }
                 else
                 {
@@ -112,6 +112,8 @@ public class BaseFrameMainActivity extends Activity implements View.OnClickListe
                 }
                 break;
         }
+
+        transaction.commit();
     }
 
     private void hideAllFragment(FragmentTransaction transaction) {

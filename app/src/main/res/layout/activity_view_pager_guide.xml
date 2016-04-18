@@ -24,7 +24,7 @@
             android:clickable="true"
             android:contentDescription="小圆点"
             android:padding="15dp"
-            android:src="@drawable/selector_view_paper_point"
+            android:src="@drawable/base_frame_welcome_guide_point"
             />
         <ImageView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:clickable="true"
             android:contentDescription="小圆点"
             android:padding="15dp"
-            android:src="@drawable/selector_view_paper_point"/>
+            android:src="@drawable/base_frame_welcome_guide_point"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:clickable="true"
             android:contentDescription="小圆点"
             android:padding="15dp"
-            android:src="@drawable/selector_view_paper_point"/>
+            android:src="@drawable/base_frame_welcome_guide_point"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +49,6 @@
             android:clickable="true"
             android:contentDescription="小圆点"
             android:padding="15dp"
-            android:src="@drawable/selector_view_paper_point"/>
+            android:src="@drawable/base_frame_welcome_guide_point"/>
     </LinearLayout>
 </RelativeLayout>
