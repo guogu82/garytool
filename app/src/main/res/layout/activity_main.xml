@@ -35,6 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="拼图"/>
+    <Button
+        android:id="@+id/bt_base_frame"
+        android:onClick="onBaseFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="基础框架"/>
 
     <Button
         android:layout_width="match_parent"
@@ -47,6 +53,7 @@
 
 
     <Button
+        android:visibility="gone"
         android:id="@+id/bt_insane"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +61,7 @@
 
 
     <Button
+        android:visibility="gone"
         android:id="@+id/bt_stock"
         android:onClick="stockMain"
         android:layout_width="match_parent"
@@ -61,6 +69,7 @@
         android:text="stock function"/>
 
     <Button
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="PullToRefresh专题"
@@ -68,6 +77,7 @@
         />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

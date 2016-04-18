@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gary.garytool.business.baseframe.BaseFrameMainActivity;
 import com.gary.garytool.business.guessmusic.GuessMusicMainActivity;
 import com.gary.garytool.business.insane.MainInsaneActivity;
 import com.gary.garytool.business.map.MapMainActivity;
@@ -107,6 +108,14 @@ public class MainActivity extends Activity {
     {
         //洪洋的美女拼图小游戏 http://www.imooc.com/learn/224
         Intent intent=new Intent(MainActivity.this, PuzzleMainActivity.class);
+        startActivity(intent);
+    }
+
+    //知识点  fragment的replace和add hide的使用 http://blog.csdn.net/shimiso/article/details/44677007
+    //知识点 android:descendantFocusability 的使用  http://www.cnblogs.com/eyu8874521/archive/2012/10/17/2727882.html
+    public void onBaseFrame(View view)
+    {
+        Intent intent=new Intent(MainActivity.this, BaseFrameMainActivity.class);
         startActivity(intent);
     }
 
