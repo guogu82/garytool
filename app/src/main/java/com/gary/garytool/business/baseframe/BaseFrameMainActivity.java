@@ -39,7 +39,7 @@ public class BaseFrameMainActivity extends Activity implements View.OnClickListe
 
         initView();
         mFragmentManager=getFragmentManager();
-        setTabSelection(R.id.layout_welcome);
+        setTabSelection(R.id.layout_list);
     }
     private void initView() {
         mLayoutWelcome= (LinearLayout) findViewById(R.id.layout_welcome);
