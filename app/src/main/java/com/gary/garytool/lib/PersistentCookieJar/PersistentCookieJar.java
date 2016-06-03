@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar;
+package com.gary.garytool.lib.PersistentCookieJar;
 
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.cache.CookieCache;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.persistence.CookiePersistor;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.gary.garytool.lib.PersistentCookieJar.cache.CookieCache;
+import com.gary.garytool.lib.PersistentCookieJar.persistence.CookiePersistor;
+import com.gary.garytool.lib.PersistentCookieJar.cache.SetCookieCache;
+import com.gary.garytool.lib.PersistentCookieJar.persistence.SharedPrefsCookiePersistor;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -54,15 +56,19 @@ public class PersistentCookieJar implements ClearableCookieJar {
         for (Iterator<Cookie> it = cache.iterator(); it.hasNext(); ) {
             Cookie currentCookie = it.next();
 
-            //webchatid=; usertype=4; ASP.NET_SessionId=fuesnjrrs0bvzvzkbqxehej1; username=王浩远; otherid=13; userid=221; .ASPXAUTH=
-            if(currentCookie.name().contains("username"))
-                continue;
+            //webchatid=; usertype=4; ASP.NET_SessionId=fuesnjrrs0bvzvzkbqxehej1; username=王浩远; otherid=13; userid=221; .ASPXAUTH=               ;
+
 
             if (isCookieExpired(currentCookie)) {
                 removedCookies.add(currentCookie);
                 it.remove();
 
             } else if (currentCookie.matches(url)) {
+                try {
+                    currentCookie=new Cookie.Builder().domain(currentCookie.domain()).name(currentCookie.name()).value(URLEncoder.encode(currentCookie.value(),"utf-8")).build();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 validCookies.add(currentCookie);
             }
         }

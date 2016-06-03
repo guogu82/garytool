@@ -1,7 +1,6 @@
 package com.gary.garytool.business.baseframe;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.gary.garytool.R;
-import com.gary.garytool.business.retrofit.IUserBiz;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
-import com.gary.garytool.lib.libretrofit.RetrofitManager;
+import com.gary.garytool.business.retrofit.ILoginHttp;
+import com.gary.garytool.business.retrofit.IOrderHttp;
+import com.gary.garytool.business.retrofit.RetrofitManager;
 import com.gary.garytool.util.LogUtil;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by gary on 2016/4/18.
@@ -67,38 +64,33 @@ public class ListFragment extends Fragment {
     }
 
     private void getData2() {
-        Call<ResponseBody> call =RetrofitManager.getRetrofit(getActivity()).create(IUserBiz.class).getOrderCancel("",1,40,13,"2016-05-02~2016-05-30");
-        call.enqueue(new Callback<ResponseBody>()
+        IOrderHttp orderHttp =RetrofitManager.getRetrofit(getActivity()).create(IOrderHttp.class);
+        orderHttp.getOrderCancel2("",1,40,13,"2016-05-02~2016-05-30").enqueue(new Callback<Map<String, Object>>()
         {
 
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                     if(response.body()==null)
                     {
                         LogUtil.e(TAG, "ResponseBody: is null");
                         return;
                     }
+                    LogUtil.e(TAG, "ResponseBody:" + response.body().get("rows") + "");
 
-                    LogUtil.e(TAG, "ResponseBody:" + response.body().string() + "");
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                LogUtil.e(TAG, "ResponseBody:" + t.getMessage() + "");
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                LogUtil.e(TAG, "ResponseBody Error:" + t.getMessage() + "");
             }
         });;
 
     }
 
     private void login() {
-        //login?username=王浩远&userpwd=123&type=0
-        //{"status":false,"msg_type":1,"msg_code":null,"msg":"技师才能使用该系统","state":0,"data":null}
-        RetrofitManager.getRetrofit(getActivity()).create(IUserBiz.class).login("王浩远","123",0).enqueue(new Callback<ResponseBody>()
+        ILoginHttp loginHttp=RetrofitManager.getRetrofit(getActivity()).create(ILoginHttp.class);
+        loginHttp.login("王浩远","123",0).enqueue(new Callback<ResponseBody>()
         {
 
             @Override
@@ -120,8 +112,8 @@ public class ListFragment extends Fragment {
 
     public void getData()
     {
-        Call<ResponseBody> call =RetrofitManager.getRetrofit(getActivity()).create(IUserBiz.class).getOrderCancel("",1,40,13,"2016-05-12~2016-05-22");
-        call.enqueue(new Callback<ResponseBody>()
+        IOrderHttp orderHttp =RetrofitManager.getRetrofit(getActivity()).create(IOrderHttp.class);
+        orderHttp.getOrderCancel("",1,40,13,"2016-05-12~2016-05-22").enqueue(new Callback<ResponseBody>()
         {
 
             @Override

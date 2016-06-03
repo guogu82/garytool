@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.cache;
+package com.gary.garytool.lib.PersistentCookieJar.cache;
 
 import java.util.ArrayList;
 import java.util.Collection;

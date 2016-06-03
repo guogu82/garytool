@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar.persistence;
+package com.gary.garytool.lib.PersistentCookieJar.persistence;
 
 import android.content.Context;
 import android.content.SharedPreferences;

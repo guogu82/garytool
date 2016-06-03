@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gary.garytool.lib.libpersistentcookiejar.com.franmontiel.persistentcookiejar;
+package com.gary.garytool.lib.PersistentCookieJar;
 
 import okhttp3.CookieJar;
 
