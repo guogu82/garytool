@@ -1,4 +1,4 @@
-package com.gary.garytool.view.pulltorefresh;
+package com.gary.garytool.view.pulltorefreshused;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import com.gary.garytool.R;
 import com.gary.garytool.model.ForeignNew;
 import com.gary.garytool.util.LogUtil;
 import com.gary.garytool.business.volley.VolleyManger;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.gary.garytool.view.pulltorefresh.PullToRefreshBase;
+import com.gary.garytool.view.pulltorefresh.PullToRefreshListView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

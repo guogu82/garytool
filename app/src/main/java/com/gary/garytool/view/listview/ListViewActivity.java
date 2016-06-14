@@ -11,13 +11,14 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
 import com.gary.garytool.view.viewpager.BottomMenuWithActionbarLikeWeChat6Activity;
 import com.gary.garytool.view.viewpager.BottomMenuWithFragment;
 import com.gary.garytool.view.viewpager.BottomMenuWithPopupWindowLikeQQ;
 import com.gary.garytool.view.viewpager.BottomMenuWithViewpager;
 import com.gary.garytool.view.PictureChoseActivity;
 import com.gary.garytool.view.PopupWindowActivity;
-import com.gary.garytool.view.pulltorefresh.PullToRefreshActivity;
+import com.gary.garytool.view.pulltorefreshused.PullToRefreshActivity;
 import com.gary.garytool.R;
 import com.gary.garytool.view.viewpager.ViewPagerGuideActivity;
 import com.gary.garytool.business.volley.VolleyActivity;
@@ -49,6 +50,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int WECHAT_PICTURE_CHOSE = 14;
     private static final int X_UTILS = 15;
     private static final int PAGER_INDICATOR = 16;
+    private static final int DATE_PICKER = 17;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("微信图片选择器");
         data.add("XUtils");
         data.add("跟随型ViewPager指示器");
+        data.add("日期控件");
 
 
         return data;
@@ -162,6 +165,10 @@ public class ListViewActivity extends ActionBarActivity {
                     break;
                 case PAGER_INDICATOR:
                     intent =new Intent(ListViewActivity.this, ViewPagerIndicatorActivity.class);
+                    startActivity(intent);
+                    break;
+                case DATE_PICKER:
+                    intent =new Intent(ListViewActivity.this, DatePickerDialogActivity.class);
                     startActivity(intent);
                     break;
                 default:

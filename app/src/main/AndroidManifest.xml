@@ -20,7 +20,10 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/MainWindowTheme" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".business.stock.StockMainActivity"
@@ -57,13 +60,13 @@
         <activity
             android:name=".business.volley.VolleyTableLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".view.pulltorefresh.PullToRefreshActivity" >        </activity>
+        <activity android:name=".view.pulltorefreshused.PullToRefreshActivity" >        </activity>
         <activity android:name=".view.PictureChoseActivity" >        </activity>
         <activity android:name=".business.xutil.XUtilsActivity" >        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshListViewActivity" >        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshBaseActivity" >        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshBothActivity" >        </activity>
-        <activity android:name=".view.pulltorefresh.PullToRefreshGradViewActivity" >        </activity>
+        <activity android:name=".view.pulltorefreshused.PullToRefreshListViewActivity" >        </activity>
+        <activity android:name=".view.pulltorefreshused.PullToRefreshBaseActivity" >        </activity>
+        <activity android:name=".view.pulltorefreshused.PullToRefreshBothActivity" >        </activity>
+        <activity android:name=".view.pulltorefreshused.PullToRefreshGradViewActivity" >        </activity>
         <activity android:name=".business.insane.MainInsaneActivity" >        </activity>
         <activity
             android:name=".business.insane.InsaneDemoActivity"
@@ -89,11 +92,8 @@
         <activity android:name=".business.tourist.TouristScenicDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.puzzle.PuzzleMainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.baseframe.BaseFrameMainActivity" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".business.datepicker.DatePickerDialogActivity"></activity>
     </application>
 
 </manifest>

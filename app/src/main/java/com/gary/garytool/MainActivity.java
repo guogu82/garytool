@@ -16,7 +16,7 @@ import com.gary.garytool.business.stock.StockMainActivity;
 import com.gary.garytool.business.tourist.TouristMainActivity;
 import com.gary.garytool.util.Util;
 import com.gary.garytool.view.listview.ListViewActivity;
-import com.gary.garytool.view.pulltorefresh.PullToRefreshListViewActivity;
+import com.gary.garytool.view.pulltorefreshused.PullToRefreshListViewActivity;
 
 
 public class MainActivity extends Activity {

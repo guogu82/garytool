@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:id="@+id/ll_container"
     android:orientation="vertical"
-    tools:context="com.gary.garytool.view.pulltorefresh.PullToRefreshActivity">
+    tools:context="com.gary.garytool.view.pulltorefreshused.PullToRefreshActivity">
 
 <com.handmark.pulltorefresh.library.PullToRefreshListView
     xmlns:ptr="http://schemas.android.com/apk/res-auto"

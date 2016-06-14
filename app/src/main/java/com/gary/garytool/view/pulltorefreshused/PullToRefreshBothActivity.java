@@ -1,4 +1,4 @@
-package com.gary.garytool.view.pulltorefresh;
+package com.gary.garytool.view.pulltorefreshused;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,9 +14,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.gary.garytool.R;
 import com.gary.garytool.model.ForeignNew;
 import com.gary.garytool.business.volley.VolleyManger;
-import com.handmark.pulltorefresh.library.ILoadingLayout;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.gary.garytool.view.pulltorefresh.ILoadingLayout;
+import com.gary.garytool.view.pulltorefresh.PullToRefreshBase;
+import com.gary.garytool.view.pulltorefresh.PullToRefreshListView;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
