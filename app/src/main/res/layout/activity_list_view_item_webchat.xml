@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/selector_color_bg"
-    tools:context="com.gary.garytool.view.listview.ListViewActivity">
+    tools:context=".MainFunctionActivity">
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

@@ -31,7 +31,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".view.listview.ListViewActivity"
+            android:name=".MainFunctionActivity"
             android:label="功能列表" />
         <activity
             android:name=".view.viewpager.BottomMenuWithActionbarLikeWeChat6Activity"

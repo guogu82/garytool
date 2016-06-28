@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:background="@drawable/selector_color_bg"
     android:id="@+id/ll_content"
-    tools:context="com.gary.garytool.view.listview.ListViewActivity">
+    tools:context=".MainFunctionActivity">
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

@@ -1,8 +1,8 @@
-package com.gary.garytool.view.listview;
+package com.gary.garytool;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,11 @@ import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
 import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
+import com.gary.garytool.view.listview.ListViewAdapterMActivity;
+import com.gary.garytool.view.listview.ListViewCustomStateActivity;
+import com.gary.garytool.view.listview.ListViewItemUIActivity;
+import com.gary.garytool.view.listview.ListViewLoadMoreActivity;
+import com.gary.garytool.view.listview.ListViewUpdateActivity;
 import com.gary.garytool.view.viewpager.BottomMenuWithActionbarLikeWeChat6Activity;
 import com.gary.garytool.view.viewpager.BottomMenuWithFragment;
 import com.gary.garytool.view.viewpager.BottomMenuWithPopupWindowLikeQQ;
@@ -20,7 +25,6 @@ import com.gary.garytool.view.viewpager.BottomMenuWithViewpager;
 import com.gary.garytool.view.PictureChoseActivity;
 import com.gary.garytool.view.PopupWindowActivity;
 import com.gary.garytool.view.pulltorefreshused.PullToRefreshActivity;
-import com.gary.garytool.R;
 import com.gary.garytool.view.viewpager.ViewPagerGuideActivity;
 import com.gary.garytool.business.volley.VolleyActivity;
 import com.gary.garytool.business.volley.VolleyTableLayoutActivity;
@@ -31,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ListViewActivity extends ActionBarActivity {
+public class MainFunctionActivity extends Activity {
     private ListView mListView;
 
     private static final int BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6=0;
@@ -101,79 +105,79 @@ public class ListViewActivity extends ActionBarActivity {
             Intent intent;
             switch (position) {
                 case BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6:
-                    intent = new Intent(ListViewActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
+                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
                     startActivity(intent);
                     break;
                 case BOTTOM_MENU_WITH_POPUPWINDOW:
-                    intent = new Intent(ListViewActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
+                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
                     startActivity(intent);
                     break;
                 case BOTTOM_MENU_WITH_VIEWPAGER:
-                    intent = new Intent(ListViewActivity.this, BottomMenuWithViewpager.class);
+                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithViewpager.class);
                     startActivity(intent);
                     break;
                 case BOTTOM_MENU_WITH_FRAGMENT:
-                    intent = new Intent(ListViewActivity.this, BottomMenuWithFragment.class);
+                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithFragment.class);
                     startActivity(intent);
                     break;
                 case LIST_VIEW_ITEM_UI:
-                    intent = new Intent(ListViewActivity.this, ListViewItemUIActivity.class);
+                    intent = new Intent(MainFunctionActivity.this, ListViewItemUIActivity.class);
                     startActivity(intent);
                     break;
                 case LIST_VIEW_MESSAGE_READED:
-                    intent =new Intent(ListViewActivity.this, ListViewCustomStateActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ListViewCustomStateActivity.class);
                     startActivity(intent);
                     break;
                 case LIST_VIEW_UPDATE:
-                    intent =new Intent(ListViewActivity.this, ListViewUpdateActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ListViewUpdateActivity.class);
                     startActivity(intent);
                     break;
                 case LIST_VIEW_LOAD_MORE:
-                    intent =new Intent(ListViewActivity.this, ListViewLoadMoreActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ListViewLoadMoreActivity.class);
                     startActivity(intent);
                     break;
                 case LIST_VIEW_ADAPTER_BASE:
-                    intent =new Intent(ListViewActivity.this, ListViewAdapterMActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ListViewAdapterMActivity.class);
                     startActivity(intent);
                     break;
                 case VIEW_PAGER_GUIDE:
-                    intent =new Intent(ListViewActivity.this, ViewPagerGuideActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ViewPagerGuideActivity.class);
                     startActivity(intent);
                     break;
                 case VOLLEY:
-                    intent =new Intent(ListViewActivity.this, VolleyActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, VolleyActivity.class);
                     startActivity(intent);
                     break;
                 case POPUP_WINDOW:
-                    intent =new Intent(ListViewActivity.this, PopupWindowActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, PopupWindowActivity.class);
                     startActivity(intent);
                     break;
                 case VOLLEY_TABLE_LAYOUT:
-                    intent =new Intent(ListViewActivity.this, VolleyTableLayoutActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, VolleyTableLayoutActivity.class);
                     startActivity(intent);
                     break;
                 case PULL_TO_REFRESH:
-                    intent =new Intent(ListViewActivity.this, PullToRefreshActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, PullToRefreshActivity.class);
                     startActivity(intent);
                     break;
                 case WECHAT_PICTURE_CHOSE:
-                    intent =new Intent(ListViewActivity.this, PictureChoseActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, PictureChoseActivity.class);
                     startActivity(intent);
                     break;
                 case X_UTILS:
-                    intent =new Intent(ListViewActivity.this, XUtilsActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, XUtilsActivity.class);
                     startActivity(intent);
                     break;
                 case PAGER_INDICATOR:
-                    intent =new Intent(ListViewActivity.this, ViewPagerIndicatorActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, ViewPagerIndicatorActivity.class);
                     startActivity(intent);
                     break;
                 case DATE_PICKER:
-                    intent =new Intent(ListViewActivity.this, DatePickerDialogActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, DatePickerDialogActivity.class);
                     startActivity(intent);
                     break;
                 case CAR_BRAND:
-                    intent =new Intent(ListViewActivity.this, CarBrandIndexActivity.class);
+                    intent =new Intent(MainFunctionActivity.this, CarBrandIndexActivity.class);
                     startActivity(intent);
                     break;
                 default:

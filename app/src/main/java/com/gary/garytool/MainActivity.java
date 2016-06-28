@@ -15,7 +15,6 @@ import com.gary.garytool.business.puzzle.PuzzleMainActivity;
 import com.gary.garytool.business.stock.StockMainActivity;
 import com.gary.garytool.business.tourist.TouristMainActivity;
 import com.gary.garytool.util.Util;
-import com.gary.garytool.view.listview.ListViewActivity;
 import com.gary.garytool.view.pulltorefreshused.PullToRefreshListViewActivity;
 
 
@@ -43,7 +42,7 @@ public class MainActivity extends Activity {
         mFunctions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                Intent intent = new Intent(MainActivity.this, MainFunctionActivity.class);
                 startActivity(intent);
             }
         });
