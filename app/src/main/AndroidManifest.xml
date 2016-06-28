@@ -94,6 +94,7 @@
         <activity android:name=".business.baseframe.BaseFrameMainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.datepicker.DatePickerDialogActivity"></activity>
         <activity android:name=".function.carbrand.CarBrandIndexActivity"></activity>
+        <activity android:name=".function.spinner.SpinnerActivity"></activity>
     </application>
 
 </manifest>

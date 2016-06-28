@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
 import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
+import com.gary.garytool.function.spinner.SpinnerActivity;
 import com.gary.garytool.view.listview.ListViewAdapterMActivity;
 import com.gary.garytool.view.listview.ListViewCustomStateActivity;
 import com.gary.garytool.view.listview.ListViewItemUIActivity;
@@ -57,6 +58,7 @@ public class MainFunctionActivity extends Activity {
     private static final int PAGER_INDICATOR = 16;
     private static final int DATE_PICKER = 17;
     private static final int CAR_BRAND = 18;
+    private static final int SPINNER = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,7 @@ public class MainFunctionActivity extends Activity {
         data.add("跟随型ViewPager指示器");
         data.add("日期控件");
         data.add("车辆品牌");
+        data.add("Spinner");
         return data;
     }
 
@@ -180,6 +183,10 @@ public class MainFunctionActivity extends Activity {
                     intent =new Intent(MainFunctionActivity.this, CarBrandIndexActivity.class);
                     startActivity(intent);
                     break;
+                case SPINNER:
+                    intent =new Intent(MainFunctionActivity.this, SpinnerActivity.class);
+                    startActivity(intent);
+                    break;
                 default:
                     break;
             }
@@ -244,9 +251,10 @@ public class MainFunctionActivity extends Activity {
         //ViewDragHelper并不是第一个用于分析手势处理的类，gesturedetector也是，但是在和拖动相关的手势分析方面gesturedetector只能说是勉为其难。
 
         /*----框架---*/
-        //OkHttp 可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
+        //OkHttp+Retrofit可以与volley配合，做volley的传输层 http://blog.csdn.net/lmj623565791/article/details/47911083
         //EventBus
-        //ButterKnife
+        //EXJava EXAndroid
+        //ButterKnife done
 
         //项目里差不多都用自己写的框架，除了一些UI会找lib，能自己写的基本自己动手，毕竟架构再完善也很难去满足一个特定的需求
         //网络层： Retrofit或者Volley＋OkHttp，async-http-lib尽量就别用了，比较老。另外这些都需要再进一步扩展的，可以自己搜下，有用的就集成进去。
