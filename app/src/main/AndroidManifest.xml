@@ -91,9 +91,9 @@
         <activity android:name=".business.tourist.TouristScenicSpotActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.tourist.TouristScenicDetailActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.puzzle.PuzzleMainActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".business.baseframe.BaseFrameMainActivity" android:screenOrientation="portrait">
-        </activity>
+        <activity android:name=".business.baseframe.BaseFrameMainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".business.datepicker.DatePickerDialogActivity"></activity>
+        <activity android:name=".function.carbrand.CarBrandIndexActivity"></activity>
     </application>
 
 </manifest>

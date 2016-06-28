@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
+import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
 import com.gary.garytool.view.viewpager.BottomMenuWithActionbarLikeWeChat6Activity;
 import com.gary.garytool.view.viewpager.BottomMenuWithFragment;
 import com.gary.garytool.view.viewpager.BottomMenuWithPopupWindowLikeQQ;
@@ -51,6 +52,7 @@ public class ListViewActivity extends ActionBarActivity {
     private static final int X_UTILS = 15;
     private static final int PAGER_INDICATOR = 16;
     private static final int DATE_PICKER = 17;
+    private static final int CAR_BRAND = 18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +87,7 @@ public class ListViewActivity extends ActionBarActivity {
         data.add("XUtils");
         data.add("跟随型ViewPager指示器");
         data.add("日期控件");
-
-
+        data.add("车辆品牌");
         return data;
     }
 
@@ -169,6 +170,10 @@ public class ListViewActivity extends ActionBarActivity {
                     break;
                 case DATE_PICKER:
                     intent =new Intent(ListViewActivity.this, DatePickerDialogActivity.class);
+                    startActivity(intent);
+                    break;
+                case CAR_BRAND:
+                    intent =new Intent(ListViewActivity.this, CarBrandIndexActivity.class);
                     startActivity(intent);
                     break;
                 default:
