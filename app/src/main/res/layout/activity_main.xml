@@ -51,6 +51,14 @@
         android:id="@+id/bt_functions"
         />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="控件列表"
+        style="@style/text_black_shadow"
+        android:textAllCaps="false"
+        android:id="@+id/bt_controls"
+        />
 
     <Button
         android:visibility="gone"

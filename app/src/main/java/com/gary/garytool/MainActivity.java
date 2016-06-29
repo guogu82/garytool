@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
     TextView mTextView;
     Button mPullToRefresh;
     Button bt_insane;
+    Button btControls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,16 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        btControls = (Button) findViewById(R.id.bt_controls);
+        btControls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainControlActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mTextView= (TextView) findViewById(R.id.tv);
         mTextView.setText("个人框架 \n Volley \n XUtils \n" +

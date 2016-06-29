@@ -95,6 +95,7 @@
         <activity android:name=".business.datepicker.DatePickerDialogActivity"></activity>
         <activity android:name=".function.carbrand.CarBrandIndexActivity"></activity>
         <activity android:name=".function.spinner.SpinnerActivity"></activity>
+        <activity android:name=".MainControlActivity"></activity>
     </application>
 
 </manifest>

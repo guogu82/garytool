@@ -35,7 +35,11 @@ import com.gary.garytool.view.viewpager.ViewPagerIndicatorActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ *  Created by gary on 2016/06/29.
+ * @author gary guo
+ * 本类用于记录复杂控件，框架使用，类库使用的用法
+ */
 public class MainFunctionActivity extends Activity {
     private ListView mListView;
 
@@ -64,7 +68,7 @@ public class MainFunctionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.lv_list);
         MyAdapter adapter = new MyAdapter(this);
         mListView.setAdapter(adapter);
     }
