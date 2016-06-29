@@ -98,7 +98,6 @@ public class MainFunctionActivity extends Activity {
         data.add("跟随型ViewPager指示器");
         data.add("日期控件");
         data.add("车辆品牌");
-        data.add("Spinner");
         return data;
     }
 
@@ -185,10 +184,6 @@ public class MainFunctionActivity extends Activity {
                     break;
                 case CAR_BRAND:
                     intent =new Intent(MainFunctionActivity.this, CarBrandIndexActivity.class);
-                    startActivity(intent);
-                    break;
-                case SPINNER:
-                    intent =new Intent(MainFunctionActivity.this, SpinnerActivity.class);
                     startActivity(intent);
                     break;
                 default:
