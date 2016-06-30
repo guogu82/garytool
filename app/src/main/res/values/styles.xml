@@ -46,4 +46,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="function_spinner_style">
+        <item name="android:background">@drawable/function_selector_spinner</item>
+    </style>
+
 </resources>

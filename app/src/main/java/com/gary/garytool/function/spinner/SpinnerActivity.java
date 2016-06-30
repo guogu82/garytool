@@ -19,6 +19,7 @@ public class SpinnerActivity extends Activity {
     String[] mData=new String[]{" 上海 "," 北京 "," 南京 "," 哈尔滨 "," 乌鲁木齐 "," 符拉迪沃斯托克 "," 圣弗朗西斯科 "};
     Spinner spinnerNormal;
     Spinner spinnerOne;
+    Spinner spinnerTwo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,5 +74,11 @@ public class SpinnerActivity extends Activity {
             }
         });
 
+        //改变了选中背景，通过selector，去图片设置。
+        spinnerTwo= (Spinner) findViewById(R.id.spinner_two);
+        adapter = new ArrayAdapter<String>(SpinnerActivity.this,android.R.layout.simple_spinner_item);
+        adapter.addAll(mData);
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinnerTwo.setAdapter(adapter);
     }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--按下时效果-->
+    <item android:state_pressed="true">
+        <shape>
+            <gradient android:startColor="#31c37c" />
+            <stroke android:color="#31c37c" android:width="1dp" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape>
+            <gradient android:startColor="#FFF" />
+            <stroke android:color="#31c37c" android:width="1dp" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</selector>

@@ -31,4 +31,16 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:background="@color/whiteWithA"></Spinner>
+ <TextView
+     android:text="利用selector设置背景的Spinner"
+     android:textSize="30sp"
+     android:textColor="@color/black"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" />
+ <Spinner
+     android:id="@+id/spinner_two"
+     android:layout_width="match_parent"
+     android:layout_height="80dp"
+     style="@style/function_spinner_style"
+     ></Spinner>
 </LinearLayout>
