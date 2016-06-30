@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
+import com.gary.garytool.function.shape.ShapeActivity;
 import com.gary.garytool.function.spinner.SpinnerActivity;
+import com.gary.garytool.function.toast.ToastActivity;
 import com.gary.garytool.util.Util;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,10 @@ public class MainControlActivity extends Activity {
     private ListView lvList;
     private  List<String> mData=new ArrayList<String>(){
         {
+            add("Shape");
+            add("Animation");
+            add("Style");
+            add("Theme");
             add("TextView");
             add("EditText");
             add("Button");
@@ -55,6 +62,10 @@ public class MainControlActivity extends Activity {
             String value= (String) getItem(position);
             if(value.equals("Spinner"))
                 Util.startActivity(MainControlActivity.this, SpinnerActivity.class);
+            else if(value.equals("Toast"))
+                Util.startActivity(MainControlActivity.this, ToastActivity.class);
+            else if(value.equals("Shape"))
+                Util.startActivity(MainControlActivity.this, ShapeActivity.class);
         }
 
         private LayoutInflater mInflater;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/layout_shape"
+    android:background="@drawable/function_selector_button"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+ <TextView
+     android:gravity="center"
+     android:text="shape示例"
+     android:textSize="30sp"
+     android:textColor="@color/black"
+    android:layout_width="400dp"
+    android:layout_height="50dp" /></LinearLayout>
+ <LinearLayout
+     android:gravity="center_horizontal"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+  <TextView
+      android:gravity="center"
+      android:text="shape示例"
+      android:textSize="30sp"
+      android:textColor="@color/black"
+      android:layout_width="400dp"
+      android:layout_height="50dp" /></LinearLayout>
+
+</LinearLayout>
