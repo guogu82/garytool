@@ -98,6 +98,7 @@
         <activity android:name=".function.toast.ToastActivity"></activity>
         <activity android:name=".MainControlActivity"></activity>
         <activity android:name=".function.shape.ShapeActivity"></activity>
+        <activity android:name=".function.BaasActivity"></activity>
     </application>
 
 </manifest>

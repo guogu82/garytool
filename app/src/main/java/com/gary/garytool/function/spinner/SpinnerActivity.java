@@ -80,5 +80,6 @@ public class SpinnerActivity extends Activity {
         adapter.addAll(mData);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         spinnerTwo.setAdapter(adapter);
-    }
+
+        }
 }

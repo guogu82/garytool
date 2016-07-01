@@ -2,7 +2,6 @@ package com.gary.garytool;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
+import com.gary.garytool.function.BaasActivity;
 import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
-import com.gary.garytool.function.spinner.SpinnerActivity;
+import com.gary.garytool.util.Util;
 import com.gary.garytool.view.listview.ListViewAdapterMActivity;
 import com.gary.garytool.view.listview.ListViewCustomStateActivity;
 import com.gary.garytool.view.listview.ListViewItemUIActivity;
@@ -43,26 +43,32 @@ import java.util.List;
 public class MainFunctionActivity extends Activity {
     private ListView mListView;
 
-    private static final int BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6=0;
-    private static final int BOTTOM_MENU_WITH_POPUPWINDOW=1;
-    private static final int BOTTOM_MENU_WITH_VIEWPAGER = 2;
-    private static final int BOTTOM_MENU_WITH_FRAGMENT = 3;
-    private static final int LIST_VIEW_ITEM_UI = 4;
-    private static final int LIST_VIEW_MESSAGE_READED = 5;
-    private static final int LIST_VIEW_UPDATE = 6;
-    private static final int LIST_VIEW_LOAD_MORE = 7;
-    private static final int LIST_VIEW_ADAPTER_BASE = 8;
-    private static final int VIEW_PAGER_GUIDE = 9;
-    private static final int VOLLEY = 10;
-    private static final int POPUP_WINDOW = 11;
-    private static final int VOLLEY_TABLE_LAYOUT = 12;
-    private static final int PULL_TO_REFRESH = 13;
-    private static final int WECHAT_PICTURE_CHOSE = 14;
-    private static final int X_UTILS = 15;
-    private static final int PAGER_INDICATOR = 16;
-    private static final int DATE_PICKER = 17;
-    private static final int CAR_BRAND = 18;
-    private static final int SPINNER = 19;
+
+    private  List<String> mData=new ArrayList<String>(){
+        {
+            add("BaaS服务");
+            add("微信6.0主界面");
+            add("底部菜单仿QQ空间");
+            add("底部菜单WithViewpager");
+            add("底部菜单WithFragment");
+            add("ListViewItem界面展示");
+            add("ListView邮件已读");
+            add("ListView下拉刷新");
+            add("ListView上拉加载更多");
+            add("万能的adapter适配器");
+            add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
+            add("volley");
+            add("地区学校二级联动-PopupWindow");//http://www.cnblogs.com/tonycheng93/p/4823860.html
+            add("股票显示-TableLayout");
+            add("PullToRefresh");
+            add("微信图片选择器");
+            add("XUtils");
+            add("跟随型ViewPager指示器");
+            add("日期控件");
+            add("车辆品牌");
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,33 +79,6 @@ public class MainFunctionActivity extends Activity {
         mListView.setAdapter(adapter);
     }
 
-    /**
-     * 功能列表展示
-     * @return
-     */
-    private List<String> getData() {
-        List<String> data = new ArrayList<>();
-        data.add("微信6.0主界面");
-        data.add("底部菜单仿QQ空间");
-        data.add("底部菜单WithViewpager");
-        data.add("底部菜单WithFragment");
-        data.add("ListViewItem界面展示");
-        data.add("ListView邮件已读");
-        data.add("ListView下拉刷新");
-        data.add("ListView上拉加载更多");
-        data.add("万能的adapter适配器");
-        data.add("ViewPager引导页");/*http://www.cnblogs.com/yc-755909659/p/4283294.html*/
-        data.add("volley");
-        data.add("地区学校二级联动-PopupWindow");//http://www.cnblogs.com/tonycheng93/p/4823860.html
-        data.add("股票显示-TableLayout");
-        data.add("PullToRefresh");
-        data.add("微信图片选择器");
-        data.add("XUtils");
-        data.add("跟随型ViewPager指示器");
-        data.add("日期控件");
-        data.add("车辆品牌");
-        return data;
-    }
 
     public final class ViewHolder {
         public Button item;
@@ -108,87 +87,50 @@ public class MainFunctionActivity extends Activity {
     private class MyAdapter extends BaseAdapter {
 
         private void onItemClick(int position) {
-            Intent intent;
-            switch (position) {
-                case BOTTOM_MENU_WITH_ACTIONBAR_LIKE_WECHAT6:
-                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
-                    startActivity(intent);
-                    break;
-                case BOTTOM_MENU_WITH_POPUPWINDOW:
-                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
-                    startActivity(intent);
-                    break;
-                case BOTTOM_MENU_WITH_VIEWPAGER:
-                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithViewpager.class);
-                    startActivity(intent);
-                    break;
-                case BOTTOM_MENU_WITH_FRAGMENT:
-                    intent = new Intent(MainFunctionActivity.this, BottomMenuWithFragment.class);
-                    startActivity(intent);
-                    break;
-                case LIST_VIEW_ITEM_UI:
-                    intent = new Intent(MainFunctionActivity.this, ListViewItemUIActivity.class);
-                    startActivity(intent);
-                    break;
-                case LIST_VIEW_MESSAGE_READED:
-                    intent =new Intent(MainFunctionActivity.this, ListViewCustomStateActivity.class);
-                    startActivity(intent);
-                    break;
-                case LIST_VIEW_UPDATE:
-                    intent =new Intent(MainFunctionActivity.this, ListViewUpdateActivity.class);
-                    startActivity(intent);
-                    break;
-                case LIST_VIEW_LOAD_MORE:
-                    intent =new Intent(MainFunctionActivity.this, ListViewLoadMoreActivity.class);
-                    startActivity(intent);
-                    break;
-                case LIST_VIEW_ADAPTER_BASE:
-                    intent =new Intent(MainFunctionActivity.this, ListViewAdapterMActivity.class);
-                    startActivity(intent);
-                    break;
-                case VIEW_PAGER_GUIDE:
-                    intent =new Intent(MainFunctionActivity.this, ViewPagerGuideActivity.class);
-                    startActivity(intent);
-                    break;
-                case VOLLEY:
-                    intent =new Intent(MainFunctionActivity.this, VolleyActivity.class);
-                    startActivity(intent);
-                    break;
-                case POPUP_WINDOW:
-                    intent =new Intent(MainFunctionActivity.this, PopupWindowActivity.class);
-                    startActivity(intent);
-                    break;
-                case VOLLEY_TABLE_LAYOUT:
-                    intent =new Intent(MainFunctionActivity.this, VolleyTableLayoutActivity.class);
-                    startActivity(intent);
-                    break;
-                case PULL_TO_REFRESH:
-                    intent =new Intent(MainFunctionActivity.this, PullToRefreshActivity.class);
-                    startActivity(intent);
-                    break;
-                case WECHAT_PICTURE_CHOSE:
-                    intent =new Intent(MainFunctionActivity.this, PictureChoseActivity.class);
-                    startActivity(intent);
-                    break;
-                case X_UTILS:
-                    intent =new Intent(MainFunctionActivity.this, XUtilsActivity.class);
-                    startActivity(intent);
-                    break;
-                case PAGER_INDICATOR:
-                    intent =new Intent(MainFunctionActivity.this, ViewPagerIndicatorActivity.class);
-                    startActivity(intent);
-                    break;
-                case DATE_PICKER:
-                    intent =new Intent(MainFunctionActivity.this, DatePickerDialogActivity.class);
-                    startActivity(intent);
-                    break;
-                case CAR_BRAND:
-                    intent =new Intent(MainFunctionActivity.this, CarBrandIndexActivity.class);
-                    startActivity(intent);
-                    break;
-                default:
-                    break;
-            }
+
+            String value= (String) getItem(position);
+            if(value.equals("BaaS服务"))
+                Util.startActivity(MainFunctionActivity.this, BaasActivity.class);
+            else if(value.equals("微信6.0主界面"))
+                Util.startActivity(MainFunctionActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
+            else if(value.equals("底部菜单仿QQ空间"))
+                Util.startActivity(MainFunctionActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
+            else if(value.equals("底部菜单WithViewpager"))
+                Util.startActivity(MainFunctionActivity.this, BottomMenuWithViewpager.class);
+            else if(value.equals("底部菜单WithFragment"))
+                Util.startActivity(MainFunctionActivity.this, BottomMenuWithFragment.class);
+            else if(value.equals("ListViewItem界面展示"))
+                Util.startActivity(MainFunctionActivity.this, ListViewItemUIActivity.class);
+            else if(value.equals("ListView邮件已读"))
+                Util.startActivity(MainFunctionActivity.this, ListViewCustomStateActivity.class);
+            else if(value.equals("ListView下拉刷新"))
+                Util.startActivity(MainFunctionActivity.this, ListViewUpdateActivity.class);
+            else if(value.equals("ListView上拉加载更多"))
+                Util.startActivity(MainFunctionActivity.this, ListViewLoadMoreActivity.class);
+            else if(value.equals("万能的adapter适配器"))
+                Util.startActivity(MainFunctionActivity.this, ListViewAdapterMActivity.class);
+            else if(value.equals("ViewPager引导页"))
+                Util.startActivity(MainFunctionActivity.this, ViewPagerGuideActivity.class);
+            else if(value.equals("volley"))
+                Util.startActivity(MainFunctionActivity.this, VolleyActivity.class);
+            else if(value.equals("地区学校二级联动-PopupWindow"))
+                Util.startActivity(MainFunctionActivity.this, PopupWindowActivity.class);
+            else if(value.equals("股票显示-TableLayout"))
+                Util.startActivity(MainFunctionActivity.this, VolleyTableLayoutActivity.class);
+            else if(value.equals("PullToRefresh"))
+                Util.startActivity(MainFunctionActivity.this, PullToRefreshActivity.class);
+            else if(value.equals("微信图片选择器"))
+                Util.startActivity(MainFunctionActivity.this, PictureChoseActivity.class);
+            else if(value.equals("XUtils"))
+                Util.startActivity(MainFunctionActivity.this, XUtilsActivity.class);
+            else if(value.equals("跟随型ViewPager指示器"))
+                Util.startActivity(MainFunctionActivity.this, ViewPagerIndicatorActivity.class);
+            else if(value.equals("日期控件"))
+                Util.startActivity(MainFunctionActivity.this, DatePickerDialogActivity.class);
+            else if(value.equals("车辆品牌"))
+                Util.startActivity(MainFunctionActivity.this, CarBrandIndexActivity.class);
+
+
         }
 
            /*-----done------*/
@@ -290,15 +232,15 @@ public class MainFunctionActivity extends Activity {
         }
         @Override
         public int getCount() {
-            return getData().size();
+            return mData.size();
         }
         @Override
         public Object getItem(int arg0) {
-            return null;
+            return mData.get(arg0);
         }
         @Override
         public long getItemId(int arg0) {
-            return 0;
+            return arg0;
         }
 
         @Override
@@ -314,7 +256,7 @@ public class MainFunctionActivity extends Activity {
                     holder = (ViewHolder) convertView.getTag();
                 }
 
-                holder.item.setText(getData().get(position));
+                holder.item.setText(mData.get(position));
                 holder.item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
