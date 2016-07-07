@@ -99,6 +99,7 @@
         <activity android:name=".MainControlActivity"></activity>
         <activity android:name=".function.shape.StyleActivity"></activity>
         <activity android:name=".function.BaasActivity"></activity>
+        <activity android:name=".function.rxjava.RxJavaActivity"></activity>
     </application>
 
 </manifest>

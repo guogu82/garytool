@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
 import com.gary.garytool.function.BaasActivity;
+import com.gary.garytool.function.rxjava.RxJavaActivity;
 import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
 import com.gary.garytool.util.Util;
 import com.gary.garytool.view.listview.ListViewAdapterMActivity;
@@ -46,8 +47,9 @@ public class MainFunctionActivity extends Activity {
 
     private  List<String> mData=new ArrayList<String>(){
         {
-            add("BaaS服务");
             add("微信6.0主界面");
+            add("RxJava");
+            add("BaaS服务");
             add("底部菜单仿QQ空间");
             add("底部菜单WithViewpager");
             add("底部菜单WithFragment");
@@ -89,10 +91,12 @@ public class MainFunctionActivity extends Activity {
         private void onItemClick(int position) {
 
             String value= (String) getItem(position);
-            if(value.equals("BaaS服务"))
-                Util.startActivity(MainFunctionActivity.this, BaasActivity.class);
-            else if(value.equals("微信6.0主界面"))
+            if(value.equals("微信6.0主界面"))
                 Util.startActivity(MainFunctionActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
+            else if(value.equals("RxJava"))
+                Util.startActivity(MainFunctionActivity.this, RxJavaActivity.class);
+            else if(value.equals("BaaS服务"))
+                Util.startActivity(MainFunctionActivity.this, BaasActivity.class);
             else if(value.equals("底部菜单仿QQ空间"))
                 Util.startActivity(MainFunctionActivity.this, BottomMenuWithPopupWindowLikeQQ.class);
             else if(value.equals("底部菜单WithViewpager"))

@@ -2,6 +2,7 @@ package com.gary.garytool.business.retrofit;
 
 import android.content.Context;
 
+
 import com.gary.garytool.lib.PersistentCookieJar.PersistentCookieJar;
 import com.gary.garytool.lib.PersistentCookieJar.cache.SetCookieCache;
 import com.gary.garytool.lib.PersistentCookieJar.persistence.SharedPrefsCookiePersistor;
@@ -14,7 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by gary on 2016/6/2/002.
  */
 public class RetrofitManager {
-    static final String BASE_URL="http://test.jujia.ctauto.cn/";
+    //static String BASE_URL="http://test.jujia.ctauto.cn/";
+    static String BASE_URL="http://api.openweathermap.org/data/2.5/";
+
     static Retrofit mRetrofit;
     static OkHttpClient mHttpClient;
 
@@ -27,7 +30,7 @@ public class RetrofitManager {
     {
         if(mRetrofit==null)
         {
-            //mHttpClient=new OkHttpClient.Builder().cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context))).build();
+            mHttpClient=new OkHttpClient.Builder().cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(context))).build();
             mRetrofit=new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -38,4 +41,8 @@ public class RetrofitManager {
         return mRetrofit;
     }
 
+
+    public static void setBaseUrl(String baseUrl) {
+        BASE_URL = baseUrl;
+    }
 }
