@@ -7,31 +7,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.gary.garytool.R;
-import com.gary.garytool.business.retrofit.IOrderHttp;
 import com.gary.garytool.business.retrofit.RetrofitManager;
 import com.gary.garytool.util.LogUtil;
 
-import java.util.concurrent.TimeUnit;
-
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Administrator on 2016/7/1/001.
+ * Created by Gary on 2016/7/1/001.
  */
 public class RxJavaActivity extends Activity {
     private static final String TAG = "RxJavaActivity";
     TextView tv_rxjava;
     Button bt_button;
-    ApiManager.ApiManagerService apiManagerService;
+    MovieService movieService;
     private static final String content = "RxJava 是一个响应式编程框架，采用观察者设计模式。";
-
+    String BASE_URL="https://api.douban.com/v2/movie/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +34,7 @@ public class RxJavaActivity extends Activity {
         tv_rxjava = (TextView) findViewById(R.id.tv_rxjava);
         tv_rxjava.setText(content);
         bt_button = (Button) findViewById(R.id.bt_button);
-        apiManagerService = RetrofitManager.getRetrofit(this).create(ApiManager.ApiManagerService.class);
+        movieService = RetrofitManager.getRetrofit(BASE_URL).create(MovieService.class);
     }
 
 
@@ -57,30 +51,32 @@ public class RxJavaActivity extends Activity {
                     }
                 });
 
-        //getWeatherRxjava();
+        getMovie();
     }
 
-    private void getWeatherRxjava() {
-        Observable<WeatherData> observable = apiManagerService.getWeatherData("guangzhou", "cn");
-        observable.subscribeOn(Schedulers.io())
+    private void getMovie()
+    {
+        movieService.getTopMovie(0,10)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WeatherData>() {
+                .subscribe(new Subscriber<MovieEntity>() {
                     @Override
                     public void onCompleted() {
-                        LogUtil.i("wxl", "onCompleted");
+                        LogUtil.e(TAG,"get top move Completed");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtil.i("wxl", "e=" + e.getMessage());
+                        tv_rxjava.setText(e.getMessage());
                     }
 
                     @Override
-                    public void onNext(WeatherData weatherJson) {
-                        LogUtil.i("wxl", "getWeatherinfo=" + weatherJson.toString());
+                    public void onNext(MovieEntity movieEntity) {
+                        tv_rxjava.setText(movieEntity.toString());
                     }
                 });
-
     }
+
+
 }
 
