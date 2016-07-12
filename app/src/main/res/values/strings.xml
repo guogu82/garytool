@@ -8,4 +8,8 @@
     <string name="title_activity_intent_service">IntentServiceActivity</string>
     <string name="title_activity_stock_main">StockMainActivity</string>
 
+
+    <!--用于dataBinding-->
+    <string name="name_format">姓名: %1$s</string>
+    <string name="mobile_format">手机号: %1s</string>
 </resources>

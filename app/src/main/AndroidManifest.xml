@@ -100,6 +100,7 @@
         <activity android:name=".function.shape.StyleActivity"></activity>
         <activity android:name=".function.BaasActivity"></activity>
         <activity android:name=".function.rxjava.RxJavaActivity"></activity>
+        <activity android:name=".function.databinding.DataBindingActivity"></activity>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@ import android.app.Application;
 import com.gary.garytool.business.volley.VolleyManger;
 
 /**
- * Created by Administrator on 2015/9/15.
+ * Created by Gary on 2015/9/15.
  */
 public class GaryApplication extends Application {
 

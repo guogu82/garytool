@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.gary.garytool.business.datepicker.DatePickerDialogActivity;
 import com.gary.garytool.function.BaasActivity;
+import com.gary.garytool.function.databinding.DataBindingActivity;
 import com.gary.garytool.function.rxjava.RxJavaActivity;
 import com.gary.garytool.function.carbrand.CarBrandIndexActivity;
 import com.gary.garytool.util.Util;
@@ -48,6 +49,7 @@ public class MainFunctionActivity extends Activity {
     private  List<String> mData=new ArrayList<String>(){
         {
             add("微信6.0主界面");
+            add("dataBinding");
             add("RxJava");
             add("BaaS服务");
             add("底部菜单仿QQ空间");
@@ -93,6 +95,8 @@ public class MainFunctionActivity extends Activity {
             String value= (String) getItem(position);
             if(value.equals("微信6.0主界面"))
                 Util.startActivity(MainFunctionActivity.this, BottomMenuWithActionbarLikeWeChat6Activity.class);
+            else if(value.equals("dataBinding"))
+                Util.startActivity(MainFunctionActivity.this, DataBindingActivity.class);
             else if(value.equals("RxJava"))
                 Util.startActivity(MainFunctionActivity.this, RxJavaActivity.class);
             else if(value.equals("BaaS服务"))
